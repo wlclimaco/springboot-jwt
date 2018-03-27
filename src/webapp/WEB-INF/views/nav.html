@@ -1,0 +1,80 @@
+<div class="nav-wrapper">
+    <ul id="nav"
+        class="nav"
+        data-ng-controller="NavController"
+		data-collapse-nav
+        data-highlight-active>
+        <li><a href="#/dashboard"> <i class="fa fa-dashboard"></i><span data-translate="dashboard"></span> </a></li>
+        <li>
+            <a href="#/ui"><i class="fa fa-magic"></i><span data-translate="ui kit"></span></a>
+            <ul>
+                <li><a href="#/ui/buttons"><i class="fa fa-caret-right"></i><span data-translate="buttons"></span></a></li>
+                <li><a href="#/ui/typography"><i class="fa fa-caret-right"></i><span data-translate="typography"></span></a></li>
+                <li><a href="#/ui/widgets"><i class="fa fa-caret-right"></i><span data-translate="widgets"></span><span class="badge badge-success">13</span></a></li>
+                <li><a href="#/ui/grids"><i class="fa fa-caret-right"></i><span data-translate="grids"></span></a></li>
+                <li><a href="#/ui/icons"><i class="fa fa-caret-right"></i><span data-translate="icons"></span><span class="badge badge-warning">3</span></a></li>
+                <li><a href="#/ui/components"><i class="fa fa-caret-right"></i><span data-translate="components"></span> <span class="badge badge-danger">19</span></a></li>
+                <li><a href="#/ui/timeline"><i class="fa fa-caret-right"></i><span data-translate="timeline"></span></a></li>
+                <li><a href="#/ui/tree"><i class="fa fa-caret-right"></i><span data-translate="tree"></span></a></li>
+                <li><a href="#/ui/pricing-tables"><i class="fa fa-caret-right"></i><span data-translate="pricing tables"></span></a></li>
+                <li><a href="#/ui/maps"><i class="fa fa-caret-right"></i><span data-translate="maps"></span> <span class="badge badge-info">5</span></a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#/table"><i class="fa fa-table"></i><span data-translate="tables"></span></a>
+            <ul>
+                <li><a href="#/tables/static"><i class="fa fa-caret-right"></i><span data-translate="static tables"></span></a></li>
+                <li><a href="#/tables/responsive"><i class="fa fa-caret-right"></i><span data-translate="responsive tables"></span><span class="badge badge-info">3</span></a></li>
+                <li><a href="#/tables/dynamic"><i class="fa fa-caret-right"></i><span data-translate="dynamic tables"></span></a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#/form"><i class="fa fa-pencil"></i><span data-translate="forms"></span></a>
+            <ul>
+                <li><a href="#/forms/layouts"><i class="fa fa-caret-right"></i><span data-translate="form layouts"></span></a></li> 
+				<li><a href="#/forms/elements"><i class="fa fa-caret-right"></i><span data-translate="form elements"></span> <span class="badge badge-warning">14</span></a></li>
+                <li><a href="#/forms/validation"><i class="fa fa-caret-right"></i><span data-translate="form validation"></span></a></li>
+            </ul>
+        </li>
+       <li>
+            <a href="#/charts"><i class="fa fa-bar-chart-o"></i><span data-translate="charts"></span></a>
+            <ul>
+                <li><a href="#/charts/chartjs"><i class="fa fa-caret-right"></i>Chart.js <span data-translate="charts"></span><span class="badge badge-success">10</span></a></li>			
+                <li><a href="#/charts/echarts"><i class="fa fa-caret-right"></i>ECharts <span data-translate="charts"></span><span class="badge badge-info">6</span></a></li>
+			</ul>
+        </li>
+        <li class="nav-task">
+            <a href="#/tasks/tasks">
+                <i class="fa fa-check-square-o"></i><span data-translate="tasks"></span>
+                <span class="badge badge-danger main-badge"
+                      data-ng-show="taskRemainingCount > 0">{{taskRemainingCount}}</span>
+            </a>
+        </li>
+        <li>
+            <a href="#/mail"><i class="fa fa-envelope-o"></i><span data-translate="mail"></span></a>
+            <ul>
+                <li><a href="#/mail/inbox"><i class="fa fa-caret-right"></i><span data-translate="inbox"></span></a></li>
+                <li><a href="#/mail/compose"><i class="fa fa-caret-right"></i><span data-translate="compose"></span></a></li>
+                <li><a href="#/mail/single"><i class="fa fa-caret-right"></i><span data-translate="single mail"></span></a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#/apps"><i class="fa fa-wrench"></i><span data-translate="applications"></span></a>
+            <ul>
+                <li><a href="#/apps/stocks"><i class="fa fa-caret-right"></i><span data-translate="stocks"></span></a></li>
+                <li><a href="#/apps/counties" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_DOMAIN_USERS') || hasRole('ROLE_GUEST')"><i class="fa fa-caret-right"></i><span data-translate="counties"></span></a></li>		
+                <li><a href="#/apps/procedures" ng-show="(hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_DOMAIN_USERS') || hasRole('ROLE_GUEST')) && (main.backend !== 'PHP')"><i class="fa fa-caret-right"></i><span data-translate="procedures"></span></a></li>					
+            </ul>
+        </li>
+        <li>
+            <a href="#/pages"><i class="fa fa-file-text-o"></i><span data-translate="pages"></span></a>
+            <ul>
+                <li><a href="#/pages/invoice"><i class="fa fa-caret-right"></i><span data-translate="invoice"></span></a></li>
+				<li><a href="#/pages/profile"><i class="fa fa-caret-right"></i><span data-translate="user profile"></span></a></li>
+                <li><a href="#/pages/404"><i class="fa fa-caret-right"></i>404 <span data-translate="error"></span></a></li>
+                <li><a href="#/pages/500"><i class="fa fa-caret-right"></i>500 <span data-translate="error"></span></a></li>
+                <li><a href="#/pages/blank"><i class="fa fa-caret-right"></i><span data-translate="blank page"></span></a></li>
+            </ul>
+        </li>		
+    </ul>
+</div>

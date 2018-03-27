@@ -1,16 +1,11 @@
 package com.nouhoun.springboot.jwt.integration.service.impl;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.nouhoun.springboot.jwt.integration.domain.Role;
 import com.nouhoun.springboot.jwt.integration.domain.User;
 import com.nouhoun.springboot.jwt.integration.repository.RoleRepository;
 import com.nouhoun.springboot.jwt.integration.repository.UserRepository;
@@ -23,8 +18,7 @@ public class UserServiceImpl implements UserService{
 	private UserRepository userRepository;
 	@Autowired
     private RoleRepository roleRepository;
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    
 	@Override
 	public User findUserByEmail(String email) {
 		// TODO Auto-generated method stub

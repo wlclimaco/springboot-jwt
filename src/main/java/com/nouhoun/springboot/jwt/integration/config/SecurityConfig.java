@@ -10,6 +10,7 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -18,6 +19,10 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
  * Created by nydiarra on 06/05/17.
@@ -44,6 +49,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected AuthenticationManager authenticationManager() throws Exception {
 		return super.authenticationManager();
 	}
+	
+    @Bean
+    public ViewResolver viewResolver() {
+
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setPrefix("/resources/templates/");
+        resolver.setSuffix(".html");
+
+        return resolver;
+    }
+
+	
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+	    web
+	       .ignoring()
+	       .antMatchers("/resources/**","/resources/**/**","/resources/**/**/**", "/static/**", "/css/**","/css/**/**","/css/**/**/**", "/js/**", "/images/**"
+	    		   , "/thirdparty/**", "/scripts/**", "/styles/**", "/views/**", "/fonts/**", "/scripts/**/**", "/templates/**/**", "/templates/**");
+	}
+
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {

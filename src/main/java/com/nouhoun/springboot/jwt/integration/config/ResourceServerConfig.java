@@ -8,6 +8,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 @Configuration
 @EnableResourceServer
@@ -25,11 +28,36 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-                http
-                .requestMatchers()
-                .and()
-                .authorizeRequests()
-                .antMatchers("/actuator/**", "/api-docs/**").permitAll()
-                .antMatchers("/springjwt/**" ).authenticated();
+                
+                http.
+    			authorizeRequests()
+    				.antMatchers("/").permitAll()
+    				.antMatchers("/actuator/**", "/api-docs/**").permitAll()
+                    .antMatchers("/springjwt/**" ).authenticated()
+    				.antMatchers("/login").permitAll()
+    				.antMatchers("/ws/**").permitAll()
+    				.antMatchers("/ws/info/**").permitAll()
+    				.antMatchers("/registration").permitAll()
+    				.antMatchers("/upload").permitAll()
+    				.antMatchers("/upload2").permitAll()
+    				.antMatchers("/api/**").permitAll()
+    				.antMatchers("/api/upload/multi").permitAll()
+    				.antMatchers("/empresa/**").permitAll()
+    				.antMatchers("/admin/**").permitAll()
+    				.antMatchers("/jogo/**").permitAll()
+    				.antMatchers("/user/**").permitAll()
+    				.antMatchers("/quadra/**").permitAll()
+    				.antMatchers("/notificacao/**").permitAll()
+    				.antMatchers("/header").permitAll();
+    			//	.antMatchers("/raxa/**").hasAuthority("ADMIN").anyRequest();
+    			//	.authenticated().and().csrf().disable().formLogin()
+    		//		.loginPage("/login").failureUrl("/login?error=true")
+    		//		.defaultSuccessUrl("/admin/home2")
+    		//		.usernameParameter("email")
+    		//		.passwordParameter("password")
+    		//		.and().logout()
+    		//		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+    		//		.logoutSuccessUrl("/").and().exceptionHandling()
+    		//		.accessDeniedPage("/access-denied");
     }
 }
