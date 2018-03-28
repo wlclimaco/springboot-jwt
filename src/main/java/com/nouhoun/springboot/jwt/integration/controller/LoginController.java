@@ -59,6 +59,18 @@ public class LoginController extends BaseController {
 		
 		return "index";
 	}
+	
+	@RequestMapping(value = { "/header" }, method = RequestMethod.GET)
+	public String header() {
+		
+		return "header";
+	}
+	
+	@RequestMapping(value = { "/nav" }, method = RequestMethod.GET)
+	public String nav() {
+		
+		return "nav";
+	}
 //	private @Autowired MailJobService mailJobService;
 
 //
