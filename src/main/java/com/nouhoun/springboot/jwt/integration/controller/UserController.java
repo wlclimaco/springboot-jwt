@@ -50,7 +50,7 @@ public class UserController {
 	public @ResponseBody APIResponse createNewMensagem(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		List<String> erros = new ArrayList<>();
-		User userExists = userService.findUserByEmail(user.getUsername());
+		User userExists = userService.findUserByEmail(user.getEmail());
 		if (userExists != null) {
 			erros.add("There is already a user registered with the email provided");
 		}
@@ -78,7 +78,7 @@ public class UserController {
 	public @ResponseBody APIResponse updateMensagem(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		List<String> erros = new ArrayList<>();
-		User userExists = userService.findUserByEmail(user.getUsername());
+		User userExists = userService.findUserByEmail(user.getEmail());
 		if (userExists != null) {
 			erros.add("There is already a user registered with the email provided");
 		}
@@ -108,17 +108,17 @@ public class UserController {
 		List<String> erros = new ArrayList<>();
 		ObjectMapper mapper = new ObjectMapper();
 		User user = mapper.readValue(userString, User.class);
-		User userExists = userService.findUserByEmail(user.getUsername());
+		User userExists = userService.findUserByEmail(user.getEmail());
 		List<Jogo> jogos= jogoService.findJogoByUser(userExists);
 		UserDTO dto =new UserDTO();
-	//	dto.setId(userExists.getId());
-		dto.setEmail(userExists.getUsername());
+		dto.setId(userExists.getId());
+		dto.setEmail(userExists.getEmail());
 		dto.setPassword(userExists.getPassword());
-	//	dto.setName(userExists.getName());
+		dto.setName(userExists.getName());
 		dto.setLastName(userExists.getLastName());
-	//	dto.setActive(userExists.getActive());
-	//	dto.setRoles(userExists.getRoles());
-	//	dto.setEnabled(userExists.getEnabled());
+		dto.setActive(userExists.getActive());
+		dto.setRoles(userExists.getRoles());
+		dto.setEnabled(userExists.getEnabled());
 		dto.setJogos(jogos);
 		
 		return new ResponseEntity<List<UserDTO>>(Arrays.asList(dto), HttpStatus.OK);
@@ -126,7 +126,7 @@ public class UserController {
 
 	private void createAuthResponse(User user, HashMap<String, Object> authResp,ArrayList<String> erros) {
         String token = "";
-        		//Jwts.builder().setSubject(user.getUsername())
+        		//Jwts.builder().setSubject(user.getEmail())
                // .claim("role", user.getRole().name()).setIssuedAt(new Date())
               // .signWith(SignatureAlgorithm.HS256, JWTTokenAuthFilter.JWT_KEY).compact();
         authResp.put("token", token);

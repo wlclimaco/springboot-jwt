@@ -17,7 +17,7 @@ public class UserDTO {
 	private String lastName;
 	private int active;
 	private int isDono;
-	private Set<Role> roles;
+	private List<Role> roles;
 	private String iv;
 	private String salt;
 	private int keySize;
@@ -110,11 +110,13 @@ public class UserDTO {
 		this.active = active;
 	}
 
-	public Set<Role> getRoles() {
+
+
+	public List<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<Role> roles) {
+	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
 

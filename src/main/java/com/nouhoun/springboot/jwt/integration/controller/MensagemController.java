@@ -33,7 +33,7 @@ public class MensagemController {
 	public @ResponseBody APIResponse createNewMensagem(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		List<String> erros = new ArrayList<>();
-		User userExists = userService.findUserByEmail(user.getUsername());
+		User userExists = userService.findUserByEmail(user.getEmail());
 		if (userExists != null) {
 			erros.add("There is already a user registered with the email provided");
 		}
@@ -61,7 +61,7 @@ public class MensagemController {
 	public @ResponseBody APIResponse updateMensagem(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		List<String> erros = new ArrayList<>();
-		User userExists = userService.findUserByEmail(user.getUsername());
+		User userExists = userService.findUserByEmail(user.getEmail());
 		if (userExists != null) {
 			erros.add("There is already a user registered with the email provided");
 		}
@@ -89,7 +89,7 @@ public class MensagemController {
 	public @ResponseBody APIResponse deleteMensagem(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		List<String> erros = new ArrayList<>();
-		User userExists = userService.findUserByEmail(user.getUsername());
+		User userExists = userService.findUserByEmail(user.getEmail());
 		if (userExists != null) {
 			erros.add("There is already a user registered with the email provided");
 		}
@@ -117,7 +117,7 @@ public class MensagemController {
 	public @ResponseBody APIResponse fetchByUser(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		List<String> erros = new ArrayList<>();
-		User userExists = userService.findUserByEmail(user.getUsername());
+		User userExists = userService.findUserByEmail(user.getEmail());
 		if (userExists != null) {
 			erros.add("There is already a user registered with the email provided");
 		}
@@ -142,7 +142,7 @@ public class MensagemController {
 
 	private void createAuthResponse(User user, HashMap<String, Object> authResp,ArrayList<String> erros) {
         String token = "";
-        		//Jwts.builder().setSubject(user.getUsername())
+        		//Jwts.builder().setSubject(user.getEmail())
                // .claim("role", user.getRole().name()).setIssuedAt(new Date())
               // .signWith(SignatureAlgorithm.HS256, JWTTokenAuthFilter.JWT_KEY).compact();
         authResp.put("token", token);
