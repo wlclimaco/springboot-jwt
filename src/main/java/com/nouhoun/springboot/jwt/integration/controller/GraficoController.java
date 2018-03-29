@@ -32,7 +32,7 @@ public class GraficoController {
 	@RequestMapping(value = "/grafico/insert", method = RequestMethod.POST)
 	public @ResponseBody APIResponse createNewMensagem(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
-		List<String> erros = new ArrayList<>();
+		List<String> erros = new ArrayList<String>();
 		User userExists = userService.findUserByEmail(user.getEmail());
 		if (userExists != null) {
 			erros.add("There is already a user registered with the email provided");
@@ -44,7 +44,7 @@ public class GraficoController {
 			modelAndView.setViewName("registration");
 
 
-	HashMap<String, Object> authResp = new HashMap<>();
+	HashMap<String, Object> authResp = new HashMap<String, Object>();
 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 	Object token = auth.getCredentials();
@@ -60,7 +60,7 @@ public class GraficoController {
 	@RequestMapping(value = "/grafico/update", method = RequestMethod.POST)
 	public @ResponseBody APIResponse updateMensagem(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
-		List<String> erros = new ArrayList<>();
+		List<String> erros = new ArrayList<String>();
 		User userExists = userService.findUserByEmail(user.getEmail());
 		if (userExists != null) {
 			erros.add("There is already a user registered with the email provided");
@@ -72,7 +72,7 @@ public class GraficoController {
 			modelAndView.setViewName("registration");
 
 
-	HashMap<String, Object> authResp = new HashMap<>();
+	HashMap<String, Object> authResp = new HashMap<String, Object>();
 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 	Object token = auth.getCredentials();
@@ -88,7 +88,7 @@ public class GraficoController {
 	@RequestMapping(value = "/grafico/delete", method = RequestMethod.POST)
 	public @ResponseBody APIResponse deleteMensagem(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
-		List<String> erros = new ArrayList<>();
+		List<String> erros = new ArrayList<String>();
 		User userExists = userService.findUserByEmail(user.getEmail());
 		if (userExists != null) {
 			erros.add("There is already a user registered with the email provided");
@@ -100,7 +100,7 @@ public class GraficoController {
 			modelAndView.setViewName("registration");
 
 
-	HashMap<String, Object> authResp = new HashMap<>();
+	HashMap<String, Object> authResp = new HashMap<String, Object>();
 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 	Object token = auth.getCredentials();
@@ -116,7 +116,7 @@ public class GraficoController {
 	@RequestMapping(value = "/grafico/fetchByUser", method = RequestMethod.POST)
 	public @ResponseBody APIResponse fetchByUser(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
-		List<String> erros = new ArrayList<>();
+		List<String> erros = new ArrayList<String>();
 		User userExists = userService.findUserByEmail(user.getEmail());
 		if (userExists != null) {
 			erros.add("There is already a user registered with the email provided");
@@ -128,7 +128,7 @@ public class GraficoController {
 			modelAndView.setViewName("registration");
 
 
-	HashMap<String, Object> authResp = new HashMap<>();
+	HashMap<String, Object> authResp = new HashMap<String, Object>();
 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 	Object token = auth.getCredentials();

@@ -1,51 +1,12 @@
 package com.nouhoun.springboot.jwt.integration.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
-import java.util.HashMap;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.PBEKeySpec;
-import javax.crypto.spec.SecretKeySpec;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.codec.DecoderException;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nouhoun.springboot.jwt.api.APIResponse;
-import com.nouhoun.springboot.jwt.integration.domain.User;
-import com.nouhoun.springboot.jwt.integration.domain.UserDTO;
 import com.nouhoun.springboot.jwt.integration.service.UserService;
 
 @Controller
@@ -99,7 +60,7 @@ public class LoginController extends BaseController {
 //		LOG.info("Looking for user by email: " + userDTO.getUsername());
 //		User user = userService.findUserByEmail(userDTO.getUsername());
 //
-//		HashMap<String, Object> authResp = new HashMap<>();
+//		HashMap<String, Object> authResp = new HashMap<String, Object>();
 //		if (userService.isValidPass(user, password)) {
 //			LOG.info("User authenticated: " + user.getUsername());
 //			userService.loginUser(user, request);
@@ -124,7 +85,7 @@ public class LoginController extends BaseController {
 //		LOG.info("Looking for user by email: " + userDTO.getUsername());
 //		User user = userService.findUserByEmail(userDTO.getUsername());
 //
-//		HashMap<String, Object> authResp = new HashMap<>();
+//		HashMap<String, Object> authResp = new HashMap<String, Object>();
 //		if (userService.isValidPass(user, password)) {
 //			LOG.info("User authenticated: " + user.getUsername());
 //			userService.loginUser(user, request);
@@ -159,7 +120,7 @@ public class LoginController extends BaseController {
 //		User users = new User();
 //		userService.saveUser(users);
 //		
-//		HashMap<String, Object> authResp = new HashMap<>();
+//		HashMap<String, Object> authResp = new HashMap<String, Object>();
 //		//if (userService.isValidPass(users, password)) {
 //		//	LOG.info("User authenticated: " + user.getUsername());
 //		//	userService.loginUser(users, request);
@@ -202,7 +163,7 @@ public class LoginController extends BaseController {
 //		LOG.info("Looking for user by email: " + userDTO.getUsername());
 //		User user = userService.findUserByEmail(userDTO.getUsername());
 //
-//		HashMap<String, Object> authResp = new HashMap<>();
+//		HashMap<String, Object> authResp = new HashMap<String, Object>();
 //		if (userService.isValidPass(user, passwords)) {
 //			LOG.info("User authenticated: " + user.getUsername());
 //			userService.loginUser(user, request);

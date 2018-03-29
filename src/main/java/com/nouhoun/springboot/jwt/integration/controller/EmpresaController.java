@@ -96,7 +96,7 @@ public class EmpresaController {
 		
 		jogoService.saveJogo(generateJogos(empresa));
 		
-		HashMap<String, Object> authResp = new HashMap<>();
+		HashMap<String, Object> authResp = new HashMap<String, Object>();
 		createAuthResponse(empresa,empresaDTO.getUserLogado(), authResp);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -124,7 +124,7 @@ public class EmpresaController {
 	@RequestMapping(value = "/empresa/update", method = RequestMethod.POST)
 	public @ResponseBody APIResponse updateMensagem(@Valid Empresa user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
-		List<String> erros = new ArrayList<>();
+		List<String> erros = new ArrayList<String>();
 		Empresa userExists = empresaService.findEmpresaByEmail(user.getEmail());
 		if (userExists != null) {
 			erros.add("There is already a user registered with the email provided");
@@ -134,7 +134,7 @@ public class EmpresaController {
 		modelAndView.addObject("successMessage", "User has been registered successfully");
 		modelAndView.addObject("user", new Empresa());
 
-		HashMap<String, Object> authResp = new HashMap<>();
+		HashMap<String, Object> authResp = new HashMap<String, Object>();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 		Object token = auth.getCredentials();
@@ -149,11 +149,11 @@ public class EmpresaController {
 	@RequestMapping(value = "/empresa/delete", method = RequestMethod.POST)
 	public @ResponseBody APIResponse deleteMensagem(@Valid Empresa user, BindingResult bindingResult) {
 
-		List<String> erros = new ArrayList<>();
+		List<String> erros = new ArrayList<String>();
 
 		empresaService.deleteEmpresa(user);
 
-		HashMap<String, Object> authResp = new HashMap<>();
+		HashMap<String, Object> authResp = new HashMap<String, Object>();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 		//createAuthResponse(user, authResp);
@@ -165,11 +165,11 @@ public class EmpresaController {
 	@RequestMapping(value = "/empresa/fetchByUser", method = RequestMethod.POST)
 	public @ResponseBody APIResponse fetchByUser(@Valid Empresa user, BindingResult bindingResult) {
 
-		List<String> erros = new ArrayList<>();
+		List<String> erros = new ArrayList<String>();
 
 		List<Empresa> empresas = empresaService.findEmpresaByUser(user);
 
-		HashMap<String, Object> authResp = new HashMap<>();
+		HashMap<String, Object> authResp = new HashMap<String, Object>();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 		Object token = auth.getCredentials();
@@ -184,11 +184,11 @@ public class EmpresaController {
 	@RequestMapping(value = "/empresa/fetchAllEmpresa", method = RequestMethod.POST)
 	public ResponseEntity<List<Empresa>> fetchAllEmpresa(@Valid Empresa user, BindingResult bindingResult) {
 
-		List<String> erros = new ArrayList<>();
+		List<String> erros = new ArrayList<String>();
 
 		List<Empresa> empresas = empresaService.findAllEmpresa();
 
-		HashMap<String, Object> authResp = new HashMap<>();
+		HashMap<String, Object> authResp = new HashMap<String, Object>();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 		Object token = auth.getCredentials();
@@ -201,7 +201,7 @@ public class EmpresaController {
 
 	public List<Jogo> generateJogos(Empresa empresa) {
 		Jogo jogo = new Jogo();
-		List<Jogo> jogos = new ArrayList<>();
+		List<Jogo> jogos = new ArrayList<Jogo>();
 		for (Quadra quadra : empresa.getQuadras()) {
 
 			for (Horarios horario : quadra.getHorarioAberto()) {

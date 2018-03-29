@@ -69,7 +69,7 @@ public class JogoController {
 		ObjectMapper mapper = new ObjectMapper();
 		Jogo user = mapper.readValue(users, Jogo.class);
 		ModelAndView modelAndView = new ModelAndView();
-		List<String> erros = new ArrayList<>();
+		List<String> erros = new ArrayList<String>();
 
 		
 		Notificacoes notificacoes = new Notificacoes();
@@ -88,7 +88,7 @@ public class JogoController {
 			userss =  userService.findUserById(user.getUser_id());
 			jogo = jogoService.findJogoById(user.getId());
 			jogoService.saveUpdateJogo(user);
-			List<UserJogo2> userJogos = new ArrayList<>();
+			List<UserJogo2> userJogos = new ArrayList<UserJogo2>();
 			userJogos.add(new UserJogo2(user.getUser_id(),user.getId(),StatusUser.CONFIRMADO,Admin.SIM));
 			jogoUserService.saveUserJogo(userJogos);
 			noticicacaoText = "Acabo de ser solicitado na quadra : " + quadra.getNome() + " dia: " +jogo.getDia().name().toLowerCase() + " horario (" + jogo.getHoraInicial() + " - " + jogo.getHoraFinal() + "). " + "Solicitado por : " + userss.getEmail() + " " + userss.getLastName(); 
@@ -131,7 +131,7 @@ public class JogoController {
 			break;
 			
 		case SOLICITAR:
-			List<UserJogo2> userJogos1 = new ArrayList<>();
+			List<UserJogo2> userJogos1 = new ArrayList<UserJogo2>();
 			userJogos1.add(new UserJogo2(user.getUser_id(),user.getId(),StatusUser.SOLICITADO,Admin.NAO));
 			jogoUserService.saveUserJogo(userJogos1);
 			notificacoes = new Notificacoes("SOLICITAR", new Date(), "Titulo SOLICITAR", NotificacoesStatus.NAOLIDO, 10,8);
@@ -141,7 +141,7 @@ public class JogoController {
 			break;
 		}
 		notificacoesService.insertNotificacoes(notificacoes);
-		HashMap<String, Object> authResp = new HashMap<>();
+		HashMap<String, Object> authResp = new HashMap<String, Object>();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Object token = auth.getCredentials();
 		authResp.put("token", token);
@@ -158,7 +158,7 @@ public class JogoController {
 		ObjectMapper mapper = new ObjectMapper();
 		JogoPorData user = mapper.readValue(users, JogoPorData.class);
 		ModelAndView modelAndView = new ModelAndView();
-		List<String> erros = new ArrayList<>();
+		List<String> erros = new ArrayList<String>();
 		
 		Jogo jogo = jogoService.findJogoById(user.getJogoId());
 		Quadra quadra = quadraService.findAllQuadraById(jogo.getQuadraId());
@@ -214,7 +214,7 @@ public class JogoController {
 
 	
 		notificacoesService.insertNotificacoes(notificacoes);
-		HashMap<String, Object> authResp = new HashMap<>();
+		HashMap<String, Object> authResp = new HashMap<String, Object>();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Object token = auth.getCredentials();
 		authResp.put("token", token);
@@ -231,7 +231,7 @@ public class JogoController {
 		ObjectMapper mapper = new ObjectMapper();
 		UserJogo2 user = mapper.readValue(users, UserJogo2.class);
 		ModelAndView modelAndView = new ModelAndView();
-		List<String> erros = new ArrayList<>();
+		List<String> erros = new ArrayList<String>();
 
 		Jogo jogo = jogoService.findJogoById(user.getJogo_id());
 		Quadra quadra = quadraService.findAllQuadraById(jogo.getQuadraId());
@@ -274,7 +274,7 @@ public class JogoController {
 		notificacoes.setParaJogoId(jogo.getId());
 		notificacoes.setParaUserId(user.getUser_id());
 		notificacoesService.insertNotificacoes(notificacoes);
-		HashMap<String, Object> authResp = new HashMap<>();
+		HashMap<String, Object> authResp = new HashMap<String, Object>();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Object token = auth.getCredentials();
 		authResp.put("token", token);
@@ -292,7 +292,7 @@ public class JogoController {
 		ObjectMapper mapper = new ObjectMapper();
 		UserJogo2 user = mapper.readValue(users, UserJogo2.class);
 		ModelAndView modelAndView = new ModelAndView();
-		List<String> erros = new ArrayList<>();
+		List<String> erros = new ArrayList<String>();
 		
 		Jogo jogo = jogoService.findJogoById(user.getJogo_id());
 		Quadra quadra = quadraService.findAllQuadraById(jogo.getQuadraId());
@@ -352,7 +352,7 @@ public class JogoController {
 		notificacoes.setParaUserId(user.getUser_id());
 		notificacoesService.insertNotificacoes(notificacoes);
 		jogoUserService.saveUserJogo(Arrays.asList(user));
-		HashMap<String, Object> authResp = new HashMap<>();
+		HashMap<String, Object> authResp = new HashMap<String, Object>();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Object token = auth.getCredentials();
 		authResp.put("token", token);
@@ -397,7 +397,7 @@ public class JogoController {
 //			}
 //		}
 		jogoService.saveJogoPorData(jogosData);
-		HashMap<String, Object> authResp = new HashMap<>();
+		HashMap<String, Object> authResp = new HashMap<String, Object>();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Object token = auth.getCredentials();
 		authResp.put("token", token);
@@ -412,7 +412,7 @@ public class JogoController {
 	// public @ResponseBody APIResponse deleteMensagem(@Valid User user,
 	// BindingResult bindingResult) {
 	// ModelAndView modelAndView = new ModelAndView();
-	// List<String> erros = new ArrayList<>();
+	// List<String> erros = new ArrayList<String>();
 	// User userExists = userService.findUserByEmail(user.getEmail());
 	// if (userExists != null) {
 	// erros.add("There is already a user registered with the email provided");
@@ -425,7 +425,7 @@ public class JogoController {
 	// modelAndView.setViewName("registration");
 	//
 	//
-	// HashMap<String, Object> authResp = new HashMap<>();
+	// HashMap<String, Object> authResp = new HashMap<String, Object>();
 	// Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	//
 	// Object token = auth.getCredentials();
@@ -442,7 +442,7 @@ public class JogoController {
 	// public @ResponseBody APIResponse fetchByUser(@Valid User user, BindingResult
 	// bindingResult) {
 	// ModelAndView modelAndView = new ModelAndView();
-	// List<String> erros = new ArrayList<>();
+	// List<String> erros = new ArrayList<String>();
 	// User userExists = userService.findUserByEmail(user.getEmail());
 	// if (userExists != null) {
 	// erros.add("There is already a user registered with the email provided");
@@ -455,7 +455,7 @@ public class JogoController {
 	// modelAndView.setViewName("registration");
 	//
 	//
-	// HashMap<String, Object> authResp = new HashMap<>();
+	// HashMap<String, Object> authResp = new HashMap<String, Object>();
 	// Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	//
 	// Object token = auth.getCredentials();

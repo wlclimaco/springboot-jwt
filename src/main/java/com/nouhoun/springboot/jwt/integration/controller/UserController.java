@@ -49,7 +49,7 @@ public class UserController {
 	@RequestMapping(value = "/user/insert", method = RequestMethod.POST)
 	public @ResponseBody APIResponse createNewMensagem(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
-		List<String> erros = new ArrayList<>();
+		List<String> erros = new ArrayList<String>();
 		User userExists = userService.findUserByEmail(user.getEmail());
 		if (userExists != null) {
 			erros.add("There is already a user registered with the email provided");
@@ -61,7 +61,7 @@ public class UserController {
 			modelAndView.setViewName("registration");
 
 
-	HashMap<String, Object> authResp = new HashMap<>();
+	HashMap<String, Object> authResp = new HashMap<String, Object>();
 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 	Object token = auth.getCredentials();
@@ -77,7 +77,7 @@ public class UserController {
 	@RequestMapping(value = "/user/update", method = RequestMethod.POST)
 	public @ResponseBody APIResponse updateMensagem(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
-		List<String> erros = new ArrayList<>();
+		List<String> erros = new ArrayList<String>();
 		User userExists = userService.findUserByEmail(user.getEmail());
 		if (userExists != null) {
 			erros.add("There is already a user registered with the email provided");
@@ -89,7 +89,7 @@ public class UserController {
 			modelAndView.setViewName("registration");
 
 
-	HashMap<String, Object> authResp = new HashMap<>();
+	HashMap<String, Object> authResp = new HashMap<String, Object>();
 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 	Object token = auth.getCredentials();
@@ -105,7 +105,7 @@ public class UserController {
 	@RequestMapping(value = "/user/fetchByUser", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<List<UserDTO>> fetchByUser(@RequestBody String userString, HttpServletRequest request,
 			HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException {
-		List<String> erros = new ArrayList<>();
+		List<String> erros = new ArrayList<String>();
 		ObjectMapper mapper = new ObjectMapper();
 		User user = mapper.readValue(userString, User.class);
 		User userExists = userService.findUserByEmail(user.getEmail());

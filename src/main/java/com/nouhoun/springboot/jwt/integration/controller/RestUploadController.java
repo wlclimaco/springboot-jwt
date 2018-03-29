@@ -53,7 +53,7 @@ public class RestUploadController {
             saveUploadedFiles(Arrays.asList(uploadfile));
 
         } catch (IOException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity("Successfully uploaded - " +
@@ -70,8 +70,8 @@ public class RestUploadController {
 
         logger.debug("Multiple file upload!");
 
-        String uploadedFileName = Arrays.stream(uploadfiles).map(x -> x.getOriginalFilename())
-                .filter(x -> !StringUtils.isEmpty(x)).collect(Collectors.joining(" , "));
+        String uploadedFileName = ""; //Arrays.stream(uploadfiles).map(x -> x.getOriginalFilename())
+      //          .filter(x -> !StringUtils.isEmpty(x)).collect(Collectors.joining(" , "));
 
         if (StringUtils.isEmpty(uploadedFileName)) {
             return new ResponseEntity("please select a file!", HttpStatus.OK);
@@ -82,7 +82,7 @@ public class RestUploadController {
             saveUploadedFiles(Arrays.asList(uploadfiles));
 
         } catch (IOException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity("Successfully uploaded - "
@@ -101,7 +101,7 @@ public class RestUploadController {
             saveUploadedFiles(Arrays.asList(model.getFiles()));
 
         } catch (IOException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity("Successfully uploaded!", HttpStatus.OK);

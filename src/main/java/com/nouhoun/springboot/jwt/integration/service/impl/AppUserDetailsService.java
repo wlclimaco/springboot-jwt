@@ -2,6 +2,7 @@ package com.nouhoun.springboot.jwt.integration.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import com.nouhoun.springboot.jwt.integration.domain.Role;
 import com.nouhoun.springboot.jwt.integration.domain.User;
 import com.nouhoun.springboot.jwt.integration.repository.UserRepository;
 
@@ -30,10 +32,13 @@ public class AppUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException(String.format("The username %s doesn't exist", s));
         }
 
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        user.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority(role.getRole()));
-        });
+        final List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        user.getRoles().forEach(new Consumer<Role>() {
+			@Override
+			public void accept(Role role) {
+			    authorities.add(new SimpleGrantedAuthority(role.getRole()));
+			}
+		});
 
         UserDetails userDetails = new org.springframework.security.core.userdetails.
                 User(user.getEmail(), user.getPassword(), authorities);

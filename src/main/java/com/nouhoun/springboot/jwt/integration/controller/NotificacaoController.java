@@ -41,9 +41,9 @@ public class NotificacaoController {
 
 		ObjectMapper mapper = new ObjectMapper();
 		Notificacoes notificacao = mapper.readValue(users, Notificacoes.class);
-		List<String> erros = new ArrayList<>();
+		List<String> erros = new ArrayList<String>();
 		userService.updateNotificacoes(notificacao);
-		HashMap<String, Object> authResp = new HashMap<>();
+		HashMap<String, Object> authResp = new HashMap<String, Object>();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	
 		Object token = auth.getCredentials();
@@ -61,9 +61,9 @@ public class NotificacaoController {
 
 		ObjectMapper mapper = new ObjectMapper();
 		Notificacoes notificacao = mapper.readValue(users, Notificacoes.class);
-		List<String> erros = new ArrayList<>();
+		List<String> erros = new ArrayList<String>();
 		userService.deleteNotificacoes(notificacao);
-		HashMap<String, Object> authResp = new HashMap<>();
+		HashMap<String, Object> authResp = new HashMap<String, Object>();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	
 		Object token = auth.getCredentials();
@@ -80,15 +80,15 @@ public class NotificacaoController {
 			throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		NotificacaoRequest notificacaoRequest = mapper.readValue(users, NotificacaoRequest.class);
-		List<String> erros = new ArrayList<>();
-		List<Notificacoes> notificacaoList = new ArrayList<>();
+		List<String> erros = new ArrayList<String>();
+		List<Notificacoes> notificacaoList = new ArrayList<Notificacoes>();
 		if(notificacaoRequest.getRole().getId() == 3)
 		{
 			notificacaoList = userService.findNotificacoesByEmpr(notificacaoRequest.getEmpresaId());
 		}else {
 			notificacaoList = userService.findNotificacoesByUser(notificacaoRequest.getUserId());
 		}
-	HashMap<String, Object> authResp = new HashMap<>();
+	HashMap<String, Object> authResp = new HashMap<String, Object>();
 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 	Object token = auth.getCredentials();

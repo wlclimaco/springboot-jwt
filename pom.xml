@@ -21,23 +21,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
-		<apacheCommonLang.version>2.6</apacheCommonLang.version>
-        <apacheCodec.version>1.9</apacheCodec.version>
-        <apacheXerces.version>2.10.0</apacheXerces.version>
-        <apacheXercesImpl.version>2.11.0</apacheXercesImpl.version>
-        <jackson.version>2.8.6</jackson.version>
-        <googleGson.version>2.3.1</googleGson.version>
-        <fasterxmlJackson.version>2.4.3</fasterxmlJackson.version>
-        <orgJson.version>20141113</orgJson.version>
-        <castor.version>1.3.1</castor.version>
-        <xstream.version>1.4.7</xstream.version>
-        <jayway.version>2.0.0</jayway.version>
-        <jjwt.version>0.6.0</jjwt.version>
-        <base>frolvlad/alpine-oraclejdk8:slim</base>
-	    <tomcat.port>9081</tomcat.port>
-	    <tomcat.ip>127.0.0.1</tomcat.ip>
-	    <file>readme</file>
+
 	</properties>
 
 	<dependencies>
@@ -167,17 +151,7 @@
 			<artifactId>nekohtml</artifactId>
 		</dependency>
 		 
-		       <!-- https://mvnrepository.com/artifact/org.javassist/javassist 
-<dependency>
-    <groupId>org.javassist</groupId>
-    <artifactId>javassist</artifactId>
-    </dependency>-->
-		        <!-- Apache Commons -->
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>${apacheCommonLang.version}</version>
-        </dependency>
+
 
 
         <!-- Apache Codec -->
@@ -185,21 +159,6 @@
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             </dependency>
-
-
-        <!-- Apache Xerces -->	
-        <dependency>
-            <groupId>xerces</groupId>
-            <artifactId>xercesImpl</artifactId>
-            <version>${apacheXercesImpl.version}</version>
-        </dependency>
-<!--
-		<dependency>
-		   <groupId>org.apache.tomcat</groupId>
-		   <artifactId>tomcat-catalina</artifactId>
-		   <version>8.0.5</version>
-		</dependency>
--->		
 
 <!-- https://mvnrepository.com/artifact/org.json/json -->
 <dependency>
@@ -250,12 +209,6 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             </dependency>
-
-		<dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>${jjwt.version}</version>
-        </dependency>
 
         <!-- Test -->
         <dependency>

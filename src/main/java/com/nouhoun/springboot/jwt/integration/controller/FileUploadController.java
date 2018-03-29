@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -46,8 +47,13 @@ public class FileUploadController {
     public String listUploadedFiles(Model model) throws IOException {
 
         model.addAttribute("files", storageService.loadAll().map(
-                path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
-                        "serveFile", path.getFileName().toString()).build().toString())
+                new Function<Path, Object>() {
+					@Override
+					public Object apply(Path path) {
+						return MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
+						        "serveFile", path.getFileName().toString()).build().toString();
+					}
+				})
                 .collect(Collectors.toList()));
         logger.debug("Multiple file upload! -- > 3");
         return "uploadForm";
@@ -80,7 +86,7 @@ public class FileUploadController {
             saveUploadedFiles(uploadfile);
 
         } catch (IOException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity("Successfully uploaded - " +
