@@ -34,16 +34,20 @@
   
 	commonControllers.controller('LoginController', ['$scope', '$rootScope', '$location', 'localStorageService','WDAuthentication', 
 		function($scope, $rootScope, $location, localStorageService, WDAuthentication) {
-			
+		
 			$scope.login = function() {
-				WDAuthentication.processLogin(WebDaptiveAppConfig.authenticationURL, $.param({username: $scope.username, password: $scope.password}), function(authenticationResult) {
-					var authToken = authenticationResult.token;
+				
+				WDAuthentication.processLogin(WebDaptiveAppConfig.authenticationURL, $.param({username: $scope.username, password: $scope.password,grant_type : "password" }), function(authenticationResult) {
+					debugger
+					var authToken = authenticationResult.access_token;
 					if (authToken !== undefined){	
 						$rootScope.authToken = authToken;
 						localStorageService.set('authToken', authToken);
-						var currentUser = {user: authenticationResult.name, roles: authenticationResult.roles};
+						localStorageService.set('expires_in', authenticationResult.expires_in);
+						localStorageService.set('jti', authenticationResult.jti);
+						var currentUser = {user: $scope.username, roles: $scope.username};
 						$rootScope.user = currentUser;
-						$rootScope.main.name = authenticationResult.name;
+						$rootScope.main.name = $scope.username;
 						localStorageService.set('currentUser', $rootScope.user);
 						var tempRole = "";
 						for (var prop in authenticationResult.roles) {
@@ -58,7 +62,7 @@
 							$location.path($rootScope.callingPath);
 						}
 						else{
-							$location.path( "/" );
+							$location.path( "/index2" );
 						}		
 					}
 					else{

@@ -15,7 +15,7 @@ var WebDaptiveAppConfig = {
 	//restAuthBase = string to check for rest calls to jDpative, nDaptive or PHP Back-end so the angular http provider can inject x-auth token
 	//Java URLs & Settings
 	restAuthBase: 'qat-sysmgmt-controller-rest',
-	authenticationURL: 'http://localhost:8080/qat-sysmgmt-controller-rest/auth/api/authenticate',		
+	authenticationURL: 'http://localhost:8080/oauth/token',		
 	base_county_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/county/api',
 	base_procedure_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/procedure/api',	
 	//PHP URLs & Settings
@@ -55,7 +55,7 @@ var WebDaptiveAppConfig = {
 			'charts/chartjs', 'charts/echarts', 'pages/404', 'pages/500', 'pages/blank',
 			'pages/invoice', 'pages/profile', 'pages/signin', 'mail/compose', 
 			'mail/inbox', 'mail/single', 'tasks/tasks', 
-			'apps/stocks', 'apps/counties', 'apps/procedures'];
+			'apps/stocks', 'apps/counties', 'apps/procedures','index2'];
 			
 			//generic routine for building route from array
 			setRoutes = function(route) {

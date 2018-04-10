@@ -1,148 +1,42 @@
-<div class="page page-dashboard">
-    <section>
-        <section class="panel panel-default">
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-7"  data-ng-controller="DBPieController as pc">
-                        <div data-echarts data-options="pc.pie1.options" style="height: 350px;"></div>
-                    </div>
-                    <div class="col-lg-5">
-                        <h3 class="text-thin">Statistics</h3>
-                        <div class="divider-dashed"></div>
-                        <p>Bounce Rate</p>
-                        <uib-progressbar class="progressbar-xs progress-rounded" value="34" type="success"></uib-progressbar>
-                        <p>New Visists</p>
-                        <uib-progressbar class="progressbar-xs progress-rounded" value="68" type="info"></uib-progressbar>
-                        <p>Search Traffic</p>
-                        <uib-progressbar class="progressbar-xs progress-rounded" value="52" type="warning"></uib-progressbar>
-                        <p>Modern Browsers</p>
-                        <uib-progressbar class="progressbar-xs progress-rounded" value="77" type="danger"></uib-progressbar>                        
-                    </div>
-                </div>
-            </div>
-        </section>
-    </section> 
+ <div class="page-signin">
 
 
-    <!-- Stats -->
-    <div class="row text-center">
-        <div class="col-lg-3 col-xsm-6">
-            <div class="panel mini-box">
-                <span class="box-icon rounded bg-success">
-                    <span class="fa fa-rocket"></span>
-                </span>
-                <div class="box-info">
-                    <p class="size-h2">36 <span class="size-h4">%</span></p>
-                    <p class="text-muted"><span data-translate="growth"></span></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-xsm-6">
-            <div class="panel mini-box">
-                <span class="box-icon rounded bg-info">
-                    <i class="fa fa-users"></i>
-                </span>
-                <div class="box-info">
-                    <p class="size-h2">22 <span class="size-h4">%</span></p>
-                    <p class="text-muted"><span data-translate="new users"></span></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-xsm-6">
-            <div class="panel mini-box">
-                <span class="box-icon rounded bg-warning">
-                    <i class="fa fa-dollar"></i>
-                </span>
-                <div class="box-info">
-                    <p class="size-h2">81 <span class="size-h4">k</span></p>
-                    <p class="text-muted"><span data-translate="profit"></span></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-xsm-6">
-            <div class="panel mini-box">
-                <span class="box-icon rounded bg-danger">
-                    <i class="fa fa-shopping-cart"></i>
-                </span>
-                <div class="box-info">
-                    <p class="size-h2">13 <span class="size-h4">k</span></p>
-                    <p class="text-muted"><span data-translate="sales"></span></p>
-                </div>
+    <div class="signin-body">
+        <div class="container">
+
+            <div class="form-container" data-ng-controller="LoginController">
+                <form class="form-horizontal">
+                
+                <img class="img-responsive center-block" src="https://www.freelogoservices.com/api/main/ph/zjHl2lgef9cYrQL0JFa7kzbw2vuDpBZNkBjO0Tp9OXdE9g5shnN1i...Bv9ettdV9dsBUGw0pY" />
+                    <fieldset>
+                        <div class="form-group">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                            <input type="text" id="username" ng-model="username" data-focus="true" class="form-control input-lg input-round text-center" placeholder="e-address@qat.com">
+                        </div>
+                        <div class="form-group">
+                            <span class="glyphicon glyphicon-lock"></span>
+                            <input type="password" id="password" ng-model="password" class="form-control input-lg input-round text-center" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+							<input type="submit" value="Log In" class="btn btn-primary btn-lg btn-round btn-block text-center" ng-click="login()"/>							
+                        </div>
+						<div class="alert alert-danger" ng-show="error">{{error}}</div>						
+                    </fieldset>
+                </form>
+
+                <section>
+                    <p class="text-center"><a href="#/pages/forgot-password">Forgot your password?</a></p>
+                    <p class="text-center text-muted text-small">Don't have an account yet? <a href="#/pages/signup">Sign up</a></p>
+                </section>
+                
             </div>
         </div>
     </div>
-    <!-- end stats -->
-
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Realtime Chart</h3>
-        </div>
-        <div class="panel-body" data-ng-controller="DBRealTimeController as rt">
-			<canvas id="rtchartjs" height="40" class="chart chart-line" chart-data="rt.data"  chart-options="rt.options" chart-labels="rt.labels">
-			</canvas>
-        </div>
-    </div>
-
-
-    <div class="panel panel-default">
-        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Table - General</strong></div>	
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Project</th>
-                    <th>Status</th>
-                    <th>Manager</th>
-                    <th>Progress</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><span class="color-success"><i class="fa fa-level-up"></i></span> TWLT</td>
-                    <td><span class="label label-info">Pending</span></td>
-                    <td>Amery Lee</td>
-                    <td><uib-progressbar class="progressbar-xs no-margin" value="55"></uib-progressbar>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><span class="color-success"><i class="fa fa-level-up"></i></span> A16Z</td>
-                    <td><span class="label label-primary">Due</span></td>
-                    <td>Romayne Carlyn</td>
-                    <td><uib-progressbar class="progressbar-xs no-margin" value="34" type="success"></uib-progressbar></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><span class="color-warning"><i class="fa fa-level-down"></i></span> DARK</td>
-                    <td><span class="label label-success">Due</span></td>
-                    <td>Marybeth Joanna</td>
-                    <td><uib-progressbar class="progressbar-xs no-margin" value="68" type="info"></uib-progressbar></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td><span class="color-info"><i class="fa fa-level-up"></i></span> Q300</td>
-                    <td><span class="label label-danger">Blocked</span></td>
-                    <td>Jonah Benny</td>
-                    <td><uib-progressbar class="progressbar-xs no-margin" value="52" type="warning"></uib-progressbar></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td><span class="color-danger"><i class="fa fa-level-down"></i></span> RVNG</td>
-                    <td><span class="label label-warning">Suspended</span></td>
-                    <td>Daly Royle</td>
-                    <td><uib-progressbar class="progressbar-xs no-margin" value="77" type="danger"></uib-progressbar></td></td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td><span class="color-info"><i class="fa fa-level-down"></i></span> FDSA</td>
-                    <td><span class="label label-info">Suspended</span></td>
-                    <td>Jane Swift</td>
-                    <td><uib-progressbar class="progressbar-xs no-margin" value="55" type="success"></uib-progressbar></td></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-	<div data-ui-footer></div>		
+	<div data-ui-footer></div>
 </div>
-  
+ 
+ 
+ 
+ 
+ 
+     </div> 	
