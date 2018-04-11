@@ -38,7 +38,7 @@
 			$scope.login = function() {
 				
 				WDAuthentication.processLogin(WebDaptiveAppConfig.authenticationURL, $.param({username: $scope.username, password: $scope.password,grant_type : "password" }), function(authenticationResult) {
-					debugger
+					
 					var authToken = authenticationResult.access_token;
 					if (authToken !== undefined){	
 						$rootScope.authToken = authToken;
@@ -62,7 +62,7 @@
 							$location.path($rootScope.callingPath);
 						}
 						else{
-							$location.path( "/index2" );
+							$location.path( "/dashboard" );
 						}		
 					}
 					else{

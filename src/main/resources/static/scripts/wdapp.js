@@ -41,7 +41,7 @@ var WebDaptiveAppConfig = {
 				'wdApp.tasks', 'wdApp.charts.chartjs.controllers', 'wdApp.charts.echarts.controllers',  'wdApp.dashboard.controllers',
 				'wdApp.authentication', 'wdApp.pages.controllers', 'wdApp.demodata', 'wdApp.apps.stocks', 
 				'wdApp.apps.stocksdata','wdApp.apps.counties', 	'wdApp.apps.procedures','wdApp.apps.sysmgmt.data', 
-				'wdApp.apps.sysmgmt.datajava', 'wdApp.apps.sysmgmt.dataphp']);  
+				'wdApp.apps.sysmgmt.datajava', 'wdApp.apps.sysmgmt.dataphp','wdApp.apps.meusJogos','wdApp.apps.factory.meusJogos']);  
   
 	wdApp.config(['$routeProvider',
 		function($routeProvider) {
@@ -75,7 +75,7 @@ var WebDaptiveAppConfig = {
 			
 			//routes not automatically built specified here
 			return $routeProvider.when('/', {
-				redirectTo: '/dashboard'
+				redirectTo: '/pages/signin'
 			}).when('/404', {
 				templateUrl: 'views/pages/404.html'
 			}).otherwise({
