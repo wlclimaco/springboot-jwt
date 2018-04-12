@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -35,7 +37,8 @@ import com.nouhoun.springboot.jwt.integration.service.JogoService;
 import com.nouhoun.springboot.jwt.integration.service.UserService;
 
 
-@Controller
+@RestController
+@RequestMapping("/user")
 public class UserController {
 
 	@Autowired
@@ -46,7 +49,7 @@ public class UserController {
 
 
 	@CrossOrigin(origins = "*")
-	@RequestMapping(value = "/user/insert", method = RequestMethod.POST)
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public @ResponseBody APIResponse createNewMensagem(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		List<String> erros = new ArrayList<String>();
@@ -74,7 +77,7 @@ public class UserController {
 	}
 
 	@CrossOrigin(origins = "*")
-	@RequestMapping(value = "/user/update", method = RequestMethod.POST)
+	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public @ResponseBody APIResponse updateMensagem(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		List<String> erros = new ArrayList<String>();
@@ -102,7 +105,23 @@ public class UserController {
 	}
 
 	@CrossOrigin(origins = "*")
-	@RequestMapping(value = "/user/fetchByUser", method = RequestMethod.POST)
+	@RequestMapping(value ="/findUserById", method = RequestMethod.POST)
+	@PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')")
+    public User getUsers(@RequestBody Integer id, HttpServletRequest request,
+			HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException {
+        return userService.findUserById(id);
+    }
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value ="/findUserByEmail", method = RequestMethod.POST)
+	@PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')")
+    public User findUserByEmail(@RequestBody String email, HttpServletRequest request,
+			HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException {
+        return userService.findUserByEmail(email);
+    }
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value = "/fetchByUser", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<List<UserDTO>> fetchByUser(@RequestBody String userString, HttpServletRequest request,
 			HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException {
 		List<String> erros = new ArrayList<String>();
@@ -124,15 +143,6 @@ public class UserController {
 		return new ResponseEntity<List<UserDTO>>(Arrays.asList(dto), HttpStatus.OK);
 	}
 
-	private void createAuthResponse(User user, HashMap<String, Object> authResp,ArrayList<String> erros) {
-        String token = "";
-        		//Jwts.builder().setSubject(user.getEmail())
-               // .claim("role", user.getRole().name()).setIssuedAt(new Date())
-              // .signWith(SignatureAlgorithm.HS256, JWTTokenAuthFilter.JWT_KEY).compact();
-        authResp.put("token", token);
-        authResp.put("user", user);
-        authResp.put("Error", erros);
-    }
 
 
 }

@@ -32,8 +32,8 @@
 		
     }]);
   
-	commonControllers.controller('LoginController', ['$scope', '$rootScope', '$location', 'localStorageService','WDAuthentication', 
-		function($scope, $rootScope, $location, localStorageService, WDAuthentication) {
+	commonControllers.controller('LoginController', ['$scope','SysMgmtData', '$rootScope', '$location', 'localStorageService','WDAuthentication', 
+		function($scope, SysMgmtData, $rootScope, $location, localStorageService, WDAuthentication) {
 		
 			$scope.login = function() {
 				
@@ -45,16 +45,20 @@
 						localStorageService.set('authToken', authToken);
 						localStorageService.set('expires_in', authenticationResult.expires_in);
 						localStorageService.set('jti', authenticationResult.jti);
-						var currentUser = {user: $scope.username, roles: $scope.username};
-						$rootScope.user = currentUser;
-						$rootScope.main.name = $scope.username;
-						localStorageService.set('currentUser', $rootScope.user);
-						var tempRole = "";
-						for (var prop in authenticationResult.roles) {
-							tempRole += prop + " ";
-						}							
-						$rootScope.displayRoles = tempRole;
-						localStorageService.set('displayRoles', $rootScope.displayRoles);						
+						
+					SysMgmtData.processPostPageData("http://localhost:8080/user/findUserByEmail", ""+$scope.username , function(res){
+							var currentUser = res;
+							$rootScope.user = currentUser;
+							$rootScope.main.name = $scope.username;
+							localStorageService.set('currentUser', $rootScope.user);
+							var tempRole = "";
+							for (var prop in authenticationResult.roles) {
+								tempRole += prop + " ";
+							}							
+							$rootScope.displayRoles = tempRole;
+							localStorageService.set('displayRoles', $rootScope.displayRoles);						
+						});
+											
 						if ($rootScope.callingPath !== undefined){	
 							if ($rootScope.callingPath === '/pages/signin'){
 								$rootScope.callingPath = "/";
