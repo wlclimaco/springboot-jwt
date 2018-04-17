@@ -32,25 +32,33 @@
 		
     }]);
   
-	commonControllers.controller('LoginController', ['$scope', '$rootScope', '$location', 'localStorageService','WDAuthentication', 
-		function($scope, $rootScope, $location, localStorageService, WDAuthentication) {
-			
+	commonControllers.controller('LoginController', ['$scope','SysMgmtData', '$rootScope', '$location', 'localStorageService','WDAuthentication', 
+		function($scope, SysMgmtData, $rootScope, $location, localStorageService, WDAuthentication) {
+		
 			$scope.login = function() {
-				WDAuthentication.processLogin(WebDaptiveAppConfig.authenticationURL, $.param({username: $scope.username, password: $scope.password}), function(authenticationResult) {
-					var authToken = authenticationResult.token;
+				
+				WDAuthentication.processLogin(WebDaptiveAppConfig.authenticationURL, $.param({username: $scope.username, password: $scope.password,grant_type : "password" }), function(authenticationResult) {
+					
+					var authToken = authenticationResult.access_token;
 					if (authToken !== undefined){	
 						$rootScope.authToken = authToken;
 						localStorageService.set('authToken', authToken);
-						var currentUser = {user: authenticationResult.name, roles: authenticationResult.roles};
-						$rootScope.user = currentUser;
-						$rootScope.main.name = authenticationResult.name;
-						localStorageService.set('currentUser', $rootScope.user);
-						var tempRole = "";
-						for (var prop in authenticationResult.roles) {
-							tempRole += prop + " ";
-						}							
-						$rootScope.displayRoles = tempRole;
-						localStorageService.set('displayRoles', $rootScope.displayRoles);						
+						localStorageService.set('expires_in', authenticationResult.expires_in);
+						localStorageService.set('jti', authenticationResult.jti);
+						
+					SysMgmtData.processPostPageData("http://localhost:8080/user/findUserByEmail", ""+$scope.username , function(res){
+							var currentUser = res;
+							$rootScope.user = currentUser;
+							$rootScope.main.name = $scope.username;
+							localStorageService.set('currentUser', $rootScope.user);
+							var tempRole = "";
+							for (var prop in authenticationResult.roles) {
+								tempRole += prop + " ";
+							}							
+							$rootScope.displayRoles = tempRole;
+							localStorageService.set('displayRoles', $rootScope.displayRoles);						
+						});
+											
 						if ($rootScope.callingPath !== undefined){	
 							if ($rootScope.callingPath === '/pages/signin'){
 								$rootScope.callingPath = "/";
@@ -58,7 +66,7 @@
 							$location.path($rootScope.callingPath);
 						}
 						else{
-							$location.path( "/" );
+							$location.path( "/dashboard" );
 						}		
 					}
 					else{

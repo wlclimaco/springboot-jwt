@@ -33,11 +33,12 @@
 				/* Registers auth token interceptor, auth token is either passed by header or by query parameter
 				 * as soon as there is an authenticated user only for sysmgmt api calls*/						
 				'request': function(config) {
-					var isRestCall = config.url.indexOf(WebDaptiveAppConfig.restAuthBase) != -1;
-					if (isRestCall && angular.isDefined($rootScope.authToken)) {
+				//	var isRestCall = config.url.indexOf(WebDaptiveAppConfig.restAuthBase) != -1;
+					if (angular.isDefined($rootScope.authToken)) {
 						var authToken = $rootScope.authToken;
 						if (WebDaptiveAppConfig.useAuthTokenHeader){
-							config.headers['X-Auth-Token'] = authToken;
+						//	config.headers['X-Auth-Token'] = authToken;
+							config.headers.Authorization = 'Bearer ' + authToken;
 						} 
 						else{
 							config.url = config.url + "?token=" + authToken;
