@@ -41,8 +41,8 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private JogoService jogoService;
+//	@Autowired
+//	private JogoService jogoService;
 
 
 	@CrossOrigin(origins = "*")
@@ -109,7 +109,7 @@ public class UserController {
 		ObjectMapper mapper = new ObjectMapper();
 		User user = mapper.readValue(userString, User.class);
 		User userExists = userService.findUserByEmail(user.getEmail());
-		List<Jogo> jogos= jogoService.findJogoByUser(userExists);
+	//	List<Jogo> jogos= jogoService.findJogoByUser(userExists);
 		UserDTO dto =new UserDTO();
 		dto.setId(userExists.getId());
 		dto.setEmail(userExists.getEmail());
@@ -119,9 +119,17 @@ public class UserController {
 		dto.setActive(userExists.getActive());
 		dto.setRoles(userExists.getRoles());
 		dto.setEnabled(userExists.getEnabled());
-		dto.setJogos(jogos);
+	//	dto.setJogos(jogos);
 		
 		return new ResponseEntity<List<UserDTO>>(Arrays.asList(dto), HttpStatus.OK);
+	}
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value = "/user/fetchAll", method = RequestMethod.POST)
+	public @ResponseBody ResponseEntity<List<User>> fetchByAllUser(@RequestBody String userString, HttpServletRequest request,
+			HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException {
+				
+		return new ResponseEntity<List<User>>(userService.findAllUser(), HttpStatus.OK);
 	}
 
 	private void createAuthResponse(User user, HashMap<String, Object> authResp,ArrayList<String> erros) {

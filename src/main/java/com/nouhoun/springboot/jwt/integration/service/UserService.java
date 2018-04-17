@@ -1,5 +1,7 @@
 package com.nouhoun.springboot.jwt.integration.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.nouhoun.springboot.jwt.integration.domain.User;
@@ -12,4 +14,6 @@ public interface UserService {
 	public void saveUser(User user);
 	boolean isValidPass(User user, String rawPass);
 	User loginUser(User user, HttpServletRequest request);
+	
+	public List<User> findAllUser();
 }
