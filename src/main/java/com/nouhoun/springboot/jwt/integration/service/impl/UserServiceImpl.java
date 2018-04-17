@@ -1,19 +1,13 @@
 package com.nouhoun.springboot.jwt.integration.service.impl;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.HashSet;
-<<<<<<< HEAD
 import java.util.List;
-=======
->>>>>>> branch 'master' of https://github.com/wlclimaco85/springboot-jwt.git
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nouhoun.springboot.jwt.integration.domain.Role;
 import com.nouhoun.springboot.jwt.integration.domain.User;
 import com.nouhoun.springboot.jwt.integration.repository.RoleRepository;
 import com.nouhoun.springboot.jwt.integration.repository.UserRepository;
@@ -36,15 +30,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void saveUser(User user) {
-<<<<<<< HEAD
-	//	user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-    //    user.setActive(1);
-=======
-		//user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setActive(1);
->>>>>>> branch 'master' of https://github.com/wlclimaco85/springboot-jwt.git
-    //    Role userRole = roleRepository.findByRole("ADMIN");
-    //    user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+
 		userRepository.save(user);
 	}
 
@@ -74,14 +60,12 @@ public class UserServiceImpl implements UserService{
 	public User findUserById(Integer id) {
 		return userRepository.findUserById(id);
 	}
-<<<<<<< HEAD
 
 	@Override
 	public List<User> findAllUser() {
 		return (List<User>) userRepository.findAll();
 	}
 
-=======
->>>>>>> branch 'master' of https://github.com/wlclimaco85/springboot-jwt.git
+
 
 }
