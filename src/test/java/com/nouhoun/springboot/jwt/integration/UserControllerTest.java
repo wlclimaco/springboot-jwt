@@ -9,6 +9,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -16,8 +17,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
-import javax.sound.sampled.AudioFormat.Encoding;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,14 +26,19 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.nouhoun.springboot.jwt.integration.controller.UserController;
@@ -46,7 +50,8 @@ import com.nouhoun.springboot.jwt.integration.service.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@WebMvcTest(UserController.class)
+//@SpringBootTest(classes = SpringbootJwtApplication.class, webEnvironment = WebEnvironment.RANDOM_PORT)
+
 public class UserControllerTest {
 
 
@@ -86,6 +91,22 @@ public class UserControllerTest {
 		String authorization = "Basic dGVzdGp3dGNsaWVudGlkOlhZN2ttem9OemwxMDA=";
 		String contentType = MediaType.APPLICATION_JSON + ";charset=UTF-8";
 
+//		
+//	    MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+//	    params.add("grant_type", "password");
+//	    params.add("client_id", "fooClientIdPassword");
+//	    params.add("username", username);
+//	    params.add("password", password);
+//	 
+//	    ResultActions result 
+//	      = mvc.perform(post("/oauth/token")
+//	        .params(params)
+//	        .with(httpBasic("fooClientIdPassword","secret"))
+//	        .accept("application/json;charset=UTF-8"))
+//	        .andExpect(status().isOk())
+//	        .andExpect(content().contentType("application/json;charset=UTF-8"));
+//	 
+//	    String resultString = result.andReturn().getResponse().getContentAsString();
 		
 		// @formatter:off
 		String content = mvc
@@ -94,6 +115,7 @@ public class UserControllerTest {
 								.header("Authorization", authorization)
 								.contentType(
 									"application/x-www-form-urlencoded")
+								.accept(MediaType.APPLICATION_JSON)
 								.param("username", "wlclimaco@gmail.com")
 								.param("password", "jwtpass")
 								.param("grant_type", "password")

@@ -67,7 +67,7 @@ public class Quadra{
 	private String intervalo;
 	
 	@Column(name = "empresa_id")
-	private String empresaId;
+	private Integer empresaId;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name= "quadra_id")
@@ -153,11 +153,11 @@ public class Quadra{
 		this.intervalo = intervalo;
 	}
 
-	public String getEmpresaId() {
+	public Integer getEmpresaId() {
 		return empresaId;
 	}
 
-	public void setEmpresaId(String empresaId) {
+	public void setEmpresaId(Integer empresaId) {
 		this.empresaId = empresaId;
 	}
 

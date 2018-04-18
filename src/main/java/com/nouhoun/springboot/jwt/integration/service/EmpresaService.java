@@ -11,6 +11,6 @@ public interface EmpresaService {
 	public void saveEmpresa(Empresa empresa);
 	public void updateEmpresa(Empresa empresa);
 	public void deleteEmpresa(Empresa empresa);
-	public List<Empresa> findEmpresaByUser(Empresa empresa);
+	public List<Empresa> findEmpresaByUser(String empresa);
 	public List<Empresa> findAllEmpresa();
 }

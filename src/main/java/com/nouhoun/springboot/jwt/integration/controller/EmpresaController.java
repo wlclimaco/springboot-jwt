@@ -163,7 +163,7 @@ public class EmpresaController {
 
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/empresa/fetchByUser", method = RequestMethod.POST)
-	public @ResponseBody APIResponse fetchByUser(@Valid Empresa user, BindingResult bindingResult) {
+	public @ResponseBody APIResponse fetchByUser(@Valid String user, BindingResult bindingResult) {
 
 		List<String> erros = new ArrayList<String>();
 

@@ -46,9 +46,8 @@ public class EmpresaServiceImpl implements EmpresaService{
 		return empresaRepository.findAll();
 	}
 	@Override
-	public List<Empresa> findEmpresaByUser(Empresa empresa) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Empresa> findEmpresaByUser(String empresa) {
+		return empresaRepository.findEmpresaByUser(empresa);
 	}
 	
 	

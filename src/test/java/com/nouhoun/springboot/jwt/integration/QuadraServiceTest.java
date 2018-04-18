@@ -23,7 +23,7 @@ import com.nouhoun.springboot.jwt.integration.service.UserService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-public class UserServiceTests {
+public class QuadraServiceTest {
 
 
     @Mock
