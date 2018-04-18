@@ -2,10 +2,14 @@ package com.nouhoun.springboot.jwt.integration;
 
 
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
@@ -13,15 +17,25 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import javax.sound.sampled.AudioFormat.Encoding;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.nouhoun.springboot.jwt.integration.controller.UserController;
 import com.nouhoun.springboot.jwt.integration.domain.Role;
@@ -31,15 +45,122 @@ import com.nouhoun.springboot.jwt.integration.service.UserService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
+@WebAppConfiguration
 @WebMvcTest(UserController.class)
 public class UserControllerTest {
 
 
     @Autowired
     private MockMvc mvc;
+    
+    @Autowired
+    private FilterChainProxy springSecurityFilterChain;
+    
+    @Autowired
+	WebApplicationContext context;
  
     @MockBean
     private UserService userService;
+    
+	@InjectMocks
+	UserController controller;
+    
+    @Before
+	public void setUp() {
+    	MockitoAnnotations.initMocks(this);
+		mvc = MockMvcBuilders.webAppContextSetup(context)
+				.addFilter(springSecurityFilterChain).build();
+	}
+    
+    @Test
+	public void greetingUnauthorized() throws Exception {
+		// @formatter:off
+		mvc.perform(get("/user/fetchAll")
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isUnauthorized())
+				.andExpect(jsonPath("$.error", is("unauthorized")));
+		// @formatter:on
+	}
+
+	private String getAccessToken(String username, String password) throws Exception {
+		String authorization = "Basic dGVzdGp3dGNsaWVudGlkOlhZN2ttem9OemwxMDA=";
+		String contentType = MediaType.APPLICATION_JSON + ";charset=UTF-8";
+
+		
+		// @formatter:off
+		String content = mvc
+				.perform(
+						post("/oauth/token")
+								.header("Authorization", authorization)
+								.contentType(
+									"application/x-www-form-urlencoded")
+								.param("username", "wlclimaco@gmail.com")
+								.param("password", "jwtpass")
+								.param("grant_type", "password")
+								.param("scope", "read write")
+								.param("client_id", "testjwtclientid")
+								.param("client_secret", "XY7kmzoNzl100"))
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.content().contentType(contentType))
+				.andExpect(jsonPath("$.access_token", is(notNullValue())))
+				.andExpect(jsonPath("$.token_type", is(equalTo("bearer"))))
+				.andExpect(jsonPath("$.refresh_token", is(notNullValue())))
+				.andExpect(jsonPath("$.expires_in", is(greaterThan(4000))))
+				.andExpect(jsonPath("$.scope", is(equalTo("read write"))))
+				.andReturn().getResponse().getContentAsString();
+
+		// @formatter:on
+
+		return content.substring(17, 53);
+	}
+
+	@Test
+	public void greetingAuthorized() throws Exception {
+		String accessToken = getAccessToken("roy", "spring");
+
+		// @formatter:off
+		mvc.perform(get("/user/fetchAll")
+				.header("Authorization", "Bearer " + accessToken))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.id", is(1)))
+				.andExpect(jsonPath("$.content", is("Hello, Roy!")));
+		// @formatter:on
+
+		// @formatter:off
+		mvc.perform(get("/user/fetchAll")
+				.header("Authorization", "Bearer " + accessToken))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.id", is(2)))
+				.andExpect(jsonPath("$.content", is("Hello, Roy!")));
+		// @formatter:on
+
+		// @formatter:off
+		mvc.perform(get("/user/fetchAll")
+				.header("Authorization", "Bearer " + accessToken))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.id", is(3)))
+				.andExpect(jsonPath("$.content", is("Hello, Roy!")));
+		// @formatter:on
+	}
+
+	@Test
+	public void usersEndpointAuthorized() throws Exception {
+		// @formatter:off
+		mvc.perform(get("/users")
+				.header("Authorization", "Bearer " + getAccessToken("roy", "spring")))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$", hasSize(3)));
+		// @formatter:on
+	}
+
+	@Test
+	public void usersEndpointAccessDenied() throws Exception {
+		// @formatter:off
+		mvc.perform(get("/users")
+				.header("Authorization", "Bearer " + getAccessToken("craig", "spring")))
+				.andExpect(status().is(403));
+		// @formatter:on
+	}
     
     @Test
     public void givenEmployees_whenGetEmployees_thenReturnJsonArray()

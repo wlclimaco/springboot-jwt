@@ -41,13 +41,13 @@ var WebDaptiveAppConfig = {
 				'wdApp.tasks', 'wdApp.charts.chartjs.controllers', 'wdApp.charts.echarts.controllers',  'wdApp.dashboard.controllers',
 				'wdApp.authentication', 'wdApp.pages.controllers', 'wdApp.demodata', 'wdApp.apps.stocks', 
 				'wdApp.apps.stocksdata','wdApp.apps.counties', 	'wdApp.apps.procedures','wdApp.apps.sysmgmt.data', 
-				'wdApp.apps.sysmgmt.datajava', 'wdApp.apps.sysmgmt.dataphp','wdApp.apps.meusJogos','wdApp.apps.factory.meusJogos','wdApp.apps.Auth']);  
+				'wdApp.apps.sysmgmt.datajava', 'wdApp.apps.sysmgmt.dataphp','wdApp.apps.meusJogos','wdApp.apps.factory.meusJogos','wdApp.apps.Auth','wdApp.apps.dialogs','wdApp.apps.buscarQuadra']);  
   
 	wdApp.config(['$routeProvider',
 		function($routeProvider) {
 			var routes, setRoutes;
 			//all available routes
-			routes = ['dashboard', 'ui/typography', 'ui/buttons', 
+			routes = ['dashboard', 'ui/typography', 'ui/buttons', 'ui/BuscaQuadra',
 			'ui/icons', 'ui/grids', 'ui/widgets', 'ui/components', 
 			'ui/timeline', 'ui/tree', 'ui/pricing-tables', 'ui/maps', 
 			'tables/static', 'tables/dynamic', 'tables/responsive', 

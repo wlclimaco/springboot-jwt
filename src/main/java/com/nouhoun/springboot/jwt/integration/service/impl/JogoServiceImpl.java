@@ -33,21 +33,17 @@ public class JogoServiceImpl implements JogoService{
 	public void deleteJogo(Jogo user) {
 		jogoRepository.delete(user);
 	}
-	//@Override
-	//public List<Jogo> findJogoByUser(Jogo user) {
-	//	return jogoRepository.findJogoByUser(user);
+	@Override
+	public List<Jogo> findJogoByUser(Jogo user) {
+		return jogoRepository.findJogoByUser(user.getUser_id());
 		
-	//}
+	}
 
 	@Override
 	public List<Jogo> findAllJogo() {
 		return jogoRepository.findAll();
 	}
-	@Override
-	public List<Jogo> findJogoByUser(Jogo jogo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public void saveJogo(List<Jogo> jogos) {

@@ -58,10 +58,10 @@
 							$rootScope.displayRoles = tempRole;
 							localStorageService.set('displayRoles', $rootScope.displayRoles);						
 						});
-											
+							debugger				
 						if ($rootScope.callingPath !== undefined){	
 							if ($rootScope.callingPath === '/pages/signin'){
-								$rootScope.callingPath = "/";
+								$rootScope.callingPath = "/dashboard";
 							}
 							$location.path($rootScope.callingPath);
 						}

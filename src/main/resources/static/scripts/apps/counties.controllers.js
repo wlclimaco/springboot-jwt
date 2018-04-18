@@ -1,4 +1,5 @@
 (function() {
+	
   angular.module('wdApp.apps.counties', []).controller('CountiesController', 
   ['$scope', 'SysMgmtData', 'toastr', 'toastrConfig',
 	function($scope, SysMgmtData, toastr, toastrConfig) {
