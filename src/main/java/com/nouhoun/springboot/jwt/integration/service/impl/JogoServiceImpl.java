@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.nouhoun.springboot.jwt.integration.domain.Jogo;
 import com.nouhoun.springboot.jwt.integration.domain.Jogo.Status;
 import com.nouhoun.springboot.jwt.integration.domain.JogoPorData;
-import com.nouhoun.springboot.jwt.integration.domain.User;
 import com.nouhoun.springboot.jwt.integration.repository.JogoPorDataRepository;
 import com.nouhoun.springboot.jwt.integration.repository.JogoRepository;
 import com.nouhoun.springboot.jwt.integration.service.JogoService;
@@ -34,8 +33,8 @@ public class JogoServiceImpl implements JogoService{
 		jogoRepository.delete(user);
 	}
 	@Override
-	public List<Jogo> findJogoByUser(Jogo user) {
-		return jogoRepository.findJogoByUser(user.getUser_id());
+	public List<Jogo> findJogoByUser(Integer user) {
+		return jogoRepository.findJogoByUser(user);
 		
 	}
 
@@ -60,10 +59,7 @@ public class JogoServiceImpl implements JogoService{
 		jogoPorDataRepository.save(jogos);
 		
 	}
-//	@Override
-//	public List<Jogo> findJogoByUser(User user) {
-//		return jogoRepository.findJogoByUser(user.getId());
-//	}
+
 	@Override
 	public void saveJogoPorData(JogoPorData jogoPorData) {
 		jogoPorDataRepository.save(jogoPorData);
@@ -83,11 +79,7 @@ public class JogoServiceImpl implements JogoService{
 			
 		
 	}
-	@Override
-	public List<Jogo> findJogoByUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	
 	
 

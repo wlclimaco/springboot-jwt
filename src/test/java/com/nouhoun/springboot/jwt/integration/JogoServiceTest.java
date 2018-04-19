@@ -3,6 +3,7 @@ package com.nouhoun.springboot.jwt.integration;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -16,35 +17,23 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.nouhoun.springboot.jwt.integration.domain.Jogo;
-import com.nouhoun.springboot.jwt.integration.domain.Role;
+import com.nouhoun.springboot.jwt.integration.domain.Jogo.Confirmacao;
+import com.nouhoun.springboot.jwt.integration.domain.Jogo.Dias;
+import com.nouhoun.springboot.jwt.integration.domain.Jogo.Status;
+import com.nouhoun.springboot.jwt.integration.domain.JogoPorData;
+import com.nouhoun.springboot.jwt.integration.domain.JogoPorData.StatusJogoPorData;
 import com.nouhoun.springboot.jwt.integration.domain.User;
+import com.nouhoun.springboot.jwt.integration.domain.UserJogo2;
+import com.nouhoun.springboot.jwt.integration.domain.UserJogo2.Admin;
+import com.nouhoun.springboot.jwt.integration.domain.UserJogo2.StatusUser;
 import com.nouhoun.springboot.jwt.integration.service.JogoService;
-import com.nouhoun.springboot.jwt.integration.service.JogoUserService;
-import com.nouhoun.springboot.jwt.integration.service.UserService;
 
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class JogoServiceTest {
 
-//	public void updateJogo(Jogo empresa);
-//	public void deleteJogo(Jogo empresa);
-//	public List<Jogo> findJogoByUser(Jogo empresa);
-//	public Jogo findJogoById(Integer empresa);
-//	public List<Jogo> findAllJogo();
-//	public List<Jogo> findJogoByUser(User user);
-//	public List<JogoPorData> findJogoPorDataUserConfirmDTO(Integer JogoId, Date dataJogo);
-//	void saveJogo(List<Jogo> jogos);
-//	void saveUpdateJogo(Jogo jogos);
-//	void saveJogoPorData(List<JogoPorData> jogos);
-//	void saveJogoPorData(JogoPorData jogoPorData);
-//	public void updateStatus(Status indisponivel, Integer id);
-    @Mock
-	private UserService userService;
-    
-    @Mock
-	private JogoUserService jogoUserService;
-	
+
     @Mock
 	private JogoService jogoService;
 
@@ -54,9 +43,9 @@ public class JogoServiceTest {
 
         List<Jogo> dataList = new ArrayList<Jogo>();
         
-        dataList.add(listJogo(1));
-        dataList.add(listJogo(2));
-        Mockito.when(jogoService.findJogoByUser(listJogo(1))).thenReturn(dataList);
+        dataList.add(listJogo(1,2));
+        dataList.add(listJogo(2,2));
+        Mockito.when(jogoService.findJogoByUser(2)).thenReturn(dataList);
 
     }
 
@@ -66,85 +55,60 @@ public class JogoServiceTest {
 
     @Test
     public void findAllUser() {
-        List<Jogo> batchData = jogoService.findJogoByUser(listJogo(1));
+        List<Jogo> batchData = jogoService.findJogoByUser(2);
         assertEquals(1, batchData.size());
 
     }
     
+//===========================================================================================
     @Before
-    public void setUp2() {
-    	User data = new User();
-
-    	data.setId(1);
-    	data.setUsername("User Name");
-    	data.setEmail("wlclimaco@gmail.com");
-    	data.setPassword("password");
-    	data.setName("name");
-    	data.setLastName("lastName");
-    	data.setActive(1);
-    	List<Role> roles = new ArrayList<Role>();
-    	roles.add(new Role("TESTE_ADMIN"));
-    	roles.add(new Role("TESTE_PROD"));
-    	data.setRoles(roles);
-    	data.setIv("iv");
-    	data.setSalt("salt");
-    	//data.setNotificacoes(notificacoes);;
-    	data.setKeySize(10);
-    	data.setIterations(10);
-    	data.setLoginCount(2);
-    	data.setCurrentLoginAt(new Date());
-    	data.setLastLoginAt(new Date());
-    	data.setCurrentLoginIp("currentLoginIp");
-    	data.setLastLoginIp("lastLoginIp");
-    	data.setUpdatedAt(new Date());
-    	data.setEnabled(Boolean.TRUE);
-    	data.setIsGoleiro(Boolean.TRUE);
-    	data.setFoto("foto");
-    	data.setReceberNotificacoes(Boolean.TRUE);
-    	data.setEmpresaId(1);
-     
-        Mockito.when(userService.findUserByEmail("wlclimaco@gmail.com"))
-          .thenReturn(data);
-    }
-
-    @Test
-    public void findUserByEmail() {
-    	
-    	
-        User batchData = userService.findUserByEmail("wlclimaco@gmail.com");
-        assertEquals("wlclimaco@gmail.com", batchData.getEmail());
+    public void setupFindAllJogo() {
+        MockitoAnnotations.initMocks(this);
+        Mockito.when(jogoService.findAllJogo()).thenReturn(Arrays.asList(listJogo(1,2)));
 
     }
     
- public Jogo listJogo(Integer id){
+    @Test
+    public void findAllJogo() {
+        List<Jogo> batchData = jogoService.findAllJogo();
+        assertEquals(1, batchData.size());
+
+    }
+//===========================================================================================
+    @Before
+    public void setupFindJogoById() {
+        MockitoAnnotations.initMocks(this);
+        Mockito.when(jogoService.findJogoById(1)).thenReturn(listJogo(1,2));
+
+    }
+    
+    @Test
+    public void findJogoById() {
+        Jogo batchData = jogoService.findJogoById(1);
+        assertEquals(1, batchData.getId());
+
+    }
+    
+ public Jogo listJogo(Integer id,Integer user_id){
     	
 	 Jogo jogo = new Jogo();
-//    	empresa.setId(id);
-//    	empresa.setNome("nome");
-//    	empresa.setNomeResponsavel("nomeResponsavel");
-//    	empresa.setEmail(email);;
-//    	empresa.setTelefone("telefone");
-//    	Endereco endereco = new Endereco();
-//    	endereco.setId(id + 1000);
-//    	endereco.setBairro("bairro");
-//    	endereco.setCidade("cidade");
-//    	endereco.setEstadoId(1);
-//    	endereco.setLat("5441454141");
-//    	endereco.setLongi("5417854");  	
-//    	empresa.setEndereco(endereco);
-//    	empresa.setEnderecoId(1);
-//    	Quadra quadra = new Quadra();
-//    	quadra.setCobertura(Cobertura.NAO  );
-//    	quadra.setComBola(1);
-//    	quadra.setDescricao("descricao");
-//    	quadra.setEmpresaId(id);
-//    	quadra.setNome("nome");
-//    	quadra.setTempoJogo("90");
-//    	quadra.setTipo(Tipo.GRAMA);
-//    	quadra.setValor((float) 1.2);
-//    	
-//    	empresa.setQuadras(Arrays.asList(quadra));
-    	
+
+	 jogo.setId(id);
+	 jogo.setNome("nome");
+	 jogo.setDescricao("descricao");
+	 jogo.setUsersJogo(Arrays.asList(new User(user_id,"Washington", "wlclimaco@gmail.com", "Luis", "Luis", 1,1)));
+	 jogo.setUsersJogo2(Arrays.asList(new UserJogo2(user_id, id, StatusUser.CONFIRMADO , Admin.SIM)) );
+	 jogo.setUser_id(user_id);
+	 jogo.setMaximoConfirmados(1);
+	 jogo.setJogos(Arrays.asList(new JogoPorData(new Date(),new Date(),id, user_id, StatusJogoPorData.ACONFIRMAR, 10,5,1)));
+	 jogo.setAceitaExterno("aceitaExterno");
+	 jogo.setConfirmacao(Confirmacao.ANUAL);
+	 jogo.setQuadraId(1);
+	 jogo.setHoraInicial("10:30");
+	 jogo.setHoraFinal("11:30");
+	 jogo.setDia(Dias.DOMINGO);
+	 jogo.setStatus(Status.ACONFIRMAR);
+
     	return jogo;
     }
 

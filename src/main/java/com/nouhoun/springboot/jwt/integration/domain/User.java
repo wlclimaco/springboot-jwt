@@ -363,6 +363,21 @@ public class User{
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+
+	public User(Integer id, String username, String email, String password, String name, int active,
+			Integer empresaId) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.active = active;
+		this.empresaId = empresaId;
+	}
+	
+	
 	
 	
 }

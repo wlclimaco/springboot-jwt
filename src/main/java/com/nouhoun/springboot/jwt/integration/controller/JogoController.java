@@ -485,7 +485,7 @@ public class JogoController {
 		ObjectMapper mapper = new ObjectMapper();
 		User user = mapper.readValue(users, User.class);
 
-		List<Jogo> quadra = jogoService.findJogoByUser(user);
+		List<Jogo> quadra = jogoService.findJogoByUser(user.getId());
 
 		return new ResponseEntity<List<Jogo>>(quadra, HttpStatus.OK);
 	}

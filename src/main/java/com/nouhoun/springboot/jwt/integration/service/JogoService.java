@@ -6,17 +6,15 @@ import java.util.List;
 import com.nouhoun.springboot.jwt.integration.domain.Jogo;
 import com.nouhoun.springboot.jwt.integration.domain.Jogo.Status;
 import com.nouhoun.springboot.jwt.integration.domain.JogoPorData;
-import com.nouhoun.springboot.jwt.integration.domain.User;
 
 
 
 public interface JogoService {
 	public void updateJogo(Jogo empresa);
 	public void deleteJogo(Jogo empresa);
-	public List<Jogo> findJogoByUser(Jogo empresa);
+	public List<Jogo> findJogoByUser(Integer empresa);
 	public Jogo findJogoById(Integer empresa);
 	public List<Jogo> findAllJogo();
-	public List<Jogo> findJogoByUser(User user);
 	public List<JogoPorData> findJogoPorDataUserConfirmDTO(Integer JogoId, Date dataJogo);
 	void saveJogo(List<Jogo> jogos);
 	void saveUpdateJogo(Jogo jogos);
