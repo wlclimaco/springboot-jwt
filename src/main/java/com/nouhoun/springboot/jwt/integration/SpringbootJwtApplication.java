@@ -5,8 +5,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Import;
+
+import com.nouhoun.springboot.jwt.job.JobsListenerService;
 
 @SpringBootApplication
+@Import(JobsListenerService.class)
 public class SpringbootJwtApplication extends SpringBootServletInitializer {
 
 
@@ -16,6 +20,7 @@ public class SpringbootJwtApplication extends SpringBootServletInitializer {
 /**
  * @param args Arguments
 */
+
 public static void main(String[] args) {
 SpringApplication application = new SpringApplication(SpringbootJwtApplication.class);
 /* Setting Boot banner off default value is true */
