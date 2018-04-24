@@ -124,23 +124,31 @@
     }
   ]).controller('ModalDemoController', [
     '$scope', '$uibModal', '$log', function($scope, $uibModal, $log) {
-      $scope.items = ["item1", "item2", "item3"];
-      $scope.open = function() {
+    var $ctrl = this;
+    	$ctrl.items = ['item1', 'item2', 'item3'];
+
+    	  $ctrl.animationsEnabled = true;
+      $scope.open = function(jogo, status) {debugger
         var modalInstance;
         modalInstance = $uibModal.open({
           templateUrl: "myModalContent.html",
-          controller: 'ModalInstanceController',
+          controller: 'ModalInstanceCtrl',
+          controllerAs: '$ctrls',
           resolve: {
             items: function() {
               return $scope.items;
             }
           }
         });
-        modalInstance.result.then((function(selectedItem) {
-          $scope.selected = selectedItem;
-        }), function() {
-          $log.info("Modal dismissed at: " + new Date());
-        });
+        modalInstance.result.then(function (selectedItem) {
+            $ctrl.selected = selectedItem;
+            debugger 
+            console.log(jogo);
+          }, function () {
+            debugger 
+            console.log(jogo);
+            $log.info('Modal dismissed at: ' + new Date());
+          });
       };
     }
   ]).controller('ModalInstanceController', [

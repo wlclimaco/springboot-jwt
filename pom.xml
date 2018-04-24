@@ -68,13 +68,13 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
         </dependency>
-<!-- https://mvnrepository.com/artifact/org.liquibase/liquibase-core -->
+<!-- https://mvnrepository.com/artifact/org.liquibase/liquibase-core 
 <dependency>
     <groupId>org.liquibase</groupId>
     <artifactId>liquibase-core</artifactId>
 
 </dependency>
-
+-->
     
  
  <!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->

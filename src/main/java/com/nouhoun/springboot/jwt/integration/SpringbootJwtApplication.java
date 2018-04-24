@@ -6,11 +6,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Import;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.nouhoun.springboot.jwt.job.JobsListenerService;
 
 @SpringBootApplication
-@Import(JobsListenerService.class)
+@EnableScheduling
 public class SpringbootJwtApplication extends SpringBootServletInitializer {
 
 
