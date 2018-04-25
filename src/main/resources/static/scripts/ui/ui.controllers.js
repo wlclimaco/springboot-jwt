@@ -123,41 +123,66 @@
       return $scope.isCollapsed = false;
     }
   ]).controller('ModalDemoController', [
-    '$scope', '$uibModal', '$log', function($scope, $uibModal, $log) {
-    var $ctrl = this;
-    	$ctrl.items = ['item1', 'item2', 'item3'];
-
-    	  $ctrl.animationsEnabled = true;
-      $scope.open = function(jogo, status) {debugger
+    '$scope', '$uibModal', '$log','$document', function($scope, $uibModal, $log,$document) {
+      $scope.items = ["item1", "item2", "item3"];
+      $scope.ok = function(a,b) {debugger; console.log('a')}
+      $scope.open = function(size, parentSelector,jogo,status) {
         var modalInstance;
         modalInstance = $uibModal.open({
           templateUrl: "myModalContent.html",
-          controller: 'ModalInstanceCtrl',
-          controllerAs: '$ctrls',
+          controller: 'ModalInstanceController',
           resolve: {
             items: function() {
-              return $scope.items;
+            	 return {"jogo" : jogo,"status" : status};
             }
           }
         });
-        modalInstance.result.then(function (selectedItem) {
-            $ctrl.selected = selectedItem;
-            debugger 
-            console.log(jogo);
-          }, function () {
-            debugger 
-            console.log(jogo);
-            $log.info('Modal dismissed at: ' + new Date());
-          });
+        modalInstance.result.then((function(selectedItem) {
+          $scope.selected = selectedItem;
+        }), function() {
+          $log.info("Modal dismissed at: " + new Date());
+        });
       };
+      
+      
+      $scope.openSolicitacao = function (size, parentSelector,jogo,status) {
+
+    	      var modalInstance;
+    	     modalInstance = $uibModal.open({
+    	      animation: $scope.animationsEnabled,
+    	      ariaLabelledBy: 'modal-title',
+    	      ariaDescribedBy: 'modal-body',
+    	      templateUrl: 'myModalContent2.html',
+    	      controller: 'ModalInstanceController',
+    	      size: size,
+    	      resolve: {
+    	        items: function () {
+    	          
+    	          return {"jogo" : jogo,"status" : status};
+    	        }
+    	      }
+    	    });
+
+    	    modalInstance.result.then(function (selectedItem) {
+    	      $scope.selected = selectedItem;
+    	       
+    	      console.log(jogo);
+    	    }, function () {
+    	       
+    	      console.log(jogo);
+    	      $log.info('Modal dismissed at: ' + new Date());
+    	    });
+    	  };
     }
   ]).controller('ModalInstanceController', [
-    '$scope', '$uibModalInstance', 'items', function($scope, $uibModalInstance, items) {
+    '$scope', '$uibModalInstance', 'items','jogoFactory', function($scope, $uibModalInstance, items,jogoFactory) {
       $scope.items = items;
       $scope.selected = {
         item: $scope.items[0]
       };
-      $scope.ok = function() {
+      $scope.ok = function(oJogo, sStatus) {
+    	  debugger
+    	jogoFactory.update(oJogo, sStatus);
         $uibModalInstance.close($scope.selected.item);
       };
       $scope.cancel = function() {
