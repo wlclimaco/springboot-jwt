@@ -1,0 +1,42 @@
+ <section class="panel panel-default">
+                <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Modal</div>
+                <div class="panel-body" data-ng-controller="ModalDemoCtrl as $ctrl">
+                    <script type="text/ng-template" id="myModalContent.html">
+
+		<div class="modal-header">
+			<h3 class="modal-title" id="modal-title">Confirmar Agenda</h3>
+		</div>
+		<div class="modal-body" id="modal-body">
+            <form role="form" ng-submit='login()'>
+                <fieldset>
+                        <div class="list list-inset removePM">
+                                <form name="form"  role="form">
+                                        <div ng-disabled="isSubmitted">
+                        <div class="form-group">
+                                <label class="item item-input"><input ng-model="$ctrl.items.jogo.maximoConfirmados" type="number" placeholder="Numero Maximo Jogodores" name="email" id="email" class="form-control" ng-model="lc.user.email" > </label>
+                                
+                        </div>
+                    <div class="form-group">
+                            <dl class="dl-horizontal">
+                                    <dt>Tempo Agenda</dt>
+                                    <dd>
+                                        <label class="ui-radio"><input ng-model="$ctrl.items.jogo.confirmacao" name="radio1" type="radio" value="FIXO" checked><span>Fixo</span></label>
+                                        <label class="ui-radio"><input ng-model="$ctrl.items.jogo.confirmacao" name="radio1" type="radio" value="SOHOJE" ><span>So Dessa Vez</span></label>
+                                        <label class="ui-radio"><input ng-model="$ctrl.items.jogo.confirmacao" name="radio1" type="radio" value="MENSAL"><span>Mensal</span></label>
+                                        <label class="ui-radio"><input ng-model="$ctrl.items.jogo.confirmacao" name="radio1" type="radio" value="ANUAL"><span>Anual</span></label>
+                                    </dd>
+                                    
+                                </dl>
+                        </div>
+                    </div>
+                    </div>
+                </fieldset>
+            </form>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary" type="button" ng-click="$ctrl.ok($ctrl.items.jogo, $ctrl.items.status)">Gravar</button>
+			<button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Fechar</button>
+		</div>
+	</script>
+	</div>
+            </section>
