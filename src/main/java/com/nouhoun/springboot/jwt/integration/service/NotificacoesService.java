@@ -14,5 +14,6 @@ public interface NotificacoesService {
 	public List<Notificacoes> findNotificacoesByEmpr(Integer email);
 	public List<Notificacoes> findNotificacoesByJogo(Integer email);
 	public List<Notificacoes> findAllNotificacoes();
+	public Integer findNotificacoesByCount(Integer email);
 
 }

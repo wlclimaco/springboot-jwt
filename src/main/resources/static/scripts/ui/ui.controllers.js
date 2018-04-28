@@ -276,7 +276,7 @@
             '                    <div class="pull-right"><span class="icon glyphicon glyphicon-flag"></span>' +
             '                    <label>H. Func</label>' +
             '                    Australia</div>' +
-            '                </li><br>' ;
+            '                </li>' ;
             for(var y = 0; y < oEmpresa.quadras.length;y++){
             	
             	var oQuadra = oEmpresa.quadras[y];
@@ -341,12 +341,15 @@
    //     i = 0;
           for (var x = 0; $scope.empresaList.length > 0 ;x++)
           {
-        	  var endereco = $scope.empresaList[x].endereco;
-	          lat = endereco.lat;
-	          lng = endereco.longi;
-	          loc = new google.maps.LatLng(lat, lng);
-	          markers[0].setPosition(loc);
-	          markers[0].setMap($scope.map);
+        	 // if($scope.empresaList[x] && $scope.empresaList[x].endereco)
+        	//  {
+	        	  var endereco = $scope.empresaList[x].endereco;
+		          lat = endereco.lat;
+		          lng = endereco.longi;
+		          loc = new google.maps.LatLng(lat, lng);
+		          markers[0].setPosition(loc);
+		          markers[0].setMap($scope.map);
+        	//  }
     //      i++;
         }
       };

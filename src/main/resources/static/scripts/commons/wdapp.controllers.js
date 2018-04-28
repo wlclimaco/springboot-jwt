@@ -19,16 +19,28 @@
 		 };
     }]);
   
-	commonControllers.controller('NavController', ['$scope', 'TaskStorage', 'filterFilter', function($scope, TaskStorage, filterFilter) {
+	commonControllers.controller('NavController', ['$scope', 'TaskStorage', 'filterFilter','AuthService','$interval', function($scope, TaskStorage, filterFilter,AuthService,$interval) {
 		var tasks;
 		tasks = $scope.tasks = TaskStorage.get();
 		$scope.taskRemainingCount = filterFilter(tasks, {
 			completed: false
 		}).length;
+		
+		var fNotificacoesCount = function()
+		{
+			var oUser = JSON.parse(localStorage.getItem('wdAppLS.currentUser'));
+			var oNotificacaoRequest = {userId : oUser.id,empresaId : 82,role : oUser.roles[0]};
+			
+                AuthService.contNotificacoes(oNotificacaoRequest, function (responses) {
+                	
+                	$scope.notificacoesCount = responses.result.notificacaoCount;
+			});
+		}
+		
+		fNotificacoesCount();
+		
+		$interval(fNotificacoesCount, 50000);
 		  
-		return $scope.$on('taskRemaining:changed', function(event, count) {
-			return $scope.taskRemainingCount = count;
-		});
 		
     }]);
   
@@ -47,27 +59,41 @@
 						localStorageService.set('jti', authenticationResult.jti);
 						
 					SysMgmtData.processPostPageData("http://localhost:8080/user/findUserByEmail", ""+$scope.username , function(res){
-							var currentUser = res;
+						debugger	
+						var currentUser = res;
 							$rootScope.user = currentUser;
 							$rootScope.main.name = $scope.username;
 							localStorageService.set('currentUser', $rootScope.user);
 							var tempRole = "";
-							for (var prop in authenticationResult.roles) {
-								tempRole += prop + " ";
+							var bAdmin = false;
+							var prop = {};
+							for (var x = 0; x < currentUser.roles.length; x++) {
+								prop = currentUser.roles[x]
+								tempRole += prop.role + " ";
+								if(prop.role === 'ADMIN')
+									bAdmin = true;
 							}							
 							$rootScope.displayRoles = tempRole;
 							localStorageService.set('displayRoles', $rootScope.displayRoles);						
-						});
+						
 							debugger				
 						if ($rootScope.callingPath !== undefined){	
 							if ($rootScope.callingPath === '/pages/signin'){
-								$rootScope.callingPath = "/dashboard";
+								if(bAdmin)
+								{
+									$rootScope.callingPath = "/dashboard2";
+								}
+								else
+								{
+									$rootScope.callingPath = "/dashboard";
+								}
 							}
 							$location.path($rootScope.callingPath);
 						}
 						else{
 							$location.path( "/dashboard" );
-						}		
+						}	
+					});
 					}
 					else{
 							$location.path( "/pages/signin" );

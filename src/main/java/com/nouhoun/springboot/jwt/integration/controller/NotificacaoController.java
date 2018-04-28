@@ -73,8 +73,28 @@ public class NotificacaoController {
 		
 		  return APIResponse.toOkResponse(authResp);
 	}
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value = "/notificacao/fetchByUserCount", method = RequestMethod.POST)
+	public @ResponseBody APIResponse fetchByUserCount(@RequestBody String users)
+			throws JsonParseException, JsonMappingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		NotificacaoRequest notificacaoRequest = mapper.readValue(users, NotificacaoRequest.class);
+		List<String> erros = new ArrayList<String>();
+		HashMap<String, Object> authResp = new HashMap<String, Object>();
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-	//@CrossOrigin(origins = "*")
+		Object token = auth.getCredentials();
+		
+		authResp.put("token", token);
+		authResp.put("notificacaoCount", userService.findNotificacoesByCount(notificacaoRequest.getEmpresaId()));
+		authResp.put("Error", erros);
+
+
+	    return APIResponse.toOkResponse(authResp);
+	}
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/notificacao/fetchByUser", method = RequestMethod.POST)
 	public @ResponseBody APIResponse fetchByUser(@RequestBody String users)
 			throws JsonParseException, JsonMappingException, IOException {

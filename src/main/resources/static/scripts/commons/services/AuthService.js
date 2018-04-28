@@ -23,6 +23,26 @@
 	            var url = sUrlServer + '/jogo/insertUserJogo';
 	            	
 	            SysMgmtData.processPostPageData(url, oJogo ,fnCallback);
+	        },
+	        fetchAllNotificacoes   : function (oNotificacao, fnCallback) {
+	            var url = sUrlServer + '/notificacao/fetchByUser';
+	            	
+	            SysMgmtData.processPostPageData(url, oNotificacao ,fnCallback);
+	        },
+	        updateNotificacoes   : function (oNotificacao, fnCallback) {
+	            var url = sUrlServer + '/notificacao/update';
+	            	
+	            SysMgmtData.processPostPageData(url, oNotificacao ,fnCallback);
+	        },
+	        deleteNotificacoes   : function (oNotificacao, fnCallback) {
+	            var url = sUrlServer + '/notificacao/delete';
+	            	
+	            SysMgmtData.processPostPageData(url, oNotificacao ,fnCallback);
+	        },
+	        contNotificacoes   : function (oNotificacao, fnCallback) {
+	            var url = sUrlServer + '/notificacao/fetchByUserCount';
+	            	
+	            SysMgmtData.processPostPageData(url, oNotificacao ,fnCallback, false);
 	        }
 		};
 	}]);

@@ -32,16 +32,19 @@ angular.module('wdApp.apps.sysmgmt.datajava', [])
 		};		
 		
 		//common process data logic		
-		function process_data(_resp, _callback)	{
+		function process_data(_resp, _callback, _bMesg)	{
+			
 			//console.log(_resp);
 			//Successful Return and got some type of object back
-			if (_resp != null && (_resp.operationSuccess)){
+			if (_resp != null && (_resp.code == 200)){
 				//checks for business errors
-				if (_resp.messageList.length > 0){	
+				if (_resp.result.Error.length > 0){	
 					process_business_errors(_resp, _callback);	
 				}
 				else{
 					_callback(_resp);
+					if(_bMesg !== false)
+						toastr.success('Operação feita com Sucesso!');
 				}
 			}
 			else{
@@ -50,14 +53,14 @@ angular.module('wdApp.apps.sysmgmt.datajava', [])
 		};		
 	
 		return{
-				processPostPageData: function(_url, _req, _callback){
+				processPostPageData: function(_url, _req, _callback, _bMesg){
 					var res = $http.post(_url, _req);
 					res.then(function(response) {
 						//process success data						
-						process_data(response.data, _callback)						
+						process_data(response.data, _callback, _bMesg)						
 					}).catch( // Catch
 						function(responseError) {
-							process_errors(responseError, _callback);;
+							process_errors(responseError, _callback);
 					});
 					
 				},

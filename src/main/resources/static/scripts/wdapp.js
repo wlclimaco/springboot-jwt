@@ -6,7 +6,7 @@ var WebDaptiveAppConfig = {
 	 * This might be desirable if headers don't work correctly in some
 	 * environments and is still secure when using https. */
 	useAuthTokenHeader: true,
-	wdBrand: 'WebDaptive - Angular',
+	wdBrand: 'Eu-Jogador',
 	wdDefaultUser: 'Taz',
 	//What is the back-end PHP, Java, NET
 	//example 	wdBackend: 'PHP', or 	wdBackend: 'Java', or 	wdBackend: 'NET',
@@ -41,13 +41,13 @@ var WebDaptiveAppConfig = {
 				'wdApp.tasks', 'wdApp.charts.chartjs.controllers', 'wdApp.charts.echarts.controllers',  'wdApp.dashboard.controllers',
 				'wdApp.authentication', 'wdApp.pages.controllers', 'wdApp.demodata', 'wdApp.apps.stocks', 
 				'wdApp.apps.stocksdata','wdApp.apps.counties', 	'wdApp.apps.procedures','wdApp.apps.sysmgmt.data', 
-				'wdApp.apps.sysmgmt.datajava', 'wdApp.apps.dialogs.um','wdApp.apps.sysmgmt.dataphp','wdApp.apps.meusJogos','wdApp.apps.factory.meusJogos','wdApp.apps.Auth','wdApp.apps.dialogs','wdApp.apps.buscarQuadra']);  
+				'wdApp.apps.sysmgmt.datajava', 'wdApp.apps.dialogs.um','wdApp.apps.sysmgmt.dataphp','wdApp.apps.meusJogos','wdApp.apps.factory.meusJogos','wdApp.apps.Auth','wdApp.apps.dialogs','wdApp.apps.buscarQuadra','wdApp.apps.notificacao']);  
   
 	wdApp.config(['$routeProvider',
 		function($routeProvider) {
 			var routes, setRoutes;
 			//all available routes
-			routes = ['dashboard', 'ui/typography', 'ui/buttons', 'ui/BuscaQuadra',
+			routes = ['dashboard', 'dashboard2', 'ui/typography', 'ui/buttons', 'buscaQuadra', 'notificacoes', 'buscaQuadra3',
 			'ui/icons', 'ui/grids', 'ui/widgets', 'ui/components', 
 			'ui/timeline', 'ui/tree', 'ui/pricing-tables', 'ui/maps', 
 			'tables/static', 'tables/dynamic', 'tables/responsive', 

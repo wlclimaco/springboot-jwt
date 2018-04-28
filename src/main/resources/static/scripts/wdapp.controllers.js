@@ -47,9 +47,12 @@
 						$rootScope.user = currentUser;
 						$rootScope.main.name = authenticationResult.name;
 						localStorageService.set('currentUser', $rootScope.user);
+						var bAdmin = false;
 						var tempRole = "";
-						for (var prop in authenticationResult.roles) {
+						for (var prop in currentUser.roles) {
 							tempRole += prop + " ";
+							if(prop == 'ADMIN')
+								bAdmin = true
 						}							
 						$rootScope.displayRoles = tempRole;
 						localStorageService.set('displayRoles', $rootScope.displayRoles);						
