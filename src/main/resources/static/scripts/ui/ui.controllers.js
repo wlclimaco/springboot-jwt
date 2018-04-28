@@ -217,6 +217,8 @@
     }
   ]).controller('TreeDemoController', [
     '$scope','DemoData', function($scope, DemoData) {
+    	
+      
 
 	  DemoData.getDemoData('./demodata/dyntree.json', function(data){
 			$scope.list = data;		 
@@ -241,31 +243,150 @@
     }
   ]).controller('MapDemoController', [
     '$scope', '$http', '$interval', function($scope, $http, $interval) {
+    	
+    	var createMacromed =	function(oEmpresa)
+        {
+    	  var vazio = " -- "
+      	  
+      	  var sHtml = ' <div class="panel panel-default">' +
+      	  ' <div class="panel-body">' +
+            '    <div class="media">' +
+            '       <div class="media-body">' +
+            '            <ul class="list-unstyled list-info">' +
+            '                <li>' +
+            '                    <div class="pull-left"><span class="icon glyphicon glyphicon-user"></span>' +
+            '                    <label>Nome Quadra</label>' +
+            '                    '+oEmpresa.nome+'</div>' +
+            '					 <div class="pull-right"><span class="icon glyphicon glyphicon-user"></span>' +
+            '                    <label>Responsavel</label>' +
+            '                    '+oEmpresa.nomeResponsavel+'</div>' +
+            '                </li><br>' +
+            '                <li>' +
+            '                    <div class="pull-left"><span class="icon glyphicon glyphicon-envelope"></span>' +
+            '                    <label>Email</label>' +
+            '                    '+oEmpresa.email+' </div>' +
+            '				     <div class="pull-right"><span class="icon glyphicon glyphicon-home"></span>' +
+            '                    <label>Endereço</label>' +
+            '                    '+oEmpresa.endereco.logradouro+', '+oEmpresa.endereco.numero+', '+oEmpresa.endereco.bairro+' </div>' +
+            '                </li><br>' +
+            '                <li>' +
+            '                    <div class="pull-left"><span class="icon glyphicon glyphicon-earphone"></span>' +
+            '                    <label>Telefone</label>' +
+            '                    '+oEmpresa.telefone+'</div>' +
+            '                    <div class="pull-right"><span class="icon glyphicon glyphicon-flag"></span>' +
+            '                    <label>H. Func</label>' +
+            '                    Australia</div>' +
+            '                </li><br>' ;
+            for(var y = 0; y < oEmpresa.quadras.length;y++){
+            	
+            	var oQuadra = oEmpresa.quadras[y];
+            	sHtml=  sHtml+  '<hr><li>' +
+            '                    <div class="pull-left"><span class="icon glyphicon glyphicon-globe"></span>' +
+            '                    <label>Quadra</label>' +
+            '                    '+oQuadra.nome+'</div>' +
+            '                </li>' +
+            '                <li>' +
+            '                    <div class="pull-left"><span class="icon glyphicon glyphicon-globe"></span>' +
+            '                    <label>Tipo Piso</label>' +
+            '                    '+oQuadra.tipo  +'</div>' +
+            '                    <div class="pull-right"><span class="icon glyphicon glyphicon-globe"></span>' +
+            '                    <label>Coberta</label>' +
+            '                    '+oQuadra.cobertura  +'</div>' +
+            '                </li>' +
+    		'                <li>' +
+            '                    <div class="pull-left"><span class="icon glyphicon glyphicon-envelope"></span>' +
+            '                    <label>Valor/Sem Bola</label>' +
+            '                    '+oQuadra.valor+' </div>' +
+            '				     <div class="pull-right"><span class="icon glyphicon glyphicon-home"></span>' +
+            '                    <label>Valor/Com Bola</label>' +
+            '                    '+(oQuadra.valor + oQuadra.valorBola) +'</div>' +
+            '                </li>' 
+            }
+
+      	sHtml=  sHtml+'            </ul>' +
+            '            ' +
+            '        </div>' +
+            '    </div>' +
+            '</div>' +
+            '</div>' ;
+      	  debugger
+      	  return sHtml;
+        }
+    	 var map, infoWindow;
+    	var mapOptions = {
+                zoom: 12,
+                center: {lat: -19.7483300, lng: -47.9319400},
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                scrollwheel: false
+            };
+             //   if (map === void 0) {
+             //       map = new google.maps.Map(document.getElementById('mapamaster'), mapOptions);
+             //   }
+               
       var i, markers;
       markers = [];
       i = 0;
-      while (i < 8) {
-        markers[i] = new google.maps.Marker({
-          title: "Marker: " + i
+//      while (i < 8) {
+        markers[0] = new google.maps.Marker({
+          title: "Quadra 01 click details"
         });
-        i++;
-      }
+    //    i++;
+  //    }
       $scope.GenerateMapMarkers = function() {
+    	  
         var d, lat, lng, loc, numMarkers;
         d = new Date();
         $scope.date = d.toLocaleString();
-        numMarkers = Math.floor(Math.random() * 4) + 4;
-        i = 0;
-        while (i < numMarkers) {
-          lat = 40.7500000 + (Math.random() / 100);
-          lng = -73.9800000 + (Math.random() / 100);
-          loc = new google.maps.LatLng(lat, lng);
-          markers[i].setPosition(loc);
-          markers[i].setMap($scope.map);
-          i++;
+    //    numMarkers = Math.floor(Math.random() * 4) + 4;
+   //     i = 0;
+          for (var x = 0; $scope.empresaList.length > 0 ;x++)
+          {
+        	  var endereco = $scope.empresaList[x].endereco;
+	          lat = endereco.lat;
+	          lng = endereco.longi;
+	          loc = new google.maps.LatLng(lat, lng);
+	          markers[0].setPosition(loc);
+	          markers[0].setMap($scope.map);
+    //      i++;
         }
       };
-      $interval($scope.GenerateMapMarkers, 2000);
+      
+      google.maps.event.addListener(markers[0], 'click', function () {
+    	  
+    	  var contentString = '<div id="content">'+
+          '<div id="siteNotice">'+
+          '</div>'+
+          '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+          '<div id="bodyContent">'+
+          '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+          'sandstone rock formation in the southern part of the '+
+          'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+          'south west of the nearest large town, Alice Springs; 450&#160;km '+
+          '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
+          'features of the Uluru - Kata Tjuta National Park. Uluru is '+
+          'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
+          'Aboriginal people of the area. It has many springs, waterholes, '+
+          'rock caves and ancient paintings. Uluru is listed as a World '+
+          'Heritage Site.</p>'+
+          '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+          'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+          '(last visited June 22, 2009).</p>'+
+          '</div>'+
+          '</div>';
+
+          // close window if not undefined
+          if (infoWindow !== void 0) {
+              infoWindow.close();
+          }
+          // create new window
+          var infoWindowOptions = {
+              content: createMacromed($scope.empresaList[0])
+          };
+          infoWindow = new google.maps.InfoWindow(infoWindowOptions);
+          infoWindow.open($scope.map, markers[0]);
+      });
+      
+      $interval($scope.GenerateMapMarkers, 10000);
     }
   ]).controller('LoaderController', ['$scope', 'cfpLoadingBar', function($scope, cfpLoadingBar) {
     $scope.start = function() {
