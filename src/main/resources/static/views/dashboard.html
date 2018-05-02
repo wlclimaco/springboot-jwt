@@ -30,7 +30,7 @@
 							<div class="col-lg-3 col-xsm-6">
 								<div class="panel mini-box">
 									<span class="box-icon rounded bg-success">
-									<span class="fa" ><img src="/../images/gols_LEa_6.ico" alt="Smiley face" height="100%" width="100%" ></span>
+									<span class="fa" ><img src="/images/gols_LEa_6.ico" alt="Smiley face" height="100%" width="100%" ></span>
 									</span>
 									<div class="box-info">
 										<p class="size-h2">{{iQuantGols}} <span class="size-h4">Gols</span></p>
@@ -51,6 +51,7 @@
 							</div>
 						</div>
 						<div ng-show="bUserJogoAprovar">
+						
 							<a class="list-group-item" data-toggle="collapse" data-target="#sl1dfff" data-parent="#menu"><span class="glyphicon glyphicon-resize-vertical"></span>Aprovar/Recusar Jogador <span class="glyphicon glyphicon-list pull-right"></span></a>
 							<div id="sl1dfff" class="sublinks collapse" style="border: 1px solid rgb(221, 221, 221)">
 								<div id="menu">
@@ -99,7 +100,7 @@
 													</div>
 												</div>
 												<a class="list-group-item">
-													AÃ§Ãµes 
+													Ações 
 													<span class="pull-right">
 														<button ng-click="gravarHorario(jogoData, 'CONFIRMADO')" class="btn btn-xs btn-success glyphicon glyphicon-ok"    uib-tooltip="Confirmar!"   tooltip-append-to-body="true"></button><!-- Aprovar -->
 														<button ng-click="gravarHorario(jogoData, 'NAOVO')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"   uib-tooltip="NÃ£o Vai dar!"    tooltip-append-to-body="true"></button><!-- Desmarcar -->
@@ -124,7 +125,7 @@
 													<div class="list-group-item"><span class="glyphicon glyphicon-user"></span> Nota <span class="pull-right popover-wrapper"><a href="#" style="width:50px" editable-number="jogoData.nota" e-min="0"><span class="badge badge-success">{{ jogoData.nota || '0' }}</span></a>
 														</span>
 													</div>
-													<div class="list-group-item"><span class="glyphicon glyphicon-user"></span> NÃ‚Â° Gol <span class="pull-right popover-wrapper"><a href="#" style="width:50px" editable-number="jogoData.qntGols" e-min="0"><span class="badge badge-success">{{ jogoData.qntGols || '0' }}</span></a>
+													<div class="list-group-item"><span class="glyphicon glyphicon-user"></span> N° Gol <span class="pull-right popover-wrapper"><a href="#" style="width:50px" editable-number="jogoData.qntGols" e-min="0"><span class="badge badge-success">{{ jogoData.qntGols || '0' }}</span></a>
 														</span>
 													</div>
 													<a class="list-group-item small"></a>
@@ -133,9 +134,9 @@
 												<div id="sds{{jogoData.id-$index}}" class="sublinks collapse">
 													<div ng-repeat="user in jogo.usersJogo">
 														<a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span> {{user.name}} {{user.lastName}}<span class="pull-right fa">
-														<img ng-show="fnConfirm(jogo, user ) === 1" src="/../images/hold.png" uib-tooltip="Sem Resposta!" tooltip-append-to-body="true" height="20px" width="20px" >
-														<img ng-show="fnConfirm(jogo, user ) === 2" src="/../images/dislike2.png" uib-tooltip="NÃ£o Vo!" tooltip-append-to-body="true" height="20px" width="20px" >
-														<img ng-show="fnConfirm(jogo, user ) === 3" src="/../images/like.png" uib-tooltip="Estarei lÃ¡!" tooltip-append-to-body="true" height="20px" width="20px" ></span>
+														<img ng-show="fnConfirm(jogo, user ) === 1" src="/images/hold.png" uib-tooltip="Sem Resposta!" tooltip-append-to-body="true" height="20px" width="20px" >
+														<img ng-show="fnConfirm(jogo, user ) === 2" src="/images/dislike2.png" uib-tooltip="Não Vo!" tooltip-append-to-body="true" height="20px" width="20px" >
+														<img ng-show="fnConfirm(jogo, user ) === 3" src="/images/like.png" uib-tooltip="Estarei lá¡!" tooltip-append-to-body="true" height="20px" width="20px" ></span>
 														</a>
 													</div>
 												</div>
@@ -162,22 +163,7 @@
 						</div>
 						<hr>
 					</div>
-				<div ng-controller="ModalDemoCtrl as $ctrl" class="modal-demo">
-			<button type="button" class="btn btn-default" ng-click="$ctrl.open()">Open me!</button>
-			<button type="button" class="btn btn-default" ng-click="$ctrl.open('lg')">Large modal</button>
-			<button type="button" class="btn btn-default" ng-click="$ctrl.open('sm')">Small modal</button>
-			<button type="button" 
-				class="btn btn-default" 
-				ng-click="$ctrl.open('sm', '.modal-parent')">
-					Modal appended to a custom parent
-			</button>
-			<button type="button" class="btn btn-default" ng-click="$ctrl.toggleAnimation()">Toggle Animation ({{ $ctrl.animationsEnabled }})</button>
-			<button type="button" class="btn btn-default" ng-click="$ctrl.openComponentModal()">Open a component modal!</button>
-			<button type="button" class="btn btn-default" ng-click="$ctrl.openMultipleModals()">
-				Open multiple modals at once 
-			</button>
-			</div>
-		</section>
+
 	<div data-ui-footer></div>		
 </div>
 <script>

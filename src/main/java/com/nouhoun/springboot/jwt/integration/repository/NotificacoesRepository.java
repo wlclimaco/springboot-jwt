@@ -22,4 +22,7 @@ public interface NotificacoesRepository extends JpaRepository<Notificacoes, Long
 
 	@Query("SELECT Count(n)  FROM Notificacoes n WHERE n.paraUserId = :email")
 	Integer findNotificacoesByCount(@Param("email") Integer user);
+	
+	@Query("SELECT Count(n)  FROM Notificacoes n WHERE n.paraEmprId = :email")
+	Integer findNotificacoesEmpresaByCount(@Param("email") Integer user);
 }

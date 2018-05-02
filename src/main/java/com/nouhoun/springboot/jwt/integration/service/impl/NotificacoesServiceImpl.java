@@ -59,6 +59,11 @@ public class NotificacoesServiceImpl implements NotificacoesService{
 		return notificacoesRepository.findNotificacoesByJogo(email);
 	}
 
+	@Override
+	public Integer findNotificacoesEmpresaByCount(Integer empresaId) {
+		return notificacoesRepository.findNotificacoesEmpresaByCount(empresaId);
+	}
+
 	
 
 }

@@ -7,10 +7,10 @@ var WebDaptiveAppConfig = {
 	 * environments and is still secure when using https. */
 	useAuthTokenHeader: true,
 	wdBrand: 'Eu-Jogador',
-	wdDefaultUser: 'Taz',
+	wdDefaultUser: 'Eu-Jogador',
 	//What is the back-end PHP, Java, NET
 	//example 	wdBackend: 'PHP', or 	wdBackend: 'Java', or 	wdBackend: 'NET',
-	wdBackend: 'Java',
+	wdBackend: '',
 	//values for the rest calls to jDpative, nDaptive or PHP Back-end so the county and/or provider applications work
 	//restAuthBase = string to check for rest calls to jDpative, nDaptive or PHP Back-end so the angular http provider can inject x-auth token
 	//Java URLs & Settings
@@ -41,7 +41,7 @@ var WebDaptiveAppConfig = {
 				'wdApp.tasks', 'wdApp.charts.chartjs.controllers', 'wdApp.charts.echarts.controllers',  'wdApp.dashboard.controllers',
 				'wdApp.authentication', 'wdApp.pages.controllers', 'wdApp.demodata', 'wdApp.apps.stocks', 
 				'wdApp.apps.stocksdata','wdApp.apps.counties', 	'wdApp.apps.procedures','wdApp.apps.sysmgmt.data', 
-				'wdApp.apps.sysmgmt.datajava', 'wdApp.apps.dialogs.um','wdApp.apps.sysmgmt.dataphp','wdApp.apps.meusJogos','wdApp.apps.factory.meusJogos','wdApp.apps.Auth','wdApp.apps.dialogs','wdApp.apps.buscarQuadra','wdApp.apps.notificacao']);  
+				'wdApp.apps.sysmgmt.datajava','wdApp.apps.horario', 'wdApp.apps.dialogs.um','wdApp.apps.sysmgmt.dataphp','wdApp.apps.meusJogos','wdApp.apps.factory.meusJogos','wdApp.apps.Auth','wdApp.apps.dialogs','wdApp.apps.buscarQuadra','wdApp.apps.notificacao']);  
   
 	wdApp.config(['$routeProvider',
 		function($routeProvider) {

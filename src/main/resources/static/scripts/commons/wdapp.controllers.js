@@ -25,14 +25,14 @@
 		$scope.taskRemainingCount = filterFilter(tasks, {
 			completed: false
 		}).length;
-		
+		var oUser = JSON.parse(localStorage.getItem('wdAppLS.currentUser'));
+		$scope.user= oUser;
 		var fNotificacoesCount = function()
 		{
 			var oUser = JSON.parse(localStorage.getItem('wdAppLS.currentUser'));
 			var oNotificacaoRequest = {userId : oUser.id,empresaId : 82,role : oUser.roles[0]};
 			
                 AuthService.contNotificacoes(oNotificacaoRequest, function (responses) {
-                	
                 	$scope.notificacoesCount = responses.result.notificacaoCount;
 			});
 		}
@@ -59,7 +59,7 @@
 						localStorageService.set('jti', authenticationResult.jti);
 						
 					SysMgmtData.processPostPageData("http://localhost:8080/user/findUserByEmail", ""+$scope.username , function(res){
-						debugger	
+							
 						var currentUser = res;
 							$rootScope.user = currentUser;
 							$rootScope.main.name = $scope.username;
@@ -70,13 +70,13 @@
 							for (var x = 0; x < currentUser.roles.length; x++) {
 								prop = currentUser.roles[x]
 								tempRole += prop.role + " ";
-								if(prop.role === 'ADMIN')
+								if(prop.role === 'ADMIN_USER')
 									bAdmin = true;
 							}							
 							$rootScope.displayRoles = tempRole;
 							localStorageService.set('displayRoles', $rootScope.displayRoles);						
 						
-							debugger				
+											
 						if ($rootScope.callingPath !== undefined){	
 							if ($rootScope.callingPath === '/pages/signin'){
 								if(bAdmin)

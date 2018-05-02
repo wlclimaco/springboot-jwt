@@ -51,7 +51,7 @@
 						var tempRole = "";
 						for (var prop in currentUser.roles) {
 							tempRole += prop + " ";
-							if(prop == 'ADMIN')
+							if(prop == 'ADMIN_USER')
 								bAdmin = true
 						}							
 						$rootScope.displayRoles = tempRole;

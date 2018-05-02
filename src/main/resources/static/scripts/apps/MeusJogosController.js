@@ -157,7 +157,7 @@
 
 
 		var fnCallback = function (oResp) {
-
+debugger
 			var odata = [];
 			var oGols = [];
 			var oNota = [];

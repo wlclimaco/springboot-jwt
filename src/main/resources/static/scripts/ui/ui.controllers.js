@@ -243,9 +243,9 @@
     }
   ]).controller('MapDemoController', [
     '$scope', '$http', '$interval', function($scope, $http, $interval) {
-    	
+    	debugger
     	var createMacromed =	function(oEmpresa)
-        {
+        {debugger
     	  var vazio = " -- "
       	  
       	  var sHtml = ' <div class="panel panel-default">' +
@@ -340,7 +340,7 @@
     //    numMarkers = Math.floor(Math.random() * 4) + 4;
    //     i = 0;
           for (var x = 0; $scope.empresaList.length > 0 ;x++)
-          {
+          {debugger
         	 // if($scope.empresaList[x] && $scope.empresaList[x].endereco)
         	//  {
 	        	  var endereco = $scope.empresaList[x].endereco;

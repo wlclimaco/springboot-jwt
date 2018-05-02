@@ -43,6 +43,21 @@
 	            var url = sUrlServer + '/notificacao/fetchByUserCount';
 	            	
 	            SysMgmtData.processPostPageData(url, oNotificacao ,fnCallback, false);
+	        },//
+	        fetchAllQuadraByEmpresa   : function (oEmpresa, fnCallback) {
+	            var url = sUrlServer + '/quadra/findAllQuadraByEmpresa';
+	            	
+	            SysMgmtData.processPostPageData(url, oEmpresa ,fnCallback, false);
+	        },
+	        marcarJogoPorData   : function (oEmpresa, fnCallback) {
+	            var url = sUrlServer + '/jogo/updateJogoPorData';
+	            	
+	            SysMgmtData.processPostPageData(url, oEmpresa ,fnCallback, false);
+	        },
+	        aprovarJogador   : function (oEmpresa, fnCallback) {
+	            var url = sUrlServer + '/jogo/aprovarJogador';
+	            	
+	            SysMgmtData.processPostPageData(url, oEmpresa ,fnCallback, false);
 	        }
 		};
 	}]);

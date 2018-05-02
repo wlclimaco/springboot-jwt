@@ -112,9 +112,9 @@ public class JogoController {
 			for (UserJogo2 userJogo2 : user.getUsersJogo2()) {
 				if(Admin.SIM.equals(userJogo2.getAdmin())) {
 					noticicacaoText = "Foi Aprovado na quadra : " + quadra.getNome() + " dia: " +jogoa.getDia().name().toLowerCase() + " horario (" + jogoa.getHoraInicial() + " - " + jogoa.getHoraFinal() + "). " + "Aprovado por : " + userss.getEmail() + " " + userss.getLastName(); 
-					notificacoes = new Notificacoes("INDISPONIVEL", new Date(), noticicacaoText, NotificacoesStatus.NAOLIDO, 0,0);
+					notificacoes = new Notificacoes("INDISPONIVEL", new Date(), noticicacaoText, NotificacoesStatus.NAOLIDO,userss.getId(),82);
 					notificacoes.setParaJogoId(jogoa.getId());
-					notificacoes.setParaUserId(userJogo2.getUser_id());
+					notificacoes.setParaUserId(userss.getId());
 					notificacoesService.insertNotificacoes(notificacoes);
 				}
 			}

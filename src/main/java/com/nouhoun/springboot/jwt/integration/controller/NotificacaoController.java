@@ -88,7 +88,11 @@ public class NotificacaoController {
 		Object token = auth.getCredentials();
 		
 		authResp.put("token", token);
-		authResp.put("notificacaoCount", userService.findNotificacoesByCount(notificacaoRequest.getEmpresaId()));
+		if(notificacaoRequest.getUserId() != 0)
+			authResp.put("notificacaoCount", userService.findNotificacoesByCount(notificacaoRequest.getUserId()));
+		else
+			authResp.put("notificacaoCount", userService.findNotificacoesEmpresaByCount(notificacaoRequest.getEmpresaId()));
+			
 		authResp.put("Error", erros);
 
 

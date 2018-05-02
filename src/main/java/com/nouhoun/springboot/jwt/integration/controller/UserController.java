@@ -13,10 +13,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,10 +28,8 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nouhoun.springboot.jwt.api.APIResponse;
-import com.nouhoun.springboot.jwt.integration.domain.Jogo;
 import com.nouhoun.springboot.jwt.integration.domain.User;
 import com.nouhoun.springboot.jwt.integration.domain.UserDTO;
-import com.nouhoun.springboot.jwt.integration.service.JogoService;
 import com.nouhoun.springboot.jwt.integration.service.UserService;
 
 
@@ -106,7 +102,6 @@ public class UserController {
 
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value ="/findUserById", method = RequestMethod.POST)
-	@PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')")
     public User getUsers(@RequestBody Integer id, HttpServletRequest request,
 			HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException {
         return userService.findUserById(id);
@@ -114,7 +109,6 @@ public class UserController {
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value ="/findUserByEmail", method = RequestMethod.POST)
-	@PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')")
     public User findUserByEmail(@RequestBody String email, HttpServletRequest request,
 			HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException {
         return userService.findUserByEmail(email);

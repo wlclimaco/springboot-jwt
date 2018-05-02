@@ -37,28 +37,27 @@ angular.module('wdApp.apps.factory.meusJogos', [])
 			},
 			updateJogoPorData : function(oJogo, status, fncallBack)
 			{
-				var oUser = $rootScope.globals.currentUser;
+				var oUser = JSON.parse(localStorage.getItem('wdAppLS.currentUser'));
 				oJogo.status = status
 				oJogo.user_id = oUser.id;
-			//	AuthService.marcarJogoPorData(new qat.model.jogoPorData(oJogo),function(res)
-			//	{ console.log(res)
-			//		toastr.success('Jogo '+ status.toLowerCase() +' com sucesso!', 'Information');
-				//	fncallBack(res);
-			//	})
+				AuthService.marcarJogoPorData(new qat.model.jogoPorData(oJogo),function(res)
+				{ console.log(res)
+					toastr.success('Jogo '+ status.toLowerCase() +' com sucesso!', 'Information');
+					fncallBack(res);
+				})
 			},
 
 			aprovarJogador : function(oJogo, status, fncallBack)
 			{debugger
-				var globals = JSON.parse(localStorage.getItem('globals'));
-    			var oUser = globals.currentUser;
+				var oUser = JSON.parse(localStorage.getItem('wdAppLS.currentUser'));
 				oJogo.status_user = status
 				oJogo.aprovadoPor = oUser.id;
 		        oJogo.aprovadoDate = new Date();
-			//	//AuthService.aprovarJogador(new qat.model.UserJogo2(oJogo),function(res)
-				//{ console.log(res)
-				//	toastr.success('Jogo '+ status.toLowerCase() +' com sucesso!', 'Information');
-				//	fncallBack(res);
-				//})
+		        AuthService.aprovarJogador(new qat.model.UserJogo2(oJogo),function(res)
+				{ console.log(res)
+					toastr.success('Jogo '+ status.toLowerCase() +' com sucesso!', 'Information');
+					fncallBack(res);
+				})
 			}
 		};
 }]);
