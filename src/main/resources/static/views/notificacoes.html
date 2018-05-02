@@ -1,0 +1,43 @@
+
+<div class="page" >
+
+    <div  data-ng-controller="NotificacaoController  as ec">
+      <div class="container">
+          <div class="panel panel-default">
+            <table class="table table-hover">
+              <tbody>
+                <tr ng-repeat="notificacao in ec.notificacoesList">
+                  <td ng-click="ec.lerNotificacao(notificacao)" ng-style="notificacao.status === 'NAOLIDO' ? { 'font-weight': 'bolder' } : { 'font-weight': 'normal' }">
+                    <span class="glyphicon glyphicon-envelope"></span>
+                    {{notificacao.titulo}}
+                  </td>
+                  <td class="text-right text-nowrap">
+                    <button ng-click="ec.deleteNotificacao(notificacao)" class="btn btn-xs btn-warning">
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                  </td>
+                </tr>          
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+    
+          </div>
+
+
+
+
+
+ 
+
+	
+	<div data-ui-footer></div>	
+</div>
+
+<script>
+$( document ).ready(function() {
+	$("#nav-container").removeClass("hide");
+	$("#header").removeClass("hide");
+});
+</script>
