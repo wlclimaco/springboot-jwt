@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.3.13</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.nouhoun.springboot.jwt.integration</groupId>
 	<artifactId>springboot-jwt</artifactId>
@@ -21,11 +21,10 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
-	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -86,6 +85,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
+			<optional> true </optional> 
 			<scope>runtime</scope>
 		</dependency>
 
@@ -158,11 +158,6 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		
-		 <dependency>
-            <groupId>com.jayway.jsonpath</groupId>
-            <artifactId>json-path</artifactId>
-        </dependency>
 		
 		 <!-- Hibernate 
         <dependency>
@@ -272,11 +267,7 @@
         	<artifactId>spring-boot-configuration-processor</artifactId>
         	<optional>true</optional>
         </dependency>
-        <dependency>
-        	<groupId>org.springframework.boot</groupId>
-        	<artifactId>spring-boot-configuration-processor</artifactId>
-        	<optional>true</optional>
-        </dependency>
+
 	</dependencies>
 
 	<build>
@@ -297,44 +288,7 @@
                 </executions>
 			</plugin>
 			
-	         <plugin>
-		        <groupId>io.fabric8</groupId>
-		        <artifactId>docker-maven-plugin</artifactId>
-		        <extensions>true</extensions>
-		        
- 		        <configuration>
-		          <images>
-			            <image>
-			              <name>springboot-jwt</name>
-			              <alias>springboot-jwt</alias>
-			              <build>
-			                <filter>@</filter>
-			                <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>
-			                <assembly>
-			                  <descriptorRef>artifact</descriptorRef>
-			                </assembly>
-			              </build>
-			              <run>
-			              	<namingStrategy>alias</namingStrategy>
-			                <ports> 
-			                  <port>${tomcat.port}:8080</port>
-			                </ports>
-					         <wait> 
-					           <http>
-					              <url>http://${tomcat.ip}:${tomcat.port}/health</url>
-					           </http>
-					           <time>90000</time>
-					         </wait>
-			              </run>
-			            </image>
-		          </images>
-		        </configuration>	
-		        	
-		      </plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+	     
 		</plugins>
 	</build>
 
