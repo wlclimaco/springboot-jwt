@@ -29,6 +29,10 @@ public class Jogo {
 	 public enum Status {
 	       DISPONIVEL, ACONFIRMAR, OCUPADO, INDISPONIVEL, CONFIRMAR, DESMARCAR, EXCLUIR, SOLICITAR
 	    }
+	 
+	 public enum Processo {
+	       FINALIZAO, AGUARDANDO, GERADO
+	    }
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "jogo_id")
@@ -37,6 +41,9 @@ public class Jogo {
 	private String nome;
 	@Column(name = "descricao")
 	private String descricao;
+	
+	@Column(name = "processo")
+	private Processo processo;
 
 	//@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	//@JoinColumn(name="para_jogo_id", referencedColumnName="jogo_id")
@@ -208,6 +215,12 @@ public class Jogo {
 	}
 	public void setMaximoConfirmados(Integer maximoConfirmados) {
 		this.maximoConfirmados = maximoConfirmados;
+	}
+	public Processo getProcesso() {
+		return processo;
+	}
+	public void setProcesso(Processo processo) {
+		this.processo = processo;
 	}
 
 

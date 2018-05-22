@@ -21,4 +21,5 @@ public interface JogoPorDataRepository extends JpaRepository<JogoPorData, Long> 
 	
     @Query("SELECT u  FROM JogoPorData u WHERE u.data = :data and u.jogoId = :jogoId")
     List<JogoPorData> findJogoPorDataUserConfirmDTO(@Param("data") Date data,@Param("jogoId") Integer jogoId );
+    
 }

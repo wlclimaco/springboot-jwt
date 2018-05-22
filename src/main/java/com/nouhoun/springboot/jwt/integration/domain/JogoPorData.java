@@ -1,54 +1,47 @@
 package com.nouhoun.springboot.jwt.integration.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "jogo_por_data")
-public class JogoPorData{
-	 public enum StatusJogoPorData {
-	       CONFIRMADO, ACONFIRMAR, NAOVO, TALVEZ
-	    }
+public class JogoPorData {
+	public enum StatusJogoPorData {
+		JAJOGADO, AJOGAR, JOGANDO, CANCELADO
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "jogoPorData_id")
 	private Integer id;
-	
+
 	@Column(name = "Data")
 	private Date data;
-	
+
 	@Column(name = "DataFinal")
 	private Date dataFinal;
-	
+
 	@Column(name = "jogo_id")
 	private Integer jogoId;
-	
+
 	@Column(name = "status")
 	private StatusJogoPorData status;
-	
-	@Column(name = "nota")
-	private Integer nota;
-	
-	@Column(name = "qnt_gols")
-	private Integer qntGols;
-	
 
-	@Column(name = "user_id")
-	private Integer user_id;
-	
-
-	HashMap<Integer, StatusJogoPorData> userConfirm = new HashMap<Integer, StatusJogoPorData>();
-//	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
-//	@JoinColumn(name="jogo_id", referencedColumnName="user_id", nullable = false, insertable = false, updatable = false)
-//	private Jogo jogo;
-	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "jogoPorData_id", referencedColumnName = "jogoPorData_id", nullable = false, insertable = false, updatable = false)
+	private List<UserJogoData> userJogoData;
 
 	public Integer getId() {
 		return id;
@@ -57,10 +50,6 @@ public class JogoPorData{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-
-
-
 
 	public Date getData() {
 		return data;
@@ -94,34 +83,14 @@ public class JogoPorData{
 		this.status = status;
 	}
 
-	public Integer getNota() {
-		return nota;
-	}
-
-	public void setNota(Integer nota) {
-		this.nota = nota;
-	}
-
-	public Integer getQntGols() {
-		return qntGols;
-	}
-
-	public void setQntGols(Integer qntGols) {
-		this.qntGols = qntGols;
-	}
-
-	
-
-	public JogoPorData(Date dataInicial,Date dataFInal, Integer jogoId, Integer userId, StatusJogoPorData status, Integer nota, Integer qntGols,
+	public JogoPorData(Date dataInicial, Date dataFInal, Integer jogoId, List<User> user, StatusJogoPorData status,
 			int quadraId) {
 		super();
 		this.data = dataInicial;
 		this.dataFinal = dataFInal;
-		this.user_id = userId;
 		this.jogoId = jogoId;
 		this.status = status;
-		this.nota = nota;
-		this.qntGols = qntGols;
+		this.userJogoData = convertUserToUserJogoData(user);
 
 	}
 
@@ -129,30 +98,32 @@ public class JogoPorData{
 
 	}
 
-	public Integer getUser_id() {
-		return user_id;
+	public List<UserJogoData> getUserJogoData() {
+		return userJogoData;
 	}
 
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+	public void setUserJogoData(List<UserJogoData> userJogoData) {
+		this.userJogoData = userJogoData;
 	}
 
-	public HashMap<Integer, StatusJogoPorData> getUserConfirm() {
-		return userConfirm;
+	private List<UserJogoData> convertUserToUserJogoData(List<User> users) {
+
+		List<UserJogoData> userData = new ArrayList<UserJogoData>();
+		for (User user : users) {
+			userData.add(new UserJogoData(user.getId()));
+		}
+
+		return userData;
 	}
 
-	public void setUserConfirm(HashMap<Integer, StatusJogoPorData> userConfirm) {
-		this.userConfirm = userConfirm;
+	public JogoPorData(JogoPorDataDTO jogoPorData) {
+		super();
+		this.id = jogoPorData.getId();
+		this.data = jogoPorData.getData();
+		this.dataFinal = jogoPorData.getDataFinal();
+		this.jogoId = jogoPorData.getJogoId();
+		this.status = jogoPorData.getStatus();
+		this.userJogoData = jogoPorData.getUserJogoData();
 	}
 
-//	public Jogo getJogo() {
-//		return jogo;
-//	}
-//
-//	public void setJogo(Jogo jogo) {
-//		this.jogo = jogo;
-//	}
-	
-
-		
 }

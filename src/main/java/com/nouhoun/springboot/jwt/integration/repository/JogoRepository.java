@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.nouhoun.springboot.jwt.integration.domain.Jogo;
+import com.nouhoun.springboot.jwt.integration.domain.Jogo.Processo;
 import com.nouhoun.springboot.jwt.integration.domain.Jogo.Status;
 import com.nouhoun.springboot.jwt.integration.domain.UserJogo2;
 
@@ -28,5 +29,8 @@ public interface JogoRepository extends JpaRepository<Jogo, Long> {
     @Modifying
 	@Query("UPDATE Jogo  j SET j.status =?1 WHERE j.id=?2")
 	List<UserJogo2> updateStatus(Status status,Integer jogoId);
+    
+    @Query("SELECT u  FROM Jogo u WHERE u.status =?1 and u.processo =?2")
+    List<Jogo> findJogoByStatus(Status status, Processo processo);
 	
 }

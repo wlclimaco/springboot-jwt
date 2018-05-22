@@ -42,7 +42,9 @@ public class UserController {
 	
 //	@Autowired
 //	private JogoService jogoService;
-
+	public int getfifteen(){
+        return 15;
+    }
 
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
