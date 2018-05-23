@@ -22,7 +22,7 @@
 
     </head>
 	<div class="loader" ng-hide="initialized">
-		Loading...
+		Carregando...
 	</div>	
     <body data-ng-app="wdApp"
           id="wdApp"
@@ -36,14 +36,9 @@
          </section>
 	   
         <div class="main-container" >
-			<aside data-ng-include=" 'views/nav.html' "
-							   id="nav-container"
-							   class="nav-container hide"
-							   data-ng-class=" {'nav-fixed': admin.fixedSidebar, 'nav-vertical': admin.menu === 'vertical', 'nav-horizontal': admin.menu === 'horizontal'}">
-			</aside>			
-            <div id="content" class="content-container">
+
                 <section data-ng-view data-ng-cloak class="view-container animate-fade-up"></section>
-            </div>			
+         		
         </div>
         <!-- thirdparty libraries-->
 		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBUqfsa6I7Fhud3-xK24rldx0iKDcueURA&libraries=visualization"></script>		
