@@ -22,7 +22,7 @@ import com.nouhoun.springboot.jwt.integration.domain.Jogo.Processo;
 import com.nouhoun.springboot.jwt.integration.domain.Jogo.Status;
 import com.nouhoun.springboot.jwt.integration.domain.JogoPorData;
 import com.nouhoun.springboot.jwt.integration.domain.JogoPorData.StatusJogoPorData;
-import com.nouhoun.springboot.jwt.integration.domain.User;
+import com.nouhoun.springboot.jwt.integration.domain.UserJogo2;
 import com.nouhoun.springboot.jwt.integration.domain.UserJogoData;
 import com.nouhoun.springboot.jwt.integration.domain.UserJogoData.StatusUserJogoPorData;
 import com.nouhoun.springboot.jwt.integration.service.JogoService;
@@ -57,15 +57,16 @@ public class WebSocketEventListener {
     	{
     		for (Jogo jogo : jogos) {
 				GregorianCalendar gc = new GregorianCalendar();
-				JogoPorData jogoPorData = jogoService.saveJogoPorData(new JogoPorData(data.shouldDownloadFile2(jogo.getDia(),gc,jogo.getHoraInicial()).getTime(),data.shouldDownloadFile2(jogo.getDia(),gc,jogo.getHoraFinal()).getTime(), jogo.getId(), jogo.getUsersJogo(), StatusJogoPorData.AJOGAR,jogo.getQuadraId()));
+				JogoPorData jogoPorData = jogoService.saveJogoPorData(new JogoPorData(data.shouldDownloadFile2(jogo.getDia(),gc,jogo.getHoraInicial()).getTime(),data.shouldDownloadFile2(jogo.getDia(),gc,jogo.getHoraFinal()).getTime(), jogo.getId(), jogo.getUsersJogo2(), StatusJogoPorData.AJOGAR,jogo.getQuadraId()));
 				jogo.setProcesso(Processo.GERADO);
-				for (User usesr : jogo.getUsersJogo()) {
-					jogoService.saveUserJogoData(new UserJogoData(usesr.getId(),jogoPorData.getId(),StatusUserJogoPorData.ACONFIRMAR));
+				for (UserJogo2 usesr : jogo.getUsersJogo2()) {
+					logger.info("Save Jogo por DATA :: " + usesr.getJogo_id());
+					jogoService.saveUserJogoData(new UserJogoData(usesr.getUser_id(),jogoPorData.getId(),StatusUserJogoPorData.ACONFIRMAR));
 				}
 				jogosClone.add(jogo);
     		} 
     	
-    		data.jogoService.saveJogo(jogosClone);
+    		jogoService.saveJogo(jogosClone);
     	}
         logger.info("Current time is :: " + Calendar.getInstance().getTime());
         

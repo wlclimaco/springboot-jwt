@@ -83,14 +83,23 @@ public class JogoPorData {
 		this.status = status;
 	}
 
-	public JogoPorData(Date dataInicial, Date dataFInal, Integer jogoId, List<User> user, StatusJogoPorData status,
+	public JogoPorData(Date dataInicial, Date dataFInal, Integer jogoId, List<UserJogo2> user, StatusJogoPorData status,
 			int quadraId) {
 		super();
 		this.data = dataInicial;
 		this.dataFinal = dataFInal;
 		this.jogoId = jogoId;
 		this.status = status;
-		this.userJogoData = convertUserToUserJogoData(user);
+		
+		List<UserJogoData> userData = new ArrayList<UserJogoData>();
+		
+		if(!user.isEmpty())
+		{
+			for (UserJogo2 users : user) {
+				userData.add(new UserJogoData(users.getUser_id()));
+			}
+		}
+		this.userJogoData = userData;
 
 	}
 
@@ -106,15 +115,17 @@ public class JogoPorData {
 		this.userJogoData = userJogoData;
 	}
 
-	private List<UserJogoData> convertUserToUserJogoData(List<User> users) {
-
-		List<UserJogoData> userData = new ArrayList<UserJogoData>();
-		for (User user : users) {
-			userData.add(new UserJogoData(user.getId()));
-		}
-
-		return userData;
-	}
+//	private List<UserJogoData> convertUserToUserJogoData(List<UserJogo2> users) {
+//
+//		List<UserJogoData> userData = new ArrayList<UserJogoData>();
+//		if(!users.isEmpty())
+//		{
+//			for (UserJogo2 user : users) {
+//				userData.add(new UserJogoData(user.getUser_id()));
+//			}
+//		}
+//		return userData;
+//	}
 
 	public JogoPorData(JogoPorDataDTO jogoPorData) {
 		super();

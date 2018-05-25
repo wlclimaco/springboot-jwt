@@ -13,16 +13,7 @@ import com.nouhoun.springboot.jwt.integration.service.QuadraService;
 import com.nouhoun.springboot.jwt.integration.service.UserService;
 
 public class FunctionsUtius {
-	@Autowired
-	public JogoService jogoService;
-	@Autowired
-	public QuadraService quadraService;
-	@Autowired
-	public UserService userService;
-	@Autowired
-	public NotificacoesService notificacoesService;
-	@Autowired
-	public JogoUserService jogoUserService;
+	
 	
 	public FunctionsUtius() {
 	}

@@ -36,7 +36,7 @@ public class Jogo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "jogo_id")
-	private int id;
+	private Integer id;
 	@Column(name = "nome")
 	private String nome;
 	@Column(name = "descricao")
@@ -64,16 +64,16 @@ public class Jogo {
 //	@JoinTable(name = "user_jogos", joinColumns = @JoinColumn(name = "jogo_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 //
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "user_jogos", joinColumns = @JoinColumn(name="jogo_id", nullable = false,  insertable = false, updatable = false), inverseJoinColumns = @JoinColumn(name = "user_id", nullable = false,  insertable = false, updatable = false))
-	private List<User> usersJogo;
+//	@ManyToMany(cascade = CascadeType.ALL)
+//	@JoinTable(name = "user_jogos", joinColumns = @JoinColumn(name="jogo_id", nullable = false,  insertable = false, updatable = false), inverseJoinColumns = @JoinColumn(name = "user_id", nullable = false,  insertable = false, updatable = false))
+//	private List<User> usersJogo;
 
 //	@ManyToMany(cascade = CascadeType.ALL)
 //	@JoinTable(name = "user_jogos", joinColumns = @JoinColumn(name="jogo_id", nullable = false,  insertable = false, updatable = false), inverseJoinColumns = @JoinColumn(name = "user_id", nullable = false,  insertable = false, updatable = false))
 //	private List<UserJogo2> usersJogo2;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name="jogo_id", referencedColumnName="jogo_id", nullable = false, insertable = false, updatable = false)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name="jogo_id",  insertable = false,unique = false, nullable = false, updatable = false)
 	private List<UserJogo2> usersJogo2;
 
 	@Column(name = "user_id")
@@ -180,12 +180,7 @@ public class Jogo {
 		this.quadraId = quadraId;
 	}
 
-	public List<User> getUsersJogo() {
-		return usersJogo;
-	}
-	public void setUsersJogo(List<User> usersJogo) {
-		this.usersJogo = usersJogo;
-	}
+
 	public Integer getUser_id() {
 		return user_id;
 	}
@@ -198,10 +193,10 @@ public class Jogo {
 	public void setJogos(List<JogoPorData> jogos) {
 		this.jogos = jogos;
 	}
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public List<UserJogo2> getUsersJogo2() {

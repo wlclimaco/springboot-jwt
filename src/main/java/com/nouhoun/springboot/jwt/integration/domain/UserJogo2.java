@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 /**
  * The core Job Entity
@@ -31,31 +30,38 @@ public class UserJogo2 {
 	       SIM, NAO
 	    }
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private int id;
 	
-    /**dsad
-     * 
-     */
+	@Column(name = "user_id")
     private Integer user_id;
+	
+	@Column(name = "aprovadoPor")
     private Integer aprovadoPor;
+	
+	@Column(name = "aprovadoDate")
     private Date aprovadoDate;
+	
+	@Column(name = "jogo_id")
     private Integer jogo_id;
+	
+	@Column(name = "status_user")
     private StatusUser status_user;
+	
+	@Column(name = "admin")
     private Admin admin;
     
     
     
-    @NotNull
-    @Column
-    
+
 	public Integer getUser_id() {
 		return user_id;
 	}
 	public void setUser_id(Integer user_id) {
 		this.user_id = user_id;
 	}
-	@NotNull
-    @Column
 	public Integer getJogo_id() {
 		return jogo_id;
 	}
@@ -74,16 +80,14 @@ public class UserJogo2 {
 		this.status_user = status_user;
 		this.admin = admin;
 	}
-	@NotNull
-    @Column
+
 	public StatusUser getStatus_user() {
 		return status_user;
 	}
 	public void setStatus_user(StatusUser status_user) {
 		this.status_user = status_user;
 	}
-	@NotNull
-    @Column
+
 	public Admin getAdmin() {
 		return admin;
 	}
@@ -91,9 +95,6 @@ public class UserJogo2 {
 		this.admin = admin;
 	}
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
 	public int getId() {
 		return id;
 	}
@@ -103,14 +104,14 @@ public class UserJogo2 {
 	public UserJogo2() {
 		
 	}
-	@Column
+
 	public Integer getAprovadoPor() {
 		return aprovadoPor;
 	}
 	public void setAprovadoPor(Integer aprovadoPor) {
 		this.aprovadoPor = aprovadoPor;
 	}
-	@Column
+
 	public Date getAprovadoDate() {
 		return aprovadoDate;
 	}
