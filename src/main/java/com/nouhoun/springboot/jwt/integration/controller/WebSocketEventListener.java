@@ -33,59 +33,61 @@ import com.nouhoun.springboot.jwt.integration.service.JogoService;
 @Component
 public class WebSocketEventListener {
 
-    private static final Logger logger = LoggerFactory.getLogger(WebSocketEventListener.class);
+	private static final Logger logger = LoggerFactory.getLogger(WebSocketEventListener.class);
 
-    @Autowired
-    private SimpMessageSendingOperations messagingTemplate;
-    
-    @Autowired
+	@Autowired
+	private SimpMessageSendingOperations messagingTemplate;
+
+	@Autowired
 	public JogoService jogoService;
-    
-    private FunctionsUtius data = new FunctionsUtius();
 
-    @EventListener
-    public void handleWebSocketConnectListener(SessionConnectedEvent event) {
-        logger.info("Received a new web socket connection");
-    }
-    
-    @Scheduled(initialDelay = 10000, fixedRate = 100000)
-    public void run() {
-    	
-     	List<Jogo> jogos = jogoService.findJogoByStatus(Status.INDISPONIVEL, Processo.FINALIZAO) ;
-    	List<Jogo> jogosClone = new ArrayList<Jogo>();
-    	if(!jogos.isEmpty())
-    	{
-    		for (Jogo jogo : jogos) {
+	private FunctionsUtius data = new FunctionsUtius();
+
+	@EventListener
+	public void handleWebSocketConnectListener(SessionConnectedEvent event) {
+		logger.info("Received a new web socket connection");
+	}
+
+	@Scheduled(initialDelay = 10000, fixedRate = 100000)
+	public void run() {
+
+		List<Jogo> jogos = jogoService.findJogoByStatus(Status.INDISPONIVEL, Processo.FINALIZAO);
+		List<Jogo> jogosClone = new ArrayList<Jogo>();
+		if (!jogos.isEmpty()) {
+			for (Jogo jogo : jogos) {
 				GregorianCalendar gc = new GregorianCalendar();
-				JogoPorData jogoPorData = jogoService.saveJogoPorData(new JogoPorData(data.shouldDownloadFile2(jogo.getDia(),gc,jogo.getHoraInicial()).getTime(),data.shouldDownloadFile2(jogo.getDia(),gc,jogo.getHoraFinal()).getTime(), jogo.getId(), jogo.getUsersJogo2(), StatusJogoPorData.AJOGAR,jogo.getQuadraId()));
+				JogoPorData jogoPorData = jogoService.saveJogoPorData(
+						new JogoPorData(data.shouldDownloadFile2(jogo.getDia(), gc, jogo.getHoraInicial()).getTime(),
+								data.shouldDownloadFile2(jogo.getDia(), gc, jogo.getHoraFinal()).getTime(),
+								jogo.getId(), jogo.getUsersJogo(), StatusJogoPorData.AJOGAR, jogo.getQuadraId()));
 				jogo.setProcesso(Processo.GERADO);
-				for (UserJogo2 usesr : jogo.getUsersJogo2()) {
+				for (UserJogo2 usesr : jogo.getUsersJogo()) {
 					logger.info("Save Jogo por DATA :: " + usesr.getJogo_id());
-					jogoService.saveUserJogoData(new UserJogoData(usesr.getUser_id(),jogoPorData.getId(),StatusUserJogoPorData.ACONFIRMAR));
+					jogoService.saveUserJogoData(new UserJogoData(usesr.getUser_id(), jogoPorData.getId(),
+							StatusUserJogoPorData.ACONFIRMAR));
 				}
 				jogosClone.add(jogo);
-    		} 
-    	
-    		jogoService.saveJogo(jogosClone);
-    	}
-        logger.info("Current time is :: " + Calendar.getInstance().getTime());
-        
-        
-    }
+			}
 
-    @EventListener
-    public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
-        StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
+			jogoService.saveJogo(jogosClone);
+		}
+		logger.info("Current time is :: " + Calendar.getInstance().getTime());
 
-        String username = (String) headerAccessor.getSessionAttributes().get("username");
-        if(username != null) {
-            logger.info("User Disconnected : " + username);
+	}
 
-            ChatMessage chatMessage = new ChatMessage();
-            chatMessage.setType(ChatMessage.MessageType.LEAVE);
-            chatMessage.setSender(username);
+	@EventListener
+	public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
+		StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
 
-            messagingTemplate.convertAndSend("/topic/public", chatMessage);
-        }
-    }
+		String username = (String) headerAccessor.getSessionAttributes().get("username");
+		if (username != null) {
+			logger.info("User Disconnected : " + username);
+
+			ChatMessage chatMessage = new ChatMessage();
+			chatMessage.setType(ChatMessage.MessageType.LEAVE);
+			chatMessage.setSender(username);
+
+			messagingTemplate.convertAndSend("/topic/public", chatMessage);
+		}
+	}
 }

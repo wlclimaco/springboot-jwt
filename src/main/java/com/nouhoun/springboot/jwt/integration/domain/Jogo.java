@@ -10,10 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "jogo")
@@ -74,7 +74,7 @@ public class Jogo {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="jogo_id",  insertable = false,unique = false, nullable = false, updatable = false)
-	private List<UserJogo2> usersJogo2;
+	private List<UserJogo2> usersJogo;
 
 	@Column(name = "user_id")
 	private Integer user_id;
@@ -88,7 +88,8 @@ public class Jogo {
 //	@JoinTable(joinColumns = @JoinColumn(name= "jogo_id", insertable = false,unique = false, nullable = false, updatable = false))
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name="jogo_id", referencedColumnName="jogo_id", nullable = false, insertable = false, updatable = false)
-	private List<JogoPorData> jogos;
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private List<JogoPorData> jogoPorData;
 
 //	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //	@JoinTable(name = "user_jogos",  joinColumns = {
@@ -187,24 +188,14 @@ public class Jogo {
 	public void setUser_id(Integer user_id) {
 		this.user_id = user_id;
 	}
-	public List<JogoPorData> getJogos() {
-		return jogos;
-	}
-	public void setJogos(List<JogoPorData> jogos) {
-		this.jogos = jogos;
-	}
+
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public List<UserJogo2> getUsersJogo2() {
-		return usersJogo2;
-	}
-	public void setUsersJogo2(List<UserJogo2> usersJogo2) {
-		this.usersJogo2 = usersJogo2;
-	}
+
 	public Integer getMaximoConfirmados() {
 		return maximoConfirmados;
 	}
@@ -216,6 +207,18 @@ public class Jogo {
 	}
 	public void setProcesso(Processo processo) {
 		this.processo = processo;
+	}
+	public List<UserJogo2> getUsersJogo() {
+		return usersJogo;
+	}
+	public void setUsersJogo(List<UserJogo2> usersJogo) {
+		this.usersJogo = usersJogo;
+	}
+	public List<JogoPorData> getJogoPorData() {
+		return jogoPorData;
+	}
+	public void setJogoPorData(List<JogoPorData> jogoPorData) {
+		this.jogoPorData = jogoPorData;
 	}
 
 

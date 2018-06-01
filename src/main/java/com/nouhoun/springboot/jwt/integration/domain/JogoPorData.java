@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "jogo_por_data")
 public class JogoPorData {
@@ -41,7 +43,8 @@ public class JogoPorData {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "jogoPorData_id", referencedColumnName = "jogoPorData_id", nullable = false, insertable = false, updatable = false)
-	private List<UserJogoData> userJogoData;
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private List<UserJogoData> userJogoData = new ArrayList<UserJogoData>();
 
 	public Integer getId() {
 		return id;

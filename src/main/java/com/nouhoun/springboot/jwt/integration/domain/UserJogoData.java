@@ -1,10 +1,14 @@
 package com.nouhoun.springboot.jwt.integration.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -31,6 +35,10 @@ public class UserJogoData {
 	
 	@Column(name = "user_id") 
     private Integer user_id;
+	
+	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+	@JoinColumn(name="user_id", referencedColumnName="user_id", nullable = false, insertable = false, updatable = false)
+	private User usuario;
 	
 	@Column(name = "jogoPorData_id") 
     private Integer jogoPorData_id;
@@ -96,7 +104,20 @@ public class UserJogoData {
 		super();
 		this.user_id = user_id;
 	}
+	public UserJogoData() {
+
+	}
+	public User getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(User usuario) {
+		this.usuario = usuario;
+	}
+	public Integer getJogoPorData_id() {
+		return jogoPorData_id;
+	}
+	public void setJogoPorData_id(Integer jogoPorData_id) {
+		this.jogoPorData_id = jogoPorData_id;
+	}
 	
-
-
 }

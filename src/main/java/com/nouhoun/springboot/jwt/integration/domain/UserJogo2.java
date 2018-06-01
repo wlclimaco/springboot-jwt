@@ -2,11 +2,15 @@ package com.nouhoun.springboot.jwt.integration.domain;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -37,6 +41,10 @@ public class UserJogo2 {
 	
 	@Column(name = "user_id")
     private Integer user_id;
+	
+	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+	@JoinColumn(name="user_id", referencedColumnName="user_id", nullable = false, insertable = false, updatable = false)
+	private User usuario;
 	
 	@Column(name = "aprovadoPor")
     private Integer aprovadoPor;
@@ -117,6 +125,12 @@ public class UserJogo2 {
 	}
 	public void setAprovadoDate(Date aprovadoDate) {
 		this.aprovadoDate = aprovadoDate;
+	}
+	public User getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(User usuario) {
+		this.usuario = usuario;
 	}
 
     
