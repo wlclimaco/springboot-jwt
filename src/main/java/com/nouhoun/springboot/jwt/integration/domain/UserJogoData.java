@@ -1,5 +1,7 @@
 package com.nouhoun.springboot.jwt.integration.domain;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,6 +38,9 @@ public class UserJogoData {
 	@Column(name = "user_id") 
     private Integer user_id;
 	
+	@Column(name = "jogo_id") 
+    private Integer jogo_id;
+	
 	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
 	@JoinColumn(name="user_id", referencedColumnName="user_id", nullable = false, insertable = false, updatable = false)
 	private User usuario;
@@ -51,6 +56,12 @@ public class UserJogoData {
 	
 	@Column(name = "status")
 	private StatusUserJogoPorData status;
+	
+	@Column(name = "aprovadoPor")
+    private Integer aprovadoPor;
+	
+	@Column(name = "aprovadoDate")
+    private Date aprovadoDate;
     
    
 	public Integer getUser_id() {
@@ -94,11 +105,14 @@ public class UserJogoData {
 	public void setStatus(StatusUserJogoPorData status) {
 		this.status = status;
 	}
-	public UserJogoData(Integer user_id, Integer jogo_por_data,StatusUserJogoPorData status) {
+	public UserJogoData(Integer user_id, Integer jogo_por_data,StatusUserJogoPorData status,Integer jogoId,Integer aprovadoPor) {
 		super();
 		this.user_id = user_id;
 		this.jogoPorData_id = jogo_por_data;
 		this.status = status;
+		this.aprovadoDate = new Date();
+		this.jogo_id = jogoId;
+		this.aprovadoPor = aprovadoPor;
 	}
 	public UserJogoData(Integer user_id) {
 		super();
@@ -118,6 +132,24 @@ public class UserJogoData {
 	}
 	public void setJogoPorData_id(Integer jogoPorData_id) {
 		this.jogoPorData_id = jogoPorData_id;
+	}
+	public Integer getJogo_id() {
+		return jogo_id;
+	}
+	public void setJogo_id(Integer jogo_id) {
+		this.jogo_id = jogo_id;
+	}
+	public Integer getAprovadoPor() {
+		return aprovadoPor;
+	}
+	public void setAprovadoPor(Integer aprovadoPor) {
+		this.aprovadoPor = aprovadoPor;
+	}
+	public Date getAprovadoDate() {
+		return aprovadoDate;
+	}
+	public void setAprovadoDate(Date aprovadoDate) {
+		this.aprovadoDate = aprovadoDate;
 	}
 	
 }

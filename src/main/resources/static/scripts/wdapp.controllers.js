@@ -3,7 +3,7 @@
 	var commonControllers =  angular.module('wdApp.controllers', []);
   
 	commonControllers.controller('WDAppController', ['$scope', '$rootScope', function($scope, $rootScope) {
-		  debugger
+		  
 		$scope.admin = {
 			layout: 'wide',
 			menu: 'vertical'
@@ -34,11 +34,11 @@
   
 	commonControllers.controller('LoginController', ['$scope', '$rootScope', '$location', 'localStorageService','WDAuthentication', 
 		function($scope, $rootScope, $location, localStorageService, WDAuthentication) {
-		debugger
+		
 			$scope.login = function() {
-				debugger
+				
 				WDAuthentication.processLogin(WebDaptiveAppConfig.authenticationURL, $.param({username: $scope.username, password: $scope.password}), function(authenticationResult) {
-					debugger
+					
 					var authToken = authenticationResult.token;
 					if (authToken !== undefined){	
 						$rootScope.authToken = authToken;

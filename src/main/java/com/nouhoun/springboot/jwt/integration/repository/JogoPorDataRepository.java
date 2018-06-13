@@ -19,7 +19,7 @@ public interface JogoPorDataRepository extends JpaRepository<JogoPorData, Long> 
 
 	//List<Empresa> findEmpresaByUser(Empresa empresa);
 	
-    @Query("SELECT u  FROM JogoPorData u WHERE u.data = :data and u.jogoId = :jogoId")
-    List<JogoPorData> findJogoPorDataUserConfirmDTO(@Param("data") Date data,@Param("jogoId") Integer jogoId );
+    @Query("SELECT u  FROM JogoPorData u WHERE cast(u.data as date) = :data AND cast(u.dataFinal as date) = :data1 AND u.jogoId = :jogoId")
+    JogoPorData findJogoPorDataUserConfirmDTO(@Param("jogoId") Integer jogoId,@Param("data") Date data,@Param("data1") Date data1 );
     
 }

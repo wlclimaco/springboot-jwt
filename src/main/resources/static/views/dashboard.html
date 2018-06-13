@@ -67,7 +67,7 @@
 												<a class="list-group-item">
 													{{jogoDatas.aprovadoDate}}. 
 													<span class="pull-right">
-														<button ng-click="aprovarJogador(jogoDatas, 'CONFIRMADO')" class="btn btn-xs btn-success glyphicon glyphicon-ok"    uib-tooltip="Aprovar P/ Todos os Jogos!"   tooltip-append-to-body="true"></button><!-- Aprovar -->
+														<button ng-click="aprovarJogador(jogoDatas, 'CONFIRMADO')" class="btn btn-xs btn-success glyphicon glyphicon-ok"       uib-tooltip="Aprovar P/ Todos os Jogos!"   tooltip-append-to-body="true"></button><!-- Aprovar -->
 														<button ng-click="aprovarJogador(jogoDatas, 'RECUSADO')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"     uib-tooltip="Aprovar Apenas proximo Jogo!"   tooltip-append-to-body="true"></button><!-- Desmarcar -->
 														<button ng-click="aprovarJogador(jogoDatas, 'RECUSADO')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"     uib-tooltip="Resusar!"   tooltip-append-to-body="true"></button><!-- Desmarcar -->
 													</span>
@@ -96,7 +96,7 @@
 														<a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span> {{user.usuario.name}} {{user.usuario.lastName}}<span class="pull-right fa">
 														<img ng-show="fnConfirm(jogoData.userConfirm, user ) === 1" src="/../images/hold.png" uib-tooltip="Sem Resposta!" tooltip-append-to-body="true" height="20px" width="20px" >
 														<img ng-show="fnConfirm(jogoData.userConfirm, user ) === 2" src="/../images/dislike2.png" uib-tooltip="Não Vo!" tooltip-append-to-body="true" height="20px" width="20px" >
-														<img ng-show="fnConfirm(jogoData.userConfirm, user ) === 3" src="/../images/like.png" uib-tooltip="Estarei lÃ¡!" tooltip-append-to-body="true" height="20px" width="20px" ></span>
+														<img ng-show="fnConfirm(jogoData.userConfirm, user ) === 3" src="/../images/like.png" uib-tooltip="Estarei lá¡!" tooltip-append-to-body="true" height="20px" width="20px" ></span>
 														</a>
 													</div>
 												</div>
@@ -104,7 +104,7 @@
 													Ações 
 													<span class="pull-right">
 														<button ng-click="gravarHorario(jogoData, 'CONFIRMADO')" class="btn btn-xs btn-success glyphicon glyphicon-ok"    uib-tooltip="Confirmar!"   tooltip-append-to-body="true"></button><!-- Aprovar -->
-														<button ng-click="gravarHorario(jogoData, 'NAOVO')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"   uib-tooltip="NÃ£o Vai dar!"    tooltip-append-to-body="true"></button><!-- Desmarcar -->
+														<button ng-click="gravarHorario(jogoData, 'NAOVO')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"   uib-tooltip="Não Vai dar!"    tooltip-append-to-body="true"></button><!-- Desmarcar -->
 													</span>
 												</a>
 											</div>

@@ -48,7 +48,7 @@ angular.module('wdApp.apps.factory.meusJogos', [])
 			},
 
 			aprovarJogador : function(oJogo, status, fncallBack)
-			{debugger
+			{
 				var oUser = JSON.parse(localStorage.getItem('wdAppLS.currentUser'));
 				oJogo.status_user = status
 				oJogo.aprovadoPor = oUser.id;

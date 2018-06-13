@@ -202,6 +202,7 @@ public class FunctionsUtius {
 		String[] rabbitmqUserInfo = hInc.split(":");
 		gc.set(GregorianCalendar.HOUR_OF_DAY,Integer.parseInt(rabbitmqUserInfo[0]));
 		gc.set(GregorianCalendar.MINUTE,Integer.parseInt(rabbitmqUserInfo[1]));
+		gc.set(GregorianCalendar.SECOND,0);
 		
 		//gc.add(gc.HOUR, Integer.parseInt(rabbitmqUserInfo[0]));
 	//	gc.add(gc.MINUTE, Integer.parseInt(rabbitmqUserInfo[0]));

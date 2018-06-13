@@ -8,7 +8,7 @@
 	  };
 
 	  $ctrl.ok = function (oJogo, sStatus) {
-	    debugger
+	    
 	   // $scope.loading = true;
 	    jogoFactory.update(oJogo, sStatus);
 	 //   $scope.loading = false;

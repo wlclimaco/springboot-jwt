@@ -5,9 +5,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +29,10 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nouhoun.springboot.jwt.api.APIResponse;
 import com.nouhoun.springboot.jwt.integration.domain.Jogo;
+import com.nouhoun.springboot.jwt.integration.domain.Jogo.Processo;
 import com.nouhoun.springboot.jwt.integration.domain.Jogo.Status;
 import com.nouhoun.springboot.jwt.integration.domain.JogoPorData;
+import com.nouhoun.springboot.jwt.integration.domain.JogoPorData.StatusJogoPorData;
 import com.nouhoun.springboot.jwt.integration.domain.JogoPorDataDTO;
 import com.nouhoun.springboot.jwt.integration.domain.Notificacoes;
 import com.nouhoun.springboot.jwt.integration.domain.Notificacoes.NotificacoesStatus;
@@ -36,6 +41,8 @@ import com.nouhoun.springboot.jwt.integration.domain.User;
 import com.nouhoun.springboot.jwt.integration.domain.UserJogo2;
 import com.nouhoun.springboot.jwt.integration.domain.UserJogo2.Admin;
 import com.nouhoun.springboot.jwt.integration.domain.UserJogo2.StatusUser;
+import com.nouhoun.springboot.jwt.integration.domain.UserJogoData.StatusUserJogoPorData;
+import com.nouhoun.springboot.jwt.integration.domain.UserJogoData;
 import com.nouhoun.springboot.jwt.integration.service.JogoService;
 import com.nouhoun.springboot.jwt.integration.service.JogoUserService;
 import com.nouhoun.springboot.jwt.integration.service.NotificacoesService;
@@ -45,6 +52,8 @@ import com.nouhoun.springboot.jwt.integration.service.UserService;
 @Controller
 public class JogoController {
 
+	private static final Logger logger = LoggerFactory.getLogger(WebSocketEventListener.class);
+	
 	@Autowired
 	public JogoService jogoService;
 	@Autowired
@@ -55,6 +64,8 @@ public class JogoController {
 	public NotificacoesService notificacoesService;
 	@Autowired
 	public JogoUserService jogoUserService;
+	
+	private FunctionsUtius data = new FunctionsUtius();
 
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/jogo/update", method = RequestMethod.POST)
@@ -263,6 +274,10 @@ public class JogoController {
 			break;
 		default:
 			break;
+		}
+		if(jogo.getProcesso().equals(Processo.GERADO)) 
+		{
+			insertProximoJogoPorData(jogo, user);
 		}
 		user.setAprovadoDate(new Date());
 		notificacoes.setParaJogoId(jogo.getId());
@@ -483,5 +498,27 @@ public class JogoController {
 
 		return new ResponseEntity<List<Jogo>>(quadra, HttpStatus.OK);
 	}
+	
+	private void insertProximoJogoPorData(Jogo jogo, UserJogo2 user)
+	{
+		//BUSCAR JOGO POR DATA ID
+		logger.info("BUSCAR JOGO POR DATA ID");
+		GregorianCalendar gc = new GregorianCalendar();
+		JogoPorData jogoPorData = new JogoPorData(data.shouldDownloadFile2(jogo.getDia(), gc, jogo.getHoraInicial()).getTime(),
+						data.shouldDownloadFile2(jogo.getDia(), gc, jogo.getHoraFinal()).getTime(),
+						jogo.getId(), jogo.getUsersJogo(), StatusJogoPorData.AJOGAR, jogo.getQuadraId());
+		
+		JogoPorData jogoPor = jogoService.findJogoPorDataUserConfirmDTO(jogo.getId(), jogoPorData.getData(), jogoPorData.getDataFinal());
+		if(jogoPor != null)
+		{
+			// SALVANDO JOGADOR POR JOGO DATA
+			logger.info("INICIANDO SALVAR JODADOR POR JOGO USER_ID :: " + jogo.getId());
+			jogoService.saveUserJogoData(new UserJogoData(user.getUser_id(), jogoPor.getId(),
+					StatusUserJogoPorData.ACONFIRMAR,jogo.getId(),user.getAprovadoPor()));
+			
+			logger.info("FINALIZANDO SALVAR JODADOR POR JOGO USER_ID :: " + jogo.getId());
+		}
+	}
+	
 
 }

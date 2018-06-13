@@ -77,8 +77,9 @@ public class JogoServiceImpl implements JogoService{
 		
 	}
 	@Override
-	public List<JogoPorData> findJogoPorDataUserConfirmDTO(Integer JogoId, Date dataJogo) {
-		return jogoPorDataRepository.findJogoPorDataUserConfirmDTO(dataJogo,JogoId);
+	public JogoPorData findJogoPorDataUserConfirmDTO(Integer JogoId, Date dataJogoInicio, Date dataJogoFinal) {
+	//public List<JogoPorData> findJogoPorDataUserConfirmDTO(Integer JogoId, Date dataJogo) {
+		return jogoPorDataRepository.findJogoPorDataUserConfirmDTO(JogoId, dataJogoInicio, dataJogoFinal );
 	}
 	@Override
 	public Jogo findJogoById(Integer empresa) {

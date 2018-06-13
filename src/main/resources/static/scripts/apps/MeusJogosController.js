@@ -92,7 +92,6 @@
 
 
 		$scope.fnNameJogadorAprovar = function (item,jogoData) {
-debugger
 			var sName = "";
 
 			for(var x = 0; x< item.usersJogo.length;x++)

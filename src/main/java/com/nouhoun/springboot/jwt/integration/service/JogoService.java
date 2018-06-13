@@ -18,7 +18,7 @@ public interface JogoService {
 	public List<Jogo> findJogoByStatus(Status status,Processo processo);
 	public Jogo findJogoById(Integer empresa);
 	public List<Jogo> findAllJogo();
-	public List<JogoPorData> findJogoPorDataUserConfirmDTO(Integer JogoId, Date dataJogo);
+	public JogoPorData findJogoPorDataUserConfirmDTO(Integer JogoId, Date dataJogoInicio, Date dataJogoFinal);
 	void saveJogo(List<Jogo> jogos);
 	void saveUpdateJogo(Jogo jogos);
 	void saveJogoPorData(List<JogoPorData> jogos);

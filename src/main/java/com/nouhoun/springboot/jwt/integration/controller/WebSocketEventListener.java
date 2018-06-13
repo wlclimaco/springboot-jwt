@@ -64,7 +64,7 @@ public class WebSocketEventListener {
 				for (UserJogo2 usesr : jogo.getUsersJogo()) {
 					logger.info("Save Jogo por DATA :: " + usesr.getJogo_id());
 					jogoService.saveUserJogoData(new UserJogoData(usesr.getUser_id(), jogoPorData.getId(),
-							StatusUserJogoPorData.ACONFIRMAR));
+							StatusUserJogoPorData.ACONFIRMAR,jogo.getId(),usesr.getAprovadoPor()));
 				}
 				jogosClone.add(jogo);
 			}
