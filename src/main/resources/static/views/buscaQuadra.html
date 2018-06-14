@@ -76,9 +76,10 @@
 	                            <uib-tab heading="Lista">
 	                            	<section class="panel panel-box" data-ng-controller="MapDemoController">
 	                            	<div ng-repeat="oEmpresa in empresaList | orderBy:'id'">
-	                            		<div class="row" style="text-align: center;"><h3 style="text-align: center;">{{oEmpresa.nome}}</h3></div>
-	                            		<div class="row" >
+	                            		<div class="row">
+	                            		
 	                            		<div class="col-md-3">
+	                            		<h3>{{oEmpresa.nome}}</h3>
 						                <div class="panel-left panel-item">
 						                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
 											  <ol class="carousel-indicators">
@@ -111,6 +112,7 @@
 						                <div class="col-md-9">
 						                <div class="panel-right panel-item bg-reverse">
 						                <div class="col-md-12">
+						                
 						                			                    <!-- Pofile panel -->
             <div class="panel panel-profile">
    				
@@ -138,7 +140,9 @@
                     </li>
                     <li class="list-group-item">
                         <p class="pull-left">Tipo : {{oQuadra.tipo}}</p>
-                        <p class="pull-right">Coberta : {{oQuadra.cobertura}}</p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="pull-left">Coberta : {{oQuadra.cobertura}}</p>
                     </li>
                     <li class="list-group-item">
                          <p class="pull-left">Valor : R${{oQuadra.valor}}</p>
@@ -154,6 +158,11 @@
             <!-- end Pofile panel -->
 						                </div>
 						                </div>
+						                </div>
+						                <div class="col-md-12">
+						                	<div class="col-md-2"></div>
+						                	<div class="col-md-5"><label for="Dom" class="btn btn-danger">Filtrar horarios<input  type="checkbox" name="gender0" id="defaults" checked="checked" value="DOMINGO" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label></div>
+						                	<div class="col-md-5">Ver no Mapa</div>
 						                </div>
 						            </section>
 	                             </uib-tab>
