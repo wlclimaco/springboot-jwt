@@ -1,248 +1,254 @@
-
 <div class="page" data-ng-controller="ModalDemoController">
-  
-                    <script type="text/ng-template" id="myModalContent2.html">
-                        	<div class="modal-header">
-			<h3 class="modal-title" id="modal-title">Solicitar Participação!</h3>
-		</div>
-		<div class="modal-body" id="modal-body">
-            <form role="form" ng-submit='login()'>
-                <fieldset>
-                       <div class="modal-body" id="modal-body">
-            Sua solicitação foi enviada, para o adminstrador <br>
-            do jogo assim que for Aprovado/recusado você receber <br> uma noticicação no aplicativo
+    <script type="text/ng-template" id="myModalContent2.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Solicitar Participação!</h3>
         </div>
-                </fieldset>
-            </form>
-		</div>
-		<div class="modal-footer">
-			<button class="btn btn-primary" type="button" ng-click="ok(items.jogo, items.status)">Confirmar</button>
-			<button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
-		</div>
-                    </script>
-
-                    <script type="text/ng-template" id="myModalContent.html">
-                        	<div class="modal-header">
-			<h3 class="modal-title" id="modal-title">Confirmar Agenda</h3>
-		</div>
-		<div class="modal-body" id="modal-body">
+        <div class="modal-body" id="modal-body">
             <form role="form" ng-submit='login()'>
                 <fieldset>
-                        <div class="list list-inset removePM">
-                                <form name="form"  role="form">
-                                        <div ng-disabled="isSubmitted">
-                        <div class="form-group">
-                                <label class="item item-input"><input ng-model="items.jogo.maximoConfirmados" type="number" placeholder="Numero Maximo Jogodores" name="email" id="email" class="form-control" ng-model="lc.user.email" > </label>
-                                
-                        </div>
-                    <div class="form-group">
-                            <dl class="dl-horizontal">
-                                    <dt>Tempo Agenda</dt>
-                                    <dd>
-                                        <label class="ui-radio"><input ng-model="items.jogo.confirmacao" name="radio1" type="radio" value="FIXO" checked><span>Fixo</span></label>
-                                        <label class="ui-radio"><input ng-model="items.jogo.confirmacao" name="radio1" type="radio" value="SOHOJE" ><span>So Dessa Vez</span></label>
-                                        <label class="ui-radio"><input ng-model="items.jogo.confirmacao" name="radio1" type="radio" value="MENSAL"><span>Mensal</span></label>
-                                        <label class="ui-radio"><input ng-model="items.jogo.confirmacao" name="radio1" type="radio" value="ANUAL"><span>Anual</span></label>
-                                    </dd>
-                                    
-                                </dl>
-                        </div>
-                    </div>
+                    <div class="modal-body" id="modal-body">
+                        Sua solicitação foi enviada, para o adminstrador <br> do jogo assim que for Aprovado/recusado você receber <br> uma noticicação no aplicativo
                     </div>
                 </fieldset>
             </form>
-		</div>
-		<div class="modal-footer">
-			<button class="btn btn-primary" type="button" ng-click="ok(items.jogo, items.status)">Solicitar</button>
-			<button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
-		</div>
-                    </script>
-           
-		<div id="menu"   ng-controller="BuscaQuadraController" >
-                   
-                    
-			<div class="panel list-group">
-				<a class="list-group-item" data-toggle="collapse" data-target="#sl1fff" data-parent="#menu"><span class="glyphicon glyphicon-resize-vertical"></span>Filtros <span class="glyphicon glyphicon-list pull-right"></span></a>
-				
-				
-				
-				
-				
-				
-				<div id="sl1fff" class="sublinks collapse in" style="border: 1px solid rgb(221, 221, 221)">
-					<div class="form-group input-group" >
-						<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-						<input name="consulta" id="txt_consulta" placeholder="Consultar nome quadra, endereço" type="text" class="form-control">
-					</div>
-					
-					<div id="buscarQuadra-container3s" class="creator-container" style="margin-top:1%;margin-left:1%;">
-						<div class="divider"></div>
-	                    <div class="ui-tab-container">
-	                        <uib-tabset class="ui-tab">
-	                            <uib-tab heading="Lista">
-	                            	<section class="panel panel-box" data-ng-controller="MapDemoController">
-	                            	<div ng-repeat="oEmpresa in empresaList | orderBy:'id'">
-	                            		<div class="row">
-	                            		
-	                            		<div class="col-md-3">
-	                            		<h3>{{oEmpresa.nome}}</h3>
-						                <div class="panel-left panel-item">
-						                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
-											  <ol class="carousel-indicators">
-											    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-											    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-											    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-											  </ol>
-											  <div class="carousel-inner">
-											    <div class="carousel-item active">
-											      <img class="d-block w-100" src="/images/gols_LEa_6.ico" alt="First slide">
-											    </div>
-											    <div class="carousel-item">
-											      <img class="d-block w-100" src="/images/dislike.png" alt="Second slide">
-											    </div>
-											    <div class="carousel-item">
-											      <img class="d-block w-100" src="/images/beer.jpg" alt="Third slide">
-											    </div>
-											  </div>
-											  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-											    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-											    <span class="sr-only">Previous</span>
-											  </a>
-											  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-											    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-											    <span class="sr-only">Next</span>
-											  </a>
-											</div>
-						                </div>
-						                </div>
-						                <div class="col-md-9">
-						                <div class="panel-right panel-item bg-reverse">
-						                <div class="col-md-12">
-						                
-						                			                    <!-- Pofile panel -->
-            <div class="panel panel-profile">
-   				
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <p class="pull-left">Responsavel : {{oEmpresa.nomeResponsavel}}</p>
-                        <p class="pull-right">Email : {{oEmpresa.email}}</p>
-                    </li>
-  
-                    <li class="list-group-item">
-                        <p class="pull-left">Endereço : {{oEmpresa.endereco.logradouro}}, {{oEmpresa.endereco.numero}}, {{Empresa.endereco.bairro}}</p>
-                    	<p class="pull-right">Telefone : {{oEmpresa.telefone}}</p> 
-                    </li>
-                </ul>
-                </div>
-                
-            </div>
-            <div ng-repeat="oQuadra in oEmpresa.quadras | orderBy:'id'">
-			<div class="col-md-{{12/oEmpresa.quadras.length}}">			                    <!-- Pofile panel -->
-            <div class="panel panel-profile">
-   				
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <p class="pull-left">Quadra : {{oQuadra.nome}}</p>
-                    </li>
-                    <li class="list-group-item">
-                        <p class="pull-left">Tipo : {{oQuadra.tipo}}</p>
-                    </li>
-                    <li class="list-group-item">
-                        <p class="pull-left">Coberta : {{oQuadra.cobertura}}</p>
-                    </li>
-                    <li class="list-group-item">
-                         <p class="pull-left">Valor : R${{oQuadra.valor}}</p>
-                    </li>
-                    <li class="list-group-item">
-                         <p class="pull-left">Valor C/Bola : R${{oQuadra.valor + oQuadra.valorBola}}</p>
-                    </li>
-                </ul>
-                </div>
-             </div>   
-            </div>
-            </div>
-            <!-- end Pofile panel -->
-						                </div>
-						                </div>
-						                </div>
-						                <div class="col-md-12">
-						                	<div class="col-md-2"></div>
-						                	<div class="col-md-5"><label for="Dom" class="btn btn-danger">Filtrar horarios<input  type="checkbox" name="gender0" id="defaults" checked="checked" value="DOMINGO" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label></div>
-						                	<div class="col-md-5">Ver no Mapa</div>
-						                </div>
-						            </section>
-	                             </uib-tab>
-	                            <uib-tab heading="Mapa"><div class="panel-body" data-ng-controller="MapDemoController">
-					                <map class="ui-map" center="current-location" map-type-id="TERRAIN" zoom="14" scrollwheel="false"> </map>
-					            </div></uib-tab>
-	                            
-	                        </uib-tabset>
-	                    </div>		
-					</div>
-					<div id="buscarQuadra-container3" class="creator-container" style="margin-top:1%;margin-left:1%;">
-						<label for="Dom" class="btn btn-danger">Dom<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender0" id="defaults" checked="checked" value="DOMINGO" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-						<label for="Seg" class="btn btn-info">Seg<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender1"   checked="checked"  value="SEGUNDA" id="default" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-						<label for="Ter" class="btn btn-info">Ter<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender2"   checked="checked" value="TERCA" id="primary" class="badgebox" ng-true-value="'TERCA'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-						<label for="Qua" class="btn btn-info">Qua<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender3"   checked="checked" value="QUARTA" id="info" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-						<label for="Qui" class="btn btn-info">Qui<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender4"   checked="checked" value="QUINTA" id="success" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-						<label for="Sex" class="btn btn-info">Sex<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender5"   checked="checked" value="SEXTA" id="warning" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-						<label for="Sab" class="btn btn-warning">Sab<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender6" checked="checked" value="SABADO" id="danger" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>  
-					</div>
-					<div id="buscarStatus-container3" class="creator-container"  style="margin-top:1%;margin-left:1%;margin-bottom:1%;">
-						<label for="Dom" class="btn btn-info">DISPONIVEL<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender0" id="defaults"  value="DISPONIVEL" checked="checked" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-						<label for="Seg" class="btn btn-info">ACONFIRMAR<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender1"    value="ACONFIRMAR" id="default" checked="checked"  class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-						<label for="Ter" class="btn btn-info">OCUPADO<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender2"    value="OCUPADO" id="primary" class="badgebox" checked="checked"><span class="badge">&check;</span></label>
-						<label for="Qua" class="btn btn-info">INDISPONIVEL<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender3"    value="INDISPONIVEL" id="info" class="badgebox" checked="checked"><span class="badge">&check;</span></label>
-					</div>
-				</div>
-			</div>
-			<div ng-repeat="empresa in empresaList | orderBy:'nome'">
-				<div ng-repeat="quadra in empresa.quadras | orderBy:'nome'">
-					<div ng-repeat="jogo in quadra.jogos  | priceGreaterThan:'DOMINGO' | filterStatus:'DOMINGO' | orderBy:'status' | orderBy:'dia' | orderBy:'horaInicial'">
-						<div class="panel list-group">
-							<a class="list-group-item" data-toggle="collapse" data-target="#sm{{jogo.id}}" data-parent="#menu"><span class="glyphicon glyphicon-eye-open"></span><span class="pull-center"> {{quadra.nome}}   -  {{jogo.dia}} - {{jogo.horaInicial}} - {{jogo.horaFinal}} </span>  
-							<span class="pull-right">
-							<span ng-if="jogo.status=='INDISPONIVEL'" style="font-size:8px" class="label label-danger"> * Reservado</span>
-							<span ng-if="jogo.status=='ACONFIRMAR'"  style="font-size:8px" class="label label-warning"> * A Confirmar</span>
-							<span ng-if="jogo.status=='DISPONIVEL'" style="font-size:8px"  class="label label-success"> * Disponivel</span>
-							<span ng-if="jogo.status=='OCUPADO'" style="font-size:8px" class="label label-danger"> * Reservado</span>
-							<span ng-if="jogo.status=='CONFIRMAR'"  style="font-size:8px" class="label label-info"> * Confirmar</span>
-							</span>
-							</a>
-							<div id="sm{{jogo.id}}" class="sublinks collapse">
-								<a class="list-group-item small">{{jogo.descricao}}</a>
-							</div>
-							<a class="list-group-item" data-toggle="collapse" data-target="#s{{jogo.id}}" data-parent="#menu"><span class="glyphicon glyphicon-user"></span> Jogadores <span class="badge badge-success">{{jogo.usersJogo.length}}</span></a>
-							<div id="s{{jogo.id}}" class="sublinks collapse" >
-								<div ng-repeat="user in jogo.usersJogo">
-									<a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span> {{user.name}} {{user.lastName}} - ({{user.email}})</a>
-								</div>
-							</div>
-								<a  class="list-group-item">
-									Ações
-									<span class="pull-right">
-										<button ng-click="gravarHorario(jogo, 'EXCLUIR')" class="btn btn-xs btn-warning glyphicon glyphicon-trash"      uib-tooltip="Excluir Horario!" tooltip-append-to-body="true" ></button><!-- Excluir-->
-										<button ng-if="jogo.status=='INDISPONIVEL'" ng-click="gravarHorario(jogo, 'DESMARCAR')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"   uib-tooltip="Desmarcar!" tooltip-append-to-body="true"></button><!-- Desmarcar -->
-										<button ng-if="jogo.status=='CONFIRMAR'"    ng-click="gravarHorario(jogo, 'INDISPONIVEL')" class="btn btn-xs btn-success glyphicon glyphicon-ok"    uib-tooltip="Aprovar!"   tooltip-append-to-body="true"></button><!-- Aprovar -->
-										<button ng-if="jogo.status=='CONFIRMAR'"    ng-click="gravarHorario(jogo, 'DISPONIVEL')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"  uib-tooltip="Recusar!"   tooltip-append-to-body="true"></button><!-- nao aprovar -->
-										<button ng-if="jogo.status=='OCUPADO'"      ng-click="gravarHorario(jogo, 'DISPONIVEL')" class="btn btn-xs btn-success glyphicon glyphicon-ok"      uib-tooltip="Disponibilizar!" tooltip-append-to-body="true"></button><!-- tornar disponivel -->
-										<button ng-if="jogo.status=='DISPONIVEL'"   ng-click="gravarHorario(jogo, 'ACONFIRMAR')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"     uib-tooltip="Ocupar!" tooltip-append-to-body="true"></button><!-- marcar como ocupado -->
-										<button ng-if="jogo.status=='DISPONIVEL'"   ng-click="open('sm', '.modal-parent',jogo, 'ACONFIRMAR') " class="btn btn-xs btn-success glyphicon glyphicon-ok"    uib-tooltip="Marcar Horario!" tooltip-append-to-body="true"></button><!-- Aprovar -->
-										<button ng-if="jogo.status=='INDISPONIVEL'" ng-click="openSolicitacao('sm', '.modal-parent',jogo, 'ACONFIRMAR')" class="btn btn-xs btn-success glyphicon glyphicon-ok"    uib-tooltip="Solicitar Participa��o!" tooltip-append-to-body="true"></button><!-- Aprovar --> 
-									</span>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	
-	<div data-ui-footer></div>	
-</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok(items.jogo, items.status)">Confirmar</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+        </div>
+    </script>
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Confirmar Agenda</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <form role="form" ng-submit='login()'>
+                <fieldset>
+                    <div class="list list-inset removePM">
+                        <form name="form" role="form">
+                            <div ng-disabled="isSubmitted">
+                                <div class="form-group">
+                                    <label class="item item-input"><input ng-model="items.jogo.maximoConfirmados" type="number" placeholder="Numero Maximo Jogodores" name="email" id="email" class="form-control" ng-model="lc.user.email" > </label>
 
-<script>
-$( document ).ready(function() {
-	$("#nav-container").removeClass("hide");
-	$("#header").removeClass("hide");
-});
-</script>
+                                </div>
+                                <div class="form-group">
+                                    <dl class="dl-horizontal">
+                                        <dt>Tempo Agenda</dt>
+                                        <dd>
+                                            <label class="ui-radio"><input ng-model="items.jogo.confirmacao" name="radio1" type="radio" value="FIXO" checked><span>Fixo</span></label>
+                                            <label class="ui-radio"><input ng-model="items.jogo.confirmacao" name="radio1" type="radio" value="SOHOJE" ><span>So Dessa Vez</span></label>
+                                            <label class="ui-radio"><input ng-model="items.jogo.confirmacao" name="radio1" type="radio" value="MENSAL"><span>Mensal</span></label>
+                                            <label class="ui-radio"><input ng-model="items.jogo.confirmacao" name="radio1" type="radio" value="ANUAL"><span>Anual</span></label>
+                                        </dd>
+
+                                    </dl>
+                                </div>
+                            </div>
+                    </div>
+                </fieldset>
+                </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok(items.jogo, items.status)">Solicitar</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+        </div>
+    </script>
+    <div id="menu" ng-controller="BuscaQuadraController">
+        <div class="panel list-group">
+            <a class="list-group-item" data-toggle="collapse" data-target="#sl1fff" data-parent="#menu"><span class="glyphicon glyphicon-resize-vertical"></span>Filtros <span class="glyphicon glyphicon-list pull-right"></span></a>
+            <div id="sl1fff" class="sublinks collapse in" style="border: 1px solid rgb(221, 221, 221)">
+                <div class="form-group input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                    <input name="consulta" id="txt_consulta" placeholder="Consultar nome quadra, endereço" type="text" class="form-control">
+                </div>
+                <div id="buscarQuadra-container3s" class="creator-container" style="margin-top:1%;margin-left:1%;">
+                    <div class="divider"></div>
+                    <div class="ui-tab-container">
+                        <uib-tabset class="ui-tab">
+                            <uib-tab heading="Lista">
+                                <section class="panel panel-box" data-ng-controller="MapDemoController">
+                                    <div ng-repeat="oEmpresa in empresaList | orderBy:'id'">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <h3>{{oEmpresa.nome}}</h3>
+                                                <div class="panel-left panel-item">
+                                                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                                        <ol class="carousel-indicators">
+                                                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                                        </ol>
+                                                        <div class="carousel-inner">
+                                                            <div class="carousel-item active">
+                                                                <img class="d-block w-100" src="/images/gols_LEa_6.ico" alt="First slide">
+                                                            </div>
+                                                            <div class="carousel-item">
+                                                                <img class="d-block w-100" src="/images/dislike.png" alt="Second slide">
+                                                            </div>
+                                                            <div class="carousel-item">
+                                                                <img class="d-block w-100" src="/images/beer.jpg" alt="Third slide">
+                                                            </div>
+                                                        </div>
+                                                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                                </a>
+                                                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                                </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div id="buscarQuadra-container3s" class="creator-container" style="margin-top:1%;margin-left:1%;">
+                                                    <div class="divider"></div>
+                                                    <div class="ui-tab-container">
+                                                        <uib-tabset class="ui-tab">
+                                                            <uib-tab heading="Lista">
+                                                                <div class="panel-right panel-item bg-reverse">
+                                                                    <div class="col-md-12">
+                                                                        <!-- Pofile panel -->
+                                                                        <div class="panel panel-profile">
+                                                                            <ul class="list-group">
+                                                                                <li class="list-group-item">
+                                                                                    <p class="pull-left">Responsavel : {{oEmpresa.nomeResponsavel}}</p>
+                                                                                    <p class="pull-right">Email : {{oEmpresa.email}}</p>
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <p class="pull-left">Endereço : {{oEmpresa.endereco.logradouro}}, {{oEmpresa.endereco.numero}}, {{Empresa.endereco.bairro}}</p>
+                                                                                    <p class="pull-right">Telefone : {{oEmpresa.telefone}}</p>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div ng-repeat="oQuadra in oEmpresa.quadras | orderBy:'id'">
+                                                                        <div class="col-md-{{12/oEmpresa.quadras.length}}">
+                                                                            <!-- Pofile panel -->
+                                                                            <div class="panel panel-profile">
+                                                                                <ul class="list-group">
+                                                                                    <li class="list-group-item">
+                                                                                        <p class="pull-left">Quadra : {{oQuadra.nome}}</p>
+                                                                                    </li>
+                                                                                    <li class="list-group-item">
+                                                                                        <p class="pull-left">Tipo : {{oQuadra.tipo}}</p>
+                                                                                    </li>
+                                                                                    <li class="list-group-item">
+                                                                                        <p class="pull-left">Coberta : {{oQuadra.cobertura}}</p>
+                                                                                    </li>
+                                                                                    <li class="list-group-item">
+                                                                                        <p class="pull-left">Valor : R${{oQuadra.valor}}</p>
+                                                                                    </li>
+                                                                                    <li class="list-group-item">
+                                                                                        <p class="pull-left">Valor C/Bola : R${{oQuadra.valor + oQuadra.valorBola}}</p>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-12">
+                                                                        <div class="col-md-2"></div>
+                                                                        <div class="col-md-5"><label for="Dom" class="btn btn-danger">Filtrar horarios<input  type="checkbox" name="gender0" id="defaults" checked="checked" value="DOMINGO" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label></div>
+                                                                        <div class="col-md-5">Ver no Mapa</div>
+                                                                    </div>
+                                                                </div>
+                                                            </uib-tab>
+                                                            <uib-tab heading="Avaliações">
+                                                                <div class="panel-body">
+                                                                    <h1>Avaliaçoes</h1>
+                                                                </div>
+                                                            </uib-tab>
+                                                            <uib-tab heading="Horario">
+                                                                <div class="panel-body">
+                                                                    <h1>Horarios</h1>
+                                                                </div>
+                                                            </uib-tab>
+                                                            <uib-tab heading="Mapa">
+                                                                <div class="panel-body" data-ng-controller="MapDemoController">
+                                                                    <map class="ui-map" center="current-location" map-type-id="TERRAIN" zoom="14" scrollwheel="false"> </map>
+                                                                </div>
+                                                            </uib-tab>
+                                                        </uib-tabset>
+
+                                                        <!-- end Pofile panel -->
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                </section>
+
+                            </uib-tab>
+
+                            <uib-tab heading="Mapa">
+                                <div class="panel-body" data-ng-controller="MapDemoController">
+                                    <map class="ui-map" center="current-location" map-type-id="TERRAIN" zoom="14" scrollwheel="false"> </map>
+                                </div>
+                            </uib-tab>
+                        </uib-tabset>
+                        </div>
+                        </div>
+                        <div id="buscarQuadra-container3" class="creator-container" style="margin-top:1%;margin-left:1%;">
+                            <label for="Dom" class="btn btn-danger">Dom<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender0" id="defaults" checked="checked" value="DOMINGO" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
+                            <label for="Seg" class="btn btn-info">Seg<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender1"   checked="checked"  value="SEGUNDA" id="default" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
+                            <label for="Ter" class="btn btn-info">Ter<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender2"   checked="checked" value="TERCA" id="primary" class="badgebox" ng-true-value="'TERCA'" ng-false-value="'2'"><span class="badge">&check;</span></label>
+                            <label for="Qua" class="btn btn-info">Qua<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender3"   checked="checked" value="QUARTA" id="info" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
+                            <label for="Qui" class="btn btn-info">Qui<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender4"   checked="checked" value="QUINTA" id="success" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
+                            <label for="Sex" class="btn btn-info">Sex<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender5"   checked="checked" value="SEXTA" id="warning" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
+                            <label for="Sab" class="btn btn-warning">Sab<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender6" checked="checked" value="SABADO" id="danger" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
+                        </div>
+                        <div id="buscarStatus-container3" class="creator-container" style="margin-top:1%;margin-left:1%;margin-bottom:1%;">
+                            <label for="Dom" class="btn btn-info">DISPONIVEL<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender0" id="defaults"  value="DISPONIVEL" checked="checked" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
+                            <label for="Seg" class="btn btn-info">ACONFIRMAR<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender1"    value="ACONFIRMAR" id="default" checked="checked"  class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
+                            <label for="Ter" class="btn btn-info">OCUPADO<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender2"    value="OCUPADO" id="primary" class="badgebox" checked="checked"><span class="badge">&check;</span></label>
+                            <label for="Qua" class="btn btn-info">INDISPONIVEL<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender3"    value="INDISPONIVEL" id="info" class="badgebox" checked="checked"><span class="badge">&check;</span></label>
+                        </div>
+                    </div>
+                </div>
+                <div ng-repeat="empresa in empresaList | orderBy:'nome'">
+                    <div ng-repeat="quadra in empresa.quadras | orderBy:'nome'">
+                        <div ng-repeat="jogo in quadra.jogos  | priceGreaterThan:'DOMINGO' | filterStatus:'DOMINGO' | orderBy:'status' | orderBy:'dia' | orderBy:'horaInicial'">
+                            <div class="panel list-group">
+                                <a class="list-group-item" data-toggle="collapse" data-target="#sm{{jogo.id}}" data-parent="#menu"><span class="glyphicon glyphicon-eye-open"></span><span class="pull-center"> {{quadra.nome}}   -  {{jogo.dia}} - {{jogo.horaInicial}} - {{jogo.horaFinal}} </span>  
+                        <span class="pull-right">
+                        <span ng-if="jogo.status=='INDISPONIVEL'" style="font-size:8px" class="label label-danger"> * Reservado</span>
+                        <span ng-if="jogo.status=='ACONFIRMAR'"  style="font-size:8px" class="label label-warning"> * A Confirmar</span>
+                        <span ng-if="jogo.status=='DISPONIVEL'" style="font-size:8px"  class="label label-success"> * Disponivel</span>
+                        <span ng-if="jogo.status=='OCUPADO'" style="font-size:8px" class="label label-danger"> * Reservado</span>
+                        <span ng-if="jogo.status=='CONFIRMAR'"  style="font-size:8px" class="label label-info"> * Confirmar</span>
+                        </span>
+                        </a>
+                                <div id="sm{{jogo.id}}" class="sublinks collapse">
+                                    <a class="list-group-item small">{{jogo.descricao}}</a>
+                                </div>
+                                <a class="list-group-item" data-toggle="collapse" data-target="#s{{jogo.id}}" data-parent="#menu"><span class="glyphicon glyphicon-user"></span> Jogadores <span class="badge badge-success">{{jogo.usersJogo.length}}</span></a>
+                                <div id="s{{jogo.id}}" class="sublinks collapse">
+                                    <div ng-repeat="user in jogo.usersJogo">
+                                        <a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span> {{user.name}} {{user.lastName}} - ({{user.email}})</a>
+                                    </div>
+                                </div>
+                                <a class="list-group-item">
+                            Ações
+                            <span class="pull-right">
+                                <button ng-click="gravarHorario(jogo, 'EXCLUIR')" class="btn btn-xs btn-warning glyphicon glyphicon-trash"      uib-tooltip="Excluir Horario!" tooltip-append-to-body="true" ></button><!-- Excluir-->
+                                <button ng-if="jogo.status=='INDISPONIVEL'" ng-click="gravarHorario(jogo, 'DESMARCAR')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"   uib-tooltip="Desmarcar!" tooltip-append-to-body="true"></button><!-- Desmarcar -->
+                                <button ng-if="jogo.status=='CONFIRMAR'"    ng-click="gravarHorario(jogo, 'INDISPONIVEL')" class="btn btn-xs btn-success glyphicon glyphicon-ok"    uib-tooltip="Aprovar!"   tooltip-append-to-body="true"></button><!-- Aprovar -->
+                                <button ng-if="jogo.status=='CONFIRMAR'"    ng-click="gravarHorario(jogo, 'DISPONIVEL')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"  uib-tooltip="Recusar!"   tooltip-append-to-body="true"></button><!-- nao aprovar -->
+                                <button ng-if="jogo.status=='OCUPADO'"      ng-click="gravarHorario(jogo, 'DISPONIVEL')" class="btn btn-xs btn-success glyphicon glyphicon-ok"      uib-tooltip="Disponibilizar!" tooltip-append-to-body="true"></button><!-- tornar disponivel -->
+                                <button ng-if="jogo.status=='DISPONIVEL'"   ng-click="gravarHorario(jogo, 'ACONFIRMAR')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"     uib-tooltip="Ocupar!" tooltip-append-to-body="true"></button><!-- marcar como ocupado -->
+                                <button ng-if="jogo.status=='DISPONIVEL'"   ng-click="open('sm', '.modal-parent',jogo, 'ACONFIRMAR') " class="btn btn-xs btn-success glyphicon glyphicon-ok"    uib-tooltip="Marcar Horario!" tooltip-append-to-body="true"></button><!-- Aprovar -->
+                                <button ng-if="jogo.status=='INDISPONIVEL'" ng-click="openSolicitacao('sm', '.modal-parent',jogo, 'ACONFIRMAR')" class="btn btn-xs btn-success glyphicon glyphicon-ok"    uib-tooltip="Solicitar Participa��o!" tooltip-append-to-body="true"></button><!-- Aprovar --> 
+                            </span>
+                        </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-ui-footer></div>
+        </div>
+        <script>
+            $( document ).ready(function() {
+            	$("#nav-container").removeClass("hide");
+            	$("#header").removeClass("hide");
+            });
+        </script>
