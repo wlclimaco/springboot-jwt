@@ -80,7 +80,7 @@ public class WebSocketEventListener {
 					if(jogoPorData.getDataFinal().getTime() < (new Date()).getTime()) {
 							jogoPorData.setStatus(StatusJogoPorData.JAJOGADO);
 							jogoService.saveJogoPorData(jogoPorData);
-						}else if(jogoPorData.getData().getTime() < (new Date()).getTime() && (jogoPorData.getDataFinal().getTime() > (new Date()).getTime())) {
+						}else if(jogoPorData.getData().getDay() == (new Date()).getDay() && (jogoPorData.getData().getMonth() == (new Date()).getMonth()) && (jogoPorData.getData().getYear() == (new Date()).getYear())) {
 							jogoPorData.setStatus(StatusJogoPorData.JOGANDO);
 							jogoService.saveJogoPorData(jogoPorData);
 						}
