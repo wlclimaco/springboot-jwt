@@ -30,6 +30,7 @@ public interface JogoRepository extends JpaRepository<Jogo, Long> {
 	@Query("UPDATE Jogo  j SET j.status =?1 WHERE j.id=?2")
 	List<UserJogo2> updateStatus(Status status,Integer jogoId);
     
+
     @Query("SELECT u  FROM Jogo u WHERE u.status =?1 and u.processo =?2")
     List<Jogo> findJogoByStatus(Status status, Processo processo);
 	

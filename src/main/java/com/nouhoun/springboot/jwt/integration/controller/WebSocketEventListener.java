@@ -2,6 +2,7 @@ package com.nouhoun.springboot.jwt.integration.controller;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -70,10 +71,26 @@ public class WebSocketEventListener {
 			}
 
 			jogoService.saveJogo(jogosClone);
-		}
+		}	
+			jogos = jogoService.findJogoByStatus(Status.INDISPONIVEL, Processo.GERADO);
+			if (!jogos.isEmpty()) {
+				for (Jogo jogo : jogos) {
+					List<JogoPorData> jogoPorDatas = jogoService.findJogoPorDataByStatus(StatusJogoPorData.AJOGAR,jogo.getId());
+					for (JogoPorData jogoPorData : jogoPorDatas) {
+					if(jogoPorData.getDataFinal().getTime() < (new Date()).getTime()) {
+							jogoPorData.setStatus(StatusJogoPorData.JAJOGADO);
+							jogoService.saveJogoPorData(jogoPorData);
+						}else if(jogoPorData.getData().getTime() < (new Date()).getTime() && (jogoPorData.getDataFinal().getTime() > (new Date()).getTime())) {
+							jogoPorData.setStatus(StatusJogoPorData.JOGANDO);
+							jogoService.saveJogoPorData(jogoPorData);
+						}
+					}
+				}
+			}
+
 		logger.info("Current time is :: " + Calendar.getInstance().getTime());
 
-	}
+}
 
 	@EventListener
 	public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {

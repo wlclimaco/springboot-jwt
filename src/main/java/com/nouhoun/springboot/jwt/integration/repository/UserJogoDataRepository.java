@@ -8,6 +8,6 @@ import com.nouhoun.springboot.jwt.integration.domain.UserJogoData;
 @Repository("userJogoDataRepository")
 public interface UserJogoDataRepository extends JpaRepository<UserJogoData, Long> {
 
-
+	
     
 }

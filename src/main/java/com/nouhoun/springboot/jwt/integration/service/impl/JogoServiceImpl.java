@@ -10,6 +10,7 @@ import com.nouhoun.springboot.jwt.integration.domain.Jogo;
 import com.nouhoun.springboot.jwt.integration.domain.Jogo.Processo;
 import com.nouhoun.springboot.jwt.integration.domain.Jogo.Status;
 import com.nouhoun.springboot.jwt.integration.domain.JogoPorData;
+import com.nouhoun.springboot.jwt.integration.domain.JogoPorData.StatusJogoPorData;
 import com.nouhoun.springboot.jwt.integration.domain.UserJogoData;
 import com.nouhoun.springboot.jwt.integration.repository.JogoPorDataRepository;
 import com.nouhoun.springboot.jwt.integration.repository.JogoRepository;
@@ -94,6 +95,14 @@ public class JogoServiceImpl implements JogoService{
 	@Override
 	public List<Jogo> findJogoByStatus(Status status, Processo processo) {
 		return jogoRepository.findJogoByStatus(status,processo);
+	}
+	@Override
+	public List<JogoPorData> findJogoPorDataByStatus(StatusJogoPorData status, Integer jogoId) {
+		return jogoPorDataRepository.findJogoPorDataByStatus(status, jogoId);
+	}
+	@Override
+	public List<JogoPorData> updateJogoPorDataStatus(StatusJogoPorData status, Integer jogoId) {
+		return jogoPorDataRepository.updateJogoPorDataStatus(status, jogoId);
 	}
 
 	
