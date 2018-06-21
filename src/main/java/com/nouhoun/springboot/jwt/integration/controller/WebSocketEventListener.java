@@ -81,9 +81,12 @@ public class WebSocketEventListener {
 							jogoPorData.setStatus(StatusJogoPorData.JAJOGADO);
 							jogoService.saveJogoPorData(jogoPorData);
 						}else if(jogoPorData.getData().getDay() == (new Date()).getDay() && (jogoPorData.getData().getMonth() == (new Date()).getMonth()) && (jogoPorData.getData().getYear() == (new Date()).getYear())) {
-							jogoPorData.setStatus(StatusJogoPorData.JOGANDO);
+							jogoPorData.setStatus(StatusJogoPorData.TIRARTIME);
 							jogoService.saveJogoPorData(jogoPorData);
-						}
+						} else if(((new Date()).getTime() >= jogoPorData.getData().getTime()) && ((new Date()).getTime() <= jogoPorData.getDataFinal().getTime())) {
+						jogoPorData.setStatus(StatusJogoPorData.JOGANDO);
+						jogoService.saveJogoPorData(jogoPorData);
+					}
 					}
 				}
 			}

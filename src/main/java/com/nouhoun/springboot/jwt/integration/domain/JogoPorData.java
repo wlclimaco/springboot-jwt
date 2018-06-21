@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "jogo_por_data")
 public class JogoPorData {
 	public enum StatusJogoPorData {
-		JAJOGADO, AJOGAR, JOGANDO, CANCELADO
+		JAJOGADO, AJOGAR, JOGANDO, CANCELADO, TIRARTIME
 	}
 
 	@Id
