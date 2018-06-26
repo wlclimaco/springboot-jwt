@@ -11,7 +11,7 @@ import com.nouhoun.springboot.jwt.integration.domain.User;
  */
 public interface UserRepository extends CrudRepository<User, Long> {
 
-	@Query("SELECT u  FROM User u WHERE u.username = :email")
+	@Query("SELECT u  FROM User u WHERE u.nome = :email")
 	User findByUsername(@Param("email") String user);
     
 	@Query("SELECT u  FROM User u WHERE u.email = :email")

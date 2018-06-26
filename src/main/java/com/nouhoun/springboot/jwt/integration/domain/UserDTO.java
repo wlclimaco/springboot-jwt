@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import com.nouhoun.springboot.jwt.integration.domain.User.Status;
+
 /**
  * @author: kameshr
  */
@@ -11,11 +13,9 @@ public class UserDTO {
 
 	private int id;
 	private String email;
-	private String username;
+	private String nome;
 	private String password;
-	private String name;
-	private String lastName;
-	private int active;
+	private Status active;
 	private int isDono;
 	private List<Role> roles;
 	private String iv;
@@ -52,14 +52,6 @@ public class UserDTO {
 		this.receberNotificacoes = receberNotificacoes;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
 	public String getEmail() {
         return email;
     }
@@ -86,27 +78,11 @@ public class UserDTO {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public int getActive() {
+	public Status getActive() {
 		return active;
 	}
 
-	public void setActive(int active) {
+	public void setActive(Status active) {
 		this.active = active;
 	}
 
@@ -278,5 +254,14 @@ public class UserDTO {
 		this.isGoleiro = isGoleiro;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	
     
 }

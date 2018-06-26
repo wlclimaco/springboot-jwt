@@ -122,8 +122,10 @@
     '$scope', function($scope) {
       var original;
       $scope.user = {
+    	nome: '',	  
         email: '',
-        password: ''
+        password: '',
+        isGoleiro: false
       };
       $scope.showInfoOnSubmit = false;
       original = angular.copy($scope.user);

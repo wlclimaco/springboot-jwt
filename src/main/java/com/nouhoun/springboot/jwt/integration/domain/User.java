@@ -29,15 +29,16 @@ import net.minidev.json.annotate.JsonIgnore;
 @Entity
 @Table(name = "user")
 public class User{
-
+	
+	 public enum Status {
+	        INATIVO,ATIVO, SUSPENSO, AGUARDANDO
+	    }
+	 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "user_id")
 	private Integer id;
 	
-    @Column(name = "username")
-    private String username;
-    
 	@Column(name = "email")
 	@Email(message = "*Please provide a valid Email")
 	@NotEmpty(message = "*Please provide an email")
@@ -47,14 +48,12 @@ public class User{
 	@NotEmpty(message = "*Please provide your password")
 	@Transient
 	private String password;
-	@Column(name = "name")
-	@NotEmpty(message = "*Please provide your name")
-	private String name;
-	@Column(name = "last_name")
-	@NotEmpty(message = "*Please provide your last name")
-	private String lastName;
+	@Column(name = "nome")
+	@NotEmpty(message = "*Favor Infomar o nome")
+	private String nome;
+
 	@Column(name = "active")
-	private int active;
+	private Status active;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns
             = @JoinColumn(name = "user_id"),
@@ -123,22 +122,6 @@ public class User{
 		this.password = password;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -147,11 +130,11 @@ public class User{
 		this.email = email;
 	}
 
-	public int getActive() {
+	public Status getActive() {
 		return active;
 	}
 
-	public void setActive(int active) {
+	public void setActive(Status active) {
 		this.active = active;
 	}
 
@@ -197,6 +180,16 @@ public class User{
 		this.iterations = iterations;
 	}
 	
+	
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	/**
      * Method to create the hash of the password before storing
      *
@@ -282,7 +275,7 @@ public class User{
         return this.enabled;
     }
 
-	public User(String email, String password, String name, String lastName, int active, String roleName,
+	public User(String email, String password, String name, String lastName, Status active, String roleName,
 			boolean enabled) {
 		super();
 		Role role = new Role(roleName);
@@ -290,11 +283,21 @@ public class User{
 		roles.add(role);
 		this.email = email;
 		this.password = password;
-		this.name = name;
-		this.lastName = lastName;
+		this.nome = name;
 		this.active = active;
 		this.roles = roles;
 		this.enabled = enabled;
+	}
+	
+	public User(UserDTO user) {
+		super();
+		this.email = user.getEmail();
+		this.password = user.getPassword();
+		this.nome = user.getNome();
+		this.active = user.getActive();
+		this.roles = user.getRoles();
+		this.enabled = user.getEnabled();
+		this.isGoleiro = user.getIsGoleiro();
 	}
 
 	public User() {
@@ -356,23 +359,13 @@ public class User{
 		this.isGoleiro = isGoleiro;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-
-	public User(Integer id, String username, String email, String password, String name, int active,
+	public User(Integer id, String username, String email, String password, String name, Status active,
 			Integer empresaId) {
 		super();
 		this.id = id;
-		this.username = username;
+		this.nome = username;
 		this.email = email;
 		this.password = password;
-		this.name = name;
 		this.active = active;
 		this.empresaId = empresaId;
 	}

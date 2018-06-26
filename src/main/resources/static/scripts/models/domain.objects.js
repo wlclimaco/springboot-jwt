@@ -71,11 +71,11 @@
 	
 	qat.model.user = function(oUser)
 	{
+
 		this.id = oUser.id ? parseInt(oUser.id) : null;
 		this.email = oUser.email ? oUser.email : "";
 		this.password = oUser.password ? oUser.password : oUser.encryptedPassword;
-		this.name = oUser.name ? oUser.name : null;
-		this.lastName = oUser.lastName ? oUser.lastName : null;
+		this.nome = oUser.nome ? oUser.nome : null;
 		this.active = oUser.active ? oUser.active : 0;
 		this.roles = oUser.roles ? oUser.roles : null;
 		this.iv = oUser.iv ? oUser.iv : null;
@@ -90,7 +90,6 @@
 		this.updatedAt = oUser.updatedAt ? oUser.updatedAt : new Date();
 		this.enabled = oUser.enabled ?  oUser.enabled : 0;
 		this.encryptedPassword = oUser.encryptedPassword ? oUser.encryptedPassword : 0;
-
 	};
 
 	qat.model.horario = function(oHorario)
