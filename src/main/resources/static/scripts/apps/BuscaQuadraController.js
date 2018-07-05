@@ -1,10 +1,10 @@
 (function() {
   angular.module('wdApp.apps.buscarQuadra', []).controller('BuscaQuadraController', 
   ['$scope', 'jogoFactory', 'AuthService', '$rootScope', '$location', '$http', '$interval', 'SysMgmtData', 'toastr', 'toastrConfig','$uibModal',
-	function($scope, jogoFactory, AuthService, $rootScope, $location,   $http, $interval, SysMgmtData, toastr, toastrConfig,$uibModal) {
+	function($scope, jogoFactory, AuthService, $rootScope, $location, $http, $interval, SysMgmtData, toastr, toastrConfig,$uibModal) {
 	  
 	  var vm = this;
-
+	  
   
     vm.teste = 'DOMINGO';
  //   vm.empresaList = [];
@@ -24,7 +24,11 @@
          
         });
 
-    
+    $scope.detalhesQuadra = function(jogo)
+    {
+    	alert('aqui');
+    	//openDetailQuadra
+    }
 
     console.log(localStorage.getItem('empresa'))
     $scope.gravarHorario = function(oJogo, sStatus)

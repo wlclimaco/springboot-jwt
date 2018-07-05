@@ -67,6 +67,7 @@
 		$scope.iQuantGols = 0;
 		$scope.fMedia = 0;
 
+		
 
 		$scope.myFilter = function (item) {
 			var oUser = JSON.parse(localStorage.getItem('wdAppLS.currentUser'));

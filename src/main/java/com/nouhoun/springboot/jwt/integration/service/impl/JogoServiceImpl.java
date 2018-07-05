@@ -34,6 +34,16 @@ public class JogoServiceImpl implements JogoService{
 		jogoRepository.save(user);
 		
 	}
+	
+	@Override
+	public void saveUserJogoData(List<UserJogoData> jogos) {
+		for (UserJogoData userJogoData : jogos) {
+			userJogoDataRepository.save(userJogoData);
+		}
+		
+		
+	}
+	
 	@Override
 	public void deleteJogo(Jogo user) {
 		jogoRepository.delete(user);

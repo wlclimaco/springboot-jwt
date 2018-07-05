@@ -33,7 +33,7 @@ var WebDaptiveAppConfig = {
 (function() {
   'use strict';
 	var wdApp = angular.module('wdApp', 
-				['ngRoute', 'ngAnimate', 'ui.bootstrap', 'textAngular', 'ui.grid', 'ngCookies','pascalprecht.translate',
+				['ngRoute', 'ngAnimate', 'jkAngularCarousel', 'ui.bootstrap', 'textAngular', 'ui.grid', 'ngCookies','pascalprecht.translate',
 				'ui.grid.resizeColumns', 'ui.grid.selection', 'ui.grid.pagination',	'ui.tree', 'ngMap', 
 				'ngTagsInput', 'toastr', 'angular-loading-bar', 'chart.js', 'ngecharts', 'base64', 'ngSlimScroll', 
 				'LocalStorageModule', 'validation.match', 'wdApp.controllers', 'wdApp.directives', 'wdApp.httpint',
@@ -42,7 +42,7 @@ var WebDaptiveAppConfig = {
 				'wdApp.authentication', 'wdApp.pages.controllers', 'wdApp.demodata', 'wdApp.apps.stocks', 
 				'wdApp.apps.stocksdata','wdApp.apps.counties', 	'wdApp.apps.procedures','wdApp.apps.sysmgmt.data', 
 				'wdApp.apps.sysmgmt.datajava','wdApp.apps.horario', 'wdApp.apps.dialogs.um','wdApp.apps.sysmgmt.dataphp','wdApp.apps.meusJogos','wdApp.apps.factory.meusJogos',
-				'wdApp.apps.Auth','wdApp.apps.dialogs','wdApp.apps.buscarQuadra','wdApp.apps.notificacao','wdApp.apps.register']);  
+				'wdApp.apps.Auth','wdApp.apps.dialogs','wdApp.apps.buscarQuadra','wdApp.apps.notificacao','wdApp.apps.register','wdApp.apps.factory.base64','jkAngularCarousel.templates']);  
   
 	wdApp.config(['$routeProvider',
 		function($routeProvider) {

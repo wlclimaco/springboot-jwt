@@ -1,3 +1,23 @@
+<style>
+    .sdsdsdsd .list-group-item {
+        padding: 0px 1px!Important;
+    }
+    
+    .sdsdsdsd .list-group {
+        margin-bottom: 0px!Important;
+    }
+    
+.my-modal-popup{
+
+    @media (min-width: 1400px){
+
+        .modal-lg {
+            width: 1308px;
+        }
+    }
+
+}
+</style>
 <div class="page" data-ng-controller="ModalDemoController">
     <script type="text/ng-template" id="myModalContent2.html">
         <div class="modal-header">
@@ -17,6 +37,57 @@
             <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
         </div>
     </script>
+    
+    <script type="text/ng-template" class="my-modal-popup" id="myModalContent3.html" style="width: 10px; max-width: 20px; min-width: 5px; ">
+        <div class="modal-header">
+            <div class="col-md-11"><h3 class="modal-title" id="modal-title">{{items.jogo.nome}}</h3></div><div class="col-md-1"> <span class="pull-right"><button type="button" ng-click="cancel()">&times;</button></span></div>
+        </div>
+        <div class="modal-body" id="modal-body" >
+           <section class="panel panel-box" ng-init="oEmpresa = items.jogo" >
+                                
+                                <div class="col-md-12">
+                                    <div id="buscarQuadra-container3s" class="creator-container" style="margin-top: 1%; margin-left: 1%;">
+                                        <div class="ui-tab-container">
+                                            <uib-tabset class="ui-tab">
+                                                <uib-tab heading="Sobre">
+													<div class="col-md-12 sdsdsdsd" style="padding: 0px 1px!Important;margin-bottom: 0px!Important;">
+                                    <div class="panel panel-profile">
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                <p class="pull-left">Responsavel : {{oEmpresa.nomeResponsavel}}</p>
+                                                <p class="pull-right">Email : {{oEmpresa.email}}</p>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <p class="pull-left">Endereço : {{oEmpresa.endereco.logradouro}}, {{oEmpresa.endereco.numero}}, {{Empresa.endereco.bairro}}
+                                                </p>
+                                                <p class="pull-right">Telefone : {{oEmpresa.telefone}}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                                    <section data-ng-include=" 'views/include-sobre.html' "></section>
+                                                </uib-tab>
+                                                <uib-tab heading="Avaliações">
+                                                    <section data-ng-include=" 'views/include-avaliacao.html' ">
+                                                    </section>
+                                                </uib-tab>
+                                                <uib-tab heading="Horario">
+                                                    <section data-ng-include=" 'views/include-horarios-tab.html' "></section>
+                                                </uib-tab>
+                                                <uib-tab heading="Fotos">
+                                                    <section data-ng-include=" 'views/include-fotos.html' "></section>
+                                                </uib-tab>
+                                            </uib-tabset>
+                                            <!-- end Pofile panel -->
+                                        </div>
+                                    </div>
+                        </section>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+        </div>
+    </script>
+    
     <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
             <h3 class="modal-title" id="modal-title">Confirmar Agenda</h3>
@@ -54,380 +125,85 @@
         </div>
     </script>
     <div id="menu" ng-controller="BuscaQuadraController">
-        <div class="panel list-group">
-            <a class="list-group-item" data-toggle="collapse" data-target="#sl1fff" data-parent="#menu"><span class="glyphicon glyphicon-resize-vertical"></span>Filtros <span class="glyphicon glyphicon-list pull-right"></span></a>
-            <div id="sl1fff" class="sublinks collapse in" style="border: 1px solid rgb(221, 221, 221)">
-                <div class="form-group input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                    <input name="consulta" id="txt_consulta" placeholder="Consultar nome quadra, endereço" type="text" class="form-control">
-                </div>
-                <div id="buscarQuadra-container3s" class="creator-container" style="margin-top:1%;margin-left:1%;">
-                    <div class="divider"></div>
-                    <div class="ui-tab-container">
-                        <uib-tabset class="ui-tab">
-                            <uib-tab heading="Lista">
-                                <section class="panel panel-box" data-ng-controller="MapDemoController">
-                                    <div ng-repeat="oEmpresa in empresaList | orderBy:'id'">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <h3>{{oEmpresa.nome}}</h3>
-                                                <div class="panel-left panel-item">
-                                                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                                        <ol class="carousel-indicators">
-                                                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                                                        </ol>
-                                                        <div class="carousel-inner">
-                                                            <div class="carousel-item active">
-                                                                <img class="d-block w-100" src="/images/gols_LEa_6.ico" alt="First slide">
-                                                            </div>
-                                                            <div class="carousel-item">
-                                                                <img class="d-block w-100" src="/images/dislike.png" alt="Second slide">
-                                                            </div>
-                                                            <div class="carousel-item">
-                                                                <img class="d-block w-100" src="/images/beer.jpg" alt="Third slide">
-                                                            </div>
-                                                        </div>
-                                                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                            <span class="sr-only">Previous</span>
-                                                        </a>
-                                                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                            <span class="sr-only">Next</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <div id="buscarQuadra-container3s" class="creator-container" style="margin-top:1%;margin-left:1%;">
-                                                    <div class="divider"></div>
-                                                    <div class="ui-tab-container">
-                                                        <uib-tabset class="ui-tab">
-                                                            <uib-tab heading="Sobre">
-                                                                <div class="panel-right panel-item bg-reverse">
-                                                                    <div class="col-md-12">
-                                                                        <!-- Pofile panel -->
-                                                                        <div class="panel panel-profile">
-                                                                            <ul class="list-group">
-                                                                                <li class="list-group-item">
-                                                                                    <p class="pull-left">Responsavel : {{oEmpresa.nomeResponsavel}}</p>
-                                                                                    <p class="pull-right">Email : {{oEmpresa.email}}</p>
-                                                                                </li>
-                                                                                <li class="list-group-item">
-                                                                                    <p class="pull-left">Endereço : {{oEmpresa.endereco.logradouro}}, {{oEmpresa.endereco.numero}}, {{Empresa.endereco.bairro}}</p>
-                                                                                    <p class="pull-right">Telefone : {{oEmpresa.telefone}}</p>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div ng-repeat="oQuadra in oEmpresa.quadras | orderBy:'id'">
-                                                                        <div class="col-md-{{12/oEmpresa.quadras.length}}">
-                                                                            <!-- Pofile panel -->
-                                                                            <div class="panel panel-profile">
-                                                                                <ul class="list-group">
-                                                                                    <li class="list-group-item">
-                                                                                        <p class="pull-left">Quadra : {{oQuadra.nome}}</p>
-                                                                                    </li>
-                                                                                    <li class="list-group-item">
-                                                                                        <p class="pull-left">Tipo : {{oQuadra.tipo}}</p>
-                                                                                    </li>
-                                                                                    <li class="list-group-item">
-                                                                                        <p class="pull-left">Coberta : {{oQuadra.cobertura}}</p>
-                                                                                    </li>
-                                                                                    <li class="list-group-item">
-                                                                                        <p class="pull-left">Valor : R${{oQuadra.valor}}</p>
-                                                                                    </li>
-                                                                                    <li class="list-group-item">
-                                                                                        <p class="pull-left">Valor C/Bola : R${{oQuadra.valor + oQuadra.valorBola}}</p>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </uib-tab>
-                                                            <uib-tab heading="Avaliações">
-                                                                <div class="panel-body ">
-                                                                    <div class="rate-review-box review-box col-md-12">
-                                                                        <div class="overall-box col-md-4 pull-left">
-                                                                            <span>5.0</span>
-                                                                            <div class="rating_stars ">
-                                                                                <i class="icon-star fa fa-star icon_on"></i>
-                                                                                <i class="icon-star fa fa-star icon_on"></i>
-                                                                                <i class="icon-star fa fa-star icon_on"></i>
-                                                                                <i class="icon-star fa fa-star icon_on"></i>
-                                                                                <i class="icon-star fa fa-star icon_on"></i>
-                                                                            </div>
-                                                                            <div class="count-reviews">(30 avaliações)</div>
-                                                                        </div>
-                                                                        <div class="rating col-md-8 pull-right">
-                                                                            <div class="rating_bars" style="order: 1;font-size: 11px;line-height: normal;width:100%!Important;margin-top: -10px;content: '';display: table;">
-                                                                                <div class="rating_bar" title="93% das avaliações possui 5 estrelas">
-                                                                                    <div class="rating_header">
-                                                                                        5 estrelas
-                                                                                    </div>
-                                                                                    <div class="rating_count">
-                                                                                        (28)
-                                                                                    </div>
-                                                                                    <div class="rating_progress progress progress-danger" style="height:10px!Important;margin-top:-10px!Important;">
-                                                                                        <div class="bar progress-bar" style="width: 93%"></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="rating_bar" title="6% das avaliações possui 4 estrelas">
-                                                                                    <div class="rating_header">
-                                                                                        4 estrelas
-                                                                                    </div>
-                                                                                    <div class="rating_count">
-                                                                                        (2)
-                                                                                    </div>
-                                                                                    <div class="rating_progress progress progress-danger" style="height:10px!Important;margin-top:-10px!Important;">
-                                                                                        <div class="bar progress-bar" style="width: 6%"></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="rating_bar" title="0% das avaliações possui 3 estrelas">
-                                                                                    <div class="rating_header">
-                                                                                        3 estrelas
-                                                                                    </div>
-                                                                                    <div class="rating_count">
-                                                                                        (0)
-                                                                                    </div>
-                                                                                    <div class="rating_progress progress progress-danger" style="height:10px!Important;margin-top:-10px!Important;">
-                                                                                        <div class="bar progress-bar" style="width: 0%"></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="rating_bar" title="0% das avaliações possui 2 estrelas">
-                                                                                    <div class="rating_header">
-                                                                                        2 estrelas
-                                                                                    </div>
-                                                                                    <div class="rating_count">
-                                                                                        (0)
-                                                                                    </div>
-                                                                                    <div class="rating_progress progress progress-danger" style="height:10px!Important;margin-top:-10px!Important;">
-                                                                                        <div class="bar progress-bar" style="width: 0%"></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="rating_bar" title="0% das avaliações possui 1 estrela">
-                                                                                    <div class="rating_header">
-                                                                                        1 estrela
-                                                                                    </div>
-                                                                                    <div class="rating_count">
-                                                                                        (0)
-                                                                                    </div>
-                                                                                    <div class="rating_progress progress progress-danger" style="height:10px!Important;margin-top:-10px!Important;">
-                                                                                        <div class="bar progress-bar" style="width: 0%"></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div style="border:1px">
-                                                                    <div class="top-reviews-box">
-                                                                        <div class="gym_rating_left pull-left col-md-3">
-                                                                            <img width="50" height="50" src="https://dtda4cv2md3ne.cloudfront.net/image/filename/114631/47450_362732440488114_84347150_n.jpg" alt="47450 362732440488114 84347150 n">
-                                                                        </div>
-                                                                        <div class="gym_rating_container col-md-9 pull-left" style="text-align: left;">
-                                                                            <p class="gym_rating_author">
-                                                                                <span itemprop="author">
-                                                                        Leandro G.
-                                                                        </span>
-                                                                            </p>
-                                                                            <div class="rate-calendar">
-                                                                                <div class="rating_stars ">
-                                                                                    <i class="icon-star fa fa-star icon_on"></i>
-                                                                                    <i class="icon-star fa fa-star icon_on"></i>
-                                                                                    <i class="icon-star fa fa-star icon_on"></i>
-                                                                                    <i class="icon-star fa fa-star icon_on"></i>
-                                                                                    <i class="icon-star fa fa-star icon_on"></i>
-                                                                                </div>
-                                                                                <div class="gym_rating_date">
-                                                                                    <meta itemprop="datePublished" content="2015-09-03"> 03/Set/15
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-12" style="margin-top:16%;">
-                                                                        <p>
-                                                                            Sem dúvidas, a melhor academia da cidade. TESTE
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="containers">
-                                                                    <div class="col-md-12">
-                                                                        <div class="">
-                                                                            <div class="well well-sm">
-                                                                                <div class="row" id="post-review-box">
-                                                                                    <div class="col-md-12">
-                                                                                        <form accept-charset="UTF-8" action="" method="post">
-                                                                                            <input id="ratings-hidden" name="rating" type="hidden">
-                                                                                            <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="5"></textarea>
-                                                                                            <div class="text-right">
-                                                                                                <div class="estrelas">
-                                                                                                    <input type="radio" id="cm_star-empty" name="fb" value="" checked/>
-                                                                                                    <label for="cm_star-1"><i class="fa"></i></label>
-                                                                                                    <input type="radio" id="cm_star-1" name="fb" value="1" />
-                                                                                                    <label for="cm_star-2"><i class="fa"></i></label>
-                                                                                                    <input type="radio" id="cm_star-2" name="fb" value="2" />
-                                                                                                    <label for="cm_star-3"><i class="fa"></i></label>
-                                                                                                    <input type="radio" id="cm_star-3" name="fb" value="3" />
-                                                                                                    <label for="cm_star-4"><i class="fa"></i></label>
-                                                                                                    <input type="radio" id="cm_star-4" name="fb" value="4" />
-                                                                                                    <label for="cm_star-5"><i class="fa"></i></label>
-                                                                                                    <input type="radio" id="cm_star-5" name="fb" value="5" />
-                                                                                                </div>
-                                                                                                <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="margin-right: 10px;">
-                                                                                                    <span class="glyphicon glyphicon-remove"></span>Cancel</a>
-                                                                                                <button class="btn btn-success btn-lg" type="submit">Save</button>
-                                                                                            </div>
-                                                                                        </form>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </uib-tab>
-                                                            <uib-tab heading="Horario">
-                                                                <div class="panel-body">
-                                                                    <div id="buscarQuadra-container3" class="creator-container" style="margin-top:1%;margin-left:1%;">
-                                                                        <label for="Dom" class="btn btn-danger">Dom<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender0" id="defaults" checked="checked" value="DOMINGO" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-                                                                        <label for="Seg" class="btn btn-info">Seg<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender1"   checked="checked"  value="SEGUNDA" id="default" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-                                                                        <label for="Ter" class="btn btn-info">Ter<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender2"   checked="checked" value="TERCA" id="primary" class="badgebox" ng-true-value="'TERCA'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-                                                                        <label for="Qua" class="btn btn-info">Qua<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender3"   checked="checked" value="QUARTA" id="info" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-                                                                        <label for="Qui" class="btn btn-info">Qui<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender4"   checked="checked" value="QUINTA" id="success" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-                                                                        <label for="Sex" class="btn btn-info">Sex<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender5"   checked="checked" value="SEXTA" id="warning" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-                                                                        <label for="Sab" class="btn btn-warning">Sab<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender6" checked="checked" value="SABADO" id="danger" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-                                                                    </div>
-                                                                    <div id="buscarStatus-container3" class="creator-container" style="margin-top:1%;margin-left:1%;margin-bottom:1%;">
-                                                                        <label for="Dom" class="btn btn-info">DISPONIVEL<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender0" id="defaults"  value="DISPONIVEL" checked="checked" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-                                                                        <label for="Seg" class="btn btn-info">ACONFIRMAR<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender1"    value="ACONFIRMAR" id="default" checked="checked"  class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-                                                                        <label for="Ter" class="btn btn-info">OCUPADO<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender2"    value="OCUPADO" id="primary" class="badgebox" checked="checked"><span class="badge">&check;</span></label>
-                                                                        <label for="Qua" class="btn btn-info">INDISPONIVEL<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender3"    value="INDISPONIVEL" id="info" class="badgebox" checked="checked"><span class="badge">&check;</span></label>
-                                                                    </div>
-                                                                    <div ng-repeat="quadra in oEmpresa.quadras | orderBy:'nome'">
-                                                                        <div ng-repeat="jogo in quadra.jogos  | orderBy:'status' | orderBy:'dia' | orderBy:'horaInicial'">
-                                                                            <div class="panel list-group">
-                                                                                <a class="list-group-item" data-toggle="collapse" data-target="#sm{{jogo.id}}" data-parent="#menu"><span class="glyphicon glyphicon-eye-open pull-left"></span><span class="pull-left"> {{quadra.nome}}   -  {{jogo.dia}} - {{jogo.horaInicial}} - {{jogo.horaFinal}} </span>  
-                                                                        <span class="pull-right">
-                                                                        <span ng-if="jogo.status=='INDISPONIVEL'" style="font-size:8px" class="label label-danger"> * Reservado</span>
-                                                                        <span ng-if="jogo.status=='ACONFIRMAR'"  style="font-size:8px" class="label label-warning"> * A Confirmar</span>
-                                                                        <span ng-if="jogo.status=='DISPONIVEL'" style="font-size:8px"  class="label label-success"> * Disponivel</span>
-                                                                        <span ng-if="jogo.status=='OCUPADO'" style="font-size:8px" class="label label-danger"> * Reservado</span>
-                                                                        <span ng-if="jogo.status=='CONFIRMAR'"  style="font-size:8px" class="label label-info"> * Confirmar</span>
-                                                                        </span>
-                                                                        </a>
-                                                                                <div id="sm{{jogo.id}}" class="sublinks collapse">
-                                                                                    <a class="list-group-item small pull-left">{{jogo.descricao}}</a>
-                                                                                </div>
-                                                                                <a class="list-group-item" data-toggle="collapse" data-target="#ssssssss{{jogo.id}}" data-parent="#menu"><span class="glyphicon glyphicon-user pull-left"></span> <span class="pull-left"> Jogadores</span> <span class="badge badge-success">{{jogo.usersJogo.length}}</span></a>
-                                                                                <div id="ssssssss{{jogo.id}}" class="sublinks collapse">
-                                                                                    <div ng-repeat="user in jogo.usersJogo">
-                                                                                        <a class="list-group-item small pull-left"><span class="glyphicon glyphicon-chevron-right"></span> {{user.name}} {{user.lastName}} - ({{user.email}})</a>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <a class="list-group-item">
-                                                                                    <span class="pull-left">Ações</span>
-                                                                                    <span class="pull-right">
-                                                                                        <button ng-click="gravarHorario(jogo, 'EXCLUIR')" class="btn btn-xs btn-warning glyphicon glyphicon-trash"      uib-tooltip="Excluir Horario!" tooltip-append-to-body="true" style="width: 3em!Important;" ></button><!-- Excluir-->
-                                                                                        <button ng-if="jogo.status=='INDISPONIVEL'" ng-click="gravarHorario(jogo, 'DESMARCAR')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"   uib-tooltip="Desmarcar!" tooltip-append-to-body="true" style="width: 3em!Important;"></button><!-- Desmarcar -->
-                                                                                        <button ng-if="jogo.status=='CONFIRMAR'"    ng-click="gravarHorario(jogo, 'INDISPONIVEL')" class="btn btn-xs btn-success glyphicon glyphicon-ok"    uib-tooltip="Aprovar!"   tooltip-append-to-body="true" style="width: 3em!Important;"></button><!-- Aprovar -->
-                                                                                        <button ng-if="jogo.status=='CONFIRMAR'"    ng-click="gravarHorario(jogo, 'DISPONIVEL')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"  uib-tooltip="Recusar!"   tooltip-append-to-body="true" style="width: 3em!Important;"></button><!-- nao aprovar -->
-                                                                                        <button ng-if="jogo.status=='OCUPADO'"      ng-click="gravarHorario(jogo, 'DISPONIVEL')" class="btn btn-xs btn-success glyphicon glyphicon-ok"      uib-tooltip="Disponibilizar!" tooltip-append-to-body="true" style="width: 3em!Important;"></button><!-- tornar disponivel -->
-                                                                                        <button ng-if="jogo.status=='DISPONIVEL'"   ng-click="gravarHorario(jogo, 'ACONFIRMAR')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"     uib-tooltip="Ocupar!" tooltip-append-to-body="true" style="width: 3em!Important;"></button><!-- marcar como ocupado -->
-                                                                                        <button ng-if="jogo.status=='DISPONIVEL'"   ng-click="open('sm', '.modal-parent',jogo, 'ACONFIRMAR') " class="btn btn-xs btn-success glyphicon glyphicon-ok"    uib-tooltip="Marcar Horario!" tooltip-append-to-body="true" style="width: 3em!Important;"></button><!-- Aprovar -->
-                                                                                        <button ng-if="jogo.status=='INDISPONIVEL'" ng-click="openSolicitacao('sm', '.modal-parent',jogo, 'ACONFIRMAR')" class="btn btn-xs btn-success glyphicon glyphicon-ok"    uib-tooltip="Solicitar Participação!" tooltip-append-to-body="true" style="width: 3em!Important;"></button><!-- Aprovar --> 
-                                                                                    </span>
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </uib-tab>
-                                                            <uib-tab heading="Mapa">
-                                                                <section class="panel panel-default">
-                                                                    <div class="panel-heading"></div>
-                                                                    <div class="panel-body">
-                                                                        <map class="ui-map" zoom="13" center="[-19.7539784,-47.9349623]" map-type-id="TERRAIN" scrollwheel="false">
-                                                                            <marker position="[{{oEmpresa.endereco.lat}},{{oEmpresa.endereco.longi}}]" title="{{oEmpresa.nome}}" animation="Animation.DROP"></marker>
-                                                                            <traffic-layer></traffic-layer>						
-                                                                        </map>
-                                                                    </div>
-                                                                </section>
-                                                            </uib-tab>
-                                                        </uib-tabset>
-                                                        <!-- end Pofile panel -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                </section>
-                            </uib-tab>
-                            <uib-tab heading="Mapa">
-                                <div class="panel-body" data-ng-controller="MapDemoController">
-                                    <map class="ui-map" center="current-location" map-type-id="TERRAIN" zoom="14" scrollwheel="false"> </map>
+        <div id="buscarQuadra-container3s" class="creator-container" style="margin-top: 1%; margin-left: 1%;">
+            <div class="divider"></div>
+            <div class="ui-tab-container">
+                <uib-tabset class="ui-tab">
+                    <uib-tab heading="Lista">
+                        <section class="panel panel-box" data-ng-controller="MapDemoController">
+                            <div ng-repeat="oEmpresa in empresaList | orderBy:'id'">
+                                <div class="col-md-3">
+                                    <section data-ng-include=" 'views/include-fotos.html' "></section>
                                 </div>
-                            </uib-tab>
-                        </uib-tabset>
-                        </div>
-                        </div>
-                        <div id="buscarQuadra-container3" class="creator-container" style="margin-top:1%;margin-left:1%;">
-                            <label for="Dom" class="btn btn-danger">Dom<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender0" id="defaults" checked="checked" value="DOMINGO" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-                            <label for="Seg" class="btn btn-info">Seg<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender1"   checked="checked"  value="SEGUNDA" id="default" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-                            <label for="Ter" class="btn btn-info">Ter<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender2"   checked="checked" value="TERCA" id="primary" class="badgebox" ng-true-value="'TERCA'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-                            <label for="Qua" class="btn btn-info">Qua<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender3"   checked="checked" value="QUARTA" id="info" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-                            <label for="Qui" class="btn btn-info">Qui<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender4"   checked="checked" value="QUINTA" id="success" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-                            <label for="Sex" class="btn btn-info">Sex<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender5"   checked="checked" value="SEXTA" id="warning" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-                            <label for="Sab" class="btn btn-warning">Sab<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender6" checked="checked" value="SABADO" id="danger" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-                        </div>
-                        <div id="buscarStatus-container3" class="creator-container" style="margin-top:1%;margin-left:1%;margin-bottom:1%;">
-                            <label for="Dom" class="btn btn-info">DISPONIVEL<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender0" id="defaults"  value="DISPONIVEL" checked="checked" class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-                            <label for="Seg" class="btn btn-info">ACONFIRMAR<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender1"    value="ACONFIRMAR" id="default" checked="checked"  class="badgebox" ng-true-value="'1'" ng-false-value="'2'"><span class="badge">&check;</span></label>
-                            <label for="Ter" class="btn btn-info">OCUPADO<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender2"    value="OCUPADO" id="primary" class="badgebox" checked="checked"><span class="badge">&check;</span></label>
-                            <label for="Qua" class="btn btn-info">INDISPONIVEL<input ng-click="orderByMe('SABADO')" type="checkbox" name="gender3"    value="INDISPONIVEL" id="info" class="badgebox" checked="checked"><span class="badge">&check;</span></label>
-                        </div>
-                    </div>
-                </div>
-                <div ng-repeat="empresa in empresaList | orderBy:'nome'">
-                    <div ng-repeat="quadra in empresa.quadras | orderBy:'nome'">
-                        <div ng-repeat="jogo in quadra.jogos | orderBy:'status' | orderBy:'dia' | orderBy:'horaInicial'">
-                            <div class="panel list-group">
-                                <a class="list-group-item" data-toggle="collapse" data-target="#sm{{jogo.id}}" data-parent="#menu"><span class="glyphicon glyphicon-eye-open"></span><span class="pull-center"> {{quadra.nome}}   -  {{jogo.dia}} - {{jogo.horaInicial}} - {{jogo.horaFinal}} </span>  
-                        <span class="pull-right">
-                        <span ng-if="jogo.status=='INDISPONIVEL'" style="font-size:8px" class="label label-danger"> * Reservado</span>
-                        <span ng-if="jogo.status=='ACONFIRMAR'"  style="font-size:8px" class="label label-warning"> * A Confirmar</span>
-                        <span ng-if="jogo.status=='DISPONIVEL'" style="font-size:8px"  class="label label-success"> * Disponivel</span>
-                        <span ng-if="jogo.status=='OCUPADO'" style="font-size:8px" class="label label-danger"> * Reservado</span>
-                        <span ng-if="jogo.status=='CONFIRMAR'"  style="font-size:8px" class="label label-info"> * Confirmar</span>
-                        </span>
-                        </a>
-                                <div id="sm{{jogo.id}}" class="sublinks collapse">
-                                    <a class="list-group-item small">{{jogo.descricao}}</a>
-                                </div>
-                                <a class="list-group-item" data-toggle="collapse" data-target="#s{{jogo.id}}" data-parent="#menu"><span class="glyphicon glyphicon-user"></span> Jogadores <span class="badge badge-success">{{jogo.usersJogo.length}}</span></a>
-                                <div id="s{{jogo.id}}" class="sublinks collapse">
-                                    <div ng-repeat="user in jogo.usersJogo">
-                                        <a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span> {{user.name}} {{user.lastName}} - ({{user.email}})</a>
+                                <div class="col-md-9" style="padding: 0px 1px!Important;margin-bottom: 0px!Important;">
+                                    <h3>{{oEmpresa.nome}}</h3>
+                                    <div class="panel panel-profile">
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                <p class="pull-left">Responsavel : {{oEmpresa.nomeResponsavel}}</p>
+                                                <p class="pull-right">Email : {{oEmpresa.email}}</p>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <p class="pull-left">Endereço : {{oEmpresa.endereco.logradouro}}, {{oEmpresa.endereco.numero}}, {{Empresa.endereco.bairro}}
+                                                </p>
+                                                <p class="pull-right">Telefone : {{oEmpresa.telefone}}</p>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
-                                <a class="list-group-item">
-                            Ações
-                            <span class="pull-right">
-                                <button ng-click="gravarHorario(jogo, 'EXCLUIR')" class="btn btn-xs btn-warning glyphicon glyphicon-trash"      uib-tooltip="Excluir Horario!" tooltip-append-to-body="true" ></button><!-- Excluir-->
-                                <button ng-if="jogo.status=='INDISPONIVEL'" ng-click="gravarHorario(jogo, 'DESMARCAR')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"   uib-tooltip="Desmarcar!" tooltip-append-to-body="true"></button><!-- Desmarcar -->
-                                <button ng-if="jogo.status=='CONFIRMAR'"    ng-click="gravarHorario(jogo, 'INDISPONIVEL')" class="btn btn-xs btn-success glyphicon glyphicon-ok"    uib-tooltip="Aprovar!"   tooltip-append-to-body="true"></button><!-- Aprovar -->
-                                <button ng-if="jogo.status=='CONFIRMAR'"    ng-click="gravarHorario(jogo, 'DISPONIVEL')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"  uib-tooltip="Recusar!"   tooltip-append-to-body="true"></button><!-- nao aprovar -->
-                                <button ng-if="jogo.status=='OCUPADO'"      ng-click="gravarHorario(jogo, 'DISPONIVEL')" class="btn btn-xs btn-success glyphicon glyphicon-ok"      uib-tooltip="Disponibilizar!" tooltip-append-to-body="true"></button><!-- tornar disponivel -->
-                                <button ng-if="jogo.status=='DISPONIVEL'"   ng-click="gravarHorario(jogo, 'ACONFIRMAR')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"     uib-tooltip="Ocupar!" tooltip-append-to-body="true"></button><!-- marcar como ocupado -->
-                                <button ng-if="jogo.status=='DISPONIVEL'"   ng-click="open('sm', '.modal-parent',jogo, 'ACONFIRMAR') " class="btn btn-xs btn-success glyphicon glyphicon-ok"    uib-tooltip="Marcar Horario!" tooltip-append-to-body="true"></button><!-- Aprovar -->
-                                <button ng-if="jogo.status=='INDISPONIVEL'" ng-click="openSolicitacao('sm', '.modal-parent',jogo, 'ACONFIRMAR')" class="btn btn-xs btn-success glyphicon glyphicon-ok"    uib-tooltip="Solicitar Participa��o!" tooltip-append-to-body="true"></button><!-- Aprovar --> 
-                            </span>
-                        </a>
-                            </div>
+                                <div class="col-md-12">
+                                    <div id="buscarQuadra-container3s" class="creator-container" style="margin-top: 1%; margin-left: 1%;">
+                                        <div class="divider"></div>
+                                        <div class="ui-tab-container">
+                                            <uib-tabset class="ui-tab">
+                                                <uib-tab heading="Sobre">
+                                                    <section data-ng-include=" 'views/include-sobre.html' "></section>
+                                                </uib-tab>
+                                                <uib-tab heading="Avaliações">
+                                                    <section data-ng-include=" 'views/include-avaliacao.html' ">
+                                                    </section>
+                                                </uib-tab>
+                                                <uib-tab heading="Horario">
+                                                    <section data-ng-include=" 'views/include-horarios-tab.html' "></section>
+                                                </uib-tab>
+                                                <uib-tab heading="Mapa">
+                                                    <section class="panel panel-default">
+                                                        <div class="panel-heading"></div>
+                                                        <div class="panel-body">
+                                                            <map class="ui-map" zoom="13" center="[-19.7539784,-47.9349623]" map-type-id="TERRAIN" scrollwheel="false">
+															<marker
+																position="[{{oEmpresa.endereco.lat}},{{oEmpresa.endereco.longi}}]"
+																title="{{oEmpresa.nome}}" animation="Animation.DROP"></marker>
+															<traffic-layer></traffic-layer>
+														</map>
+                                                        </div>
+                                                    </section>
+                                                </uib-tab>
+                                            </uib-tabset>
+                                            <!-- end Pofile panel -->
+                                        </div>
+                                    </div>
+                                </div>
+                        </section>
+                    </uib-tab>
+                    <uib-tab heading="Mapa">
+                        <div class="panel-body" data-ng-controller="MapDemoController">
+                            <map class="ui-map" center="current-location" map-type-id="TERRAIN" zoom="14" scrollwheel="false">
+							</map>
                         </div>
-                    </div>
+                    </uib-tab>
+                    <uib-tab heading="Todos Horarios">
+                        <section data-ng-include=" 'views/include-filter-checbox.html' "></section>
+                        <section data-ng-include=" 'views/include-horarios.html' "></section>
+                    </uib-tab>
+                </uib-tabset>
                 </div>
             </div>
+
+
+
+
+
             <div data-ui-footer></div>
         </div>
         <script>

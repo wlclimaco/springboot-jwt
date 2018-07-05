@@ -38,7 +38,7 @@ public class MensagemController {
 			erros.add("There is already a user registered with the email provided");
 		}
 
-			userService.saveUser(user);
+		//	userService.saveUser(user);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("registration");
@@ -66,7 +66,7 @@ public class MensagemController {
 			erros.add("There is already a user registered with the email provided");
 		}
 
-			userService.saveUser(user);
+		//	userService.saveUser(user);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("registration");
@@ -94,7 +94,7 @@ public class MensagemController {
 			erros.add("There is already a user registered with the email provided");
 		}
 
-			userService.saveUser(user);
+			//userService.saveUser(user);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("registration");
@@ -122,7 +122,7 @@ public class MensagemController {
 			erros.add("There is already a user registered with the email provided");
 		}
 
-			userService.saveUser(user);
+			//userService.saveUser(user);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("registration");

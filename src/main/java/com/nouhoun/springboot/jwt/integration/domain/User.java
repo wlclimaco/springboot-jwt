@@ -24,6 +24,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Transient;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.nouhoun.springboot.jwt.integration.domain.User.Status;
+
 import net.minidev.json.annotate.JsonIgnore;
 
 @Entity
@@ -291,13 +293,27 @@ public class User{
 	
 	public User(UserDTO user) {
 		super();
-		this.email = user.getEmail();
-		this.password = user.getPassword();
-		this.nome = user.getNome();
-		this.active = user.getActive();
-		this.roles = user.getRoles();
-		this.enabled = user.getEnabled();
-		this.isGoleiro = user.getIsGoleiro();
+	
+		this.email 				 = user.getEmail();
+		this.nome 				 = user.getNome();
+		this.password 			 = user.getPassword();
+		this.active 			 = user.getActive();
+		this.roles 				 = user.getRoles();
+		this.iv 				 = user.getIv();
+		this.salt 				 = user.getSalt();
+		this.keySize 			 = user.getKeySize();
+		this.iterations 		 = user.getIterations();
+		this.loginCount 		 = user.getLoginCount();
+		this.currentLoginAt 	 = user.getCurrentLoginAt();
+		this.lastLoginAt 		 = user.getLastLoginAt();
+		this.currentLoginIp 	 = user.getCurrentLoginIp();
+		this.lastLoginIp 		 = user.getLastLoginIp();
+		this.foto 				 = user.getFoto();
+		this.updatedAt 			 = user.getUpdatedAt();
+		this.enabled 			 = user.getEnabled();
+		this.notificacoes 		 = user.getNotificacoes();
+		this.receberNotificacoes = user.getReceberNotificacoes();
+		this.isGoleiro			 = user.getIsGoleiro();
 	}
 
 	public User() {

@@ -66,6 +66,30 @@ public class JogoController {
 	public JogoUserService jogoUserService;
 	
 	private FunctionsUtius data = new FunctionsUtius();
+	
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value = "/userJogoData/update", method = RequestMethod.POST)
+	public @ResponseBody APIResponse userJogoData(@RequestBody String users)
+			throws JsonParseException, JsonMappingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		JogoPorData user = mapper.readValue(users, JogoPorData.class);
+
+		List<String> erros = new ArrayList<String>();
+
+		Notificacoes notificacoes = new Notificacoes("DISPONIVEL", new Date(), "Titulo DISPONIVEL", NotificacoesStatus.NAOLIDO, user.getId(), 8);
+	
+		jogoService.saveUserJogoData(user.getUserJogoData());
+		notificacoesService.insertNotificacoes(notificacoes);
+		HashMap<String, Object> authResp = new HashMap<String, Object>();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Object token = auth.getCredentials();
+		authResp.put("token", token);
+		authResp.put("user", user);
+		authResp.put("Error", erros);
+
+		return APIResponse.toOkResponse(authResp);
+	}
 
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/jogo/update", method = RequestMethod.POST)

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class GraficoController {
 
 //	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/grafico/insert", method = RequestMethod.POST)
-	public @ResponseBody APIResponse createNewMensagem(@Valid User user, BindingResult bindingResult) {
+	public @ResponseBody APIResponse createNewMensagem(@Valid User user, BindingResult bindingResult,HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		List<String> erros = new ArrayList<String>();
 		User userExists = userService.findUserByEmail(user.getEmail());
@@ -38,7 +39,7 @@ public class GraficoController {
 			erros.add("There is already a user registered with the email provided");
 		}
 
-			userService.saveUser(user);
+			userService.saveUser(user,request);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("registration");
@@ -58,7 +59,7 @@ public class GraficoController {
 
 //	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/grafico/update", method = RequestMethod.POST)
-	public @ResponseBody APIResponse updateMensagem(@Valid User user, BindingResult bindingResult) {
+	public @ResponseBody APIResponse updateMensagem(@Valid User user, BindingResult bindingResul,HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		List<String> erros = new ArrayList<String>();
 		User userExists = userService.findUserByEmail(user.getEmail());
@@ -66,7 +67,7 @@ public class GraficoController {
 			erros.add("There is already a user registered with the email provided");
 		}
 
-			userService.saveUser(user);
+			userService.saveUser(user,request);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("registration");
@@ -86,7 +87,7 @@ public class GraficoController {
 
 //	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/grafico/delete", method = RequestMethod.POST)
-	public @ResponseBody APIResponse deleteMensagem(@Valid User user, BindingResult bindingResult) {
+	public @ResponseBody APIResponse deleteMensagem(@Valid User user, BindingResult bindingResult,HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		List<String> erros = new ArrayList<String>();
 		User userExists = userService.findUserByEmail(user.getEmail());
@@ -94,7 +95,7 @@ public class GraficoController {
 			erros.add("There is already a user registered with the email provided");
 		}
 
-			userService.saveUser(user);
+			userService.saveUser(user,request);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("registration");
@@ -114,7 +115,7 @@ public class GraficoController {
 
 //	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/grafico/fetchByUser", method = RequestMethod.POST)
-	public @ResponseBody APIResponse fetchByUser(@Valid User user, BindingResult bindingResult) {
+	public @ResponseBody APIResponse fetchByUser(@Valid User user, BindingResult bindingResult,HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		List<String> erros = new ArrayList<String>();
 		User userExists = userService.findUserByEmail(user.getEmail());
@@ -122,7 +123,7 @@ public class GraficoController {
 			erros.add("There is already a user registered with the email provided");
 		}
 
-			userService.saveUser(user);
+			userService.saveUser(user,request);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("registration");

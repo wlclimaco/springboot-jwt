@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class JogadorController {
 
 	//@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/jogador/insert", method = RequestMethod.POST)
-	public @ResponseBody APIResponse createNewMensagem(@Valid User user, BindingResult bindingResult) {
+	public @ResponseBody APIResponse createNewMensagem(@Valid User user, BindingResult bindingResult,HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		List<String> erros = new ArrayList<String>();
 		User userExists = userService.findUserByEmail(user.getEmail());
@@ -38,7 +39,7 @@ public class JogadorController {
 			erros.add("There is already a user registered with the email provided");
 		}
 
-			userService.saveUser(user);
+			userService.saveUser(user,request);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("registration");
@@ -66,7 +67,7 @@ public class JogadorController {
 			erros.add("There is already a user registered with the email provided");
 		}
 
-			userService.saveUser(user);
+			//userService.saveUser(user);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("registration");
@@ -94,7 +95,7 @@ public class JogadorController {
 			erros.add("There is already a user registered with the email provided");
 		}
 
-			userService.saveUser(user);
+			//userService.saveUser(user);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("registration");
@@ -122,7 +123,7 @@ public class JogadorController {
 			erros.add("There is already a user registered with the email provided");
 		}
 
-			userService.saveUser(user);
+		//	userService.saveUser(user);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("registration");

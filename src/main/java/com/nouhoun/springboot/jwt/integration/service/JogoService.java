@@ -24,6 +24,7 @@ public interface JogoService {
 	void saveJogo(List<Jogo> jogos);
 	void saveUpdateJogo(Jogo jogos);
 	void saveJogoPorData(List<JogoPorData> jogos);
+	void saveUserJogoData(List<UserJogoData> jogos);
 	JogoPorData saveJogoPorData(JogoPorData jogoPorData);
 	public void updateStatus(Status indisponivel, Integer id);
 	

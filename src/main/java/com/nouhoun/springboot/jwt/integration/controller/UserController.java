@@ -9,6 +9,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -50,10 +51,13 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nouhoun.springboot.jwt.api.APIResponse;
-import com.nouhoun.springboot.jwt.exception.AuthenticationFailedException;
+import com.nouhoun.springboot.jwt.integration.config.JWTTokenAuthFilter;
 import com.nouhoun.springboot.jwt.integration.domain.User;
 import com.nouhoun.springboot.jwt.integration.domain.UserDTO;
 import com.nouhoun.springboot.jwt.integration.service.UserService;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 @RestController
 @RequestMapping("/user")
@@ -69,43 +73,53 @@ public class UserController {
 		return 15;
 	}
 
-	@CrossOrigin(origins = "*")
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public @ResponseBody APIResponse createNewMensagem(@RequestBody UserDTO userDTO, HttpServletRequest request,
-			HttpServletResponse response) throws NoSuchPaddingException, NoSuchAlgorithmException,
-			InvalidKeySpecException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException,
-			IllegalBlockSizeException, UnsupportedEncodingException, AuthenticationFailedException {
-		Validate.isTrue(StringUtils.isNotBlank(userDTO.getEmail()), "Email is blank");
-		Validate.isTrue(StringUtils.isNotBlank(userDTO.getPassword()), "Encrypted password is blank");
-		userDTO.setPassword(userDTO.getEncryptedPassword());
-		String password = decryptPassword(userDTO);
-		LOG.info("Looking for user by email: " + password);
-		ModelAndView modelAndView = new ModelAndView();
-		List<String> erros = new ArrayList<String>();
-		User userExists = userService.findUserByEmail(userDTO.getEmail());
-		if (userExists != null) {
-			erros.add("There is already a user registered with the email provided");
-		}else {
-			userService.saveUser(new User(userDTO));
-		}
-		modelAndView.addObject("successMessage", "User has been registered successfully");
-		modelAndView.addObject("user", new User(userDTO));
-		modelAndView.setViewName("registration");
+    /**
+     * Register new user
+     * POST body expected in the format - {"user":{"displayName":"Display Name", "email":"something@somewhere.com"}}
+     *
+     * @param userDTO
+     * @return
+     */
+    @RequestMapping(value = "/insert", method = RequestMethod.POST, headers = {"content-type=application/json","content-type=application/xml"})
+    public @ResponseBody APIResponse register(@RequestBody UserDTO userDTO,
+                                              HttpServletRequest request) throws NoSuchPaddingException, UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException, InvalidKeySpecException {
+        Validate.isTrue(StringUtils.isNotBlank(userDTO.getEmail()), "Email is blank");
+        Validate.isTrue(StringUtils.isNotBlank(userDTO.getEncryptedPassword()), "Encrypted password is blank");
+        Validate.isTrue(StringUtils.isNotBlank(userDTO.getNome()), "Display name is blank");
+        String password = decryptPassword(userDTO);
 
-		HashMap<String, Object> authResp = new HashMap<String, Object>();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        LOG.info("Looking for user by email: "+userDTO.getEmail());
+      //  if(userService.isEmailExists(userDTO.getEmail())) {
+      //      return APIResponse.toErrorResponse("Email is taken");
+      //  }
 
-		Object token = auth.getCredentials();
-		authResp.put("token", token);
-		authResp.put("user", userDTO);
-		authResp.put("Error", erros);
+        LOG.info("Creating user: "+userDTO.getEmail());
+        User user = new User();
+        user.setEmail(userDTO.getEmail());
+        user.setRoles(userDTO.getRoles());
+        user.setNome(userDTO.getNome());
+        user.setPassword(password);
+        user.setEnabled(true);
 
-		return APIResponse.toOkResponse(authResp);
-	}
+        userService.saveUser(user, request);
+
+        HashMap<String, Object> authResp = new HashMap<>();
+        createAuthResponse(user, authResp);
+
+        return APIResponse.toOkResponse(authResp);
+    }
+
+    private void createAuthResponse(User user, HashMap<String, Object> authResp) {
+        String token = Jwts.builder().setSubject(user.getEmail())
+                .claim("role", user.getRoles().get(0).getRole()).setIssuedAt(new Date())
+                .signWith(SignatureAlgorithm.HS256, JWTTokenAuthFilter.JWT_KEY).compact();
+        authResp.put("token", token);
+        authResp.put("user", user);
+    }
 
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public @ResponseBody APIResponse updateMensagem(@Valid User user, BindingResult bindingResult) {
+	public @ResponseBody APIResponse updateMensagem(@Valid User user, BindingResult bindingResult,HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		List<String> erros = new ArrayList<String>();
 		User userExists = userService.findUserByEmail(user.getEmail());
@@ -113,7 +127,7 @@ public class UserController {
 			erros.add("There is already a user registered with the email provided");
 		}
 
-		userService.saveUser(user);
+		userService.saveUser(user, request);
 		modelAndView.addObject("successMessage", "User has been registered successfully");
 		modelAndView.addObject("user", new User());
 		modelAndView.setViewName("registration");

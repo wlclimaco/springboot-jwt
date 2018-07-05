@@ -29,8 +29,11 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void saveUser(User user) {
-
+	public void saveUser(User user, HttpServletRequest request) {
+		user.setPassword(User.hashPassword(user.getPassword()));
+        user.setCurrentLoginAt(new Date());
+        user.setCurrentLoginIp(request.getRemoteHost());
+        user.setLoginCount(0);
 		userRepository.save(user);
 	}
 
