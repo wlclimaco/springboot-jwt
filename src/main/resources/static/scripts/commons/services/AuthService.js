@@ -57,7 +57,7 @@
                 SysMgmtData.processPostPageData(url, oJogo, fnCallback);
             }, 
             gravarUserJogoData: function(oJogo, fnCallback) {
-                var url = sUrlServer + '/jogo/userJogoData/update';
+                var url = sUrlServer + '/userJogoData/update';
 
                 SysMgmtData.processPostPageData(url, oJogo, fnCallback);
             }, 

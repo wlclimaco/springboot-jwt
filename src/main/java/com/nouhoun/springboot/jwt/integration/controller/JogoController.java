@@ -80,7 +80,7 @@ public class JogoController {
 		Notificacoes notificacoes = new Notificacoes("DISPONIVEL", new Date(), "Titulo DISPONIVEL", NotificacoesStatus.NAOLIDO, user.getId(), 8);
 	
 		jogoService.saveUserJogoData(user.getUserJogoData());
-		notificacoesService.insertNotificacoes(notificacoes);
+	//	notificacoesService.insertNotificacoes(notificacoes);
 		HashMap<String, Object> authResp = new HashMap<String, Object>();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Object token = auth.getCredentials();
