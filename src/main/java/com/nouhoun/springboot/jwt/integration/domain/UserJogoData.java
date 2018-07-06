@@ -1,6 +1,8 @@
 package com.nouhoun.springboot.jwt.integration.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,8 +12,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * The core Job Entity
@@ -48,12 +53,6 @@ public class UserJogoData {
 	@Column(name = "jogoPorData_id") 
     private Integer jogoPorData_id;
 	
-	@Column(name = "nota") 
-	private Integer nota;
-	
-	@Column(name = "qntGols") 
-	private Integer qntGols;
-	
 	@Column(name = "status")
 	private StatusUserJogoPorData status;
 	
@@ -85,20 +84,6 @@ public class UserJogoData {
 		this.jogoPorData_id = jogo_por_data;
 	}
 
-	public Integer getNota() {
-		return nota;
-	}
-	public void setNota(Integer nota) {
-		this.nota = nota;
-	}
-
-	public Integer getQntGols() {
-		return qntGols;
-	}
-	public void setQntGols(Integer qntGols) {
-		this.qntGols = qntGols;
-	}
-	
 	public StatusUserJogoPorData getStatus() {
 		return status;
 	}

@@ -34,6 +34,8 @@ import com.nouhoun.springboot.jwt.integration.domain.Jogo.Status;
 import com.nouhoun.springboot.jwt.integration.domain.JogoPorData;
 import com.nouhoun.springboot.jwt.integration.domain.JogoPorData.StatusJogoPorData;
 import com.nouhoun.springboot.jwt.integration.domain.JogoPorDataDTO;
+import com.nouhoun.springboot.jwt.integration.domain.NotasGols;
+import com.nouhoun.springboot.jwt.integration.domain.NotasGolsDTO;
 import com.nouhoun.springboot.jwt.integration.domain.Notificacoes;
 import com.nouhoun.springboot.jwt.integration.domain.Notificacoes.NotificacoesStatus;
 import com.nouhoun.springboot.jwt.integration.domain.Quadra;
@@ -41,8 +43,8 @@ import com.nouhoun.springboot.jwt.integration.domain.User;
 import com.nouhoun.springboot.jwt.integration.domain.UserJogo2;
 import com.nouhoun.springboot.jwt.integration.domain.UserJogo2.Admin;
 import com.nouhoun.springboot.jwt.integration.domain.UserJogo2.StatusUser;
-import com.nouhoun.springboot.jwt.integration.domain.UserJogoData.StatusUserJogoPorData;
 import com.nouhoun.springboot.jwt.integration.domain.UserJogoData;
+import com.nouhoun.springboot.jwt.integration.domain.UserJogoData.StatusUserJogoPorData;
 import com.nouhoun.springboot.jwt.integration.service.JogoService;
 import com.nouhoun.springboot.jwt.integration.service.JogoUserService;
 import com.nouhoun.springboot.jwt.integration.service.NotificacoesService;
@@ -70,22 +72,24 @@ public class JogoController {
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/userJogoData/update", method = RequestMethod.POST)
-	public @ResponseBody APIResponse userJogoData(@RequestBody String users)
+	public @ResponseBody APIResponse userJogoData(@RequestBody String notasGolsDTO)
 			throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
-		JogoPorData user = mapper.readValue(users, JogoPorData.class);
+		NotasGolsDTO notasGols = mapper.readValue(notasGolsDTO, NotasGolsDTO.class);
 
+		jogoService.saveUserNotasGols(notasGols.getNotasGols());
+		
 		List<String> erros = new ArrayList<String>();
 
-		Notificacoes notificacoes = new Notificacoes("DISPONIVEL", new Date(), "Titulo DISPONIVEL", NotificacoesStatus.NAOLIDO, user.getId(), 8);
+	//	Notificacoes notificacoes = new Notificacoes("DISPONIVEL", new Date(), "Titulo DISPONIVEL", NotificacoesStatus.NAOLIDO, user.getId(), 8);
 	
-		jogoService.saveUserJogoData(user.getUserJogoData());
+		//jogoService.saveUserJogoData(user.getUserJogoData());
 	//	notificacoesService.insertNotificacoes(notificacoes);
 		HashMap<String, Object> authResp = new HashMap<String, Object>();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Object token = auth.getCredentials();
 		authResp.put("token", token);
-		authResp.put("user", user);
+		//authResp.put("user", user);
 		authResp.put("Error", erros);
 
 		return APIResponse.toOkResponse(authResp);

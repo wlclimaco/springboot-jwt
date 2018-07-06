@@ -57,11 +57,23 @@
 	    this.id = oJogo.id;
 	    this.data = oJogo.data ? oJogo.data : null;
 	    this.jogoId = oJogo.jogoId ? oJogo.jogoId : null;
-	    this.status = oJogo.status ? oJogo.status : null;
 	    this.nota = oJogo.nota ? oJogo.nota : null;
 	    this.qntGols = oJogo.qntGols ? oJogo.qntGols : null;
 	    this.user_id = oJogo.user_id;
 
+	};
+
+	qat.model.NotasGols = function(oJogo) {
+	    this.id = oJogo.id;
+	    this.useJogoDataId = oJogo.useJogoDataId;
+	    this.userId = oJogo.userId;
+	    this.jogoId = oJogo.jogoId;
+	    this.jogoPorDataId = oJogo.jogoPorDataId;
+	    this.nota = oJogo.nota ? oJogo.nota : 0;
+	    this.qntGols = oJogo.qntGols ? oJogo.qntGols : 0;
+	    this.status = oJogo.status;
+	    this.userNota = oJogo.userNota ? oJogo.userNota : 0;
+	    this.date = oJogo.date ? oJogo.date : new Date();
 	};
 
 	qat.model.UserJogoData = function(oJogo) {

@@ -11,15 +11,21 @@ import com.nouhoun.springboot.jwt.integration.domain.Jogo.Processo;
 import com.nouhoun.springboot.jwt.integration.domain.Jogo.Status;
 import com.nouhoun.springboot.jwt.integration.domain.JogoPorData;
 import com.nouhoun.springboot.jwt.integration.domain.JogoPorData.StatusJogoPorData;
+import com.nouhoun.springboot.jwt.integration.domain.NotasGols;
 import com.nouhoun.springboot.jwt.integration.domain.UserJogoData;
 import com.nouhoun.springboot.jwt.integration.repository.JogoPorDataRepository;
 import com.nouhoun.springboot.jwt.integration.repository.JogoRepository;
+import com.nouhoun.springboot.jwt.integration.repository.NotasGolsRepository;
 import com.nouhoun.springboot.jwt.integration.repository.UserJogoDataRepository;
 import com.nouhoun.springboot.jwt.integration.service.JogoService;
 
 @Service("jogoService")
 public class JogoServiceImpl implements JogoService{
 
+	
+	@Autowired
+	private NotasGolsRepository notasGolsRepository;
+	
 	@Autowired
 	private JogoRepository jogoRepository;
 	
@@ -40,8 +46,13 @@ public class JogoServiceImpl implements JogoService{
 		for (UserJogoData userJogoData : jogos) {
 			userJogoDataRepository.save(userJogoData);
 		}
-		
-		
+	}
+	@Override
+	public 
+	void saveUserNotasGols(List<NotasGols> jogos) {
+		for (NotasGols userJogoData : jogos) {
+			notasGolsRepository.save(userJogoData);
+		}
 	}
 	
 	@Override

@@ -8,35 +8,65 @@
             return {
 
                 gravarGols: function(oJogo) {
-                    var oUserJogoData = [];
-                    if(oJogo && oJogo.userJogoData)
-                    {
-	                    for (var i = 0; i < oJogo.userJogoData.length; i++) {
-	                    	oUserJogoData.push(new qat.model.UserJogoData(oJogo.userJogoData[i]));
-						}
-	                    oJogo.userJogoData = oUserJogoData;
-                    }
                     debugger
+                    var oUserJogoData = [];
+                    if (oJogo && oJogo.userJogoData) {
+                        for (var i = 0; i < oJogo.userJogoData.length; i++) {
+                            oUserJogoData.push(new qat.model.UserJogoData(oJogo.userJogoData[i]));
+                        }
+                        oJogo.userJogoData = oUserJogoData;
+                    }
                     AuthService.gravarUserJogoData(new qat.model.jogoPorData2(oJogo), function(res) {
                         console.log(res)
-                        toastr.success('Jogo ' + status.toLowerCase() + ' com sucesso!', 'Information');
                     })
 
                 },
 
                 gravarNotas: function(oJogo) {
-                	var oUserJogoData = [];
-                    if(oJogo && oJogo.userJogoData)
-                    {
-	                    for (var i = 0; i < oJogo.userJogoData.length; i++) {
-	                    	oUserJogoData.push(new qat.model.UserJogoData(oJogo.userJogoData[i]));
-						}
-	                    oJogo.userJogoData = oUserJogoData;
-                    }
                     debugger
-                    AuthService.gravarUserJogoData(new qat.model.jogoPorData2(oJogo), function(res) {
+
+                    function teste(oNotasGols, jogoId, jogoPorDataId, useJogoDataId, userId, userNota) {
+                        if (oNotasGols) {
+                            for (var x = 0; x < oNotasGols.length; x++) {
+                                var oNotasGolsAux = oNotasGols[x];
+                                if ((oNotasGolsAux.jogoId == jogoId) &&
+                                    (oNotasGolsAux.jogoPorDataId == jogoPorDataId) &&
+                                    (oNotasGolsAux.useJogoDataId == useJogoDataId) &&
+                                    (oNotasGolsAux.userId == userId) &&
+                                    (oNotasGolsAux.userNota == userNota)
+                                ) {
+                                    return oNotasGolsAux.id;
+                                } else {
+                                    return null
+                                }
+                            }
+                        } else {
+                            return null
+                        }
+                    }
+                    var oUser = JSON.parse(localStorage.getItem('wdAppLS.currentUser'));
+                    var oUserJogoData = [];
+                    if (oJogo && oJogo.userJogoData) {
+                        for (var i = 0; i < oJogo.userJogoData.length; i++) {
+                            var aJogo = oJogo.userJogoData[i];
+
+                            var notaGols = {
+                                id: teste(oJogo.notasGols, oJogo.jogoId, aJogo.jogoPorData_id, aJogo.id, aJogo.user_id, oUser.id),
+                                useJogoDataId: aJogo.id,
+                                userId: aJogo.user_id,
+                                jogoId: oJogo.jogoId,
+                                jogoPorDataId: aJogo.jogoPorData_id,
+                                nota: aJogo.nota ? aJogo.nota : 0,
+                                qntGols: aJogo.qntGols ? aJogo.qntGols : 0,
+                                date: new Date(),
+                                userNota: oUser.id
+                            }
+
+                            oUserJogoData.push(new qat.model.NotasGols(notaGols));
+                        }
+                    }
+                    AuthService.gravarUserJogoData({ notasGols: oUserJogoData }, function(res) {
                         console.log(res)
-                        toastr.success('Jogo ' + status.toLowerCase() + ' com sucesso!', 'Information');
                     })
                 },
 

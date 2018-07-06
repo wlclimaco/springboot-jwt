@@ -8,6 +8,7 @@ import com.nouhoun.springboot.jwt.integration.domain.Jogo.Processo;
 import com.nouhoun.springboot.jwt.integration.domain.Jogo.Status;
 import com.nouhoun.springboot.jwt.integration.domain.JogoPorData;
 import com.nouhoun.springboot.jwt.integration.domain.JogoPorData.StatusJogoPorData;
+import com.nouhoun.springboot.jwt.integration.domain.NotasGols;
 import com.nouhoun.springboot.jwt.integration.domain.UserJogoData;
 
 
@@ -25,6 +26,7 @@ public interface JogoService {
 	void saveUpdateJogo(Jogo jogos);
 	void saveJogoPorData(List<JogoPorData> jogos);
 	void saveUserJogoData(List<UserJogoData> jogos);
+	void saveUserNotasGols(List<NotasGols> jogos);
 	JogoPorData saveJogoPorData(JogoPorData jogoPorData);
 	public void updateStatus(Status indisponivel, Integer id);
 	

@@ -45,6 +45,11 @@ public class JogoPorData {
 	@JoinColumn(name = "jogoPorData_id", referencedColumnName = "jogoPorData_id", nullable = false, insertable = false, updatable = false)
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<UserJogoData> userJogoData = new ArrayList<UserJogoData>();
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "jogoPorData_id", referencedColumnName = "jogoPorData_id", nullable = false, insertable = false, updatable = false)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private List<NotasGols> notasGols = new ArrayList<NotasGols>();
 
 	public Integer getId() {
 		return id;
@@ -129,6 +134,14 @@ public class JogoPorData {
 //		}
 //		return userData;
 //	}
+
+	public List<NotasGols> getNotasGols() {
+		return notasGols;
+	}
+
+	public void setNotasGols(List<NotasGols> notasGols) {
+		this.notasGols = notasGols;
+	}
 
 	public JogoPorData(JogoPorDataDTO jogoPorData) {
 		super();

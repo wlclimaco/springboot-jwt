@@ -29,7 +29,7 @@
     <script type="text/ng-template" id="myModalContent4.html">
         <div class="modal-header">
             <div class="col-md-11">
-                <h3 class="modal-title" id="modal-title">{{items.jogo.nome}}</h3>
+                <h3 class="modal-title" id="modal-title">este</h3>
             </div>
             <div class="col-md-1"> <span class="pull-right"><button type="button" ng-click="cancel()">&times;</button></span></div>
         </div>
@@ -48,7 +48,7 @@
                             <tr ng-repeat="receiver in items.jogo.userJogoData">
                                 <td><span>{{receiver.usuario.nome}}</span></td>
                             	<td><span>{{receiver.usuario.email}}</span></td>
-                            	<td class="numeric"><span>{{receiver.qntGols}}</span></td>
+                            	<td class="numeric"><input type="text" ng-model="receiver.qntGols"></td>
                                 <td class="numeric"><input type="text" ng-model="receiver.nota"></td>
 
                             </tr>
@@ -85,8 +85,8 @@
                             <tr ng-repeat="receiver in items.jogo.userJogoData">
                                 <td><span>{{receiver.usuario.nome}}</span></td>
                             	<td><span>{{receiver.usuario.email}}</span></td>
-                            	<td><input type="text" ng-model="receiver.nota"></td>
-                                <td class="numeric"><span>{{receiver.qntGols}}</span></td>
+                            	<td class="numeric"><input type="text" ng-model="receiver.nota"></td>
+                                <td class="numeric"><input type="text" ng-model="receiver.qntGols"></td>
                             </tr>
                             
                         </tbody>
@@ -208,14 +208,11 @@
                             <div ng-repeat="jogo in jogos | orderBy:'dia'">
                                 <div class="well" ng-repeat="jogoData in jogo.jogoPorData  | orderBy:'-data'">
                                     <a class="list-group-item" data-toggle="collapse" data-target="#sm{{jogo.id-$index}}" data-parent="#menu" style="cursor:pointer"><span class="glyphicon glyphicon-home"></span> K10 SPORTS QUADRA-1 <span>{{jogoData.data | date:"dd/MM/yy"}}</span>
-                            <span class="pull-right"><button ng-if="jogoData.status=='JAJOGADO'"
-							ng-click="openDarNotas(jogoData)"
-							class="btn btn-xs btn-info"
-							uib-tooltip="Dar Nota" tooltip-append-to-body="true" style="width: 100px!Important;">Dar Nota</button>
+                            <span class="pull-right">
 							<button ng-if="jogoData.status=='JAJOGADO'"
-							ng-click="openDarGols(jogoData)"
+							ng-click="openDarNotas(jogoData)"
 							class="btn btn-xs btn-default"
-							uib-tooltip="Marcar Gols" tooltip-append-to-body="true" style="width: 100px!Important;">Marcar Gols</button></span></a>
+							uib-tooltip="Anotar Gols/Dar Nota" tooltip-append-to-body="true" style="width: 100px!Important;">Gols/Nota</button></span></a>
                                     <a class="list-group-item" data-toggle="collapse" data-target="#sds{{jogoData.id-$index}}" data-parent="#menu"><span class="glyphicon glyphicon-user"></span> Jogadores <span class="badge badge-success">{{jogo.usersJogo.length}}</span></a>
                                     <div id="sds{{jogoData.id-$index}}" class="sublinks collapse">
                                         <div ng-repeat="user in jogoData.userJogoData">
