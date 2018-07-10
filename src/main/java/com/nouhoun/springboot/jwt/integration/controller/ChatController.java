@@ -1,13 +1,27 @@
 package com.nouhoun.springboot.jwt.integration.controller;
 
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import java.io.IOException;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.nouhoun.springboot.jwt.integration.domain.ChatMessage;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nouhoun.springboot.jwt.integration.domain.Chat;
+import com.nouhoun.springboot.jwt.integration.domain.ChatItens;
+import com.nouhoun.springboot.jwt.integration.domain.Jogo;
+import com.nouhoun.springboot.jwt.integration.domain.User;
+import com.nouhoun.springboot.jwt.integration.service.ChatService;
 
 /**
  * Created by rajeevkumarsingh on 24/07/17.
@@ -15,21 +29,49 @@ import com.nouhoun.springboot.jwt.integration.domain.ChatMessage;
 @Controller
 public class ChatController {
 
-	@CrossOrigin(origins = "*")
-    @MessageMapping("/chat.sendMessage")
-    @SendTo("/topic/public")
-    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
-        return chatMessage;
-    }
+	private static final Logger logger = LoggerFactory.getLogger(ChatController.class);
+	
+	@Autowired
+	public ChatService chatService;
 
 	@CrossOrigin(origins = "*")
-    @MessageMapping("/chat.addUser")
-    @SendTo("/topic/public")
-    public ChatMessage addUser(@Payload ChatMessage chatMessage,
-                               SimpMessageHeaderAccessor headerAccessor) {
-        // Add username in web socket session
-        headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
-        return chatMessage;
-    }
+	@RequestMapping(value = "/chat/findChatByUser", method = RequestMethod.POST)
+	public ResponseEntity<List<Chat>> findAllQuadraById(@RequestBody String users)
+			throws JsonParseException, JsonMappingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		User user = mapper.readValue(users, User.class);
+
+		return new ResponseEntity<List<Chat>>(chatService.findChatByUser(user.getId()), HttpStatus.OK);
+	}
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value = "/chat/insert", method = RequestMethod.POST)
+	public ResponseEntity<List<ChatItens>> insert(@RequestBody String users)
+			throws JsonParseException, JsonMappingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		ChatItens user = mapper.readValue(users, ChatItens.class);
+
+		return new ResponseEntity<List<ChatItens>>(chatService.insert(user), HttpStatus.OK);
+	}
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value = "/chat/Update", method = RequestMethod.POST)
+	public ResponseEntity<List<ChatItens>> update(@RequestBody String users)
+			throws JsonParseException, JsonMappingException, IOException {
+			ObjectMapper mapper = new ObjectMapper();
+			ChatItens user = mapper.readValue(users, ChatItens.class);
+
+			return new ResponseEntity<List<ChatItens>>(chatService.update(user), HttpStatus.OK);
+	}
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value = "/chat/delete", method = RequestMethod.POST)
+	public ResponseEntity<List<ChatItens>> delete(@RequestBody String users)
+			throws JsonParseException, JsonMappingException, IOException {
+			ObjectMapper mapper = new ObjectMapper();
+			ChatItens user = mapper.readValue(users, ChatItens.class);
+
+			return new ResponseEntity<List<ChatItens>>(chatService.delete(user), HttpStatus.OK);
+	}
 
 }

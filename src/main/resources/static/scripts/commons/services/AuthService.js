@@ -41,6 +41,12 @@
 
                 SysMgmtData.processPostPageData(url, user, fnCallback);
             },
+            
+            fetchChatByUserId: function(user, fnCallback) {
+                var url = sUrlServer + '/chat/findChatByUser';
+
+                SysMgmtData.processPostPageData(url, user, fnCallback);
+            },
             fetchAllEmpresa: function(user, fnCallback) {
                 var url = sUrlServer + '/empresa/fetchAllEmpresa';
 
