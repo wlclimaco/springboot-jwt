@@ -15,7 +15,7 @@ var WebDaptiveAppConfig = {
 	//restAuthBase = string to check for rest calls to jDpative, nDaptive or PHP Back-end so the angular http provider can inject x-auth token
 	//Java URLs & Settings
 	restAuthBase: 'qat-sysmgmt-controller-rest',
-	authenticationURL: 'http://quadra-test.herokuapp.com/oauth/token',		
+	authenticationURL: 'https://quadra-test.herokuapp.com:8080/oauth/token',		
 	base_county_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/county/api',
 	base_procedure_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/procedure/api',	
 	//PHP URLs & Settings
