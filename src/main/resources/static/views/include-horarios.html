@@ -1,0 +1,87 @@
+<div ng-repeat="empresa in empresaList | orderBy:'nome'">
+	<div ng-repeat="quadra in empresa.quadras | orderBy:'nome'">
+		<div
+			ng-repeat="jogo in quadra.jogos | orderBy:'status' | orderBy:'dia' | orderBy:'horaInicial'">
+			<div class="panel list-group">
+				<a class="list-group-item" data-toggle="collapse"
+					data-target="#sm{{jogo.id}}" data-parent="#menu"><span
+					class="glyphicon glyphicon-eye-open"></span><span
+					class="pull-center"> {{quadra.nome}} - {{jogo.dia}} -
+						{{jogo.horaInicial}} - {{jogo.horaFinal}} {{jogo.id}}</span> <button ng-click="openDetailQuadra(empresa)" class="label label-info"><span class="glyphicon glyphicon-eye-open"></span> Ver Detalhes</button> <span
+					class="pull-right">  <span
+						ng-if="jogo.status=='INDISPONIVEL'" style="font-size: 8px"
+						class="label label-danger"> * Reservado</span> <span
+						ng-if="jogo.status=='ACONFIRMAR'" style="font-size: 8px"
+						class="label label-warning"> * A Confirmar</span> <span
+						ng-if="jogo.status=='DISPONIVEL'" style="font-size: 8px"
+						class="label label-success"> * Disponivel</span> <span
+						ng-if="jogo.status=='OCUPADO'" style="font-size: 8px"
+						class="label label-danger"> * Reservado</span> <span
+						ng-if="jogo.status=='CONFIRMAR'" style="font-size: 8px"
+						class="label label-info"> * Confirmar</span>
+				</span> </a>
+				<div id="sm{{jogo.id}}" class="sublinks collapse">
+					<a class="list-group-item small">{{jogo.descricao}}</a>
+				</div>
+				<a class="list-group-item" data-toggle="collapse"
+					data-target="#s{{jogo.id}}" data-parent="#menu"><span
+					class="glyphicon glyphicon-user"></span> Jogadores <span
+					class="badge badge-success">{{jogo.usersJogo.length}}</span></a>
+				<div id="s{{jogo.id}}" class="sublinks collapse">
+					<div ng-repeat="user in jogo.usersJogo">
+						<a ng-if="user.status_user == 'CONFIRMADO'"
+							class="list-group-item small"> <span><span
+								class="glyphicon glyphicon-chevron-right"></span>{{user.usuario.nome}}
+								- ({{user.usuario.email}}) <span ng-if="user.admin == 'SIM'"
+								class="label label-success">Admin</span></span>
+						</a>
+					</div>
+				</div>
+				<a class="list-group-item"> Ações <span class="pull-right">
+						<button ng-click="gravarHorario(jogo, 'EXCLUIR')"
+							class="btn btn-xs btn-warning glyphicon glyphicon-trash"
+							uib-tooltip="Excluir Horario!" tooltip-append-to-body="true"></button>
+						<!-- Excluir-->
+						<button ng-if="jogo.status=='INDISPONIVEL'"
+							ng-click="gravarHorario(jogo, 'DESMARCAR')"
+							class="btn btn-xs btn-warning glyphicon glyphicon-remove"
+							uib-tooltip="Desmarcar!" tooltip-append-to-body="true"></button>
+						<!-- Desmarcar -->
+						<button ng-if="jogo.status=='CONFIRMAR'"
+							ng-click="gravarHorario(jogo, 'INDISPONIVEL')"
+							class="btn btn-xs btn-success glyphicon glyphicon-ok"
+							uib-tooltip="Aprovar!" tooltip-append-to-body="true"></button>
+						<!-- Aprovar -->
+						<button ng-if="jogo.status=='CONFIRMAR'"
+							ng-click="gravarHorario(jogo, 'DISPONIVEL')"
+							class="btn btn-xs btn-warning glyphicon glyphicon-remove"
+							uib-tooltip="Recusar!" tooltip-append-to-body="true"></button>
+						<!-- nao aprovar -->
+						<button ng-if="jogo.status=='OCUPADO'"
+							ng-click="gravarHorario(jogo, 'DISPONIVEL')"
+							class="btn btn-xs btn-success glyphicon glyphicon-ok"
+							uib-tooltip="Disponibilizar!" tooltip-append-to-body="true"></button>
+						<!-- tornar disponivel -->
+						<button ng-if="jogo.status=='DISPONIVEL'"
+							ng-click="gravarHorario(jogo, 'ACONFIRMAR')"
+							class="btn btn-xs btn-warning glyphicon glyphicon-remove"
+							uib-tooltip="Ocupar!" tooltip-append-to-body="true"></button>
+						<!-- marcar como ocupado -->
+						<button ng-if="jogo.status=='DISPONIVEL'"
+							ng-click="open('sm', '.modal-parent',jogo, 'ACONFIRMAR') "
+							class="btn btn-xs btn-success glyphicon glyphicon-ok"
+							uib-tooltip="Marcar Horario!" tooltip-append-to-body="true"></button>
+						<!-- Aprovar -->
+						<button ng-if="jogo.status=='INDISPONIVEL'"
+							ng-click="openSolicitacao('sm', '.modal-parent',jogo, 'ACONFIRMAR')"
+							class="btn btn-xs btn-success glyphicon glyphicon-ok"
+							uib-tooltip="Solicitar Participa��o!"
+							tooltip-append-to-body="true"></button>
+						<!-- Aprovar -->
+				</span>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+</div>

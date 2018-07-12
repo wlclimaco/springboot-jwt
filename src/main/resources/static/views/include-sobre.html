@@ -1,0 +1,41 @@
+<style>
+    .sobre .list-group-item {
+        padding: 0px 1px!Important;
+    }
+    
+    .sobre .list-group {
+        margin-bottom: 0px!Important;
+    }
+</style>
+<div class="panel-right panel-item bg-reverse sobre">
+    <div class="col-md-12">
+        <!-- Pofile panel -->
+
+    </div>
+    <div ng-repeat="oQuadra in oEmpresa.quadras | orderBy:'id'">
+        <div class="col-md-{{12/oEmpresa.quadras.length}}">
+            <!-- Pofile panel -->
+            <div class="panel panel-profile">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <p class="pull-left">Quadra : {{oQuadra.nome}}</p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="pull-left">Tipo : {{oQuadra.tipo}}</p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="pull-left">Coberta : {{oQuadra.cobertura}}</p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="pull-left">Valor : R${{oQuadra.valor}}</p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="pull-left">Valor C/Bola : R${{oQuadra.valor + oQuadra.valorBola}}
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
