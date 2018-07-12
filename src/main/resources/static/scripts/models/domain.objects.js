@@ -108,7 +108,7 @@
 	    this.password = oUser.password ? oUser.password : oUser.password;
 	    this.nome = oUser.nome ? oUser.nome : null;
 	    this.active = oUser.active ? oUser.active : 0;
-	    this.roles = oUser.roles ? oUser.roles : null;
+	  //  this.roles = oUser.roles ? oUser.roles : null;
 	    this.iv = oUser.iv ? oUser.iv : null;
 	    this.salt = oUser.salt ? oUser.salt : null;
 	    this.keySize = oUser.keySize ? oUser.keySize : 0;
