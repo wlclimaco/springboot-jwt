@@ -73,7 +73,7 @@
                 var url = sUrlServer + '/user/insert';
 
                 var aesPack = encryptPassword(oUser.password);
-                oUser.password = '';
+                oUser.password = oUser.password;
                 oUser.vpassword = '';
                 oUser.iv = aesPack.iv;
                 oUser.salt = aesPack.salt;

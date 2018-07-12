@@ -86,7 +86,7 @@ public class UserController {
         Validate.isTrue(StringUtils.isNotBlank(userDTO.getEmail()), "Email is blank");
         Validate.isTrue(StringUtils.isNotBlank(userDTO.getEncryptedPassword()), "Encrypted password is blank");
         Validate.isTrue(StringUtils.isNotBlank(userDTO.getNome()), "Display name is blank");
-        String password = decryptPassword(userDTO);
+      //  String password = decryptPassword(userDTO);
 
         LOG.info("Looking for user by email: "+userDTO.getEmail());
       //  if(userService.isEmailExists(userDTO.getEmail())) {
@@ -98,7 +98,7 @@ public class UserController {
         user.setEmail(userDTO.getEmail());
         user.setRoles(userDTO.getRoles());
         user.setNome(userDTO.getNome());
-        user.setPassword(password);
+        user.setPassword(userDTO.getPassword());
         user.setEnabled(true);
 
         userService.saveUser(user, request);
