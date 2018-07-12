@@ -52,6 +52,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nouhoun.springboot.jwt.api.APIResponse;
 import com.nouhoun.springboot.jwt.integration.config.JWTTokenAuthFilter;
+import com.nouhoun.springboot.jwt.integration.domain.Role;
 import com.nouhoun.springboot.jwt.integration.domain.User;
 import com.nouhoun.springboot.jwt.integration.domain.UserDTO;
 import com.nouhoun.springboot.jwt.integration.service.UserService;
@@ -100,7 +101,13 @@ public class UserController {
         user.setNome(userDTO.getNome());
         user.setPassword(userDTO.getPassword());
         user.setEnabled(true);
-
+        List<Role> roles = new ArrayList<Role>();
+        roles.add(new Role(1));
+        roles.add(new Role(2));
+        roles.add(new Role(3));
+        roles.add(new Role(4));
+        roles.add(new Role(5));
+        user.setRoles(roles);
         userService.saveUser(user, request);
 
         HashMap<String, Object> authResp = new HashMap<>();
