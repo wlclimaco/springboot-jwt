@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import net.minidev.json.annotate.JsonIgnore;
+
 @Entity
 @Table(name = "chat_itens")
 public class ChatItens{
@@ -27,8 +29,6 @@ public class ChatItens{
 	private Integer id;
 	
 	@Column(name = "texto")
-	@Email(message = "*Please provide a valid Email")
-	@NotEmpty(message = "*Please provide an email")
 	private String texto;
 	
 	@Column(name = "user_id") 
@@ -49,6 +49,9 @@ public class ChatItens{
 	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
 	@JoinColumn(name="user_id", referencedColumnName="user_id", nullable = false, insertable = false, updatable = false)
 	private User usuario;
+	
+    @Column(name = "lastLoginIp")
+    private @JsonIgnore String lastLoginIp;
 
 	public Integer getId() {
 		return id;
@@ -88,6 +91,16 @@ public class ChatItens{
 
 	public void setJogoId(Integer jogoId) {
 		this.jogoId = jogoId;
+	}
+	
+	
+
+	public String getLastLoginIp() {
+		return lastLoginIp;
+	}
+
+	public void setLastLoginIp(String lastLoginIp) {
+		this.lastLoginIp = lastLoginIp;
 	}
 
 	public User getUsuario() {

@@ -17,6 +17,7 @@ public class ChatServiceImpl implements ChatService{
 	@Autowired
 	private ChatRepository chatRepository;
 	
+	@Autowired
 	private ChatItensRepository chatItensRepository;
 
 	@Override
@@ -35,11 +36,11 @@ public class ChatServiceImpl implements ChatService{
 	}
 
 	@Override
-	public List<ChatItens> insert(ChatItens chat) {
+	public List<Chat> insert(ChatItens chat) {
 		
 		chatItensRepository.save(chat);
 		
-		return chatRepository.findChatByid(chat.getJogoId());
+		return chatRepository.findChatByUser(chat.getUser_id());
 	}
 
 	@Override

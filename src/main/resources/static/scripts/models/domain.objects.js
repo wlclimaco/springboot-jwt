@@ -100,6 +100,29 @@
 
 
 	};
+	
+	qat.model.Chat = function(oJogo) {
+	    this.id = oJogo.id;
+	    this.jogoId = oJogo.jogoId;
+	    this.chatItens = oJogo.chatItens;
+	    this.currentLoginIp = oJogo.currentLoginIp;
+	    
+	    this.updatedAt = oJogo.updatedAt ? oJogo.updatedAt : new Date() ;
+	};
+	
+	qat.model.ChatItens = function(oJogo) {
+	    this.id           = oJogo.id;
+	    this.texto        = oJogo.texto;
+	    this.user_id      = oJogo.user_id;
+	    this.chatId       = oJogo.chatId;
+	    this.jogoId       = oJogo.jogoId;
+	    this.lastLoginIp  = oJogo.lastLoginIp;
+	    this.editMessage  = oJogo.editMessage ? oJogo.editMessage : 0;
+	    this.dataMessagem = oJogo.dataMessagem ? oJogo.dataMessagem : new Date();
+
+	};
+	
+	
 
 	qat.model.user = function(oUser) {
 

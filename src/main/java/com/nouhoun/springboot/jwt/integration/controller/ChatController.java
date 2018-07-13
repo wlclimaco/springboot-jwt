@@ -3,6 +3,8 @@ package com.nouhoun.springboot.jwt.integration.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import com.nouhoun.springboot.jwt.integration.domain.Chat;
 import com.nouhoun.springboot.jwt.integration.domain.ChatItens;
 import com.nouhoun.springboot.jwt.integration.domain.Jogo;
 import com.nouhoun.springboot.jwt.integration.domain.User;
+import com.nouhoun.springboot.jwt.integration.domain.UserDTO;
 import com.nouhoun.springboot.jwt.integration.service.ChatService;
 
 /**
@@ -46,12 +49,13 @@ public class ChatController {
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/chat/insert", method = RequestMethod.POST)
-	public ResponseEntity<List<ChatItens>> insert(@RequestBody String users)
+	public ResponseEntity<List<Chat>> insert(@RequestBody ChatItens user,
+            HttpServletRequest request)
 			throws JsonParseException, JsonMappingException, IOException {
-		ObjectMapper mapper = new ObjectMapper();
-		ChatItens user = mapper.readValue(users, ChatItens.class);
-
-		return new ResponseEntity<List<ChatItens>>(chatService.insert(user), HttpStatus.OK);
+		
+		user.setLastLoginIp(request.getRemoteHost());
+	//	request.getRemoteHost()
+		return new ResponseEntity<List<Chat>>(chatService.insert(user), HttpStatus.OK);
 	}
 	
 	@CrossOrigin(origins = "*")

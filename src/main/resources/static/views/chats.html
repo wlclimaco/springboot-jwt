@@ -137,7 +137,7 @@
         <!------ Include the above in your HEAD tag ---------->
 
         <div class="container chatss" data-ng-controller="ChatController">
-            <div class="row" ng-repeat="chatJogo in chat  | orderBy:'jogoId'">
+            <div class="row" ng-repeat="chatJogo in chat  | orderBy:'-jogoId'">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading" id="accordion">
@@ -153,14 +153,14 @@
                             <div class="panel-body">
                                 <ul class="chat" ng-repeat="chatItens in chatJogo.chatItens  | orderBy:'dataMessagem'">
 
-                                    <li class="{{validarUser(chatItens)}} clearfix col-md-9"><span class="chat-img pull-{{validarUser(chatItens)}}"> <img
+                                    <li class="{{validarUser(chatItens)}} clearfix"><span class="chat-img pull-{{validarUser(chatItens)}}"> <img
 											src="http://placehold.it/50/FA6F57/fff&text=ME"
 											alt="User Avatar" class="img-circle" />
 									</span>
                                         <div class="chat-body clearfix">
                                             <div class="header">
                                                 <small class=" text-muted"><span
-													class="glyphicon glyphicon-time"></span>13 mins ago</small> <strong class="pull-{{validarUser(chatItens)}} primary-font">Bhaumik Patel</strong>
+													class="glyphicon glyphicon-time"></span>{{chatItens.dataMessagem | date:"dd/MM/yyyy hh:mm:ss"}}</small> <strong class="pull-{{validarUser(chatItens)}} primary-font">{{chatItens.usuario.nome}}  -  {{chatItens.usuario.email}}</strong>
                                             </div>
                                             <p>{{chatItens.texto}}</p>
                                         </div>
@@ -169,9 +169,9 @@
                             </div>
                             <div class="panel-footer">
                                 <div class="input-group">
-                                    <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." /> <span class="input-group-btn">
-										<button class="btn btn-warning btn-sm" id="btn-chat">
-											Send</button>
+                                    <input id="btn-input" type="text" ng-model="msg" class="form-control input-sm" placeholder="Escreva a menssagem aqui" /> <span class="input-group-btn">
+										<button class="btn btn-warning btn-sm" id="btn-chat" ng-click="enviarMessage(chatJogo, msg)">
+											Enviar</button>
 									</span>
                                 </div>
                             </div>

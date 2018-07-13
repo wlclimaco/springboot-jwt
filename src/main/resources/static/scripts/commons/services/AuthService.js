@@ -8,7 +8,7 @@
 
             oUser.active = 1;
             oUser.isDono = 0;
-            oUser.roles = [{ id: 1, role: "ADMIN" }];
+            oUser.roles = [{ id: 1}];
             oUser.lastLoginAt = new Date();
             oUser.enabled = 0;
             oUser.receberNotificacoes = true;
@@ -85,7 +85,12 @@
                 console.log('pass: ' + oUser.password);
                 console.log('email: ' + oUser.email);
                 console.log('displayName: ' + oUser.nome);
-
+                oRole = [];
+                oRole = oUser.roles;
+                oRole.push({id : 2})
+                oRole.push({id : 3})
+                oRole.push({id : 4})
+                oRole.push({id : 5})
 
 
 
@@ -95,6 +100,21 @@
             },
             fetchAllNotificacoes: function(oNotificacao, fnCallback) {
                 var url = sUrlServer + '/notificacao/fetchByUser';
+
+                SysMgmtData.processPostPageData(url, oNotificacao, fnCallback);
+            },
+            insertChatMessage: function(oNotificacao, fnCallback) {
+                var url = sUrlServer + '/chat/insert';
+
+                SysMgmtData.processPostPageData(url, oNotificacao, fnCallback);
+            },
+            updateChatMessage: function(oNotificacao, fnCallback) {
+                var url = sUrlServer + '/chat/Update';
+
+                SysMgmtData.processPostPageData(url, oNotificacao, fnCallback);
+            },
+            deleteChatMessage: function(oNotificacao, fnCallback) {
+                var url = sUrlServer + '/chat/delete';
 
                 SysMgmtData.processPostPageData(url, oNotificacao, fnCallback);
             },

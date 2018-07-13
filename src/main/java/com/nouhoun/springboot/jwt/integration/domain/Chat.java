@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -30,6 +31,10 @@ public class Chat{
 	
     @Column(name = "jogo_id")
     private Integer jogoId;
+    
+	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @JoinColumn(name = "jogo_id",insertable = false, unique = false, nullable = false, updatable = false)	
+	private Jogo jogo;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name="chat_id", referencedColumnName="chat_id", nullable = false, insertable = false, updatable = false)
@@ -38,9 +43,6 @@ public class Chat{
 
     @Column(name = "currentLoginIp")
     private @JsonIgnore String currentLoginIp;
-    
-    @Column(name = "lastLoginIp")
-    private @JsonIgnore String lastLoginIp;
     
     @Column(name = "updatedAt")
     private @JsonIgnore Date updatedAt;
@@ -77,20 +79,20 @@ public class Chat{
 		this.currentLoginIp = currentLoginIp;
 	}
 
-	public String getLastLoginIp() {
-		return lastLoginIp;
-	}
-
-	public void setLastLoginIp(String lastLoginIp) {
-		this.lastLoginIp = lastLoginIp;
-	}
-
 	public Date getUpdatedAt() {
 		return updatedAt;
 	}
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public Jogo getJogo() {
+		return jogo;
+	}
+
+	public void setJogo(Jogo jogo) {
+		this.jogo = jogo;
 	} 
     
     
