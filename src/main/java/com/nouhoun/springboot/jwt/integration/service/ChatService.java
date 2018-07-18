@@ -10,5 +10,6 @@ public interface ChatService {
 	public List<ChatItens> delete(ChatItens chat);
 	public List<Chat> insert(ChatItens chat);
 	public List<Chat> findChatByUser(Integer empresa);
+	public Chat findChatById(Integer chatId);
 
 }

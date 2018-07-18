@@ -1,177 +1,186 @@
 <style>
-    .chat {
-        list-style: none;
+    .chat-window {
+        bottom: 0;
+        position: fixed;
+        float: right;
+        margin-left: 10px;
+    }
+    
+    .chat-window>div>.panel {
+        border-radius: 5px 5px 0 0;
+    }
+    
+    .icon_minim {
+        padding: 2px 10px;
+    }
+    
+    .msg_container_base {
+        background: #e5e5e5;
         margin: 0;
-        padding: 0;
+        padding: 0 10px 10px;
+        max-height: 300px;
+        overflow-x: hidden;
     }
     
-    .chat li {
-        margin-bottom: 10px;
-        padding-bottom: 5px;
-        border-bottom: 1px dotted #B3A9A9;
+    .top-bar {
+        background: #666;
+        color: white;
+        padding: 10px;
+        position: relative;
+        overflow: hidden;
     }
     
-    .chat li.left .chat-body {
-        margin-left: 60px;
+    .msg_receive {
+        padding-left: 0;
+        margin-left: 0;
     }
     
-    .chat li.left {
-        margin-left: 22%!Important;
+    .msg_sent {
+        padding-bottom: 20px !important;
+        margin-right: 0;
     }
     
-    .chat li.right .chat-body {
-        margin-right: 60px;
+    .messages {
+        background: white;
+        padding: 10px;
+        border-radius: 2px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        max-width: 100%;
     }
     
-    .chat li .chat-body p {
-        margin: 0;
-        color: #777777;
+    .messages>p {
+        font-size: 13px;
+        margin: 0 0 0.2rem 0;
     }
     
-    .panel .slidedown .glyphicon,
-    .chat .glyphicon {
-        margin-right: 5px;
+    .messages>time {
+        font-size: 11px;
+        color: #ccc;
     }
     
-    .panel-body {
-        overflow-y: scroll;
-        height: 250px;
+    .msg_container {
+        padding: 10px;
+        overflow: hidden;
+        display: flex;
     }
     
-     ::-webkit-scrollbar-track {
+    img {
+        display: block;
+        width: 100%;
+    }
+    
+    .avatar {
+        position: relative;
+    }
+    
+    .base_receive>.avatar:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        border: 5px solid #FFF;
+        border-left-color: rgba(0, 0, 0, 0);
+        border-bottom-color: rgba(0, 0, 0, 0);
+    }
+    
+    .base_sent {
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+    
+    .base_sent>.avatar:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border: 5px solid white;
+        border-right-color: transparent;
+        border-top-color: transparent;
+        box-shadow: 1px 1px 2px rgba(black, 0.2);
+        //
+        not quite perfect but close
+    }
+    
+    .msg_sent>time {
+        float: right;
+    }
+    
+    .msg_container_base::-webkit-scrollbar-track {
         -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
         background-color: #F5F5F5;
     }
     
-     ::-webkit-scrollbar {
+    .msg_container_base::-webkit-scrollbar {
         width: 12px;
         background-color: #F5F5F5;
     }
     
-     ::-webkit-scrollbar-thumb {
+    .msg_container_base::-webkit-scrollbar-thumb {
         -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
         background-color: #555;
     }
     
-    .chatss .panel-primary>.panel-heading {
-        background-color: #0CA84F !Important;
+    .btn-group.dropup {
+        position: fixed;
+        left: 0px;
+        bottom: 0;
     }
 </style>
-<div class="page" data-ng-controller="ModalDemoController">
-    <script type="text/ng-template" id="myModalContent4.html">
-        <div class="modal-header">
-            <div class="col-md-11">
-                <h3 class="modal-title" id="modal-title">este</h3>
-            </div>
-            <div class="col-md-1"> <span class="pull-right"><button type="button" ng-click="cancel()">&times;</button></span></div>
-        </div>
-        <div class="modal-body" id="modal-body">
-            <section class="table-flip-scroll">
-                <table class="table table-bordered table-striped cf">
-                    <thead class="cf">
-                        <tr>
-                            <th>Nome</th>
-                            <th>Email</th>
-                            <th class="numeric">Gols</th>
-                            <th class="numeric">Nota</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="receiver in items.jogo.userJogoData">
-                            <td><span>{{receiver.usuario.nome}}</span></td>
-                            <td><span>{{receiver.usuario.email}}</span></td>
-                            <td class="numeric"><input type="text" ng-model="receiver.qntGols"></td>
-                            <td class="numeric"><input type="text" ng-model="receiver.nota"></td>
-
-                        </tr>
-
-                    </tbody>
-                </table>
-            </section>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="gravarGols(items.jogo)">Confirmar</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
-        </div>
-    </script>
-
-    <script type="text/ng-template" class="my-modal-popup" id="myModalContent5.html" style="width: 10px; max-width: 20px; min-width: 5px;">
-        <div class="modal-header">
-            <div class="col-md-11">
-                <h3 class="modal-title" id="modal-title">{{items.jogo.nome}}</h3>
-            </div>
-            <div class="col-md-1"> <span class="pull-right"><button type="button" ng-click="cancel()">&times;</button></span></div>
-        </div>
-        <div class="modal-body" id="modal-body">
-            <section class="table-flip-scroll">
-                <table class="table table-bordered table-striped cf">
-                    <thead class="cf">
-                        <tr>
-                            <th>Nome</th>
-                            <th>Email</th>
-                            <th class="numeric">Nota</th>
-                            <th class="numeric">Gols</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="receiver in items.jogo.userJogoData">
-                            <td><span>{{receiver.usuario.nome}}</span></td>
-                            <td><span>{{receiver.usuario.email}}</span></td>
-                            <td class="numeric"><input type="text" ng-model="receiver.nota"></td>
-                            <td class="numeric"><input type="text" ng-model="receiver.qntGols"></td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </section>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="gravarNotas(items.jogo)">Gravar</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Fechar</button>
-        </div>
-    </script>
-
-
-    <div class="page page-dashboard">
-
-        <!------ Include the above in your HEAD tag ---------->
-
-        <div class="container chatss" data-ng-controller="ChatController">
-            <div class="row" ng-repeat="chatJogo in chat  | orderBy:'-jogoId'">
-                <div class="col-md-12">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading" id="accordion">
-                            <span class="glyphicon glyphicon-comment"></span> Chat {{chatJogo.id}}
-                            <div class="btn-group pull-right">
-                                <a class="btn btn-default btn-xs" data-toggle="collapse" data-target="#collapseOne{{chatJogo.id}}" data-parent="#menu" href="javascript:void(0)">
-                                    <!--    <a type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-parent="#collapseOne" href="javascript:void(0)" data-parent="#menu">-->
-                                    <span class="glyphicon glyphicon-chevron-down"></span>
-                                </a>
-                            </div>
+<div class="page page-dashboard">
+    <div class="container chatss" data-ng-controller="ChatController">
+    	<span class="hide {{classe}} id="teste123"></span>
+        <div class="row" ng-repeat="chatJogo in chat  | orderBy:'-jogoId'">
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading" id="accordion">
+                        <span class="glyphicon glyphicon-comment"></span> Chat {{chatJogo.id}} {{chatJogo.jogo.dia}} - {{chatJogo.jogo.horaInicial}} as {{chatJogo.jogo.horaFinal}} * {{chatJogo.jogo.id}}
+                        <div class="btn-group pull-right">
+                            <a class="btn btn-default btn-xs" data-toggle="collapse" data-target="#collapseOne{{chatJogo.id}}" data-parent="#menu" href="javascript:void(0)">
+                                <!--    <a type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-parent="#collapseOne" href="javascript:void(0)" data-parent="#menu">-->
+                                <span class="glyphicon glyphicon-chevron-down"></span>
+                            </a>
                         </div>
-                        <div class="panel-collapse collapse" id="collapseOne{{chatJogo.id}}">
-                            <div class="panel-body">
-                                <ul class="chat" ng-repeat="chatItens in chatJogo.chatItens  | orderBy:'dataMessagem'">
-
-                                    <li class="{{validarUser(chatItens)}} clearfix"><span class="chat-img pull-{{validarUser(chatItens)}}"> <img
-											src="http://placehold.it/50/FA6F57/fff&text=ME"
-											alt="User Avatar" class="img-circle" />
-									</span>
-                                        <div class="chat-body clearfix">
-                                            <div class="header">
-                                                <small class=" text-muted"><span
-													class="glyphicon glyphicon-time"></span>{{chatItens.dataMessagem | date:"dd/MM/yyyy hh:mm:ss"}}</small> <strong class="pull-{{validarUser(chatItens)}} primary-font">{{chatItens.usuario.nome}}  -  {{chatItens.usuario.email}}</strong>
-                                            </div>
+                    </div>
+                    <div class="panel-collapse collapse" id="collapseOne{{chatJogo.id}}">
+                        <div class="panel-body">
+                            <div class="panel-body msg_container_base" ng-init="funcao2(chatJogo.chatItens)" id="appends{{chatJogo.id}}">
+                               <div ng-repeat="chatItens in mensagens  | orderBy:'dataMessagem'">
+                                <div class="row msg_container base_sent" ng-if="validarUser(chatItens) == true">
+                                    <div class="col-md-10 col-xs-8">
+                                        <div class="messages msg_sent">
+                                            <time>{{chatItens.usuario.email}}</time>
                                             <p>{{chatItens.texto}}</p>
+                                            <time datetime="2009-11-13T20:00">{{chatItens.dataMessagem | date:"dd/MM/yyyy hh:mm:ss"}}</time>
                                         </div>
-                                    </li>
-                                </ul>
+                                    </div>
+                                    <div class="col-md-2 col-xs-4 avatar">
+                                        <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
+                                    </div>
+                                </div>
+                                <div class="row msg_container base_receive" ng-if="validarUser(chatItens) == false">
+                                    <div class="col-md-2 col-xs-4 avatar">
+                                        <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-5.jpg" class=" img-responsive ">
+                                    </div>
+                                    <div class="col-md-10 col-xs-8">
+                                        <div class="messages msg_receive">
+                                            <time>{{chatItens.usuario.email}}</time>
+                                            <p>{{chatItens.texto}}</p>
+                                            <time datetime="2009-11-13T20:00">{{chatItens.dataMessagem
+												| date:"dd/MM/yyyy hh:mm:ss"}}</time>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             </div>
                             <div class="panel-footer">
                                 <div class="input-group">
                                     <input id="btn-input" type="text" ng-model="msg" class="form-control input-sm" placeholder="Escreva a menssagem aqui" /> <span class="input-group-btn">
-										<button class="btn btn-warning btn-sm" id="btn-chat" ng-click="enviarMessage(chatJogo, msg)">
-											Enviar</button>
+										<button class="btn btn-warning btn-sm" id=" "
+											ng-click="enviarMessage(chatJogo, msg)">Enviar</button>
 									</span>
                                 </div>
                             </div>
@@ -179,15 +188,7 @@
                     </div>
                 </div>
             </div>
+            
         </div>
-
-
-
-        <div data-ui-footer></div>
-    </div>
-    <script>
-        $(document).ready(function() {
-            $("#nav-container").removeClass("hide");
-            $("#header").removeClass("hide");
-        });
-    </script>
+</div>
+ </div>

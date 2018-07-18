@@ -48,6 +48,15 @@ public class ChatController {
 	}
 	
 	@CrossOrigin(origins = "*")
+	@RequestMapping(value = "/chat/findChatById", method = RequestMethod.POST)
+	public ResponseEntity<Chat> findChatById(@RequestBody Integer chatId)
+			throws JsonParseException, JsonMappingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		
+		return new ResponseEntity<Chat>(chatService.findChatById(chatId), HttpStatus.OK);
+	}
+	
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/chat/insert", method = RequestMethod.POST)
 	public ResponseEntity<List<Chat>> insert(@RequestBody ChatItens user,
             HttpServletRequest request)

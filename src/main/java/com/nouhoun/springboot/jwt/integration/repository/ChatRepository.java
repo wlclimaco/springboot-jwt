@@ -18,5 +18,8 @@ public interface ChatRepository extends JpaRepository<Chat, Long> {
 	
 	@Query("select c from ChatItens c where c.jogoId = ?1")
 	public List<ChatItens> findChatByid(Integer userId);
+	
+	@Query("select c from Chat c where c.id = ?1")
+	public Chat findChatById(Integer userId);
     
 }

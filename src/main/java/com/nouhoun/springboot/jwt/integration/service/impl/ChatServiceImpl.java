@@ -47,5 +47,9 @@ public class ChatServiceImpl implements ChatService{
 	public List<Chat> findChatByUser(Integer empresa) {
 		return chatRepository.findChatByUser(empresa);
 	}
-
+	//
+	@Override
+	public Chat findChatById(Integer empresa) {
+		return chatRepository.findChatById(empresa);
+	}
 }

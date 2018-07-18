@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     var commonData = angular.module('wdApp.apps.Auth', []);
-    var sUrlServer = 'https://quadra-test.herokuapp.com';
+    var sUrlServer = 'http://localhost:8080';
     commonData.factory('AuthService', ['Base64', '$http', 'SysMgmtData', function(Base64, $http, SysMgmtData) {
 
         function userValorDefauld(oUser) {
@@ -44,6 +44,11 @@
             
             fetchChatByUserId: function(user, fnCallback) {
                 var url = sUrlServer + '/chat/findChatByUser';
+
+                SysMgmtData.processPostPageData(url, user, fnCallback);
+            }, // fetchChatById
+            fetchChatById: function(user, fnCallback) {
+                var url = sUrlServer + '/chat/findChatById';
 
                 SysMgmtData.processPostPageData(url, user, fnCallback);
             },
