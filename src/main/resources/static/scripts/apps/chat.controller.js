@@ -1,5 +1,5 @@
 (function() {
-    angular.module('wdApp.apps.chat', []).controller('ChatController', ['$scope', 'jogoFactory', 'AuthService', '$rootScope', '$location', '$http', '$interval', 'SysMgmtData', 'toastr', 'toastrConfig',
+    angular.module('wdApp.apps.chat', []).controller('ChatController', ['$scope', 'jogoFactory', 'AuthService', '$rootScope', '$location', '$http', '$interval', 'SysMgmtData', 'toastr', 'toastrConfig', 
         function($scope, jogoFactory, AuthService, $rootScope, $location, localStorageService, toastr, $http, $interval, SysMgmtData, toastr, toastrConfig) {
             var evm = this;
             evm.combo = {};
@@ -45,6 +45,10 @@
             var fnCallback = function(oResp) {
                 $scope.chat = oResp;
 
+               // $location.hash('bottom');
+
+                // call $anchorScroll()
+            //    $anchorScroll();
             }
 
             $scope.msg = "";
@@ -79,6 +83,7 @@
                 	
                     var sMessageHTML = "";
                     $scope.msg = "";
+                    oChatMsg.usuario = oUser;
                     $scope.mensagens.push(oChatMsg)
                   //  $scope.mensagens.push({message:"teste2"});
                   //  for (x = 0; x < oResp.length; x++) {

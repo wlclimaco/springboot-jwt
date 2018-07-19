@@ -129,6 +129,14 @@
         left: 0px;
         bottom: 0;
     }
+    
+    .fix-to-top {
+    position: fixed;
+    top: 55px;
+    height: 50px;
+    z-index: 999;
+    width: 100%;
+}
 </style>
 <div class="page page-dashboard">
     <div class="container chatss" data-ng-controller="ChatController">
@@ -147,8 +155,8 @@
                     </div>
                     <div class="panel-collapse collapse" id="collapseOne{{chatJogo.id}}">
                         <div class="panel-body">
-                            <div class="panel-body msg_container_base" ng-init="funcao2(chatJogo.chatItens)" id="appends{{chatJogo.id}}">
-                               <div ng-repeat="chatItens in mensagens  | orderBy:'dataMessagem'">
+                            <div class="panel-body msg_container_base scrollTop" set-class-when-at-top="fix-to-top"  ng-init="funcao2(chatJogo.chatItens)" id="appends{{chatJogo.id}}">
+                               <div  ng-repeat="chatItens in mensagens  | orderBy:'dataMessagem'" ng-init="scrollToTop()">
                                 <div class="row msg_container base_sent" ng-if="validarUser(chatItens) == true">
                                     <div class="col-md-10 col-xs-8">
                                         <div class="messages msg_sent">
@@ -192,3 +200,10 @@
         </div>
 </div>
  </div>
+<script>
+        $(document).ready(function() {
+            $("#nav-container").removeClass("hide");
+            $("#header").removeClass("hide");
+          //  $('.scrollTop').animate({scrollTop: $('.scrollTop')[0].scrollHeight}, 500);
+        });
+    </script>

@@ -144,6 +144,28 @@
 			}]
 		};
 	}]);	
+	
+	commonDirectives.directive('setClassWhenAtTop', ['$window', function($window) {
+	    var $win = angular.element($window); // wrap window object as jQuery object
+
+	    return {
+	        restrict: 'A',
+	        link: function (scope, element, attrs)
+	        {
+	            var topClass = attrs.setClassWhenAtTop, // get CSS class from directive's attribute value
+	                topPadding = parseInt(attrs.paddingWhenAtTop, 10),
+	                offsetTop = element.prop('offsetTop'); // get element's offset top relative to document
+
+	            $win.on('scroll', function (e) {
+	                if ($window.pageYOffset + topPadding >= offsetTop) {
+	                    element.addClass(topClass);
+	                } else {
+	                    element.removeClass(topClass);
+	                }
+	            });
+	        }
+	    };
+	}])
 
 	// toggle on-canvas for small screen, with CSS uses jQuery
 	commonDirectives.directive('toggleOffCanvas', [function() {
