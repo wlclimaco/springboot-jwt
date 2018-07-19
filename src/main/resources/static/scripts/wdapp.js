@@ -16,7 +16,7 @@ var WebDaptiveAppConfig = {
 	//Java URLs & Settings
 	restAuthBase: 'qat-sysmgmt-controller-rest',
 	//authenticationURL: 'https://quadra-test.herokuapp.com/oauth/token',	
-	authenticationURL: 'http://localhost:8080/oauth/token',
+	authenticationURL: 'https://quadra-test.herokuapp.com/oauth/token',
 	base_county_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/county/api',
 	base_procedure_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/procedure/api',	
 	//PHP URLs & Settings
