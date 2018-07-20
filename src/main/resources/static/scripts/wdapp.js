@@ -15,8 +15,8 @@ var WebDaptiveAppConfig = {
 	//restAuthBase = string to check for rest calls to jDpative, nDaptive or PHP Back-end so the angular http provider can inject x-auth token
 	//Java URLs & Settings
 	restAuthBase: 'qat-sysmgmt-controller-rest',
-	//authenticationURL: 'https://quadra-test.herokuapp.com/oauth/token',	
-	authenticationURL: 'https://quadra-test.herokuapp.com/oauth/token',
+	authenticationURL: 'https://quadra-test.herokuapp.com/oauth/token',	
+	//authenticationURL: 'http://localhost:8080/oauth/token',
 	base_county_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/county/api',
 	base_procedure_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/procedure/api',	
 	//PHP URLs & Settings
@@ -36,14 +36,14 @@ var WebDaptiveAppConfig = {
 	var wdApp = angular.module('wdApp', 
 				['ngRoute', 'ngAnimate', 'jkAngularCarousel', 'ui.bootstrap', 'textAngular', 'ui.grid', 'ngCookies','pascalprecht.translate',
 				'ui.grid.resizeColumns', 'ui.grid.selection', 'ui.grid.pagination',	'ui.tree', 'ngMap', 
-				'ngTagsInput', 'toastr', 'angular-loading-bar', 'chart.js', 'ngecharts', 'base64', 'ngSlimScroll', 
+				'ngTagsInput', 'toastr', 'angular-loading-bar', 'chart.js', 'ngecharts', 'base64', 'ngSlimScroll', 'xeditable',
 				'LocalStorageModule', 'validation.match', 'wdApp.controllers', 'wdApp.directives', 'wdApp.httpint',
 				'wdApp.localization', 'wdApp.ui.controllers', 'wdApp.forms.controllers', 'wdApp.tables.controllers', 
 				'wdApp.tasks', 'wdApp.charts.chartjs.controllers', 'wdApp.charts.echarts.controllers',  'wdApp.dashboard.controllers',
 				'wdApp.authentication', 'wdApp.pages.controllers', 'wdApp.demodata', 'wdApp.apps.stocks', 
 				'wdApp.apps.stocksdata','wdApp.apps.counties', 	'wdApp.apps.procedures','wdApp.apps.sysmgmt.data', 
 				'wdApp.apps.sysmgmt.datajava','wdApp.apps.horario', 'wdApp.apps.dialogs.um','wdApp.apps.sysmgmt.dataphp','wdApp.apps.meusJogos','wdApp.apps.factory.meusJogos',
-				'wdApp.apps.Auth','wdApp.apps.dialogs','wdApp.apps.buscarQuadra','wdApp.apps.notificacao','wdApp.apps.register','wdApp.apps.factory.base64','jkAngularCarousel.templates','wdApp.apps.chat']);  
+				'wdApp.apps.Auth','wdApp.apps.dialogs','wdApp.apps.buscarQuadra','wdApp.apps.notificacao','wdApp.apps.register','wdApp.apps.factory.base64','jkAngularCarousel.templates','wdApp.apps.chat','wdApp.apps.perfil']);  
   
 	wdApp.config(['$routeProvider',
 		function($routeProvider) {
@@ -85,6 +85,10 @@ var WebDaptiveAppConfig = {
 			});
 			
 	}]);
+	
+	wdApp.run(['editableOptions', function(editableOptions) {
+		  editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+		}]);
 	
 	//config localstorage
 	wdApp.config(['localStorageServiceProvider', function(localStorageServiceProvider) {

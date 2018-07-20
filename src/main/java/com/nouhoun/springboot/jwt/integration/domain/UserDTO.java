@@ -22,6 +22,9 @@ public class UserDTO {
 	private String salt;
 	private int keySize;
 	private int iterations;
+	private Endereco endereco; 
+	private String telefone1;
+	private String telefone;
     private Integer loginCount;
     private Date currentLoginAt;
     private Date lastLoginAt;
@@ -35,6 +38,9 @@ public class UserDTO {
     private List<Notificacoes> notificacoes;
     private Boolean receberNotificacoes;
     private Boolean isGoleiro;
+    private Boolean isSoAdmANoGols;
+    private Boolean isSoAdmANoMedia;
+    private Boolean isEnviarNotifPorEmail;
 
     public List<Notificacoes> getNotificacoes() {
 		return notificacoes;
@@ -260,6 +266,30 @@ public class UserDTO {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public Boolean getIsSoAdmANoGols() {
+		return isSoAdmANoGols;
+	}
+
+	public void setIsSoAdmANoGols(Boolean isSoAdmANoGols) {
+		this.isSoAdmANoGols = isSoAdmANoGols;
+	}
+
+	public Boolean getIsSoAdmANoMedia() {
+		return isSoAdmANoMedia;
+	}
+
+	public void setIsSoAdmANoMedia(Boolean isSoAdmANoMedia) {
+		this.isSoAdmANoMedia = isSoAdmANoMedia;
+	}
+
+	public Boolean getIsEnviarNotifPorEmail() {
+		return isEnviarNotifPorEmail;
+	}
+
+	public void setIsEnviarNotifPorEmail(Boolean isEnviarNotifPorEmail) {
+		this.isEnviarNotifPorEmail = isEnviarNotifPorEmail;
 	}
 
 	

@@ -1,164 +1,160 @@
-<div class="page page-profile">
+<style>
+    .user-row {
+        margin-bottom: 14px;
+    }
+    
+    .user-row:last-child {
+        margin-bottom: 0;
+    }
+    
+    .dropdown-user {
+        margin: 13px 0;
+        padding: 5px;
+        height: 100%;
+    }
+    
+    .dropdown-user:hover {
+        cursor: pointer;
+    }
+    
+    .table-user-information>tbody>tr {
+        border-top: 1px solid rgb(221, 221, 221);
+    }
+    
+    .table-user-information>tbody>tr:first-child {
+        border-top: 0;
+    }
+    
+    .table-user-information>tbody>tr>td {
+        border-top: 0;
+    }
+    
+    .toppad {
+        margin-top: 20px;
+    }
+</style>
+<div class="page page-profile" data-ng-controller="PerfilController">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="panel panel-profile">
                 <div class="panel-heading text-center bg-info">
                     <img alt="" src="images/taz.jpg" class="img-circle img80_80">
-                    <h2>{{main.name }} - {{main.backend}}</h2>
-                    <p>Project Manager</p> 
-					<p ng-show="displayRoles">Authorized Role(s) ({{ displayRoles }})</span>					
+                    <h2>{{user.nome}} - {{main.backend}}</h2>
+                    <p ng-show="displayRoles">Authorized Role(s) ({{ displayRoles }})</span>
                 </div>
                 <div class="list-justified-container">
                     <ul class="list-justified text-center">
                         <li>
                             <p class="size-h1">679</p>
-                            <p class="text-muted">Tweets</p>
+                            <p class="text-muted">Jogos</p>
                         </li>
                         <li>
                             <p class="size-h1">575</p>
-                            <p class="text-muted">Followers</p>
+                            <p class="text-muted">Nota(Media)</p>
                         </li>
                         <li>
                             <p class="size-h1">23</p>
-                            <p class="text-muted">Following</p>
+                            <p class="text-muted">Nº Gols</p>
                         </li>
                     </ul>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-sm-6">
-                    <section class="panel panel-box">
-                        <div class="panel-top bg-facebook">
-                            <div class="divider divider"></div>
-                            <i class="fa fa-facebook size-h1"></i>
-                            <div class="divider divider"></div>
-                        </div>
-                        <div class="list-justified-container">
-                            <ul class="list-justified text-center">
-                                <li>
-                                    <p class="size-h1">575</p>
-                                    <p class="text-muted">Followers</p>
-                                </li>
-                                <li>
-                                    <p class="size-h1">23</p>
-                                    <p class="text-muted">Following</p>
-                                </li>
-                            </ul>
-                        </div>
-                    </section>
-                </div>
-                <div class="col-sm-6">
-                    <section class="panel panel-box">
-                        <div class="panel-top bg-twitter">
-                            <div class="divider divider"></div>
-                            <i class="fa fa-twitter size-h1"></i>
-                            <div class="divider divider"></div>
-                        </div>
-                        <div class="list-justified-container">
-                            <ul class="list-justified text-center">
-                                <li>
-                                    <p class="size-h1">575</p>
-                                    <p class="text-muted">Followers</p>
-                                </li>
-                                <li>
-                                    <p class="size-h1">23</p>
-                                    <p class="text-muted">Following</p>
-                                </li>
-                            </ul>
-                        </div>
-                    </section>                        
-                </div>
-            </div>
-          
-        </div>
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Profile Info</strong></div>
-                <div class="panel-body">
-                    <div class="media">
-                        <div class="media-body">
-                            <ul class="list-unstyled list-info">
-                                <li>
-                                    <span class="icon glyphicon glyphicon-user"></span>
-                                    <label>User name</label>
-                                    {{main.name}}
-                                </li>
-                                <li>
-                                    <span class="icon glyphicon glyphicon-envelope"></span>
-                                    <label>Email</label>
-                                    name@example.com
-                                </li>
-                                <li>
-                                    <span class="icon glyphicon glyphicon-home"></span>
-                                    <label>Address</label>
-                                    Street 123, Avenue 45, Country
-                                </li>
-                                <li>
-                                    <span class="icon glyphicon glyphicon-earphone"></span>
-                                    <label>Contact</label>
-                                    (+012) 345 6789
-                                </li>
-                                <li>
-                                    <span class="icon glyphicon glyphicon-flag"></span>
-                                    <label>Nationality</label>
-                                    Australia
-                                </li>
-                            </ul>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="panel mini-box">
-                        <span class="box-icon bg-danger">
-                            <i class="fa fa-film"></i>
-                        </span>
-                        <div class="box-info">
-                            <p class="size-h2">79</p>
-                            <p class="text-muted">Amazing Films</p>
-                        </div>
-                    </div>                    
-                </div>
-                <div class="col-sm-6">
-                    <div class="panel mini-box">
-                        <span class="box-icon bg-warning">
-                            <i class="fa fa-camera"></i>
-                        </span>
-                        <div class="box-info">
-                            <p class="size-h2">63</p>
-                            <p class="text-muted">Wonderful Photos</p>
-                        </div>
-                    </div>                    
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="panel mini-box">
-                        <span class="box-icon bg-success">
-                            <i class="fa fa-bookmark-o"></i>
-                        </span>
-                        <div class="box-info">
-                            <p class="size-h2">55</p>
-                            <p class="text-muted">New Collections</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="panel mini-box">
-                        <span class="box-icon bg-info">
-                            <i class="fa fa-check"></i>
-                        </span>
-                        <div class="box-info">
-                            <p class="size-h2">34</p>
-                            <p class="text-muted">Tasks Finished</p>
-                        </div>
-                    </div>
-                </div>
-            </div>			
         </div>
     </div>
-	<div data-ui-footer></div>		
+    <div class="row">
+
+        <div class="col-md-12 toppad">
+
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><a href="javascript:void(0)" editable-text="user.nome">{{ user.nome || '' }}</a></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-5.jpg" class="img-circle img-responsive"> </div>
+
+                        <!--<div class="col-xs-10 col-sm-10 hidden-md hidden-lg"> <br>
+                  <dl>
+                    <dt>DEPARTMENT:</dt>
+                    <dd>Administrator</dd>
+                    <dt>HIRE DATE</dt>
+                    <dd>11/12/2013</dd>
+                    <dt>DATE OF BIRTH</dt>
+                       <dd>11/12/2013</dd>
+                    <dt>GENDER</dt>
+                    <dd>Male</dd>
+                  </dl>
+                </div>-->
+                        <div class=" col-md-9 col-lg-9 ">
+                            <table class="table table-user-information">
+                                <tbody>
+                                    <tr>
+                                        <td>Email:</td>
+                                        <td>Programming</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cep:</td>
+                                        <td>06/23/2013</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Logradouro</td>
+                                        <td>01/24/1988</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Numero</td>
+                                        <td>01/24/1988</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cidade</td>
+                                        <td>Kathmandu,Nepal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phone Number</td>
+                                        <td>123-4567-890(Landline)<br><br>555-4567-890(Mobile)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>E Goleiro?</td>
+                                        <td><a href="#" editable-checkbox="user.isGoleiro">{{ user.isGoleiro && "Sim" || "Não" }}</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Receber Notificações</td>
+                                        <td><a href="#" editable-checkbox="user.isGoleiro">{{ user.isGoleiro && "Sim" || "Não" }}</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Receber Notificações por Email</td>
+                                        <td><a href="#" editable-checkbox="user.isGoleiro">{{ user.isGoleiro && "Sim" || "Não" }}</a></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                            <a href="#" class="btn btn-primary">My Sales Performance</a>
+                            <a href="#" class="btn btn-primary">Team Sales Performance</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+                    <span class="pull-right">
+                            <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                        </span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div data-ui-footer></div>
+
+<script>
+    $(document).ready(function() {
+        $("#nav-container").removeClass("hide");
+        $("#header").removeClass("hide");
+        //  $('.scrollTop').animate({scrollTop: $('.scrollTop')[0].scrollHeight}, 500);
+    });
+</script>
 </div>

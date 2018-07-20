@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
@@ -98,11 +99,27 @@ public class User{
     @Column(name = "isGoleiro", columnDefinition="Boolean default false")
     private Boolean isGoleiro;
     
+    @Column(name = "isEnviarNotifPorEmail", columnDefinition="Boolean default true")
+    private Boolean isEnviarNotifPorEmail;
+    
     @Column(name = "foto")
     private String foto;
     
     @Column(name = "receberNotificacoes", columnDefinition="Boolean default true")
     private Boolean receberNotificacoes;
+    
+  
+    
+    @OneToOne (cascade=CascadeType.ALL)
+    @JoinColumn(name="endereco_id", unique= true, nullable=true, insertable=true, updatable=true)
+    private Endereco endereco;
+    @Column(name = "endereco_id")
+    private Integer enderecoId;
+    @Column(name = "telefone1")
+	private String telefone1;
+    @Column(name = "telefone")
+	private String telefone;
+   
     
    // @OneToOne(fetch = FetchType.EAGER)
   //  @JoinTable(name = "empresa", joinColumns = @JoinColumn(name = "empresa_id",  unique = false, insertable = false, updatable = false))
@@ -374,6 +391,14 @@ public class User{
 	public void setIsGoleiro(Boolean isGoleiro) {
 		this.isGoleiro = isGoleiro;
 	}
+	
+	public Boolean getIsEnviarNotifPorEmail() {
+		return isEnviarNotifPorEmail;
+	}
+
+	public void setIsEnviarNotifPorEmail(Boolean isEnviarNotifPorEmail) {
+		this.isEnviarNotifPorEmail = isEnviarNotifPorEmail;
+	}
 
 	public User(Integer id, String username, String email, String password, String name, Status active,
 			Integer empresaId) {
@@ -385,8 +410,37 @@ public class User{
 		this.active = active;
 		this.empresaId = empresaId;
 	}
-	
-	
-	
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public Integer getEnderecoId() {
+		return enderecoId;
+	}
+
+	public void setEnderecoId(Integer enderecoId) {
+		this.enderecoId = enderecoId;
+	}
+
+	public String getTelefone1() {
+		return telefone1;
+	}
+
+	public void setTelefone1(String telefone1) {
+		this.telefone1 = telefone1;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 	
 }
