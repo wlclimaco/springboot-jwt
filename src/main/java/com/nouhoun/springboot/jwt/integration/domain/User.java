@@ -113,10 +113,10 @@ public class User{
     @OneToOne (cascade=CascadeType.ALL)
     @JoinColumn(name="endereco_id", unique= true, nullable=true, insertable=true, updatable=true)
     private Endereco endereco;
-    @Column(name = "endereco_id")
-    private Integer enderecoId;
+   
     @Column(name = "telefone1")
 	private String telefone1;
+   
     @Column(name = "telefone")
 	private String telefone;
    
@@ -419,13 +419,6 @@ public class User{
 		this.endereco = endereco;
 	}
 
-	public Integer getEnderecoId() {
-		return enderecoId;
-	}
-
-	public void setEnderecoId(Integer enderecoId) {
-		this.enderecoId = enderecoId;
-	}
 
 	public String getTelefone1() {
 		return telefone1;
@@ -442,5 +435,7 @@ public class User{
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+	
+	
 	
 }
