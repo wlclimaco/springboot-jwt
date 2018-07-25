@@ -131,7 +131,7 @@
 	    this.password = oUser.password ? oUser.password : oUser.password;
 	    this.nome = oUser.nome ? oUser.nome : null;
 	    this.active = oUser.active ? oUser.active : 0;
-	  //  this.roles = oUser.roles ? oUser.roles : null;
+	    this.roles = oUser.roles ? oUser.roles : null;
 	    this.iv = oUser.iv ? oUser.iv : null;
 	    this.salt = oUser.salt ? oUser.salt : null;
 	    this.keySize = oUser.keySize ? oUser.keySize : 0;
@@ -144,6 +144,12 @@
 	    this.updatedAt = oUser.updatedAt ? oUser.updatedAt : new Date();
 	    this.enabled = oUser.enabled ? oUser.enabled : 0;
 	    this.encryptedPassword = oUser.encryptedPassword ? oUser.encryptedPassword : 0;
+	    this.isEnviarNotifPorEmail = oUser.isEnviarNotifPorEmail ? oUser.isEnviarNotifPorEmail : 0;
+	    this.endereco = oUser.endereco ? oUser.endereco : {};
+	    this.telefone1 = oUser.telefone1 ? oUser.telefone1 : "";
+	    this.telefone = oUser.telefone ? oUser.telefone : "";
+	    this.receberNotificacoes = oUser.receberNotificacoes ? oUser.receberNotificacoes : 0;
+	    this.isGoleiro = oUser.isGoleiro ? oUser.isGoleiro : 1;
 	};
 
 	qat.model.horario = function(oHorario) {

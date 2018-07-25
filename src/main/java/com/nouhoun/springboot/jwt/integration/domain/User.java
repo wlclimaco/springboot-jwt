@@ -331,6 +331,10 @@ public class User{
 		this.notificacoes 		 = user.getNotificacoes();
 		this.receberNotificacoes = user.getReceberNotificacoes();
 		this.isGoleiro			 = user.getIsGoleiro();
+		this.isEnviarNotifPorEmail  = user.getIsEnviarNotifPorEmail();
+		this.endereco				= user.getEndereco();
+		this.telefone1				= user.getTelefone1();
+		this.telefone				= user.getTelefone();
 	}
 
 	public User() {

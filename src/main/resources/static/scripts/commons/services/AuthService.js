@@ -1,7 +1,8 @@
 (function() {
     'use strict';
     var commonData = angular.module('wdApp.apps.Auth', []);
-    var sUrlServer = 'https://quadra-test.herokuapp.com';
+   // var sUrlServer = 'http://localhost:8080';
+   var sUrlServer = 'https://quadra-test.herokuapp.com';
     commonData.factory('AuthService', ['Base64', '$http', 'SysMgmtData', function(Base64, $http, SysMgmtData) {
 
         function userValorDefauld(oUser) {
@@ -72,6 +73,13 @@
 
                 SysMgmtData.processPostPageData(url, oJogo, fnCallback);
             }, 
+            
+            userUpdate: function(oUser, fnCallback) {
+                
+                var url = sUrlServer + '/user/update';
+
+                SysMgmtData.processPostPageData(url, new qat.model.user(oUser), fnCallback);
+            },
             
             register: function(oUser, fnCallback) {
                 

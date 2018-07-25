@@ -12,7 +12,7 @@
                 
                 var fnCallback2 = function(oResp)
                 {
-                    
+                    console.log(oResp)
                 }
 
                 

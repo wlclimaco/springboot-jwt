@@ -35,6 +35,7 @@
     }
 </style>
 <div class="page page-profile" data-ng-controller="PerfilController">
+
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-profile">
@@ -69,7 +70,7 @@
 
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><a href="javascript:void(0)" editable-text="user.nome">{{ user.nome || '' }}</a></h3>
+                    <h3 class="panel-title"><a href="javascript:void(0)"  editable-text="user.nome" onaftersave="saveUser()">{{ user.nome || '' }}</a></h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -92,40 +93,41 @@
                                 <tbody>
                                     <tr>
                                         <td>Email:</td>
-                                        <td>Programming</td>
+                                        <td><a href="javascript:void(0)" editable-text="user.email">{{ user.email || 'Vazio' }}</a></td>
                                     </tr>
                                     <tr>
                                         <td>Cep:</td>
-                                        <td>06/23/2013</td>
+                                        <td><a href="javascript:void(0)" editable-text="user.endereco.cep">{{ user.endereco.cep || 'Vazio' }}</a></td>
                                     </tr>
                                     <tr>
                                         <td>Logradouro</td>
-                                        <td>01/24/1988</td>
+                                        <td><a href="javascript:void(0)" editable-text="user.endereco.logradouro">{{ user.endereco.logradouro || 'Vazio' }}</a></td>
                                     </tr>
                                     <tr>
                                         <td>Numero</td>
-                                        <td>01/24/1988</td>
+                                        <td><a href="javascript:void(0)" editable-text="user.endereco.numero">{{ user.endereco.numero || 'Vazio' }}</a></td>
                                     </tr>
                                     <tr>
                                         <td>Cidade</td>
-                                        <td>Kathmandu,Nepal</td>
+                                        <td><a href="javascript:void(0)" editable-text="user.endereco.cidade">{{ user.endereco.cidade || 'Vazio' }}</a></td>
                                     </tr>
                                     <tr>
-                                        <td>Phone Number</td>
-                                        <td>123-4567-890(Landline)<br><br>555-4567-890(Mobile)
+                                        <td>Telefone</td>
+                                        <td><a href="javascript:void(0)" onaftersave="saveUser()" editable-text="user.telefone1">{{ user.telefone1 || 'Vazio' }}</a><br>
+                                        <br><a href="javascript:void(0)" onaftersave="saveUser()" editable-text="user.telefone">{{ user.telefone || 'Vazio' }}</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>E Goleiro?</td>
-                                        <td><a href="#" editable-checkbox="user.isGoleiro">{{ user.isGoleiro && "Sim" || "Não" }}</a></td>
+                                        <td><a href="javascript:void(0)" onaftersave="saveUser()" editable-checkbox="user.isGoleiro">{{ user.isGoleiro && "Sim" || "Não" }}</a></td>
                                     </tr>
                                     <tr>
                                         <td>Receber Notificações</td>
-                                        <td><a href="#" editable-checkbox="user.isGoleiro">{{ user.isGoleiro && "Sim" || "Não" }}</a></td>
+                                        <td><a href="javascript:void(0)" onbeforesave="saveUser()" editable-checkbox="user.receberNotificacoes">{{ user.receberNotificacoes && "Sim" || "Não" }}</a></td>
                                     </tr>
                                     <tr>
                                         <td>Receber Notificações por Email</td>
-                                        <td><a href="#" editable-checkbox="user.isGoleiro">{{ user.isGoleiro && "Sim" || "Não" }}</a></td>
+                                        <td><a href="javascript:void(0)" onbeforesave="saveUser()" editable-checkbox="user.isEnviarNotifPorEmail">{{ user.isEnviarNotifPorEmail && "Sim" || "Não" }}</a></td>
                                     </tr>
 
                                 </tbody>
@@ -147,6 +149,7 @@
             </div>
         </div>
     </div>
+  
 </div>
 
 <div data-ui-footer></div>

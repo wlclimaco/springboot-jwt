@@ -126,17 +126,17 @@ public class UserController {
 
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public @ResponseBody APIResponse updateMensagem(@Valid User user, BindingResult bindingResult,HttpServletRequest request) {
+	public @ResponseBody APIResponse updateMensagem(@RequestBody UserDTO userDTO,
+            HttpServletRequest request) throws NoSuchPaddingException, UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException, InvalidKeySpecException {
 		ModelAndView modelAndView = new ModelAndView();
 		List<String> erros = new ArrayList<String>();
-		User userExists = userService.findUserByEmail(user.getEmail());
-		if (userExists != null) {
+		User userExists = userService.findUserByEmail(userDTO.getEmail());
+		if (userExists == null) {
 			erros.add("There is already a user registered with the email provided");
 		}
-
-		userService.saveUser(user, request);
+		userService.updateUser(new User(userDTO), request);
 		modelAndView.addObject("successMessage", "User has been registered successfully");
-		modelAndView.addObject("user", new User());
+		modelAndView.addObject("user", userDTO);
 		modelAndView.setViewName("registration");
 
 		HashMap<String, Object> authResp = new HashMap<String, Object>();
@@ -144,7 +144,7 @@ public class UserController {
 
 		Object token = auth.getCredentials();
 		authResp.put("token", token);
-		authResp.put("user", user);
+		authResp.put("user", userDTO);
 		authResp.put("Error", erros);
 
 		return APIResponse.toOkResponse(authResp);

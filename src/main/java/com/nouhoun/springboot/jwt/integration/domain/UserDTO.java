@@ -22,9 +22,7 @@ public class UserDTO {
 	private String salt;
 	private int keySize;
 	private int iterations;
-	private Endereco endereco; 
-	private String telefone1;
-	private String telefone;
+
     private Integer loginCount;
     private Date currentLoginAt;
     private Date lastLoginAt;
@@ -41,6 +39,9 @@ public class UserDTO {
     private Boolean isSoAdmANoGols;
     private Boolean isSoAdmANoMedia;
     private Boolean isEnviarNotifPorEmail;
+	private Endereco endereco; 
+	private String telefone1;
+	private String telefone;
 
     public List<Notificacoes> getNotificacoes() {
 		return notificacoes;
@@ -292,6 +293,28 @@ public class UserDTO {
 		this.isEnviarNotifPorEmail = isEnviarNotifPorEmail;
 	}
 
-	
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getTelefone1() {
+		return telefone1;
+	}
+
+	public void setTelefone1(String telefone1) {
+		this.telefone1 = telefone1;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
     
 }
