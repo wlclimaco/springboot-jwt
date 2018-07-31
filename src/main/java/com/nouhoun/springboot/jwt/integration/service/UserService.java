@@ -12,7 +12,7 @@ public interface UserService {
 	public User findUserByEmail(String email);
 	public User findUserById(Integer id);
 	public void saveUser(User user,HttpServletRequest request);
-	public void updateUser(User user,HttpServletRequest request);
+	public User updateUser(User user,HttpServletRequest request);
 	boolean isValidPass(User user, String rawPass);
 	User loginUser(User user, HttpServletRequest request);
 	

@@ -134,7 +134,8 @@ public class UserController {
 		if (userExists == null) {
 			erros.add("There is already a user registered with the email provided");
 		}
-		userService.updateUser(new User(userDTO), request);
+		
+		User user23= userService.updateUser(new User(userDTO), request);
 		modelAndView.addObject("successMessage", "User has been registered successfully");
 		modelAndView.addObject("user", userDTO);
 		modelAndView.setViewName("registration");
@@ -144,7 +145,7 @@ public class UserController {
 
 		Object token = auth.getCredentials();
 		authResp.put("token", token);
-		authResp.put("user", userDTO);
+		authResp.put("user", user23);
 		authResp.put("Error", erros);
 
 		return APIResponse.toOkResponse(authResp);

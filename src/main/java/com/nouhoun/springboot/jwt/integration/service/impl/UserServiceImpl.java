@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nouhoun.springboot.jwt.integration.domain.User;
-import com.nouhoun.springboot.jwt.integration.repository.RoleRepository;
 import com.nouhoun.springboot.jwt.integration.repository.UserRepository;
 import com.nouhoun.springboot.jwt.integration.service.UserService;
 
@@ -18,10 +17,6 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	private UserRepository userRepository;
-	@Autowired
-    private RoleRepository roleRepository;
-    
-
 	
 	@Override
 	public User findUserByEmail(String email) {
@@ -29,10 +24,10 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void updateUser(User user, HttpServletRequest request) {
+	public User updateUser(User user, HttpServletRequest request) {
         user.setCurrentLoginAt(new Date());
         user.setCurrentLoginIp(request.getRemoteHost());
-		userRepository.save(user);
+        return userRepository.save(user);
 	}
 	@Override
 	public void saveUser(User user, HttpServletRequest request) {

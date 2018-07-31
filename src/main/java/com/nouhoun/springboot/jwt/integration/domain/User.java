@@ -1,6 +1,5 @@
 package com.nouhoun.springboot.jwt.integration.domain;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,17 +30,17 @@ import net.minidev.json.annotate.JsonIgnore;
 
 @Entity
 @Table(name = "user")
-public class User{
-	
-	 public enum Status {
-	        INATIVO,ATIVO, SUSPENSO, AGUARDANDO
-	    }
-	 
+public class User {
+
+	public enum Status {
+		INATIVO, ATIVO, SUSPENSO, AGUARDANDO
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "user_id")
 	private Integer id;
-	
+
 	@Column(name = "email")
 	@Email(message = "*Please provide a valid Email")
 	@NotEmpty(message = "*Please provide an email")
@@ -57,81 +56,90 @@ public class User{
 
 	@Column(name = "active")
 	private Status active;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns
-            = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<Role> roles;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private List<Role> roles;
 
 	@Column(name = "iv")
 	private String iv;
 	@Column(name = "salt")
 	private String salt;
-	
-	//@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    //@JoinColumn(name= "user_id", insertable = false,unique = false, nullable = false, updatable = false)
-//	@OneToMany
-	//@JoinTable(name = "jogo_por_data", joinColumns = @JoinColumn(name = "user_id",insertable = false,unique = false, nullable = false, updatable = false))
-	//private List<Jogo> jogos;
-	
+
+	@Column(name = "cep")
+	private String cep;
+
+	@Column(name = "logradouro")
+	private String logradouro;
+
+	@Column(name = "numero")
+	private String numero;
+
+	@Column(name = "bairro")
+	private String bairro;
+
+	@Column(name = "referencia")
+	private String referencia;
+
+	@Column(name = "cidade")
+	private String cidade;
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "estado_id", insertable = false, unique = false, nullable = false, updatable = false)
+	private Estado estado;
+
+	@Column(name = "estado_id")
+	private Integer estadoId;
+
+	@Column(name = "longi")
+	private String longi;
+
+	@Column(name = "lat")
+	private String lat;
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name="user_id",  insertable = false,unique = false, nullable = false, updatable = false)
+	@JoinColumn(name = "user_id", insertable = false, unique = false, nullable = false, updatable = false)
 	private List<Notificacoes> notificacoes;
-	
+
 	private int keySize;
 	private int iterations;
-    @Column(name = "loginCount")
-    private @JsonIgnore Integer loginCount;
-    @Column(name = "currentLoginAt")
-    private Date currentLoginAt;
-    @Column(name = "lastLoginAt")
-    private Date lastLoginAt;
-    @Column(name = "currentLoginIp")
-    private @JsonIgnore String currentLoginIp;
-    @Column(name = "lastLoginIp")
-    private @JsonIgnore String lastLoginIp;
-    @Column(name = "updatedAt")
-    private @JsonIgnore Date updatedAt;
-    
-    @Column(name = "enabled", columnDefinition="Boolean default true")
-    private Boolean enabled;
-    
-    @Column(name = "isGoleiro", columnDefinition="Boolean default false")
-    private Boolean isGoleiro;
-    
-    @Column(name = "isEnviarNotifPorEmail", columnDefinition="Boolean default true")
-    private Boolean isEnviarNotifPorEmail;
-    
-    @Column(name = "foto")
-    private String foto;
-    
-    @Column(name = "receberNotificacoes", columnDefinition="Boolean default true")
-    private Boolean receberNotificacoes;
-    
-  
-    
-    @OneToOne (cascade=CascadeType.ALL)
-    @JoinColumn(name="endereco_id", unique= true, nullable=true, insertable=true, updatable=true)
-    private Endereco endereco;
-   
-    @Column(name = "telefone1")
-	private String telefone1;
-   
-    @Column(name = "telefone")
-	private String telefone;
-   
-    
-   // @OneToOne(fetch = FetchType.EAGER)
-  //  @JoinTable(name = "empresa", joinColumns = @JoinColumn(name = "empresa_id",  unique = false, insertable = false, updatable = false))
-  //  @OneToOne(optional = true)
-   // @JoinColumn(name = "empresa_id", referencedColumnName = "empresa_id", insertable = false, updatable = false)
-   // private Empresa empresa;
+	@Column(name = "loginCount")
+	private @JsonIgnore Integer loginCount;
+	@Column(name = "currentLoginAt")
+	private Date currentLoginAt;
+	@Column(name = "lastLoginAt")
+	private Date lastLoginAt;
+	@Column(name = "currentLoginIp")
+	private @JsonIgnore String currentLoginIp;
+	@Column(name = "lastLoginIp")
+	private @JsonIgnore String lastLoginIp;
+	@Column(name = "updatedAt")
+	private @JsonIgnore Date updatedAt;
 
-    @Column(name = "empresa_id")
-    private Integer empresaId;
-    
-    
-    private static BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	@Column(name = "enabled", columnDefinition = "Boolean default true")
+	private Boolean enabled;
+
+	@Column(name = "isGoleiro", columnDefinition = "Boolean default false")
+	private Boolean isGoleiro;
+
+	@Column(name = "isEnviarNotifPorEmail", columnDefinition = "Boolean default true")
+	private Boolean isEnviarNotifPorEmail;
+
+	@Column(name = "foto")
+	private String foto;
+
+	@Column(name = "receberNotificacoes", columnDefinition = "Boolean default true")
+	private Boolean receberNotificacoes;
+
+	@Column(name = "telefone1")
+	private String telefone1;
+
+	@Column(name = "telefone")
+	private String telefone;
+
+	@Column(name = "empresa_id")
+	private Integer empresaId;
+
+	private static BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 	public String getPassword() {
 		return password;
@@ -156,8 +164,6 @@ public class User{
 	public void setActive(Status active) {
 		this.active = active;
 	}
-
-
 
 	public List<Role> getRoles() {
 		return roles;
@@ -198,9 +204,7 @@ public class User{
 	public void setIterations(int iterations) {
 		this.iterations = iterations;
 	}
-	
-	
-	
+
 	public String getNome() {
 		return nome;
 	}
@@ -210,19 +214,19 @@ public class User{
 	}
 
 	/**
-     * Method to create the hash of the password before storing
-     *
-     * @param pass
-     *
-     * @return SHA hash digest of the password
-     */
-    public static synchronized String hashPassword(String pass) {
-        return passwordEncoder.encode(pass);
-    }
+	 * Method to create the hash of the password before storing
+	 *
+	 * @param pass
+	 *
+	 * @return SHA hash digest of the password
+	 */
+	public static synchronized String hashPassword(String pass) {
+		return passwordEncoder.encode(pass);
+	}
 
-    public static synchronized boolean doesPasswordMatch(String rawPass, String encodedPass) {
-        return passwordEncoder.matches(rawPass, encodedPass);
-    }
+	public static synchronized boolean doesPasswordMatch(String rawPass, String encodedPass) {
+		return passwordEncoder.matches(rawPass, encodedPass);
+	}
 
 	public Integer getLoginCount() {
 		return loginCount;
@@ -280,8 +284,6 @@ public class User{
 		this.updatedAt = updatedAt;
 	}
 
-
-
 	public Integer getId() {
 		return id;
 	}
@@ -291,8 +293,8 @@ public class User{
 	}
 
 	public boolean isEnabled() {
-        return this.enabled;
-    }
+		return this.enabled;
+	}
 
 	public User(String email, String password, String name, String lastName, Status active, String roleName,
 			boolean enabled) {
@@ -307,40 +309,50 @@ public class User{
 		this.roles = roles;
 		this.enabled = enabled;
 	}
-	
+
 	public User(UserDTO user) {
 		super();
-	
-		this.email 				 = user.getEmail();
-		this.nome 				 = user.getNome();
-		this.password 			 = user.getPassword();
-		this.active 			 = user.getActive();
-		this.roles 				 = user.getRoles();
-		this.iv 				 = user.getIv();
-		this.salt 				 = user.getSalt();
-		this.keySize 			 = user.getKeySize();
-		this.iterations 		 = user.getIterations();
-		this.loginCount 		 = user.getLoginCount();
-		this.currentLoginAt 	 = user.getCurrentLoginAt();
-		this.lastLoginAt 		 = user.getLastLoginAt();
-		this.currentLoginIp 	 = user.getCurrentLoginIp();
-		this.lastLoginIp 		 = user.getLastLoginIp();
-		this.foto 				 = user.getFoto();
-		this.updatedAt 			 = user.getUpdatedAt();
-		this.enabled 			 = user.getEnabled();
-		this.notificacoes 		 = user.getNotificacoes();
+
+		this.id = user.getId();
+		this.email = user.getEmail();
+		this.nome = user.getNome();
+		this.password = user.getPassword();
+		this.active = user.getActive();
+		this.roles = user.getRoles();
+		this.iv = user.getIv();
+		this.salt = user.getSalt();
+		this.keySize = user.getKeySize();
+		this.iterations = user.getIterations();
+		this.loginCount = user.getLoginCount();
+		this.currentLoginAt = user.getCurrentLoginAt();
+		this.lastLoginAt = user.getLastLoginAt();
+		this.currentLoginIp = user.getCurrentLoginIp();
+		this.lastLoginIp = user.getLastLoginIp();
+		this.foto = user.getFoto();
+		this.updatedAt = user.getUpdatedAt();
+		this.enabled = user.getEnabled();
+		this.notificacoes = user.getNotificacoes();
 		this.receberNotificacoes = user.getReceberNotificacoes();
-		this.isGoleiro			 = user.getIsGoleiro();
-		this.isEnviarNotifPorEmail  = user.getIsEnviarNotifPorEmail();
-		this.endereco				= user.getEndereco();
-		this.telefone1				= user.getTelefone1();
-		this.telefone				= user.getTelefone();
+		this.isGoleiro = user.getIsGoleiro();
+		this.isEnviarNotifPorEmail = user.getIsEnviarNotifPorEmail();
+		if (user.getEndereco() != null) {
+			this.cep = user.getEndereco().getCep();
+			this.logradouro = user.getEndereco().getLogradouro();
+			this.numero = user.getEndereco().getNumero();
+			this.bairro = user.getEndereco().getBairro();
+			this.referencia = user.getEndereco().getReferencia();
+			this.cidade = user.getEndereco().getCidade();
+			this.estadoId = user.getEndereco().getEstadoId();
+			this.longi = user.getEndereco().getLongi();
+			this.lat = user.getEndereco().getLat();
+		}
+		this.telefone1 = user.getTelefone1();
+		this.telefone = user.getTelefone();
 	}
 
 	public User() {
 		super();
 	}
-
 
 	public Integer getEmpresaId() {
 		return empresaId;
@@ -349,8 +361,6 @@ public class User{
 	public void setEmpresaId(Integer empresaId) {
 		this.empresaId = empresaId;
 	}
-
-	
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -395,7 +405,7 @@ public class User{
 	public void setIsGoleiro(Boolean isGoleiro) {
 		this.isGoleiro = isGoleiro;
 	}
-	
+
 	public Boolean getIsEnviarNotifPorEmail() {
 		return isEnviarNotifPorEmail;
 	}
@@ -415,15 +425,6 @@ public class User{
 		this.empresaId = empresaId;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
-
 	public String getTelefone1() {
 		return telefone1;
 	}
@@ -439,7 +440,85 @@ public class User{
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	
-	
-	
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getLogradouro() {
+		return logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getReferencia() {
+		return referencia;
+	}
+
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+
+	public Integer getEstadoId() {
+		return estadoId;
+	}
+
+	public void setEstadoId(Integer estadoId) {
+		this.estadoId = estadoId;
+	}
+
+	public String getLongi() {
+		return longi;
+	}
+
+	public void setLongi(String longi) {
+		this.longi = longi;
+	}
+
+	public String getLat() {
+		return lat;
+	}
+
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+
 }

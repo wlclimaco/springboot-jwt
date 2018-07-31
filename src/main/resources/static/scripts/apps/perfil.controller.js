@@ -9,15 +9,18 @@
           //      $scope.loading = false;
                 $scope.user = oUser;
           //  }
-                
+
                 var fnCallback2 = function(oResp)
-                {
-                    console.log(oResp)
+                {debugger
+                	if(oResp && oResp.result && oResp.result.user){
+                		$scope.user = oResp.result.user;
+                		localStorage.setItem('wdAppLS.currentUser', JSON.stringify($scope.user));
+                	}
                 }
 
                 
                 $scope.saveUser = function() {
-                	debugger
+                	
                 	AuthService.userUpdate($scope.user, fnCallback2);
                 }
 
