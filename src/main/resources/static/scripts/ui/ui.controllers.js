@@ -152,11 +152,10 @@
 							'$scope',
 							'$uibModal',
 							'$log',
-							'$document',
-							function($scope, $uibModal, $log, $document) {
+							'$document','AuthService',
+							function($scope, $uibModal, $log, $document,AuthService) {
 								$scope.items = [ "item1", "item2", "item3" ];
 								$scope.ok = function(a, b) {
-									debugger;
 									console.log('a')
 								}
 								$scope.open = function(size, parentSelector,
@@ -236,6 +235,15 @@
 												+ new Date());
 									});
 								};
+								
+								var fnCallback2 = function(oResp)
+				                {debugger
+				                	if(oResp && oResp.result && oResp.result.user){
+				                		$scope.tirarTime = oResp.result.user;
+				                	}
+				                }
+								var oUser = JSON.parse(localStorage.getItem('wdAppLS.currentUser'));
+								AuthService.findJogoByUserAndStatus(oUser, fnCallback2);
 								
 								$scope.gravarGols = function(jogoData) {
 									alert('!!!')

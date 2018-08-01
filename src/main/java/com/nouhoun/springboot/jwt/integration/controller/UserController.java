@@ -24,7 +24,6 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Base64;
@@ -38,7 +37,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,9 +50,15 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nouhoun.springboot.jwt.api.APIResponse;
 import com.nouhoun.springboot.jwt.integration.config.JWTTokenAuthFilter;
+import com.nouhoun.springboot.jwt.integration.domain.InfoUser;
+import com.nouhoun.springboot.jwt.integration.domain.Jogo;
+import com.nouhoun.springboot.jwt.integration.domain.JogoPorData;
+import com.nouhoun.springboot.jwt.integration.domain.JogoPorData.StatusJogoPorData;
+import com.nouhoun.springboot.jwt.integration.domain.NotasGols;
 import com.nouhoun.springboot.jwt.integration.domain.Role;
 import com.nouhoun.springboot.jwt.integration.domain.User;
 import com.nouhoun.springboot.jwt.integration.domain.UserDTO;
+import com.nouhoun.springboot.jwt.integration.service.JogoService;
 import com.nouhoun.springboot.jwt.integration.service.UserService;
 
 import io.jsonwebtoken.Jwts;
@@ -67,6 +71,9 @@ public class UserController {
 	private static Logger LOG = LoggerFactory.getLogger(UserController.class);
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	public JogoService jogoService;
 
 	// @Autowired
 	// private JogoService jogoService;
@@ -142,7 +149,11 @@ public class UserController {
 
 		HashMap<String, Object> authResp = new HashMap<String, Object>();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
+		InfoUser info = getInfoUser(user23); 
+		user23.setQntJogos(info.getQntJogos());
+		user23.setQntGols(info.getQntGols());
+		user23.setMediaNota(info.getMediaNota());
+		user23.setMediaGols(info.getMediaGols());
 		Object token = auth.getCredentials();
 		authResp.put("token", token);
 		authResp.put("user", user23);
@@ -155,14 +166,51 @@ public class UserController {
 	@RequestMapping(value = "/findUserById", method = RequestMethod.POST)
 	public User getUsers(@RequestBody Integer id, HttpServletRequest request, HttpServletResponse response)
 			throws JsonParseException, JsonMappingException, IOException {
-		return userService.findUserById(id);
+		User user = userService.findUserById(id);
+		
+		InfoUser info = getInfoUser(user); 
+		user.setQntJogos(info.getQntJogos());
+		user.setQntGols(info.getQntGols());
+		user.setMediaNota(info.getMediaNota());
+		user.setMediaGols(info.getMediaGols());
+
+		return user;
+	}
+
+	private InfoUser getInfoUser(User user) {
+		List<Jogo> quadra = jogoService.findJogoByUser(user.getId());
+		Integer countJogos = 0;
+		Integer countGols = 0;
+		Integer countMedia = 0;
+		Double media = new Double(0);
+		for (Jogo jogo : quadra) {
+			if(jogo!= null && !jogo.getJogoPorData().isEmpty()) {
+				countJogos++;
+				for (JogoPorData jogoPorData : jogo.getJogoPorData()) {
+					if(jogoPorData!= null && !jogoPorData.getNotasGols().isEmpty() && StatusJogoPorData.JAJOGADO.equals(jogoPorData.getStatus())) {
+						for (NotasGols notasGols : jogoPorData.getNotasGols()) {
+							if(notasGols.getUserId() == user.getId()) {
+								countMedia++;
+								media = media + notasGols.getNota();
+								countGols = countGols + notasGols.getQntGols();
+							}
+						}
+					}
+				}
+			}
+			
+		}
+		//InfoUser(Integer qntJogos, Integer qntGols, Double mediaNota, Double mediaGols)
+		return new InfoUser(countJogos,countGols,(media/countMedia),new Double(countGols/countJogos));
 	}
 
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/findUserByEmail", method = RequestMethod.POST)
 	public User findUserByEmail(@RequestBody String email, HttpServletRequest request, HttpServletResponse response)
 			throws JsonParseException, JsonMappingException, IOException {
-		return userService.findUserByEmail(email);
+		User user =  userService.findUserByEmail(email);
+	//	user.setInfoUser(getInfoUser(user));
+		return user;
 	}
 
 	@CrossOrigin(origins = "*")

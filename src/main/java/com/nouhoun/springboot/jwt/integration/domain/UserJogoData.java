@@ -1,8 +1,6 @@
 package com.nouhoun.springboot.jwt.integration.domain;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,11 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * The core Job Entity
@@ -51,7 +46,7 @@ public class UserJogoData {
 	private User usuario;
 	
 	@Column(name = "jogoPorData_id") 
-    private Integer jogoPorData_id;
+    private Integer jogoPorDataId;
 	
 	@Column(name = "status")
 	private StatusUserJogoPorData status;
@@ -77,13 +72,6 @@ public class UserJogoData {
 		this.id = id;
 	}
 
-	public Integer getJogo_por_data() {
-		return jogoPorData_id;
-	}
-	public void setJogo_por_data(Integer jogo_por_data) {
-		this.jogoPorData_id = jogo_por_data;
-	}
-
 	public StatusUserJogoPorData getStatus() {
 		return status;
 	}
@@ -93,7 +81,7 @@ public class UserJogoData {
 	public UserJogoData(Integer user_id, Integer jogo_por_data,StatusUserJogoPorData status,Integer jogoId,Integer aprovadoPor) {
 		super();
 		this.user_id = user_id;
-		this.jogoPorData_id = jogo_por_data;
+		this.jogoPorDataId = jogo_por_data;
 		this.status = status;
 		this.aprovadoDate = new Date();
 		this.jogo_id = jogoId;
@@ -112,11 +100,12 @@ public class UserJogoData {
 	public void setUsuario(User usuario) {
 		this.usuario = usuario;
 	}
-	public Integer getJogoPorData_id() {
-		return jogoPorData_id;
+
+	public Integer getJogoPorDataId() {
+		return jogoPorDataId;
 	}
-	public void setJogoPorData_id(Integer jogoPorData_id) {
-		this.jogoPorData_id = jogoPorData_id;
+	public void setJogoPorDataId(Integer jogoPorDataId) {
+		this.jogoPorDataId = jogoPorDataId;
 	}
 	public Integer getJogo_id() {
 		return jogo_id;

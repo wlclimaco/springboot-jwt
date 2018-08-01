@@ -17,6 +17,7 @@ public interface JogoService {
 	public void updateJogo(Jogo empresa);
 	public void deleteJogo(Jogo empresa);
 	public List<Jogo> findJogoByUser(Integer empresa);
+	
 	public List<Jogo> findJogoByStatus(Status status,Processo processo);
 	
 	public Jogo findJogoById(Integer empresa);

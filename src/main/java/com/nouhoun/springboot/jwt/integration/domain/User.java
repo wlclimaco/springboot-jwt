@@ -24,8 +24,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Transient;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.nouhoun.springboot.jwt.integration.domain.User.Status;
-
 import net.minidev.json.annotate.JsonIgnore;
 
 @Entity
@@ -138,6 +136,11 @@ public class User {
 
 	@Column(name = "empresa_id")
 	private Integer empresaId;
+	
+	private Integer qntJogos;
+	private Integer qntGols;
+	private Double  mediaNota;
+	private Double  mediaGols;
 
 	private static BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -520,5 +523,39 @@ public class User {
 	public void setLat(String lat) {
 		this.lat = lat;
 	}
+
+	public Integer getQntJogos() {
+		return qntJogos;
+	}
+
+	public void setQntJogos(Integer qntJogos) {
+		this.qntJogos = qntJogos;
+	}
+
+	public Integer getQntGols() {
+		return qntGols;
+	}
+
+	public void setQntGols(Integer qntGols) {
+		this.qntGols = qntGols;
+	}
+
+	public Double getMediaNota() {
+		return mediaNota;
+	}
+
+	public void setMediaNota(Double mediaNota) {
+		this.mediaNota = mediaNota;
+	}
+
+	public Double getMediaGols() {
+		return mediaGols;
+	}
+
+	public void setMediaGols(Double mediaGols) {
+		this.mediaGols = mediaGols;
+	}
+
+	
 
 }

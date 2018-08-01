@@ -28,8 +28,9 @@
     .table-user-information>tbody>tr>td {
         border-top: 0;
     }
-    
-    
+    .bg-info {
+    	background-color :#0CA84F!Important;
+    }
     .toppad {
         margin-top: 20px;
     }
@@ -47,16 +48,20 @@
                 <div class="list-justified-container">
                     <ul class="list-justified text-center">
                         <li>
-                            <p class="size-h1">679</p>
+                            <p class="size-h1">{{user.qntJogos}}</p>
                             <p class="text-muted">Jogos</p>
                         </li>
                         <li>
-                            <p class="size-h1">575</p>
+                            <p class="size-h1">{{user.mediaNota}}</p>
                             <p class="text-muted">Nota(Media)</p>
                         </li>
                         <li>
-                            <p class="size-h1">23</p>
+                            <p class="size-h1">{{user.qntGols}}</p>
                             <p class="text-muted">Nº Gols</p>
+                        </li>
+                        <li>
+                            <p class="size-h1">{{user.mediaGols}}</p>
+                            <p class="text-muted">Media Gols</p>
                         </li>
                     </ul>
                 </div>
@@ -93,31 +98,31 @@
                                 <tbody>
                                     <tr>
                                         <td>Email:</td>
-                                        <td><a href="javascript:void(0)" editable-text="user.email">{{ user.email || 'Vazio' }}</a></td>
+                                        <td><a href="javascript:void(0)" onaftersave="saveUser()" editable-text="user.email">{{ user.email || 'Vazio' }}</a></td>
                                     </tr>
                                     <tr>
                                         <td>Cep:</td>
-                                        <td><a href="javascript:void(0)" editable-text="user.cep">{{ user.cep || 'Vazio' }}</a></td>
+                                        <td><a href="javascript:void(0)" onaftersave="saveUser()" editable-text="user.cep">{{ user.cep || 'Vazio' }}</a></td>
                                     </tr>
                                     <tr>
                                         <td>Logradouro</td>
-                                        <td><a href="javascript:void(0)" editable-text="user.logradouro">{{ user.logradouro || 'Vazio' }}</a></td>
+                                        <td><a href="javascript:void(0)" onaftersave="saveUser()" editable-text="user.logradouro">{{ user.logradouro || 'Vazio' }}</a></td>
                                     </tr>
                                     <tr>
                                         <td>Numero</td>
-                                        <td><a href="javascript:void(0)" editable-text="user.numero">{{ user.numero || 'Vazio' }}</a></td>
+                                        <td><a href="javascript:void(0)" onaftersave="saveUser()" editable-text="user.numero">{{ user.numero || 'Vazio' }}</a></td>
                                     </tr>
                                     <tr>
                                         <td>Bairro</td>
-                                        <td><a href="javascript:void(0)" editable-text="user.bairro">{{ user.bairro || 'Vazio' }}</a></td>
+                                        <td><a href="javascript:void(0)" onaftersave="saveUser()" editable-text="user.bairro">{{ user.bairro || 'Vazio' }}</a></td>
                                     </tr>
                                     <tr>
                                         <td>Cidade</td>
-                                        <td><a href="javascript:void(0)" editable-text="user.cidade">{{ user.cidade || 'Vazio' }}</a></td>
+                                        <td><a href="javascript:void(0)" onaftersave="saveUser()" editable-text="user.cidade">{{ user.cidade || 'Vazio' }}</a></td>
                                     </tr>
                                     <tr>
                                         <td>Estado</td>
-                                        <td><a href="javascript:void(0)" editable-text="user.estado.sigla">{{ user.estado.sigla || 'Vazio' }}</a></td>
+                                        <td><a href="javascript:void(0)" onaftersave="saveUser()" editable-text="user.estado.sigla">{{ user.estado.sigla || 'Vazio' }}</a></td>
                                     </tr>
                                     <tr>
                                         <td>Telefone</td>
@@ -140,20 +145,9 @@
 
                                 </tbody>
                             </table>
-
-                            <a href="#" class="btn btn-primary">My Sales Performance</a>
-                            <a href="#" class="btn btn-primary">Team Sales Performance</a>
                         </div>
                     </div>
                 </div>
-                <div class="panel-footer">
-                    <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
-                    <span class="pull-right">
-                            <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
-                        </span>
-                </div>
-
             </div>
         </div>
     </div>
