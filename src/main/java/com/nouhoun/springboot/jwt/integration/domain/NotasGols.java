@@ -44,7 +44,7 @@ public class NotasGols {
     private Integer jogoPorDataId;
 	
 	@Column(name = "nota") 
-	private Integer nota;
+	private Double nota;
 	
 	@Column(name = "qntGols") 
 	private Integer qntGols;
@@ -95,11 +95,11 @@ public class NotasGols {
 		this.jogoPorDataId = jogoPorDataId;
 	}
 
-	public Integer getNota() {
+	public Double getNota() {
 		return nota;
 	}
 
-	public void setNota(Integer nota) {
+	public void setNota(Double nota) {
 		this.nota = nota;
 	}
 

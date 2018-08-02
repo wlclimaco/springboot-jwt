@@ -152,11 +152,39 @@
 							'$scope',
 							'$uibModal',
 							'$log',
-							'$document','AuthService',
-							function($scope, $uibModal, $log, $document,AuthService) {
+							'$document','AuthService','$filter',
+							function($scope, $uibModal, $log, $document,AuthService,$filter) {
 								$scope.items = [ "item1", "item2", "item3" ];
 								$scope.ok = function(a, b) {
 									console.log('a')
+								}
+								$scope.qntJogador = 1;
+								$scope.tipoEscolha = "";
+								$scope.change = function(jogadores){
+									
+									//$scope.qntJogador = 0;
+									//$scope.Aleatorio = "";
+									var list1 = $filter('orderBy')(jogadores, 'goleiro');
+									var list2 = [];
+									if($scope.tipoEscolha === 'media'){
+										list2 = $filter('orderBy')(list1, 'mediaNota');
+									}else if($scope.tipoEscolha === 'gols'){
+										list2 = $filter('orderBy')(list1, 'mediaGols');
+									}else{
+										list2 = $filter('orderBy')(list1, 'jogador');
+									}debugger
+										var y = 0;
+										var list3 ={time:[]};
+										list3.time.push([]);
+										while (y < list2.length) {
+											for(var x=0;x < $scope.qntJogador;x++){
+												if(!list3.time[x])
+													list3.time[x] = [];
+												list3.time[x].push(list2[y]);
+												y++;
+											}
+										}
+									$scope.list3 = list3;
 								}
 								$scope.open = function(size, parentSelector,
 										jogo, status) {
@@ -237,9 +265,9 @@
 								};
 								
 								var fnCallback2 = function(oResp)
-				                {debugger
-				                	if(oResp && oResp.result && oResp.result.user){
-				                		$scope.tirarTime = oResp.result.user;
+				                {
+				                	if(oResp){
+				                		$scope.tirarTime = oResp;
 				                	}
 				                }
 								var oUser = JSON.parse(localStorage.getItem('wdAppLS.currentUser'));

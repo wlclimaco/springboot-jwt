@@ -45,6 +45,12 @@ public class TirarTime {
 	public void setGoleiro(Boolean goleiro) {
 		this.goleiro = goleiro;
 	}
+	
+	
+	
+	public TirarTime() {
+
+	}
 	public TirarTime(String jogador, Boolean goleiro, Integer qntJogos, Integer qntGols, Double mediaNota,
 			Double mediaGols) {
 		super();

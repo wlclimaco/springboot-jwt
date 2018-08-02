@@ -2,6 +2,7 @@ package com.nouhoun.springboot.jwt.integration.domain;
 
 public class InfoUser {
 	
+	public Integer userId;
 	public Integer qntJogos;
 	public Integer qntGols;
 	public Double  mediaNota;
@@ -30,12 +31,27 @@ public class InfoUser {
 	public void setMediaGols(Double mediaGols) {
 		this.mediaGols = mediaGols;
 	}
+	
+	
+
 	public InfoUser(Integer qntJogos, Integer qntGols, Double mediaNota, Double mediaGols) {
 		super();
 		this.qntJogos = qntJogos;
 		this.qntGols = qntGols;
 		this.mediaNota = mediaNota;
 		this.mediaGols = mediaGols;
+	}
+	public Integer getUserId() {
+		return userId;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+	public InfoUser(Integer userId, Integer qntGols, Double mediaNota) {
+		super();
+		this.userId = userId;
+		this.qntGols = qntGols;
+		this.mediaNota = mediaNota;
 	}
 	
 	

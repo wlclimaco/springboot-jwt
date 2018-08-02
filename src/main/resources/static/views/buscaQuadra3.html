@@ -1,90 +1,98 @@
 <div class="page" data-ng-controller="ModalDemoController">
 
-    <div class="row">
-        <div class="col-sm-12 col-xsm-6">
-            <div class="panel mini-box">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span><span class="text-center">Jogadores Confirmado ate a data</span></strong></div>
-                    <div class="panel-body">
+	<div class="row">
+		<div class="col-sm-12 col-xsm-6">
+			<div class="panel mini-box">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<strong><span class="glyphicon glyphicon-th"></span><span
+							class="text-center">Jogadores Confirmado ate a data</span></strong>
+					</div>
+					<div class="panel-body">
 
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Jogador</th>
-                                    <th>E Goleiro</th>
-                                    <th>Numero Jogos</th>
-                                    <th>Numero de Gols</th>
-                                    <th>Media %</th>
-                                    <th>Media Gols %</th>
-                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
-                            </tbody>
-                        </table>
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Jogador</th>
+									<th>E Goleiro</th>
+									<th>Numero Jogos</th>
+									<th>Numero de Gols</th>
+									<th>Media %</th>
+									<th>Media Gols %</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr
+									ng-repeat="jogadores in tirarTime  | orderBy:'jogador' | orderBy:'qntJogos' | orderBy:'qntGols'">
+									<td>{{$index}}</td>
+									<td>{{jogadores.jogador}}</td>
+									<td>{{jogadores.goleiro == true ? 'Sim' : 'Não' }}</td>
+									<td>{{jogadores.qntJogos}}</td>
+									<td>{{jogadores.qntGols}}</td>
+									<td>{{jogadores.mediaNota}}</td>
+									<td>{{jogadores.mediaGols}}</td>
+								</tr>
+							</tbody>
+						</table>
 
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div class="row text-center">
-        <div class="col-sm-12 col-xsm-6">
-            <div class="panel mini-box">
-                <div class="form-group">
-                    <div class="col-sm-10">
-                        <input type="number" class="form-control" placeholder="Numero de jogadores por time?">
-                    </div>
-                </div>
-                <div class="divider-dashed"></div>
-                <dl class="dl-horizontal">
-                    <dt>Opção de escolha de time</dt>
-                    <dd>
-                        <label class="ui-radio"><input name="radio1" type="radio" value="option1" ><span>Por Media</span></label>
-                        <label class="ui-radio"><input name="radio1" type="radio" value="option2" ><span>Por Gols</span></label>
-                        <label class="ui-radio"><input name="radio1" type="radio" value="option3" checked><span>Aleatorio</span></label>
-                    </dd>
-                </dl>
-            </div>
-        </div>
-    </div>
-    <div class="row text-center">
-        <div class="col-lg-3 col-xsm-6">
-            <div class="panel mini-box">
-                <span class="box-icon rounded bg-success">
-						<span class="fa" ><img src="/images/gols_LEa_6.ico" alt="Smiley face" height="100%" width="100%" ></span>
-                </span>
-                <div class="box-info">
-                    <p class="size-h2">{{iQuantGols}} <span class="size-h4">Gols</span></p>
-                    <p class="text-muted"><span data-translate="growth"></span></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-xsm-6">
-            <div class="panel mini-box">
-                <span class="box-icon rounded bg-info">
-						<i class="fa fa-address-card"></i>
-						</span>
-                <div class="box-info">
-                    <p class="size-h2">{{fMedia}} <span class="size-h4">%</span></p>
-                    <p class="text-muted"><span data-translate="new users"></span></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div data-ui-footer></div>
-</div>
+	<div class="row text-center">
+		<div class="col-sm-12 col-xsm-6">
+			<div class="panel mini-box">
+				<div class="col-sm-4">
+					<input type="number" class="form-control" data-ng-model="qntJogador"
+						placeholder="Numero de jogadores por time?">
+				</div>
+				<div class="col-sm-7">
+					<dl class="dl-horizontal">
+						<dt>Opção de escolha de time</dt>
+						<dd>
+							<label class="ui-radio"><input name="radio1" type="radio" data-ng-model="tipoEscolha"
+								value="media"><span>Por Media</span></label> <label
+								class="ui-radio"><input name="radio1" type="radio"  data-ng-model="tipoEscolha"
+								value="gols"><span>Por Gols</span></label> <label
+								class="ui-radio"><input name="radio1" type="radio"  data-ng-model="tipoEscolha"
+								value="aleatorio" checked><span>Aleatorio</span></label>
+						</dd>
 
-<script>
+					</dl>
+				</div>
+				<div class="col-sm-1">
+					<a href="javascript:void(0)" class="btn btn-primary" data-ng-click="change(tirarTime)">Tirar</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12">
+		<div class="col-sm-{{12/list3.time.length}}"   ng-repeat="list in list3.time">
+		<span> Time {{$index + 1}}</span>
+		<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Jogador</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="lists in list">
+									<td>{{$index + 1}}</td>
+									<td>{{lists.jogador}}</td>
+								</tr>
+							</tbody>
+						</table>
+						</div>
+						</div>
+		<div data-ui-footer></div>
+	</div>
+
+	<script>
     $(document).ready(function() {
         $("#nav-container").removeClass("hide");
         $("#header").removeClass("hide");

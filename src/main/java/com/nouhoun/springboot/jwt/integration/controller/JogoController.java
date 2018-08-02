@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nouhoun.springboot.jwt.api.APIResponse;
+import com.nouhoun.springboot.jwt.integration.domain.InfoUser;
 import com.nouhoun.springboot.jwt.integration.domain.Jogo;
 import com.nouhoun.springboot.jwt.integration.domain.Jogo.Processo;
 import com.nouhoun.springboot.jwt.integration.domain.Jogo.Status;
@@ -51,6 +53,8 @@ import com.nouhoun.springboot.jwt.integration.service.JogoUserService;
 import com.nouhoun.springboot.jwt.integration.service.NotificacoesService;
 import com.nouhoun.springboot.jwt.integration.service.QuadraService;
 import com.nouhoun.springboot.jwt.integration.service.UserService;
+
+import io.swagger.annotations.Info;
 
 @Controller
 public class JogoController {
@@ -602,24 +606,19 @@ public class JogoController {
 			throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		User user = mapper.readValue(users, User.class);
-		Integer countJogos = 0;
-		Integer countGols = 0;
-		Integer countMedia = 0;
-		Double media = new Double(0);
+
 		List<TirarTime> tirarTimeList = new ArrayList<TirarTime>();
 		List<Jogo> quadra = jogoService.findJogoByUser(user.getId());
+		List<InfoUser> infoUserList = new ArrayList<InfoUser>();
+
+
 		for (Jogo jogo : quadra) {
 			if (jogo != null && !jogo.getJogoPorData().isEmpty()) {
-				countJogos++;
 				for (JogoPorData jogoPorData : jogo.getJogoPorData()) {
 					if (jogoPorData != null && !jogoPorData.getNotasGols().isEmpty()
 							&& StatusJogoPorData.JAJOGADO.equals(jogoPorData.getStatus())) {
 						for (NotasGols notasGols : jogoPorData.getNotasGols()) {
-							if (notasGols.getUserId() == user.getId()) {
-								countMedia++;
-								media = media + notasGols.getNota();
-								countGols = countGols + notasGols.getQntGols();
-							}
+							infoUserList.add(new InfoUser(notasGols.getUserId(), notasGols.getQntGols(), notasGols.getNota()));
 						}
 					}
 				}
@@ -632,8 +631,7 @@ public class JogoController {
 					if (StatusJogoPorData.TIRARTIME.equals(jogoPorData.getStatus())) {
 						for (UserJogoData userJogoData : jogoPorData.getUserJogoData()) {
 							if (StatusUserJogoPorData.CONFIRMADO.equals(userJogoData.getStatus())) {
-								tirarTimeList.add(new TirarTime(userJogoData.getUsuario().getNome(), userJogoData.getUsuario().getIsGoleiro(),countJogos,countGols,new Double(media/countMedia),new Double(countGols/countJogos) ));
-								//tirarTimeList.add(new TirarTime("tiririca", true,countJogos,countGols,new Double(media/countMedia),new Double(countGols/countJogos) ));
+								tirarTimeList.add(tiratime(userJogoData, infoUserList));
 							}
 						}
 					}
@@ -641,6 +639,25 @@ public class JogoController {
 			}
 		}
 		return new ResponseEntity<List<TirarTime>>(tirarTimeList, HttpStatus.OK);
+	}
+
+	public TirarTime tiratime(UserJogoData userJogoData, List<InfoUser> infoUserList) {
+
+		Integer countJogos = 0;
+		Integer countGols = 0;
+		Double media = new Double(0);
+		if (!infoUserList.isEmpty()) {
+			for (InfoUser infoUser : infoUserList) {
+				if (userJogoData.getUser_id() == infoUser.getUserId()) {
+					countJogos++;
+					countGols = countGols + infoUser.getQntGols();
+					media = media + infoUser.getMediaNota();
+				}
+			}
+			return new TirarTime(userJogoData.getUsuario().getNome(), userJogoData.getUsuario().getIsGoleiro(),
+					countJogos, countGols, countJogos > 0 ? new Double(media / countJogos) : 0, countJogos > 0 ?  new Double(countGols / countJogos) : 0);
+		}
+		return new TirarTime();
 	}
 
 	@CrossOrigin(origins = "*")
