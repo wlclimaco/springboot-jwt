@@ -21,7 +21,7 @@
                 return !angular.equals(rc.user, original) || !rc.form_signin.$pristine;
             };
             rc.canSubmit = function() {
-                return rc.form_signin.$valid && !angular.equals(rc.user, original);
+                return !angular.equals(rc.user, original);
             };
             rc.submitForms = function(admin) {
 

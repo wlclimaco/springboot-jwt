@@ -30,11 +30,12 @@
 		var fNotificacoesCount = function()
 		{
 			var oUser = JSON.parse(localStorage.getItem('wdAppLS.currentUser'));
-			var oNotificacaoRequest = {userId : oUser.id,empresaId : 82,role : oUser.roles[0]};
-			
-                AuthService.contNotificacoes(oNotificacaoRequest, function (responses) {
-                	$scope.notificacoesCount = responses.result.notificacaoCount;
-			});
+			if(oUser && oUser.id){
+				var oNotificacaoRequest = {userId : oUser.id,empresaId : 82,role : oUser.roles[0]};
+	                AuthService.contNotificacoes(oNotificacaoRequest, function (responses) {
+	                $scope.notificacoesCount = responses.result.notificacaoCount;
+				});
+			}
 		}
 		
 		fNotificacoesCount();
@@ -48,8 +49,8 @@
 		function($scope, SysMgmtData, $rootScope, $location, localStorageService, WDAuthentication) {
 		
 			$scope.login = function() {
-				
-				WDAuthentication.processLogin(WebDaptiveAppConfig.authenticationURL, $.param({username: $scope.username, password: $scope.password,grant_type : "password" }), function(authenticationResult) {
+				debugger
+				WDAuthentication.processLogin(WebDaptiveAppConfig.authenticationURL, $.param({username: $scope.username, password: $scope.password}), function(authenticationResult) {
 					
 					var authToken = authenticationResult.access_token;
 					if (authToken !== undefined){	

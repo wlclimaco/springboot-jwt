@@ -36,7 +36,7 @@
 		function($scope, $rootScope, $location, localStorageService, WDAuthentication) {
 		
 			$scope.login = function() {
-				
+				debugger
 				WDAuthentication.processLogin(WebDaptiveAppConfig.authenticationURL, $.param({username: $scope.username, password: $scope.password}), function(authenticationResult) {
 					
 					var authToken = authenticationResult.token;

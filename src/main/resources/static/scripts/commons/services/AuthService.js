@@ -104,14 +104,6 @@
                 console.log('pass: ' + oUser.password);
                 console.log('email: ' + oUser.email);
                 console.log('displayName: ' + oUser.nome);
-                oRole = [];
-                oRole = oUser.roles;
-                oRole.push({id : 2})
-                oRole.push({id : 3})
-                oRole.push({id : 4})
-                oRole.push({id : 5})
-
-
 
                 var aesPack = encryptPassword(oUser.password);
 

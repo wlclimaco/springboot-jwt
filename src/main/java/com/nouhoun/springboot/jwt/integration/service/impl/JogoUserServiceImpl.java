@@ -25,7 +25,7 @@ public class JogoUserServiceImpl implements JogoUserService{
 
 	@Override
 	public void saveUserJogo(List<UserJogo2> jogos) {
-		jogoUserRepository.save(jogos);
+		jogoUserRepository.saveAll(jogos);
 		
 	}
 

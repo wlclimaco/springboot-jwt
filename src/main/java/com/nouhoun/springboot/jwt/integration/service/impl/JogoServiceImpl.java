@@ -73,7 +73,7 @@ public class JogoServiceImpl implements JogoService{
 
 	@Override
 	public void saveJogo(List<Jogo> jogos) {
-		jogoRepository.save(jogos);
+		jogoRepository.saveAll(jogos);
 	}
 	
 	
@@ -83,7 +83,7 @@ public class JogoServiceImpl implements JogoService{
 	}
 	@Override
 	public void saveJogoPorData(List<JogoPorData> jogos) {
-		jogoPorDataRepository.save(jogos);
+		jogoPorDataRepository.saveAll(jogos);
 		
 	}
 

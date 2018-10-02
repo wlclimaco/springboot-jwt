@@ -30,22 +30,22 @@ class JobConfiguration {
 		}).build();
 	}
 
-	@Bean
-	Step step2() {
-		return stepBuilderFactory.get("step2").<String, String> chunk(3)
-				.reader(new ListItemReader<>(Arrays.asList("1", "2", "3", "4", "5", "6")))
-				.processor(item -> String.valueOf(Integer.parseInt(item) * -1))
-				.writer(items -> {
-					for (String item : items) {
-						System.out.println(">> " + item);
-					}
-				}).build();
-	}
+//	@Bean
+//	Step step2() {
+//		return stepBuilderFactory.get("step2").<String, String> chunk(3)
+//				.reader(new ListItemReader<>(Arrays.asList("1", "2", "3", "4", "5", "6")))
+//				.processor(item -> String.valueOf(Integer.parseInt(item) * -1))
+//				.writer(items -> {
+//					for (String item : items) {
+//						System.out.println(">> " + item);
+//					}
+//				}).build();
+//	}
 
 	@Bean
 	Job job1() {
 		return this.jobBuilderFactory.get("job1").incrementer(new RunIdIncrementer())
-				.start(step1()).next(step2()).build();
+				.start(step1()).build();
 	}
 
 	@Bean
