@@ -56,7 +56,6 @@ import com.nouhoun.springboot.jwt.integration.domain.Jogo;
 import com.nouhoun.springboot.jwt.integration.domain.Jogo.Dias;
 import com.nouhoun.springboot.jwt.integration.domain.Jogo.Status;
 import com.nouhoun.springboot.jwt.integration.domain.Quadra;
-import com.nouhoun.springboot.jwt.integration.domain.User;
 import com.nouhoun.springboot.jwt.integration.domain.UserDTO;
 import com.nouhoun.springboot.jwt.integration.service.EmpresaService;
 import com.nouhoun.springboot.jwt.integration.service.JobService;
@@ -97,7 +96,6 @@ public class EmpresaController {
 		jogoService.saveJogo(generateJogos(empresa));
 		
 		HashMap<String, Object> authResp = new HashMap<String, Object>();
-		createAuthResponse(empresa,empresaDTO.getUserLogado(), authResp);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 	        Job job = new Job();
@@ -297,16 +295,5 @@ public class EmpresaController {
         catch (DecoderException e) {
             throw new IllegalStateException(e);
         }
-    }
-    
-    private void createAuthResponse(Empresa empresa, User user, HashMap<String, Object> authResp) {
-//    	if(user != null)
-//    	{
-//	        String token = Jwts.builder().setSubject(user.getEmail())
-//	                .claim("role", user.getRoles()).setIssuedAt(new Date())
-//	                .signWith(SignatureAlgorithm.HS256, JWTTokenAuthFilter.JWT_KEY).compact();
-//	        authResp.put("token", token);
-//	        authResp.put("user", user);
-//    	}
     }
 }

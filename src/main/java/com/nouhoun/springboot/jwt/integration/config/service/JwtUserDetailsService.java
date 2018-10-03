@@ -1,4 +1,4 @@
-package com.nouhoun.springboot.jwt.integration.service.impl;
+package com.nouhoun.springboot.jwt.integration.config.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -6,20 +6,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.nouhoun.springboot.jwt.integration.domain.User1;
-import com.nouhoun.springboot.jwt.integration.repository.UserRepository;
-import com.nouhoun.springboot.jwt.integration.service.JwtUserFactory;
+import com.nouhoun.springboot.jwt.integration.config.JwtUserFactory;
+import com.nouhoun.springboot.jwt.integration.config.repository.UserRepository;
+import com.nouhoun.springboot.jwt.integration.domain.security.User;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
-
 
     @Autowired
     private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User1 user = userRepository.findByUsername1(username);
+        User user = userRepository.findByUsername(username);
 
         if (user == null) {
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
@@ -27,4 +26,5 @@ public class JwtUserDetailsService implements UserDetailsService {
             return JwtUserFactory.create(user);
         }
     }
+    
 }

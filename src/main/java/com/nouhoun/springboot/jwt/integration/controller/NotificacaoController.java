@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nouhoun.springboot.jwt.api.APIResponse;
 import com.nouhoun.springboot.jwt.integration.domain.NotificacaoRequest;
 import com.nouhoun.springboot.jwt.integration.domain.Notificacoes;
-import com.nouhoun.springboot.jwt.integration.domain.User;
+import com.nouhoun.springboot.jwt.integration.domain.security.User;
 import com.nouhoun.springboot.jwt.integration.service.NotificacoesService;
 
 

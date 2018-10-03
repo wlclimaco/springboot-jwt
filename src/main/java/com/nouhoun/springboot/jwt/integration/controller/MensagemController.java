@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nouhoun.springboot.jwt.api.APIResponse;
-import com.nouhoun.springboot.jwt.integration.domain.User;
+import com.nouhoun.springboot.jwt.integration.domain.security.User;
 import com.nouhoun.springboot.jwt.integration.service.UserService;
 
 

@@ -1,5 +1,7 @@
 package com.nouhoun.springboot.jwt.integration.domain;
 
+import com.nouhoun.springboot.jwt.integration.domain.security.User;
+
 /**
  * @author: kameshr
  */

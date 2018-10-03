@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.nouhoun.springboot.jwt.integration.domain.security.User;
+
 /**
  * The core Job Entity
  *

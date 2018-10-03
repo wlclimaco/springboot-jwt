@@ -61,7 +61,7 @@ public class JwtTokenUtil implements Serializable {
     }
 
     private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
-        return (lastPasswordReset != null && created.before(lastPasswordReset));
+        return false; //(lastPasswordReset != null && created.before(lastPasswordReset));
     }
 
     private Boolean ignoreTokenExpiration(String token) {
@@ -71,7 +71,7 @@ public class JwtTokenUtil implements Serializable {
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-         return doGenerateToken(claims, userDetails.getUsername());
+        return doGenerateToken(claims, userDetails.getUsername());
     }
 
     private String doGenerateToken(Map<String, Object> claims, String subject) {

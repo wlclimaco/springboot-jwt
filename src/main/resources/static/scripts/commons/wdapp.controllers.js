@@ -49,15 +49,17 @@
 		function($scope, SysMgmtData, $rootScope, $location, localStorageService, WDAuthentication) {
 		
 			$scope.login = function() {
-				debugger
-				WDAuthentication.processLogin(WebDaptiveAppConfig.authenticationURL, $.param({username: $scope.username, password: $scope.password}), function(authenticationResult) {
-					
-					var authToken = authenticationResult.access_token;
+				let body = JSON.stringify(
+				        { "username": "admin", "password": "admin" }
+				    )
+				WDAuthentication.processLogin(WebDaptiveAppConfig.authenticationURL, body, function(authenticationResult) {
+					debugger
+					var authToken = authenticationResult.token;
 					if (authToken !== undefined){	
 						$rootScope.authToken = authToken;
 						localStorageService.set('authToken', authToken);
-						localStorageService.set('expires_in', authenticationResult.expires_in);
-						localStorageService.set('jti', authenticationResult.jti);
+					//	localStorageService.set('expires_in', authenticationResult.expires_in);
+					//	localStorageService.set('jti', authenticationResult.jti);
 						
 					SysMgmtData.processPostPageData("http://localhost:8080/user/findUserByEmail", ""+$scope.username , function(res){
 							
@@ -68,10 +70,10 @@
 							var tempRole = "";
 							var bAdmin = false;
 							var prop = {};
-							for (var x = 0; x < currentUser.roles.length; x++) {
-								prop = currentUser.roles[x]
-								tempRole += prop.role + " ";
-								if(prop.role === 'ADMIN_USER')
+							for (var x = 0; x < currentUser.authorities.length; x++) {
+								prop = currentUser.authorities[x]
+								tempRole += prop.name + "";
+								if(prop.name === 'ROLE_USER')
 									bAdmin = true;
 							}							
 							$rootScope.displayRoles = tempRole;

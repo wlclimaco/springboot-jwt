@@ -4,8 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.nouhoun.springboot.jwt.integration.domain.InfoUser;
-import com.nouhoun.springboot.jwt.integration.domain.User;
+import com.nouhoun.springboot.jwt.integration.domain.security.User;
 
 
 

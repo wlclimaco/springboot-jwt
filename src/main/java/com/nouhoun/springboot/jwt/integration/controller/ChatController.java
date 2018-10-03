@@ -21,9 +21,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nouhoun.springboot.jwt.integration.domain.Chat;
 import com.nouhoun.springboot.jwt.integration.domain.ChatItens;
-import com.nouhoun.springboot.jwt.integration.domain.Jogo;
-import com.nouhoun.springboot.jwt.integration.domain.User;
-import com.nouhoun.springboot.jwt.integration.domain.UserDTO;
+import com.nouhoun.springboot.jwt.integration.domain.security.User;
 import com.nouhoun.springboot.jwt.integration.service.ChatService;
 
 /**
@@ -44,7 +42,7 @@ public class ChatController {
 		ObjectMapper mapper = new ObjectMapper();
 		User user = mapper.readValue(users, User.class);
 
-		return new ResponseEntity<List<Chat>>(chatService.findChatByUser(user.getId()), HttpStatus.OK);
+		return new ResponseEntity<List<Chat>>(chatService.findChatByUser(user.getId().intValue()), HttpStatus.OK);
 	}
 	
 	@CrossOrigin(origins = "*")

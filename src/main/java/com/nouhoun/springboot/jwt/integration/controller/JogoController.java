@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,19 +41,17 @@ import com.nouhoun.springboot.jwt.integration.domain.Notificacoes;
 import com.nouhoun.springboot.jwt.integration.domain.Notificacoes.NotificacoesStatus;
 import com.nouhoun.springboot.jwt.integration.domain.Quadra;
 import com.nouhoun.springboot.jwt.integration.domain.TirarTime;
-import com.nouhoun.springboot.jwt.integration.domain.User;
 import com.nouhoun.springboot.jwt.integration.domain.UserJogo2;
 import com.nouhoun.springboot.jwt.integration.domain.UserJogo2.Admin;
 import com.nouhoun.springboot.jwt.integration.domain.UserJogo2.StatusUser;
 import com.nouhoun.springboot.jwt.integration.domain.UserJogoData;
 import com.nouhoun.springboot.jwt.integration.domain.UserJogoData.StatusUserJogoPorData;
+import com.nouhoun.springboot.jwt.integration.domain.security.User;
 import com.nouhoun.springboot.jwt.integration.service.JogoService;
 import com.nouhoun.springboot.jwt.integration.service.JogoUserService;
 import com.nouhoun.springboot.jwt.integration.service.NotificacoesService;
 import com.nouhoun.springboot.jwt.integration.service.QuadraService;
 import com.nouhoun.springboot.jwt.integration.service.UserService;
-
-import io.swagger.annotations.Info;
 
 @Controller
 public class JogoController {
@@ -115,7 +112,7 @@ public class JogoController {
 		Jogo jogo = new Jogo();
 
 		String noticicacaoText = "";// + quadra.getNome() + " " + jogo.getHoraInicial() + " - " +
-									// jogo.getHoraFinal() + " " + "" + userss.getEmail() + " " + userss.getNome();
+									// jogo.getHoraFinal() + " " + "" + userss.getEmail() + " " + userss.getUsername();
 		switch (user.getStatus()) {
 		case DISPONIVEL:
 			jogoService.saveUpdateJogo(user);
@@ -132,7 +129,7 @@ public class JogoController {
 			jogoUserService.saveUserJogo(userJogos);
 			noticicacaoText = "Acabo de ser solicitado na quadra : " + quadra.getNome() + " dia: "
 					+ jogo.getDia().name().toLowerCase() + " horario (" + jogo.getHoraInicial() + " - "
-					+ jogo.getHoraFinal() + "). " + "Solicitado por : " + userss.getEmail() + " " + userss.getNome();
+					+ jogo.getHoraFinal() + "). " + "Solicitado por : " + userss.getEmail() + " " + userss.getUsername();
 			notificacoes = new Notificacoes("ACONFIRMAR", new Date(), noticicacaoText, NotificacoesStatus.NAOLIDO,
 					userss.getId(), 82);
 			notificacoes.setParaJogoId(user.getId());
@@ -140,7 +137,7 @@ public class JogoController {
 			break;
 		case OCUPADO:
 			jogoService.saveUpdateJogo(user);
-			notificacoes = new Notificacoes("OCUPADO", new Date(), "Titulo OCUPADO", NotificacoesStatus.NAOLIDO, 10, 8);
+			notificacoes = new Notificacoes("OCUPADO", new Date(), "Titulo OCUPADO", NotificacoesStatus.NAOLIDO, new Long(10), 8);
 			break;
 		case INDISPONIVEL:
 			Jogo jogoa = jogoService.findJogoById(user.getId());
@@ -156,11 +153,11 @@ public class JogoController {
 					noticicacaoText = "Foi Aprovado na quadra : " + quadra.getNome() + " dia: "
 							+ jogoa.getDia().name().toLowerCase() + " horario (" + jogoa.getHoraInicial() + " - "
 							+ jogoa.getHoraFinal() + "). " + "Aprovado por : " + userss.getEmail() + " "
-							+ userss.getNome();
+							+ userss.getUsername();
 					notificacoes = new Notificacoes("INDISPONIVEL", new Date(), noticicacaoText,
 							NotificacoesStatus.NAOLIDO, userss.getId(), 82);
 					notificacoes.setParaJogoId(jogoa.getId());
-					notificacoes.setParaUserId(userss.getId());
+					notificacoes.setParaUserId(userss.getId().intValue());
 					notificacoesService.insertNotificacoes(notificacoes);
 				}
 			}
@@ -219,11 +216,11 @@ public class JogoController {
 		// case CONFIRMADO:
 		// jogoService.saveJogoPorData(new JogoPorData(user));
 		// for (UserJogo2 userJogo2 : jogo.getUsersJogo()) {
-		// noticicacaoText = userss.getEmail() + " " + userss.getNome() +" foi aprovado
+		// noticicacaoText = userss.getEmail() + " " + userss.getUsername() +" foi aprovado
 		// e participara do racha na quadra : " + quadra.getNome() + " dia: "
 		// +jogo.getDia().name().toLowerCase() + " horario (" + jogo.getHoraInicial() +
 		// " - " + jogo.getHoraFinal() + ")." + "Solicitado por : " + userss.getEmail()
-		// + " " + userss.getNome();
+		// + " " + userss.getUsername();
 		// notificacoes = new Notificacoes("INDISPONIVEL", new Date(), noticicacaoText,
 		// NotificacoesStatus.NAOLIDO, 10,8);
 		// notificacoes.setParaJogoId(jogo.getId());
@@ -233,7 +230,7 @@ public class JogoController {
 		// noticicacaoText = "Parabens foi APROVADA sua solicitação para o racha na
 		// quadra : " + quadra.getNome() + " dia: " +jogo.getDia().name().toLowerCase()
 		// + " horario (" + jogo.getHoraInicial() + " - " + jogo.getHoraFinal() + "). "
-		// + "Solicitado por : " + userss.getEmail() + " " + userss.getNome();
+		// + "Solicitado por : " + userss.getEmail() + " " + userss.getUsername();
 		// notificacoes = new Notificacoes("TALVEZ", new Date(), noticicacaoText,
 		// NotificacoesStatus.NAOLIDO, user.getUser_id(),user.getJogoId());
 		// //notificacoes = new Notificacoes("CONFIRMADO", new Date(), noticicacaoText,
@@ -244,10 +241,10 @@ public class JogoController {
 		// for (UserJogo2 userJogo2 : jogo.getUsersJogo()) {
 		// if(Admin.SIM.equals(userJogo2.getAdmin())) {
 		// noticicacaoText = "Foi Recusado solicitação de "+ userss.getEmail() + " " +
-		// userss.getNome() +" na quadra : " + quadra.getNome() + " dia: "
+		// userss.getUsername() +" na quadra : " + quadra.getNome() + " dia: "
 		// +jogo.getDia().name().toLowerCase() + " horario (" + jogo.getHoraInicial() +
 		// " - " + jogo.getHoraFinal() + "). " + "Solicitado por : " + userss.getEmail()
-		// + " " + userss.getNome();
+		// + " " + userss.getUsername();
 		// notificacoes = new Notificacoes("INDISPONIVEL", new Date(), noticicacaoText,
 		// NotificacoesStatus.NAOLIDO, 10,8);
 		// notificacoes.setParaJogoId(jogo.getId());
@@ -258,7 +255,7 @@ public class JogoController {
 		// noticicacaoText = "Infelizmente solicitação para o racha na quadra : " +
 		// quadra.getNome() + " dia: " +jogo.getDia().name().toLowerCase() + " horario
 		// (" + jogo.getHoraInicial() + " - " + jogo.getHoraFinal() + "). " + "Não foi
-		// aprovado por : " + userss.getEmail() + " " + userss.getNome();
+		// aprovado por : " + userss.getEmail() + " " + userss.getUsername();
 		// notificacoes = new Notificacoes("TALVEZ", new Date(), noticicacaoText,
 		// NotificacoesStatus.NAOLIDO, user.getUser_id(),user.getJogoId());
 		// break;
@@ -268,10 +265,10 @@ public class JogoController {
 		// for (UserJogo2 userJogo2 : jogo.getUsersJogo()) {
 		// if(Admin.SIM.equals(userJogo2.getAdmin())) {
 		// noticicacaoText = "Foi Recusado solicitação de "+ userss.getEmail() + " " +
-		// userss.getNome() +" na quadra : " + quadra.getNome() + " dia: "
+		// userss.getUsername() +" na quadra : " + quadra.getNome() + " dia: "
 		// +jogo.getDia().name().toLowerCase() + " horario (" + jogo.getHoraInicial() +
 		// " - " + jogo.getHoraFinal() + "). " + "Solicitado por : " + userss.getEmail()
-		// + " " + userss.getNome();
+		// + " " + userss.getUsername();
 		// notificacoes = new Notificacoes("INDISPONIVEL", new Date(), noticicacaoText,
 		// NotificacoesStatus.NAOLIDO, 10,8);
 		// notificacoes.setParaJogoId(jogo.getId());
@@ -282,7 +279,7 @@ public class JogoController {
 		// noticicacaoText = "Infelizmente solicitação para o racha na quadra : " +
 		// quadra.getNome() + " dia: " +jogo.getDia().name().toLowerCase() + " horario
 		// (" + jogo.getHoraInicial() + " - " + jogo.getHoraFinal() + "). " + "Não foi
-		// aprovado por : " + userss.getEmail() + " " + userss.getNome();
+		// aprovado por : " + userss.getEmail() + " " + userss.getUsername();
 		// notificacoes = new Notificacoes("TALVEZ", new Date(), noticicacaoText,
 		// NotificacoesStatus.NAOLIDO, user.getUser_id(),user.getJogoId());
 		// break;
@@ -321,11 +318,11 @@ public class JogoController {
 		case CONFIRMADO:
 			jogoUserService.saveUserJogo(Arrays.asList(user));
 			for (UserJogo2 userJogo2 : jogo.getUsersJogo()) {
-				noticicacaoText = userss.getEmail() + " " + userss.getNome()
+				noticicacaoText = userss.getEmail() + " " + userss.getUsername()
 						+ " foi aprovado e participara do racha na quadra : " + quadra.getNome() + " dia: "
 						+ jogo.getDia().name().toLowerCase() + " horario (" + jogo.getHoraInicial() + " - "
 						+ jogo.getHoraFinal() + ")." + "Aprovado por : " + userAprov.getEmail() + " "
-						+ userAprov.getNome();
+						+ userAprov.getUsername();
 				notificacoes = new Notificacoes("INDISPONIVEL", new Date(), noticicacaoText, NotificacoesStatus.NAOLIDO,
 						10, 8);
 				notificacoes.setParaJogoId(jogo.getId());
@@ -335,7 +332,7 @@ public class JogoController {
 			noticicacaoText = "Parabens foi APROVADA sua solicitação para o racha na quadra : " + quadra.getNome()
 					+ " dia: " + jogo.getDia().name().toLowerCase() + " horario (" + jogo.getHoraInicial() + " - "
 					+ jogo.getHoraFinal() + "). " + "Aprovado por : " + userAprov.getEmail() + " "
-					+ userAprov.getNome();
+					+ userAprov.getUsername();
 			notificacoes = new Notificacoes("TALVEZ", new Date(), noticicacaoText, NotificacoesStatus.NAOLIDO,
 					user.getUser_id(), user.getJogo_id());
 			// notificacoes = new Notificacoes("CONFIRMADO", new Date(), noticicacaoText,
@@ -345,10 +342,10 @@ public class JogoController {
 			jogoUserService.saveUserJogo(Arrays.asList(user));
 			for (UserJogo2 userJogo2 : jogo.getUsersJogo()) {
 				if (Admin.SIM.equals(userJogo2.getAdmin())) {
-					noticicacaoText = "Foi Recusado solicitação de " + userss.getEmail() + " " + userss.getNome()
+					noticicacaoText = "Foi Recusado solicitação de " + userss.getEmail() + " " + userss.getUsername()
 							+ " na quadra : " + quadra.getNome() + " dia: " + jogo.getDia().name().toLowerCase()
 							+ " horario (" + jogo.getHoraInicial() + " - " + jogo.getHoraFinal() + "). "
-							+ "Recusado por : " + userAprov.getEmail() + " " + userAprov.getNome();
+							+ "Recusado por : " + userAprov.getEmail() + " " + userAprov.getUsername();
 					notificacoes = new Notificacoes("INDISPONIVEL", new Date(), noticicacaoText,
 							NotificacoesStatus.NAOLIDO, 10, 8);
 					notificacoes.setParaJogoId(jogo.getId());
@@ -359,7 +356,7 @@ public class JogoController {
 			noticicacaoText = "Infelizmente solicitação para o racha na quadra : " + quadra.getNome() + " dia: "
 					+ jogo.getDia().name().toLowerCase() + " horario (" + jogo.getHoraInicial() + " - "
 					+ jogo.getHoraFinal() + "). " + "Não foi aprovado por : " + userss.getEmail() + " "
-					+ userss.getNome();
+					+ userss.getUsername();
 			notificacoes = new Notificacoes("TALVEZ", new Date(), noticicacaoText, NotificacoesStatus.NAOLIDO,
 					user.getUser_id(), user.getJogo_id());
 			break;
@@ -402,7 +399,7 @@ public class JogoController {
 		case CONFIRMADO:
 
 			for (UserJogo2 userJogo2 : jogo.getUsersJogo()) {
-				noticicacaoText = userss.getEmail() + " " + userss.getNome()
+				noticicacaoText = userss.getEmail() + " " + userss.getUsername()
 						+ " foi aprovado e participara do racha na quadra : " + quadra.getNome() + " dia: "
 						+ jogo.getDia().name().toLowerCase() + " horario (" + jogo.getHoraInicial() + " - "
 						+ jogo.getHoraFinal() + "). ";
@@ -414,7 +411,7 @@ public class JogoController {
 			}
 			noticicacaoText = "Parabens foi APROVADA sua solicitação para o racha na quadra : " + quadra.getNome()
 					+ " dia: " + jogo.getDia().name().toLowerCase() + " horario (" + jogo.getHoraInicial() + " - "
-					+ jogo.getHoraFinal() + "). " + "Aprovado por : " + userss.getEmail() + " " + userss.getNome();
+					+ jogo.getHoraFinal() + "). " + "Aprovado por : " + userss.getEmail() + " " + userss.getUsername();
 			notificacoes = new Notificacoes("TALVEZ", new Date(), noticicacaoText, NotificacoesStatus.NAOLIDO,
 					user.getUser_id(), user.getJogo_id());
 			// notificacoes = new Notificacoes("CONFIRMADO", new Date(), noticicacaoText,
@@ -424,7 +421,7 @@ public class JogoController {
 
 			for (UserJogo2 userJogo2 : jogo.getUsersJogo()) {
 				if (Admin.SIM.equals(userJogo2.getAdmin())) {
-					noticicacaoText = "Tem uma nova solicitação(" + userss.getEmail() + " " + userss.getNome()
+					noticicacaoText = "Tem uma nova solicitação(" + userss.getEmail() + " " + userss.getUsername()
 							+ ") para o racha na quadra : " + quadra.getNome() + " dia: "
 							+ jogo.getDia().name().toLowerCase() + " horario (" + jogo.getHoraInicial() + " - "
 							+ jogo.getHoraFinal() + "). ";
@@ -448,7 +445,7 @@ public class JogoController {
 					noticicacaoText = "Foi Aprovado na quadra : " + quadra.getNome() + " dia: "
 							+ jogo.getDia().name().toLowerCase() + " horario (" + jogo.getHoraInicial() + " - "
 							+ jogo.getHoraFinal() + "). " + "Aprovado por : " + userss.getEmail() + " "
-							+ userss.getNome();
+							+ userss.getUsername();
 					notificacoes = new Notificacoes("INDISPONIVEL", new Date(), noticicacaoText,
 							NotificacoesStatus.NAOLIDO, 10, 8);
 					notificacoes.setParaJogoId(jogo.getId());
@@ -459,7 +456,7 @@ public class JogoController {
 			noticicacaoText = "Infelizmente solicitação para o racha na quadra : " + quadra.getNome() + " dia: "
 					+ jogo.getDia().name().toLowerCase() + " horario (" + jogo.getHoraInicial() + " - "
 					+ jogo.getHoraFinal() + "). " + "Não foi aprovado por : " + userss.getEmail() + " "
-					+ userss.getNome();
+					+ userss.getUsername();
 			notificacoes = new Notificacoes("TALVEZ", new Date(), noticicacaoText, NotificacoesStatus.NAOLIDO,
 					user.getUser_id(), user.getJogo_id());
 			break;
@@ -608,7 +605,7 @@ public class JogoController {
 		User user = mapper.readValue(users, User.class);
 
 		List<TirarTime> tirarTimeList = new ArrayList<TirarTime>();
-		List<Jogo> quadra = jogoService.findJogoByUser(user.getId());
+		List<Jogo> quadra = jogoService.findJogoByUser(user.getId().intValue());
 		List<InfoUser> infoUserList = new ArrayList<InfoUser>();
 
 
@@ -654,7 +651,7 @@ public class JogoController {
 					media = media + infoUser.getMediaNota();
 				}
 			}
-			return new TirarTime(userJogoData.getUsuario().getNome(), userJogoData.getUsuario().getIsGoleiro(),
+			return new TirarTime(userJogoData.getUsuario().getUsername(), userJogoData.getUsuario().getIsGoleiro(),
 					countJogos, countGols, countJogos > 0 ? new Double(media / countJogos) : 0, countJogos > 0 ?  new Double(countGols / countJogos) : 0);
 		}
 		return new TirarTime();
@@ -667,7 +664,7 @@ public class JogoController {
 		ObjectMapper mapper = new ObjectMapper();
 		User user = mapper.readValue(users, User.class);
 
-		List<Jogo> quadra = jogoService.findJogoByUser(user.getId());
+		List<Jogo> quadra = jogoService.findJogoByUser(user.getId().intValue());
 
 		return new ResponseEntity<List<Jogo>>(quadra, HttpStatus.OK);
 	}

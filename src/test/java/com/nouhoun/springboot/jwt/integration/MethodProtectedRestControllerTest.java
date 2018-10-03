@@ -46,7 +46,7 @@ public class MethodProtectedRestControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "USER1")
+    @WithMockUser(roles = "USER")
     public void shouldGetForbiddenWithUserRole() throws Exception{
         this.mvc
                 .perform(get("/protected"))

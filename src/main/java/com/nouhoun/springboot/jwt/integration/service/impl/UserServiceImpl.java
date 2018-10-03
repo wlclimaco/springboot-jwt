@@ -8,9 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nouhoun.springboot.jwt.integration.domain.InfoUser;
-import com.nouhoun.springboot.jwt.integration.domain.User;
-import com.nouhoun.springboot.jwt.integration.repository.UserRepository;
+import com.nouhoun.springboot.jwt.integration.config.repository.UserRepository;
+import com.nouhoun.springboot.jwt.integration.domain.security.User;
 import com.nouhoun.springboot.jwt.integration.service.UserService;
 
 @Service("userService")

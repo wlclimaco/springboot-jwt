@@ -2,9 +2,8 @@ package com.nouhoun.springboot.jwt.integration.domain;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
-import com.nouhoun.springboot.jwt.integration.domain.User.Status;
+import com.nouhoun.springboot.jwt.integration.domain.Job.Status;
 
 /**
  * @author: kameshr

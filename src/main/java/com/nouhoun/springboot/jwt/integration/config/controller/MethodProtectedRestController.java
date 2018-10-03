@@ -1,4 +1,4 @@
-package com.nouhoun.springboot.jwt.integration.controller;
+package com.nouhoun.springboot.jwt.integration.config.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

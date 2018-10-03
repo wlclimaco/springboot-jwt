@@ -14,8 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
+import com.nouhoun.springboot.jwt.integration.domain.security.User;
 
 import net.minidev.json.annotate.JsonIgnore;
 

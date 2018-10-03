@@ -1,9 +1,9 @@
 package com.nouhoun.springboot.jwt.integration;
 
+import java.util.Collection;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
 
 /**
  * Created by stephan on 04.07.17.

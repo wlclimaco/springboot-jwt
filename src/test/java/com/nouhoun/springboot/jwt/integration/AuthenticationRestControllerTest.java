@@ -31,11 +31,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nouhoun.springboot.jwt.integration.config.JwtAuthenticationRequest;
 import com.nouhoun.springboot.jwt.integration.config.JwtTokenUtil;
 import com.nouhoun.springboot.jwt.integration.config.JwtUser;
-import com.nouhoun.springboot.jwt.integration.domain.Authority;
-import com.nouhoun.springboot.jwt.integration.domain.AuthorityName;
-import com.nouhoun.springboot.jwt.integration.domain.User1;
-import com.nouhoun.springboot.jwt.integration.service.JwtUserFactory;
-import com.nouhoun.springboot.jwt.integration.service.impl.JwtUserDetailsService;
+import com.nouhoun.springboot.jwt.integration.config.JwtUserFactory;
+import com.nouhoun.springboot.jwt.integration.config.service.JwtUserDetailsService;
+import com.nouhoun.springboot.jwt.integration.domain.security.Authority;
+import com.nouhoun.springboot.jwt.integration.domain.security.AuthorityName;
+import com.nouhoun.springboot.jwt.integration.domain.security.User;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -84,7 +84,7 @@ public class AuthenticationRestControllerTest {
         authority.setName(AuthorityName.ROLE_USER);
         List<Authority> authorities = Arrays.asList(authority);
 
-        User1 user = new User1();
+        User user = new User();
         user.setUsername("username");
         user.setAuthorities(authorities);
         user.setEnabled(Boolean.TRUE);
@@ -112,7 +112,7 @@ public class AuthenticationRestControllerTest {
         authority.setName(AuthorityName.ROLE_ADMIN);
         List<Authority> authorities = Arrays.asList(authority);
 
-        User1 user = new User1();
+        User user = new User();
         user.setUsername("admin");
         user.setAuthorities(authorities);
         user.setEnabled(Boolean.TRUE);

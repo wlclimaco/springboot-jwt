@@ -1,4 +1,4 @@
-package com.nouhoun.springboot.jwt.integration.controller;
+package com.nouhoun.springboot.jwt.integration.config.controller;
 
 import java.util.Objects;
 
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nouhoun.springboot.jwt.integration.config.JwtAuthenticationRequest;
 import com.nouhoun.springboot.jwt.integration.config.JwtTokenUtil;
 import com.nouhoun.springboot.jwt.integration.config.JwtUser;
-import com.nouhoun.springboot.jwt.integration.service.impl.JwtAuthenticationResponse;
+import com.nouhoun.springboot.jwt.integration.config.service.JwtAuthenticationResponse;
 
 @RestController
 public class AuthenticationRestController {
@@ -42,7 +42,7 @@ public class AuthenticationRestController {
     @Qualifier("jwtUserDetailsService")
     private UserDetailsService userDetailsService;
 
-    @RequestMapping(value = "/auth", method = RequestMethod.POST)
+    @RequestMapping(value = "${jwt.route.authentication.path}", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
 
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());

@@ -118,14 +118,14 @@ public class Notificacoes {
 	public void setParaJogoId(int paraJogoId) {
 		this.paraJogoId = paraJogoId;
 	}
-	public Notificacoes(String descricao, Date updatedAt, String titulo, NotificacoesStatus status, int deUserId,
+	public Notificacoes(String descricao, Date updatedAt, String titulo, NotificacoesStatus status, long deUserId,
 			int paraEmprId) {
 		super();
 		this.descricao = descricao;
 		this.updatedAt = updatedAt;
 		this.titulo = titulo;
 		this.status = status;
-		this.deUserId = deUserId;
+		this.deUserId = (int) deUserId;
 		this.paraEmprId = paraEmprId;
 
 	}

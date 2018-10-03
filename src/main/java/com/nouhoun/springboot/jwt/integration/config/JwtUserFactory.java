@@ -1,4 +1,4 @@
-package com.nouhoun.springboot.jwt.integration.service;
+package com.nouhoun.springboot.jwt.integration.config;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,16 +6,15 @@ import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import com.nouhoun.springboot.jwt.integration.config.JwtUser;
-import com.nouhoun.springboot.jwt.integration.domain.Authority;
-import com.nouhoun.springboot.jwt.integration.domain.User1;
+import com.nouhoun.springboot.jwt.integration.domain.security.Authority;
+import com.nouhoun.springboot.jwt.integration.domain.security.User;
 
 public final class JwtUserFactory {
 
     private JwtUserFactory() {
     }
 
-    public static JwtUser create(User1 user) {
+    public static JwtUser create(User user) {
         return new JwtUser(
                 user.getId(),
                 user.getUsername(),
