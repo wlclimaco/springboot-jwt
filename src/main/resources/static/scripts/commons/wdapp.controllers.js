@@ -31,7 +31,7 @@
 		{
 			var oUser = JSON.parse(localStorage.getItem('wdAppLS.currentUser'));
 			if(oUser && oUser.id){
-				var oNotificacaoRequest = {userId : oUser.id,empresaId : 82,role : oUser.roles[0]};
+				var oNotificacaoRequest = {userId : oUser.id,empresaId : 82,role : oUser.authorities[0]};
 	                AuthService.contNotificacoes(oNotificacaoRequest, function (responses) {
 	                $scope.notificacoesCount = responses.result.notificacaoCount;
 				});
