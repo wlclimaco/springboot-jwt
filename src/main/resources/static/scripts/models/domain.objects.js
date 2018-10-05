@@ -129,7 +129,7 @@
 	    this.id = oUser.id ? parseInt(oUser.id) : null;
 	    this.email = oUser.email ? oUser.email : "";
 	    this.password = oUser.password ? oUser.password : oUser.password;
-	    this.nome = oUser.nome ? oUser.nome : null;
+	    this.name = oUser.name ? oUser.name : null;
 	    this.active = oUser.active ? oUser.active : 0;
 	   // this.roles = oUser.roles ? oUser.roles : null;
 	    this.iv = oUser.iv ? oUser.iv : null;

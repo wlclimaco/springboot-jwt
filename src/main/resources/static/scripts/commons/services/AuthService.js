@@ -9,7 +9,7 @@
 
             oUser.active = 1;
             oUser.isDono = 0;
-            oUser.roles = [{ id: 1}];
+      //      oUser.roles = [{ id: 1}];
             oUser.lastLoginAt = new Date();
             oUser.enabled = 0;
             oUser.receberNotificacoes = true;

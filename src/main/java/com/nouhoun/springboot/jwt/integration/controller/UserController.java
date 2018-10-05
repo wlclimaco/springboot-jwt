@@ -6,6 +6,7 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -75,7 +76,7 @@ public class UserController {
                                               HttpServletRequest request) throws NoSuchPaddingException, UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException, InvalidKeySpecException {
         Validate.isTrue(StringUtils.isNotBlank(userDTO.getEmail()), "Email is blank");
         Validate.isTrue(StringUtils.isNotBlank(userDTO.getEncryptedPassword()), "Encrypted password is blank");
-        Validate.isTrue(StringUtils.isNotBlank(userDTO.getNome()), "Display name is blank");
+        Validate.isTrue(StringUtils.isNotBlank(userDTO.getName()), "Display name is blank");
       //  String password = decryptPassword(userDTO);
 
         LOG.info("Looking for user by email: "+userDTO.getEmail());
@@ -87,13 +88,15 @@ public class UserController {
         User user = new User();
         user.setEmail(userDTO.getEmail());
     //    user.setRoles(userDTO.getRoles());
-        user.setUsername(userDTO.getNome());
+        user.setUsername(userDTO.getName());
+        user.setName(userDTO.getName());
         user.setPassword(userDTO.getPassword());
         user.setEnabled(true);
         List<Authority> roles = new ArrayList<Authority>();
         roles.add(new Authority(new Long(1)));
         roles.add(new Authority(new Long(2)));
         user.setAuthorities(roles);
+        user.setLastPasswordResetDate(new Date(System.currentTimeMillis() + 1000 * 1000));
         userService.saveUser(user, request);
 
         HashMap<String, Object> authResp = new HashMap<>();
@@ -197,7 +200,7 @@ public class UserController {
 		dto.setId(userExists.getId().intValue());
 		dto.setEmail(userExists.getEmail());
 		dto.setPassword(userExists.getPassword());
-		dto.setNome(userExists.getUsername());
+		dto.setName(userExists.getUsername());
 		//dto.setActive(userExists.getActive());
 	//	dto.setRoles(userExists.getRoles());
 		dto.setEnabled(userExists.getEnabled());

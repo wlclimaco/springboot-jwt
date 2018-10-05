@@ -12,7 +12,7 @@ public class UserDTO {
 
 	private int id;
 	private String email;
-	private String nome;
+	private String name;
 	private String password;
 	private Status active;
 	private int isDono;
@@ -260,12 +260,12 @@ public class UserDTO {
 		this.isGoleiro = isGoleiro;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Boolean getIsSoAdmANoGols() {

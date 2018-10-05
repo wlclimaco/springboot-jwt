@@ -49,8 +49,9 @@
 		function($scope, SysMgmtData, $rootScope, $location, localStorageService, WDAuthentication) {
 		
 			$scope.login = function() {
+				//$scope.username, password: $scope.password
 				let body = JSON.stringify(
-				        { "username": "admin", "password": "admin" }
+				        { "username": $scope.username, "password": $scope.password }
 				    )
 				WDAuthentication.processLogin(WebDaptiveAppConfig.authenticationURL, body, function(authenticationResult) {
 					debugger

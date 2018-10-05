@@ -6,7 +6,7 @@
 
             var original;
             rc.user = {
-                nome: '',
+                name: '',
                 email: '',
                 password: '',
                 isGoleiro: false
@@ -26,7 +26,7 @@
             rc.submitForms = function(admin) {
 
                 console.log(rc.user);
-                console.log('received the register event for user: ' + rc.user.nome);
+                console.log('received the register event for user: ' + rc.user.name);
                 $rootScope.isSubmitted = true;
                 rc.dataLoading = true;
                 //   rc.user.admin = admin;
