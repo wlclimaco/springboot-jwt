@@ -82,7 +82,7 @@
 						
 											
 						if ($rootScope.callingPath !== undefined){	
-							if ($rootScope.callingPath === '/pages/signin'){
+							if ($rootScope.callingPath === '/pages/signin' || $rootScope.callingPath ===  '/cadastro'){
 								if(bAdmin)
 								{
 									$rootScope.callingPath = "/dashboard2";

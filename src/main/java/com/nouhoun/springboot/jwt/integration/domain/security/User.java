@@ -36,7 +36,7 @@ public class User {
     @Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
 
     @Column(name = "USERNAME", length = 50, unique = true)
     @NotNull
@@ -182,11 +182,11 @@ public class User {
 		return passwordEncoder.matches(rawPass, encodedPass);
 	}
 	
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

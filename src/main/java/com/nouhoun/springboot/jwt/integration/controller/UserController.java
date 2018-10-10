@@ -25,6 +25,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,6 +64,9 @@ public class UserController {
 	public int getfifteen() {
 		return 15;
 	}
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
     /**
      * Register new user
@@ -83,14 +87,15 @@ public class UserController {
       //  if(userService.isEmailExists(userDTO.getEmail())) {
       //      return APIResponse.toErrorResponse("Email is taken");
       //  }
-
+        
         LOG.info("Creating user: "+userDTO.getEmail());
         User user = new User();
         user.setEmail(userDTO.getEmail());
     //    user.setRoles(userDTO.getRoles());
         user.setUsername(userDTO.getName());
         user.setName(userDTO.getName());
-        user.setPassword(userDTO.getPassword());
+   //     user.setPassword(userDTO.getPassword());
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setEnabled(true);
         List<Authority> roles = new ArrayList<Authority>();
         roles.add(new Authority(new Long(1)));
