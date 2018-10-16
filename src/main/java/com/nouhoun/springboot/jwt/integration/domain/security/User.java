@@ -170,6 +170,36 @@ public class User {
 	private Integer qntGols;
 	private Double  mediaNota;
 	private Double  mediaGols;
+	
+	public User() {
+		super();
+	}
+
+	public User(Integer id, @NotNull @Size(min = 4, max = 50) String username,
+			@NotNull @Size(min = 4, max = 100) String password, @NotNull @Size(min = 4, max = 50) String name,
+			@NotNull @Size(min = 4, max = 50) String email, @NotNull Boolean enabled, Date lastPasswordResetDate,
+			List<Authority> authorities, Boolean isGoleiro, Boolean isEnviarNotifPorEmail, Boolean receberNotificacoes,
+			List<Notificacoes> notificacoes, Integer empresaId, Integer qntJogos, Integer qntGols, Double mediaNota,
+			Double mediaGols) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.email = email;
+		this.enabled = enabled;
+		this.lastPasswordResetDate = lastPasswordResetDate;
+		this.authorities = authorities;
+		this.isGoleiro = isGoleiro;
+		this.isEnviarNotifPorEmail = isEnviarNotifPorEmail;
+		this.receberNotificacoes = receberNotificacoes;
+		this.notificacoes = notificacoes;
+		this.empresaId = empresaId;
+		this.qntJogos = qntJogos;
+		this.qntGols = qntGols;
+		this.mediaNota = mediaNota;
+		this.mediaGols = mediaGols;
+	}
 
 	private static BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 

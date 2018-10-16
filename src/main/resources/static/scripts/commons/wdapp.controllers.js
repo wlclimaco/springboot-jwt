@@ -89,13 +89,13 @@
 								}
 								else
 								{
-									$rootScope.callingPath = "/dashboard";
+									$rootScope.callingPath = "/meusJogos";
 								}
 							}
 							$location.path($rootScope.callingPath);
 						}
 						else{
-							$location.path( "/dashboard" );
+							$location.path( "/meusJogos" );
 						}	
 					});
 					}

@@ -141,7 +141,7 @@
                                 <a class="list-group-item" data-toggle="collapse" data-target="#sm{{jogo.id-$index}}" data-parent="#menu" style="cursor:pointer"><span class="glyphicon glyphicon-home"></span> K10 SPORTS QUADRA-1 {{jogo.id}} </a>
 
                                 <div>
-                                    <a class="list-group-item" ng-repeat="jogoData in jogo.usersJogo | filter : myFilterUserJogo   | orderBy:'-id'" ng-if="jogoData.status_user == 'SOLICITADO'"><span class="glyphicon glyphicon-user"></span>
+                                    <a class="list-group-item" ng-repeat="jogoData in jogo.usersJogo | orderBy:'-id'" ng-if="jogoData.status_user == 'SOLICITADO'"><span class="glyphicon glyphicon-user"></span>
 											<span> {{jogoData.usuario.nome}} ({{jogoData.usuario.email}}) </span>
 											<span class="pull-right">
 												<button ng-click="aprovarJogador(jogoData, 'CONFIRMADO')" class="btn btn-xs btn-success glyphicon glyphicon-ok"       uib-tooltip="Aprovar P/ Todos os Jogos!"   tooltip-append-to-body="true"></button><!-- Aprovar -->

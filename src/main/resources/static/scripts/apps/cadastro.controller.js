@@ -35,9 +35,9 @@
                     if (response.code == 200) {
                         AuthService.createJWTToken(response.result.user, response.result.token);
                         AuthService.setCredentials();
-                        $location.path('/dashboard');
+                        $location.path('/dashboard2');
 
-                        var loginUrl = $location.absUrl() + '/dashboard';
+                        var loginUrl = $location.absUrl() + '/dashboard2';
 
                         $state.go("app.dashboard");
 

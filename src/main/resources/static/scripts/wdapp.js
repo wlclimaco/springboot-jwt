@@ -49,7 +49,7 @@ var WebDaptiveAppConfig = {
 		function($routeProvider) {
 			var routes, setRoutes;
 			//all available routes
-			routes = ['dashboard', 'dashboard2', 'ui/typography', 'ui/buttons', 'buscaQuadra', 'notificacoes', 'buscaQuadra3',
+			routes = ['dashboard','meusJogos', 'dashboard2', 'ui/typography', 'ui/buttons', 'buscaQuadra', 'notificacoes', 'buscaQuadra3',
 			'ui/icons', 'ui/grids', 'ui/widgets', 'ui/components', 
 			'ui/timeline', 'ui/tree', 'ui/pricing-tables', 'ui/maps', 
 			'tables/static', 'tables/dynamic', 'tables/responsive', 
