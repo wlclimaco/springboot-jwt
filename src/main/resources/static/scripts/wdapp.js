@@ -43,7 +43,7 @@ var WebDaptiveAppConfig = {
 				'wdApp.authentication', 'wdApp.pages.controllers', 'wdApp.demodata', 'wdApp.apps.stocks', 
 				'wdApp.apps.stocksdata','wdApp.apps.counties', 	'wdApp.apps.procedures','wdApp.apps.sysmgmt.data', 
 				'wdApp.apps.sysmgmt.datajava','wdApp.apps.horario', 'wdApp.apps.dialogs.um','wdApp.apps.sysmgmt.dataphp','wdApp.apps.meusJogos','wdApp.apps.factory.meusJogos',
-				'wdApp.apps.Auth','wdApp.apps.dialogs','wdApp.apps.buscarQuadra','wdApp.apps.notificacao','wdApp.apps.register','wdApp.apps.factory.base64','jkAngularCarousel.templates','wdApp.apps.chat','wdApp.apps.perfil']);  
+				'wdApp.apps.Auth','wdApp.apps.dialogs','wdApp.apps.buscarQuadra','wdApp.apps.notificacao','wdApp.apps.register','wdApp.apps.factory.base64','jkAngularCarousel.templates','wdApp.apps.chat','wdApp.apps.perfil', 'wdApp.apps.meusJogos.details']);  
   
 	wdApp.config(['$routeProvider',
 		function($routeProvider) {

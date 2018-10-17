@@ -668,6 +668,18 @@ public class JogoController {
 
 		return new ResponseEntity<List<Jogo>>(quadra, HttpStatus.OK);
 	}
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value = "/jogo/findJogoById", method = RequestMethod.POST)
+	public ResponseEntity<Jogo> findJogoById(@RequestBody String users)
+			throws JsonParseException, JsonMappingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		User user = mapper.readValue(users, User.class);
+
+		Jogo quadra = jogoService.findJogoById(user.getId().intValue());
+
+		return new ResponseEntity<Jogo>(quadra, HttpStatus.OK);
+	}
 
 	private void insertProximoJogoPorData(Jogo jogo, UserJogo2 user) {
 		// BUSCAR JOGO POR DATA ID

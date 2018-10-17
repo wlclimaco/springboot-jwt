@@ -57,6 +57,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+    
+    
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -75,6 +77,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/h2-console/**/**").permitAll()
             .antMatchers("/user/insert").permitAll()
             .antMatchers("/auth/**").permitAll()
+ 	        .antMatchers("/resources/**","/resources/**/**","/resources/**/**/**", "/static/**", "/css/**","/css/**/**","/css/**/**/**", "/js/**", "/images/**"
+ 	    		   , "/thirdparty/**", "/scripts/**", "/styles/**", "/views/**", "/fonts/**", "/scripts/**/**", "/templates/**/**", "/templates/**","/i18n/**").permitAll()
             .anyRequest().authenticated();
 
        httpSecurity
@@ -95,7 +99,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers(
                 HttpMethod.POST,
                 authenticationPath
-            )
+            ).antMatchers("/resources/**","/resources/**/**","/resources/**/**/**", "/static/**", "/css/**","/css/**/**","/css/**/**/**", "/js/**", "/images/**"
+ 	    		   , "/thirdparty/**", "/scripts/**", "/styles/**", "/views/**", "/fonts/**", "/scripts/**/**", "/templates/**/**", "/templates/**","/i18n/**")
+ 	
 
             // allow anonymous resource requests
             .and()

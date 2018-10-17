@@ -72,7 +72,7 @@ public class Jogo {
 //	@JoinTable(name = "user_jogos", joinColumns = @JoinColumn(name="jogo_id", nullable = false,  insertable = false, updatable = false), inverseJoinColumns = @JoinColumn(name = "user_id", nullable = false,  insertable = false, updatable = false))
 //	private List<UserJogo2> usersJogo2;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name="jogo_id",  insertable = false,unique = false, nullable = false, updatable = false)
 	private List<UserJogo2> usersJogo;
 

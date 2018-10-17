@@ -43,6 +43,12 @@
                 SysMgmtData.processPostPageData(url, user, fnCallback);
             },
             
+            fetchJogosById: function(user, fnCallback) {
+                var url = sUrlServer + '/jogo/findJogoById';
+
+                SysMgmtData.processPostPageData(url, user, fnCallback);
+            },
+            
             findJogoByUserAndStatus: function(user, fnCallback) {
                 var url = sUrlServer + '/jogo/findJogoByUserAndStatus';
 

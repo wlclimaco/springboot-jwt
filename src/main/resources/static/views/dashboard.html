@@ -103,7 +103,7 @@
     <div class="page page-dashboard">
 
 
-        <div data-ng-controller="MeusJogosController  as ec">
+        <div data-ng-controller="MeusJogosDetailsController  as ec">
             <!-- Stats -->
             <div class="row text-center">
                 <div class="col-lg-3 col-xsm-6">
@@ -130,73 +130,68 @@
                 </div>
             </div>
             <div>
-
-                <a class="list-group-item" data-toggle="collapse" data-target="#sl1dfff" data-parent="#menu"><span class="glyphicon glyphicon-resize-vertical"></span>Aprovar/Recusar Jogador <span class="glyphicon glyphicon-list pull-right"></span></a>
-                <div id="sl1dfff" class="sublinks collapse" style="border: 1px solid rgb(221, 221, 221)">
-                    <div id="menu">
-
-                        <div class="panel list-group">
-                            <div ng-repeat="jogo in jogos | orderBy:'dia'">
-
-                                <a class="list-group-item" data-toggle="collapse" data-target="#sm{{jogo.id-$index}}" data-parent="#menu" style="cursor:pointer"><span class="glyphicon glyphicon-home"></span> K10 SPORTS QUADRA-1 {{jogo.id}} </a>
-
-                                <div>
-                                    <a class="list-group-item" ng-repeat="jogoData in jogo.usersJogo | orderBy:'-id'" ng-if="jogoData.status_user == 'SOLICITADO'"><span class="glyphicon glyphicon-user"></span>
-											<span> {{jogoData.usuario.nome}} ({{jogoData.usuario.email}}) </span>
-											<span class="pull-right">
-												<button ng-click="aprovarJogador(jogoData, 'CONFIRMADO')" class="btn btn-xs btn-success glyphicon glyphicon-ok"       uib-tooltip="Aprovar P/ Todos os Jogos!"   tooltip-append-to-body="true"></button><!-- Aprovar -->
-												<button ng-click="aprovarJogador(jogoData, 'RECUSADO')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"     uib-tooltip="Aprovar Apenas proximo Jogo!"   tooltip-append-to-body="true"></button><!-- Desmarcar -->
-												<button ng-click="aprovarJogador(jogoData, 'RECUSADO')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"     uib-tooltip="Resusar!"   tooltip-append-to-body="true"></button><!-- Desmarcar -->
-											</span>
-										</a>
-
-                                </div>
-                                <div>
-                                    <a class="list-group-item">
-                                        <span>{{jogoData.data | date:"dd/MM/yy"}}</span>
-
-
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
+				<div ng-show="showAprovar()" >
+	                <a class="list-group-item" data-toggle="collapse" data-target="#sl1dfff" data-parent="#menu"><span class="glyphicon glyphicon-resize-vertical"></span>Aprovar/Recusar Jogador <span class="glyphicon glyphicon-list pull-right"></span></a>
+	                <div id="sl1dfff" class="sublinks collapse" style="border: 1px solid rgb(221, 221, 221)">
+	                    <div id="menu">
+	
+	                        <div class="panel list-group">
+	                                <a class="list-group-item" data-toggle="collapse" data-target="#sm{{jogo.id-$index}}" data-parent="#menu" style="cursor:pointer"><span class="glyphicon glyphicon-home"></span> K10 SPORTS QUADRA-1 {{jogo.id}} </a>
+	                                <div>
+	                                    <a class="list-group-item" ng-repeat="jogoData in jogo.usersJogo | orderBy:'-id'" ng-if="jogoData.status_user == 'SOLICITADO'"><span class="glyphicon glyphicon-user"></span>
+												<span> {{jogoData.usuario.nome}} ({{jogoData.usuario.email}}) </span>
+												<span class="pull-right">
+													<button ng-click="aprovarJogador(jogoData, 'CONFIRMADO')" class="btn btn-xs btn-success glyphicon glyphicon-ok"       uib-tooltip="Aprovar P/ Todos os Jogos!"   tooltip-append-to-body="true"></button><!-- Aprovar -->
+													<button ng-click="aprovarJogador(jogoData, 'RECUSADO')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"     uib-tooltip="Aprovar Apenas proximo Jogo!"   tooltip-append-to-body="true"></button><!-- Desmarcar -->
+													<button ng-click="aprovarJogador(jogoData, 'RECUSADO')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"     uib-tooltip="Resusar!"   tooltip-append-to-body="true"></button><!-- Desmarcar -->
+												</span>
+											</a>
+	                                </div>
+	                                <div>
+	                                    <a class="list-group-item">
+	                                        <span>{{jogoData.data | date:"dd/MM/yy"}}</span>
+	                                    </a>
+	                                </div>
+	                        </div>
+	                    </div>
+	                </div>
                 </div>
             </div>
             </br>
             <div>
-                <a class="list-group-item" data-toggle="collapse" data-target="#sl1fff" data-parent="#menu"><span class="glyphicon glyphicon-resize-vertical"></span>Meus Jogos para confirmar <span class="glyphicon glyphicon-list pull-right"></span></a>
-                <div id="sl1fff" class="sublinks collapse" style="border: 1px solid rgb(221, 221, 221)">
-                    <div id="menu">
-                        <div class="panel list-group">
-                            <div ng-repeat="jogo in jogos | orderBy:'dia'">
-                                <div class="well" ng-repeat="jogoData in jogo.jogoPorData | filter : myFilter3   | orderBy:'-data'">
-                                    <a class="list-group-item" data-toggle="collapse" data-target="#sm10{{jogo.id-$index}}" data-parent="#menu"><span class="glyphicon glyphicon-home"></span> K10 SPORTS QUADRA-1 <span>{{jogoData.data | date:"dd/MM/yy"}} - {{jogo.dia}}  {{jogo.horaInicial}} {{jogo.horaFinal}}.</span></a>
-                                    <div id="sm10{{jogo.id-$index}}" class="sublinks collapse">
-                                        <a class="list-group-item small"> {{jogoData.status}}.</a>
-                                    </div>
-                                    <a class="list-group-item" data-toggle="collapse" data-target="#ss{{jogoData.id-$index}}" data-parent="#menu"><span class="glyphicon glyphicon-user"></span> Jogadores <span class="badge badge-success">{{jogo.usersJogo.length}}</span></a>
-                                    <div id="ss{{jogoData.id-$index}}" class="sublinks collapse">
-                                        <div ng-repeat="user in jogoData.userJogoData">
-                                            <a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span> {{user.usuario.name}} {{user.usuario.lastName}}<span class="pull-right fa">
-														<img ng-show="fnConfirm(jogoData.userConfirm, user ) === 1" src="/../images/hold.png" uib-tooltip="Sem Resposta!" tooltip-append-to-body="true" height="20px" width="20px" >
-														<img ng-show="fnConfirm(jogoData.userConfirm, user ) === 2" src="/../images/dislike2.png" uib-tooltip="Não Vo!" tooltip-append-to-body="true" height="20px" width="20px" >
-														<img ng-show="fnConfirm(jogoData.userConfirm, user ) === 3" src="/../images/like.png" uib-tooltip="Estarei lá¡!" tooltip-append-to-body="true" height="20px" width="20px" ></span>
-														</a>
-                                        </div>
-                                    </div>
-                                    <a class="list-group-item">
-													Ações 
-													<span class="pull-right">
-														<button ng-click="gravarHorario(jogoData, 'CONFIRMADO')" class="btn btn-xs btn-success glyphicon glyphicon-ok"    uib-tooltip="Confirmar!"   tooltip-append-to-body="true"></button><!-- Aprovar -->
-														<button ng-click="gravarHorario(jogoData, 'NAOVO')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"   uib-tooltip="Não Vai dar!"    tooltip-append-to-body="true"></button><!-- Desmarcar -->
-													</span>
-												</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            	<div ng-show="showConfirmar()" >
+	                <a class="list-group-item" data-toggle="collapse" data-target="#sl1fff" data-parent="#menu"><span class="glyphicon glyphicon-resize-vertical"></span>Meus Jogos para confirmar <span class="glyphicon glyphicon-list pull-right"></span></a>
+	                <div id="sl1fff" class="sublinks collapse" style="border: 1px solid rgb(221, 221, 221)">
+	                    <div id="menu">
+	                        <div class="panel list-group">
+	     
+	                                <div class="well" ng-repeat="jogoData in jogos.jogoPorData | filter : myFilter3   | orderBy:'-data'">
+	                                    <a class="list-group-item" data-toggle="collapse" data-target="#sm10{{jogo.id-$index}}" data-parent="#menu"><span class="glyphicon glyphicon-home"></span> K10 SPORTS QUADRA-1 <span>{{jogoData.data | date:"dd/MM/yy"}} - {{jogo.dia}}  {{jogo.horaInicial}} {{jogo.horaFinal}}.</span></a>
+	                                    <div id="sm10{{jogo.id-$index}}" class="sublinks collapse">
+	                                        <a class="list-group-item small"> {{jogoData.status}}.</a>
+	                                    </div>
+	                                    <a class="list-group-item" data-toggle="collapse" data-target="#ss{{jogoData.id-$index}}" data-parent="#menu"><span class="glyphicon glyphicon-user"></span> Jogadores <span class="badge badge-success">{{jogos.usersJogo.length}}</span></a>
+	                                    <div id="ss{{jogoData.id-$index}}" class="sublinks collapse">
+	                                        <div ng-repeat="user in jogoData.userJogoData">
+	                                            <a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span> {{user.usuario.name}} {{user.usuario.lastName}}<span class="pull-right fa">
+															<img ng-show="fnConfirm(jogoData.userConfirm, user ) === 1" src="/../images/hold.png" uib-tooltip="Sem Resposta!" tooltip-append-to-body="true" height="20px" width="20px" >
+															<img ng-show="fnConfirm(jogoData.userConfirm, user ) === 2" src="/../images/dislike2.png" uib-tooltip="Não Vo!" tooltip-append-to-body="true" height="20px" width="20px" >
+															<img ng-show="fnConfirm(jogoData.userConfirm, user ) === 3" src="/../images/like.png" uib-tooltip="Estarei lá¡!" tooltip-append-to-body="true" height="20px" width="20px" ></span>
+															</a>
+	                                        </div>
+	                                    </div>
+	                                    <a class="list-group-item">
+														Ações 
+														<span class="pull-right">
+															<button ng-click="gravarHorario(jogoData, 'CONFIRMADO')" class="btn btn-xs btn-success glyphicon glyphicon-ok"    uib-tooltip="Confirmar!"   tooltip-append-to-body="true"></button><!-- Aprovar -->
+															<button ng-click="gravarHorario(jogoData, 'NAOVO')" class="btn btn-xs btn-warning glyphicon glyphicon-remove"   uib-tooltip="Não Vai dar!"    tooltip-append-to-body="true"></button><!-- Desmarcar -->
+														</span>
+													</a>
+	                                </div>
+	                        
+	                        </div>
+	                    </div>
+	                </div>
                 </div>
             </div>
             </br>
@@ -205,15 +200,14 @@
                 <div id="sl1fffs" class="sublinks collapse" style="border: 1px solid rgb(221, 221, 221)">
                     <div id="menu">
                         <div class="panel list-group">
-                            <div ng-repeat="jogo in jogos | orderBy:'dia'">
-                                <div class="well" ng-repeat="jogoData in jogo.jogoPorData  | orderBy:'-data'">
-                                    <a class="list-group-item" data-toggle="collapse" data-target="#sm{{jogo.id-$index}}" data-parent="#menu" style="cursor:pointer"><span class="glyphicon glyphicon-home"></span> K10 SPORTS QUADRA-1 <span>{{jogoData.data | date:"dd/MM/yy"}}</span>
+                                <div class="well" ng-repeat="jogoData in jogos.jogoPorData  | orderBy:'-data'">
+                                    <a class="list-group-item" data-toggle="collapse" data-target="#sm{{jogo.id-$index}}" data-parent="#menu" style="cursor:pointer"><span class="glyphicon glyphicon-home"></span> K10 SPORTS QUADRA-1 
                             <span class="pull-right">
-							<button ng-if="jogoData.status=='JAJOGADO'"
+							<button ng-if="jogoData.status=='JAJOGADO' && jogoData.userJogoData.length > 0"
 							ng-click="openDarNotas(jogoData)"
 							class="btn btn-xs btn-default"
 							uib-tooltip="Anotar Gols/Dar Nota" tooltip-append-to-body="true" style="width: 100px!Important;">Gols/Nota</button></span></a>
-                                    <a class="list-group-item" data-toggle="collapse" data-target="#sds{{jogoData.id-$index}}" data-parent="#menu"><span class="glyphicon glyphicon-user"></span> Jogadores <span class="badge badge-success">{{jogo.usersJogo.length}}</span></a>
+                                    <a class="list-group-item" data-toggle="collapse" data-target="#sds{{jogoData.id-$index}}" data-parent="#menu"><span class="glyphicon glyphicon-user"></span> Jogadores <span class="badge badge-success">{{jogoData.userJogoData.length}}</span></a>
                                     <div id="sds{{jogoData.id-$index}}" class="sublinks collapse">
                                         <div ng-repeat="user in jogoData.userJogoData">
                                             <a class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span> {{user.usuario.nome}} ({{user.usuario.email}}) <span class="pull-center">   Nota : {{user.nota}}  -  Gols : {{user.qntGols}}</span> <span class="pull-right fa">
@@ -223,9 +217,9 @@
 														</a>
                                         </div>
                                     </div>
-                                    <a class="list-group-item"> {{jogoData.status}} -  {{jogo.dia}}  {{jogo.horaInicial}} {{jogo.horaFinal}}. <span class="pull-right"></span></a>
+                                    <a class="list-group-item"> {{jogoData.status}} -  <span>{{jogoData.data | date:"dd/MM/yy HH:mm"}} até {{jogoData.dataFinal | date:"HH:mm"}}</span>. <span class="pull-right"></span></a>
                                 </div>
-                            </div>
+        
                         </div>
                     </div>
                 </div>
