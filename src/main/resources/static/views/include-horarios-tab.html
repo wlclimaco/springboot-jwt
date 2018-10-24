@@ -40,48 +40,48 @@
 				</div>
 				<a class="list-group-item"> <span class="pull-left">Ações</span>
 					<span class="pull-right">
-						<button ng-click="gravarHorario(jogo, 'EXCLUIR')"
+						<button ng-click="gravarHorario(jogo, 'EXCLUIR')" ng-disabled="remover"
 							class="btn btn-xs btn-warning glyphicon glyphicon-trash"
 							uib-tooltip="Excluir Horario!" tooltip-append-to-body="true"
 							style="width: 3em !Important;"></button>
 						<!-- Excluir-->
-						<button ng-if="jogo.status=='INDISPONIVEL'"
+						<button ng-if="jogo.status=='INDISPONIVEL'" ng-disabled="desmarcar"
 							ng-click="gravarHorario(jogo, 'DESMARCAR')"
 							class="btn btn-xs btn-warning glyphicon glyphicon-remove"
 							uib-tooltip="Desmarcar!" tooltip-append-to-body="true"
 							style="width: 3em !Important;"></button>
 						<!-- Desmarcar -->
-						<button ng-if="jogo.status=='CONFIRMAR'"
+						<button ng-if="jogo.status=='CONFIRMAR'" ng-disabled="marcar"
 							ng-click="gravarHorario(jogo, 'INDISPONIVEL')"
 							class="btn btn-xs btn-success glyphicon glyphicon-ok"
 							uib-tooltip="Aprovar!" tooltip-append-to-body="true"
 							style="width: 3em !Important;"></button>
 						<!-- Aprovar -->
-						<button ng-if="jogo.status=='CONFIRMAR'"
+						<button ng-if="jogo.status=='CONFIRMAR'" ng-disabled="marcar"
 							ng-click="gravarHorario(jogo, 'DISPONIVEL')"
 							class="btn btn-xs btn-warning glyphicon glyphicon-remove"
 							uib-tooltip="Recusar!" tooltip-append-to-body="true"
 							style="width: 3em !Important;"></button>
 						<!-- nao aprovar -->
-						<button ng-if="jogo.status=='OCUPADO'"
+						<button ng-if="jogo.status=='OCUPADO'" ng-disabled="marcar"
 							ng-click="gravarHorario(jogo, 'DISPONIVEL')"
 							class="btn btn-xs btn-success glyphicon glyphicon-ok"
 							uib-tooltip="Disponibilizar!" tooltip-append-to-body="true"
 							style="width: 3em !Important;"></button>
 						<!-- tornar disponivel -->
-						<button ng-if="jogo.status=='DISPONIVEL'"
+						<button ng-if="jogo.status=='DISPONIVEL'" ng-disabled="marcar"
 							ng-click="gravarHorario(jogo, 'ACONFIRMAR')"
 							class="btn btn-xs btn-warning glyphicon glyphicon-remove"
 							uib-tooltip="Ocupar!" tooltip-append-to-body="true"
 							style="width: 3em !Important;"></button>
 						<!-- marcar como ocupado -->
-						<button ng-if="jogo.status=='DISPONIVEL'"
-							ng-click="open('sm', '.modal-parent',jogo, 'ACONFIRMAR') "
+						<button ng-if="jogo.status=='DISPONIVEL'" ng-disabled="marcar"
+							ng-click="open('sm', '.modal-parent',jogo, 'ACONFIRMAR') " 
 							class="btn btn-xs btn-success glyphicon glyphicon-ok"
 							uib-tooltip="Marcar Horario!" tooltip-append-to-body="true"
 							style="width: 3em !Important;"></button>
 						<!-- Aprovar -->
-						<button ng-if="jogo.status=='INDISPONIVEL'"
+						<button ng-if="jogo.status=='INDISPONIVEL'" ng-disabled="{{marcar}}"
 							ng-click="openSolicitacao('sm', '.modal-parent',jogo, 'ACONFIRMAR')"
 							class="btn btn-xs btn-success glyphicon glyphicon-ok"
 							uib-tooltip="Solicitar Participação!"

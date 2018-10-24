@@ -152,38 +152,49 @@
 							'$scope',
 							'$uibModal',
 							'$log',
-							'$document','AuthService','$filter',
-							function($scope, $uibModal, $log, $document,AuthService,$filter) {
+							'$document',
+							'AuthService',
+							'$filter',
+							'$location',
+							function($scope, $uibModal, $log, $document,
+									AuthService, $filter, $location) {
 								$scope.items = [ "item1", "item2", "item3" ];
 								$scope.ok = function(a, b) {
 									console.log('a')
 								}
 								$scope.qntJogador = 1;
 								$scope.tipoEscolha = "";
-								$scope.change = function(jogadores){
-									
+								$scope.change = function(jogadores) {
+
 									//$scope.qntJogador = 0;
 									//$scope.Aleatorio = "";
-									var list1 = $filter('orderBy')(jogadores, 'goleiro');
+									var list1 = $filter('orderBy')(jogadores,
+											'goleiro');
 									var list2 = [];
-									if($scope.tipoEscolha === 'media'){
-										list2 = $filter('orderBy')(list1, 'mediaNota');
-									}else if($scope.tipoEscolha === 'gols'){
-										list2 = $filter('orderBy')(list1, 'mediaGols');
-									}else{
-										list2 = $filter('orderBy')(list1, 'jogador');
-									}debugger
-										var y = 0;
-										var list3 ={time:[]};
-										list3.time.push([]);
-										while (y < list2.length) {
-											for(var x=0;x < $scope.qntJogador;x++){
-												if(!list3.time[x])
-													list3.time[x] = [];
-												list3.time[x].push(list2[y]);
-												y++;
-											}
+									if ($scope.tipoEscolha === 'media') {
+										list2 = $filter('orderBy')(list1,
+												'mediaNota');
+									} else if ($scope.tipoEscolha === 'gols') {
+										list2 = $filter('orderBy')(list1,
+												'mediaGols');
+									} else {
+										list2 = $filter('orderBy')(list1,
+												'jogador');
+									}
+									debugger
+									var y = 0;
+									var list3 = {
+										time : []
+									};
+									list3.time.push([]);
+									while (y < list2.length) {
+										for (var x = 0; x < $scope.qntJogador; x++) {
+											if (!list3.time[x])
+												list3.time[x] = [];
+											list3.time[x].push(list2[y]);
+											y++;
 										}
+									}
 									$scope.list3 = list3;
 								}
 								$scope.open = function(size, parentSelector,
@@ -215,14 +226,14 @@
 									modalInstance = $uibModal.open({
 										templateUrl : "myModalContent3.html",
 										controller : 'ModalInstanceController',
-										size: 'lg',
-									    windowClass: 'my-modal-popup',
+										size : 'lg',
+										windowClass : 'my-modal-popup',
 										resolve : {
-											
+
 											items : function() {
-												
+
 												return {
-													
+
 													"jogo" : empresa
 												};
 											}
@@ -236,20 +247,19 @@
 												+ new Date());
 									});
 								};
-								
-								
+
 								$scope.openDarGols = function(empresa) {
 									var modalInstance;
 									modalInstance = $uibModal.open({
 										templateUrl : "myModalContent4.html",
 										controller : 'ModalInstanceController',
-										size: 'lg',
-									    windowClass: 'my-modal-popup',
+										size : 'lg',
+										windowClass : 'my-modal-popup',
 										resolve : {
-											
+
 											items : function() {
 												return {
-													
+
 													"jogo" : empresa
 												};
 											}
@@ -263,37 +273,38 @@
 												+ new Date());
 									});
 								};
-								
-								var fnCallback2 = function(oResp)
-				                {
-				                	if(oResp){
-				                		$scope.tirarTime = oResp;
-				                	}
-				                }
-								var oUser = JSON.parse(localStorage.getItem('wdAppLS.currentUser'));
-								AuthService.findJogoByUserAndStatus(oUser, fnCallback2);
-								
+
+								var fnCallback2 = function(oResp) {
+									if (oResp) {
+										$scope.tirarTime = oResp;
+									}
+								}
+								var oUser = JSON.parse(localStorage
+										.getItem('wdAppLS.currentUser'));
+								AuthService.findJogoByUserAndStatus(oUser,
+										fnCallback2);
+
 								$scope.gravarGols = function(jogoData) {
 									alert('!!!')
 								}
-								
+
 								$scope.gravarNotas = function(jogoData) {
 									alert('!!!!!')
 								}
-								
+
 								$scope.openDarNotas = function(empresa) {
 									var modalInstance;
 									modalInstance = $uibModal.open({
 										templateUrl : "myModalContent5.html",
 										controller : 'ModalInstanceController',
-										size: 'lg',
-									    windowClass: 'my-modal-popup',
+										size : 'lg',
+										windowClass : 'my-modal-popup',
 										resolve : {
-											
+
 											items : function() {
-	
+
 												return {
-													
+
 													"jogo" : empresa
 												};
 											}
@@ -310,26 +321,49 @@
 
 								$scope.openSolicitacao = function(size,
 										parentSelector, jogo, status) {
+									
+									var abUl = $location.absUrl();
 
 									var modalInstance;
-									modalInstance = $uibModal.open({
-										animation : $scope.animationsEnabled,
-										ariaLabelledBy : 'modal-title',
-										ariaDescribedBy : 'modal-body',
-										templateUrl : 'myModalContent2.html',
-										controller : 'ModalInstanceController',
-										size : size,
-										resolve : {
-											items : function() {
+									if (abUl === "http://localhost:8080/#/pages/signin") {
+										modalInstance = $uibModal
+										.open({
+											animation : $scope.animationsEnabled,
+											ariaLabelledBy : 'modal-title',
+											ariaDescribedBy : 'modal-body',
+											templateUrl : 'myModalContent4.html',
+											controller : 'ModalInstanceController',
+											size : 'lg',
+											resolve : {
+												items : function() {
 
-												return {
-													"jogo" : jogo,
-													"status" : status
-												};
+													return {
+														"jogo" : jogo,
+														"status" : status
+													};
+												}
 											}
-										}
-									});
+										});
+									} else {
+										modalInstance = $uibModal
+												.open({
+													animation : $scope.animationsEnabled,
+													ariaLabelledBy : 'modal-title',
+													ariaDescribedBy : 'modal-body',
+													templateUrl : 'myModalContent2.html',
+													controller : 'ModalInstanceController',
+													size : size,
+													resolve : {
+														items : function() {
 
+															return {
+																"jogo" : jogo,
+																"status" : status
+															};
+														}
+													}
+												});
+									}
 									modalInstance.result.then(function(
 											selectedItem) {
 										$scope.selected = selectedItem;
@@ -349,13 +383,71 @@
 							'$scope',
 							'$uibModalInstance',
 							'items',
-							'jogoFactory',
+							'jogoFactory','$rootScope', '$location', 'localStorageService','WDAuthentication','SysMgmtData',
 							function($scope, $uibModalInstance, items,
-									jogoFactory) {
+									jogoFactory,$rootScope, $location, localStorageService, WDAuthentication,SysMgmtData) {
 								$scope.items = items;
 								$scope.selected = {
 									item : $scope.items[0]
 								};
+								
+								$scope.loginssss  = function() {
+									//$scope.username, password: $scope.password
+									let body = JSON.stringify(
+									        { "username": $scope.username, "password": $scope.password }
+									    )
+									WDAuthentication.processLogin(WebDaptiveAppConfig.authenticationURL, body, function(authenticationResult) {
+										debugger
+										var authToken = authenticationResult.token;
+										if (authToken !== undefined){	
+											$uibModalInstance.dismiss("cancel");
+											$rootScope.authToken = authToken;
+											localStorageService.set('authToken', authToken);
+											
+										SysMgmtData.processPostPageData("http://localhost:8080/user/findUserByEmail", ""+$scope.username , function(res){
+											debugger
+											var currentUser = res;
+												$rootScope.user = currentUser;
+												$rootScope.main.name = $scope.username;
+												localStorageService.set('currentUser', $rootScope.user);
+												var tempRole = "";
+												var bAdmin = false;
+												var prop = {};
+												for (var x = 0; x < currentUser.authorities.length; x++) {
+													prop = currentUser.authorities[x]
+													tempRole += prop.name + "";
+													if(prop.name === 'ROLE_USER')
+														bAdmin = true;
+												}							
+												$rootScope.displayRoles = tempRole;
+												localStorageService.set('displayRoles', $rootScope.displayRoles);						
+											
+																
+											if ($rootScope.callingPath !== undefined){	
+												if ($rootScope.callingPath === '/pages/signin' || $rootScope.callingPath ===  '/cadastro'){
+													if(bAdmin)
+													{
+														$rootScope.callingPath = "/dashboard2";
+													}
+													else
+													{
+														$rootScope.callingPath = "/meusJogos";
+													}
+												}
+												$location.path($rootScope.callingPath);
+											}
+											else{
+												$location.path( "/buscaQuadra" );
+											}	
+										});
+										}
+										else{
+												$location.path( "/pages/signin" );
+										}		
+									});
+								};
+								
+								
 								$scope.ok = function(oJogo, sStatus) {
 
 									jogoFactory.update(oJogo, sStatus);
@@ -363,15 +455,17 @@
 											.close($scope.selected.item);
 								};
 								$scope.cancel = function() {
+									$uibModalInstance
+									.close($scope.selected.item);
 									$uibModalInstance.dismiss("cancel");
 								};
-								
+
 								$scope.gravarGols = function(jogoData) {
 									jogoFactory.gravarGols(jogoData);
 									$uibModalInstance
 											.close($scope.selected.item);
 								}
-								
+
 								$scope.gravarNotas = function(jogoData) {
 									jogoFactory.gravarNotas(jogoData);
 									$uibModalInstance
@@ -630,7 +724,7 @@
 															markers[0]);
 												});
 
-							//	$interval($scope.GenerateMapMarkers, 10000);
+								//	$interval($scope.GenerateMapMarkers, 10000);
 							} ]).controller(
 					'LoaderController',
 					[ '$scope', 'cfpLoadingBar',

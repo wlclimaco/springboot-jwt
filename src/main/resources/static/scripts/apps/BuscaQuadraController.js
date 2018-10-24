@@ -5,6 +5,13 @@
 	  
 	  var vm = this;
 	  
+	  var abUl = $location.absUrl(); 
+	  
+	  if(abUl === "http://localhost:8080/#/pages/signin"){
+		  $scope.remover = false;
+		  $scope.desmarcar = false;
+		  $scope.marcar = false;
+	  }
   
     vm.teste = 'DOMINGO';
  //   vm.empresaList = [];

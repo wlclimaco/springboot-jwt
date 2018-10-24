@@ -27,6 +27,14 @@
     };
 
   $scope.openSolicitacao = function (size, parentSelector,jogo,status) {
+	  debugger
+		var abUl = $location.absUrl(); 
+		  
+		  if(abUl === "http://localhost:8080/#/pages/signin"){
+			  $scope.remover = false;
+			  $scope.desmarcar = false;
+			  $scope.marcar = false;
+		  }
     var parentElem = parentSelector ? 
       angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
     var modalInstance = $uibModal.open({
