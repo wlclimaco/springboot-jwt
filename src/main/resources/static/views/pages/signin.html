@@ -17,6 +17,36 @@
     }
 
 }
+
+/* Hiding the checkbox, but allowing it to be focused */
+.badgebox
+{
+    opacity: 0;
+}
+
+.badgebox + .badge
+{
+    /* Move the check mark away when unchecked */
+    text-indent: -999999px;
+    /* Makes the badge's width stay the same checked and unchecked */
+	width: 27px;
+}
+
+.badgebox:focus + .badge
+{
+    /* Set something to make the badge looks focused */
+    /* This really depends on the application, in my case it was: */
+    
+    /* Adding a light border */
+    box-shadow: inset 0px 0px 5px;
+    /* Taking the difference out of the padding */
+}
+
+.badgebox:checked + .badge
+{
+    /* Move the check mark back when checked */
+	text-indent: 0;
+}
 </style>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -264,12 +294,12 @@
                     </uib-tab>
                     <uib-tab heading="Mapa">
                         <div class="panel-body" data-ng-controller="MapDemoController">
-                            <map class="ui-map" center="current-location" map-type-id="TERRAIN" zoom="14" scrollwheel="false">
+                            <map class="ui-map" zoom="13" center="[-19.7539784,-47.9349623]" map-type-id="TERRAIN" zoom="13" scrollwheel="false">
 							</map>
                         </div>
                     </uib-tab>
                     <uib-tab heading="Todos Horarios">
-                        <section data-ng-include=" 'views/include-filter-checbox.html' "></section>
+                        <section data-ng-include=" 'views/include-filter-checbox-todos.html' "></section>
                         <section data-ng-include=" 'views/include-horarios.html' "></section>
                     </uib-tab>
                 </uib-tabset>

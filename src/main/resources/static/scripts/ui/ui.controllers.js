@@ -404,7 +404,7 @@
 											$rootScope.authToken = authToken;
 											localStorageService.set('authToken', authToken);
 											
-										SysMgmtData.processPostPageData("http://localhost:8080/user/findUserByEmail", ""+$scope.username , function(res){
+										SysMgmtData.processPostPageData("https://quadra-test.herokuapp.com/user/findUserByEmail", ""+$scope.username , function(res){
 											debugger
 											var currentUser = res;
 												$rootScope.user = currentUser;
@@ -539,10 +539,10 @@
 							'$http',
 							'$interval',
 							function($scope, $http, $interval) {
-
+								debugger
 								var createMacromed = function(oEmpresa) {
 									var vazio = " -- "
-
+debugger
 									var sHtml = ' <div class="panel panel-default">'
 											+ ' <div class="panel-body">'
 											+ '    <div class="media">'

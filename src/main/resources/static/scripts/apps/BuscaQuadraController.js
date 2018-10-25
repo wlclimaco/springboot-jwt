@@ -7,7 +7,7 @@
 	  
 	  var abUl = $location.absUrl(); 
 	  
-	  if(abUl === "http://localhost:8080/#/pages/signin"){
+	  if(abUl === "https://quadra-test.herokuapp.com/#/pages/signin"){
 		  $scope.remover = false;
 		  $scope.desmarcar = false;
 		  $scope.marcar = false;

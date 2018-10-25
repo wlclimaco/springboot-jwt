@@ -62,7 +62,7 @@
 					//	localStorageService.set('expires_in', authenticationResult.expires_in);
 					//	localStorageService.set('jti', authenticationResult.jti);
 						
-					SysMgmtData.processPostPageData("http://localhost:8080/user/findUserByEmail", ""+$scope.username , function(res){
+					SysMgmtData.processPostPageData("https://quadra-test.herokuapp.com/user/findUserByEmail", ""+$scope.username , function(res){
 							
 						var currentUser = res;
 							$rootScope.user = currentUser;
