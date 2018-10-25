@@ -26,19 +26,10 @@
 		<java.version>1.8</java.version>
 		<apacheCommonLang.version>2.6</apacheCommonLang.version>
         <jjwt.version>0.9.1</jjwt.version>
-
 		<jacoco.version>0.8.1</jacoco.version>
-
-		<findbugs.version>3.0.1</findbugs.version>
 	</properties>
 
 	<dependencies>
-	<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
-<dependency>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-compiler-plugin</artifactId>
-    <version>3.8.0</version>
-</dependency>
 	
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
@@ -271,13 +262,6 @@
 			<groupId>com.jayway.jsonpath</groupId>
 			<artifactId>json-path</artifactId>
 		</dependency>
-
-     <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>findbugs</artifactId>
-            <version>${findbugs.version}</version>
-        </dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
