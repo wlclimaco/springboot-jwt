@@ -272,50 +272,102 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/javax.interceptor/javax.interceptor-api -->
 		<dependency>
-		    <groupId>javax.interceptor</groupId>
-		    <artifactId>javax.interceptor-api</artifactId>
-		    <version>1.2-b06</version>
+			<groupId>javax.interceptor</groupId>
+			<artifactId>javax.interceptor-api</artifactId>
+			<version>1.2-b06</version>
 		</dependency>
-		
+
 
 	</dependencies>
 
-<!-- 	<build> -->
-<!-- 		<plugins> -->
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
-<!-- 				<artifactId>maven-compiler-plugin</artifactId> -->
-<!-- 				<configuration> -->
-<!-- 					<source>1.8</source> -->
-<!-- 					<target>1.8</target> -->
-<!-- 				</configuration> -->
-<!-- 			</plugin> -->
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
-<!-- 				<artifactId>maven-javadoc-plugin</artifactId> -->
-<!-- 				<configuration> -->
-<!-- 					<additionalparam>-Xdoclint:none</additionalparam> -->
-<!-- 					<failOnError>false</failOnError> -->
-<!-- 				</configuration> -->
-<!-- 			</plugin> -->
-<!-- 		</plugins> -->
-<!-- 	</build> -->
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.5.1</version>
-            <configuration>
-                <source>1.8</source>
-                <target>1.8</target>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<executable>true</executable>
+					<addResources>true</addResources>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<additionalparam>-Xdoclint:none</additionalparam>
+					<failOnError>false</failOnError>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<executable>true</executable>
+					<addResources>true</addResources>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<!-- <build> -->
+	<!-- <plugins> -->
+	<!-- <plugin> -->
+	<!-- <groupId>org.apache.maven.plugins</groupId> -->
+	<!-- <artifactId>maven-compiler-plugin</artifactId> -->
+	<!-- <configuration> -->
+	<!-- <source>1.8</source> -->
+	<!-- <target>1.8</target> -->
+	<!-- </configuration> -->
+	<!-- </plugin> -->
+	<!-- <plugin> -->
+	<!-- <groupId>org.apache.maven.plugins</groupId> -->
+	<!-- <artifactId>maven-javadoc-plugin</artifactId> -->
+	<!-- <configuration> -->
+	<!-- <additionalparam>-Xdoclint:none</additionalparam> -->
+	<!-- <failOnError>false</failOnError> -->
+	<!-- </configuration> -->
+	<!-- </plugin> -->
+	<!-- </plugins> -->
+	<!-- </build> -->
+	<!-- <build> -->
+	<!-- <plugins> -->
+	<!-- <plugin> -->
+	<!-- <groupId>org.apache.maven.plugins</groupId> -->
+	<!-- <artifactId>maven-compiler-plugin</artifactId> -->
+	<!-- <version>3.5.1</version> -->
+	<!-- <configuration> -->
+	<!-- <source>1.8</source> -->
+	<!-- <target>1.8</target> -->
+	<!-- </configuration> -->
+	<!-- </plugin> -->
+	<!-- </plugins> -->
+	<!-- </build> -->
 	<!-- <build> -->
 	<!-- <plugins> -->
 	<!-- <plugin> -->
@@ -338,69 +390,67 @@
 	<!-- </plugins> -->
 	<!-- </build> -->
 
-	<!-- <profiles> -->
-	<!-- <profile> -->
-	<!-- <id>findbugs</id> -->
-	<!-- <activation> -->
-	<!-- <activeByDefault>true</activeByDefault> -->
-	<!-- </activation> -->
-	<!-- <build> -->
-	<!-- <plugins> -->
-	<!-- <plugin> -->
-	<!-- <groupId>org.codehaus.mojo</groupId> -->
-	<!-- <artifactId>findbugs-maven-plugin</artifactId> -->
-	<!-- <version>${findbugs-maven-plugin.version}</version> -->
-	<!-- <configuration> -->
-	<!-- <excludeFilterFile>${basedir}/etc/findbugs-exclude-filter.xml</excludeFilterFile> -->
-	<!-- </configuration> -->
+	<profiles>
+		<profile>
+			<id>findbugs</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>findbugs-maven-plugin</artifactId>
+						<version>3.0.5</version>
+						<configuration>
+							<excludeFilterFile>${basedir}/etc/findbugs-exclude-filter.xml</excludeFilterFile>
+						</configuration>
 
-	<!-- </plugin> -->
-	<!-- </plugins> -->
-	<!-- </build> -->
-	<!-- </profile> -->
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 
-	<!-- <profile> -->
-	<!-- <id>jacoco</id> -->
-	<!-- <build> -->
-	<!-- <plugins> -->
-	<!-- <plugin> -->
-	<!-- <groupId>org.jacoco</groupId> -->
-	<!-- <artifactId>jacoco-maven-plugin</artifactId> -->
-	<!-- <version>${jacoco.version}</version> -->
-	<!-- <executions> -->
-	<!-- <execution> -->
-	<!-- <id>prepare-agent</id> -->
-	<!-- <goals> -->
-	<!-- <goal>prepare-agent</goal> -->
-	<!-- </goals> -->
-	<!-- </execution> -->
-	<!-- <execution> -->
-	<!-- <id>report</id> -->
-	<!-- <phase>prepare-package</phase> -->
-	<!-- <goals> -->
-	<!-- <goal>report</goal> -->
-	<!-- </goals> -->
-	<!-- </execution> -->
-	<!-- <execution> -->
-	<!-- <id>post-unit-test</id> -->
-	<!-- <phase>test</phase> -->
-	<!-- <goals> -->
-	<!-- <goal>report</goal> -->
-	<!-- </goals> -->
-	<!-- <configuration> -->
-	<!-- Sets the path to the file which contains the execution data. -->
-
-	<!-- <dataFile>target/jacoco.exec</dataFile> -->
-	<!-- Sets the output directory for the code coverage report. -->
-	<!-- <outputDirectory>target/jacoco-ut</outputDirectory> -->
-	<!-- </configuration> -->
-	<!-- </execution> -->
-	<!-- </executions> -->
-	<!-- </plugin> -->
-	<!-- </plugins> -->
-	<!-- </build> -->
-	<!-- </profile> -->
-	<!-- </profiles> -->
+		<profile>
+			<id>jacoco</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<version>${jacoco.version}</version>
+						<executions>
+							<execution>
+								<id>prepare-agent</id>
+								<goals>
+									<goal>prepare-agent</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>report</id>
+								<phase>prepare-package</phase>
+								<goals>
+									<goal>report</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>post-unit-test</id>
+								<phase>test</phase>
+								<goals>
+									<goal>report</goal>
+								</goals>
+								<configuration>
 
 
+									<dataFile>target/jacoco.exec</dataFile>
+
+									<outputDirectory>target/jacoco-ut</outputDirectory>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

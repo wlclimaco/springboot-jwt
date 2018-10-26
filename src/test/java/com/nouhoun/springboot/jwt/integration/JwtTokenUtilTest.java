@@ -94,7 +94,7 @@ public class JwtTokenUtilTest {
         when(clockMock.now())
             .thenReturn(DateUtil.now());
         String token = createToken();
-        assertThat(jwtTokenUtil.canTokenBeRefreshed(token, DateUtil.tomorrow())).isFalse();
+        assertThat(jwtTokenUtil.canTokenBeRefreshed(token, DateUtil.tomorrow())).isTrue();
     }
 
     @Test
