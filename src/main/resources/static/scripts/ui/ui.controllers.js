@@ -688,7 +688,6 @@
 												markers[0],
 												'click',
 												function() {
-
 													var contentString = '<div id="content">'
 															+ '<div id="siteNotice">'
 															+ '</div>'
