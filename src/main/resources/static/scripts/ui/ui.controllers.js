@@ -539,10 +539,10 @@
 							'$http',
 							'$interval',
 							function($scope, $http, $interval) {
-								debugger
+								
 								var createMacromed = function(oEmpresa) {
 									var vazio = " -- "
-debugger
+
 									var sHtml = ' <div class="panel panel-default">'
 											+ ' <div class="panel-body">'
 											+ '    <div class="media">'
@@ -637,7 +637,7 @@ debugger
 										lat : -19.7483300,
 										lng : -47.9319400
 									},
-									mapTypeId : google.maps.MapTypeId.ROADMAP,
+									mapTypeId : new  google.maps.MapTypeId.ROADMAP,
 									scrollwheel : false
 								};
 								// if (map === void 0) {
