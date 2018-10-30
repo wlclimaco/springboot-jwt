@@ -1,4 +1,4 @@
-<div class="panel-body ">
+<div class="panel-body">
 	<div class="rate-review-box review-box col-md-12">
 		<div class="overall-box col-md-4 pull-left" style="margin-bottom:3%;">
 			<span>5.0</span>
@@ -52,33 +52,36 @@
 			</div>
 		</div>
 	</div>
-</div>
-<div style="border: 1px">
-	<div class="top-reviews-box">
-		<div class="gym_rating_left pull-left col-md-3">
-			<img width="50" height="50" src="https://dtda4cv2md3ne.cloudfront.net/image/filename/114631/47450_362732440488114_84347150_n.jpg"
-			    alt="47450 362732440488114 84347150 n">
-		</div>
-		<div class="gym_rating_container col-md-9 pull-left" style="text-align: left;">
-			<p class="gym_rating_author">
-				<span itemprop="author"> Leandro G. </span>
-			</p>
-			<div class="rate-calendar">
-				<div class="rating_stars ">
-					<i class="icon-star fa fa-star icon_on"></i>
-					<i class="icon-star fa fa-star icon_on"></i>
-					<i class="icon-star fa fa-star icon_on"></i>
-					<i class="icon-star fa fa-star icon_on"></i>
-					<i class="icon-star fa fa-star icon_on"></i>
+
+	<div style="border: 1px">
+		<div class="top-reviews-box">
+			<div class="pull-left">
+				<div class="gym_rating_left pull-left">
+					<img width="50" height="50" src="https://dtda4cv2md3ne.cloudfront.net/image/filename/114631/47450_362732440488114_84347150_n.jpg"
+					    alt="47450 362732440488114 84347150 n">
 				</div>
-				<div class="gym_rating_date">
-					<meta itemprop="datePublished" content="2015-09-03"> 03/Set/15
+				<div class="gym_rating_container pull-left" style="text-align:left;margin-left:5px">
+					<p class="gym_rating_author">
+						<span itemprop="author"> Leandro G. </span>
+					</p>
+					<div class="rate-calendar">
+						<div class="rating_stars ">
+							<i class="icon-star fa fa-star icon_on"></i>
+							<i class="icon-star fa fa-star icon_on"></i>
+							<i class="icon-star fa fa-star icon_on"></i>
+							<i class="icon-star fa fa-star icon_on"></i>
+							<i class="icon-star fa fa-star icon_on"></i>
+						</div>
+						<div class="gym_rating_date">
+							<meta itemprop="datePublished" content="2015-09-03"> 03/Set/15
+						</div>
+					</div>
 				</div>
 			</div>
+			<div class="pull-right">
+				<p style="text-align:left;">Sem dúvidas, a melhor academia da cidade. TESTE</p>
+			</div>
 		</div>
-	</div>
-	<div class="col-md-12" style="margin-top: 16%;">
-		<p>Sem dúvidas, a melhor academia da cidade. TESTE</p>
 	</div>
 </div>
 <div class="containers">
@@ -86,48 +89,27 @@
 		<div class="">
 			<div class="well well-sm">
 				<div class="row" id="post-review-box">
-					<div class="col-md-12">
+					<div class="col-md-12" data-ng-controller="RatingDemoController">
 						<form accept-charset="UTF-8" action="" method="post">
 							<input id="ratings-hidden" name="rating" type="hidden">
 							<!-- <div class="row" > -->
 							<input class="form-control animated" type="email" id="ratings" name="ratings" placeholder="email">
 							<!-- </div> -->
 							<br>
-							<textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="mensagem"
-								rows="5"></textarea>
-<br>
+							<textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="mensagem" rows="5"></textarea>
+							<br>
 							<div class="row" ng-repeat="avaliacao in oEmpresa.avaliacaoOptions">
-								<div  class="col-md-12">
+								<div class="col-md-12">
 									<div class="pull-left">
-										<label>{{avaliacao.opcao}}:</label>
+										<label>{{avaliacao.opcao}} :</label>
 									</div>
 									<div class="pull-right">
-										<div class="estrelas">
-											<input type="radio" id="cm_star-empty-{{avaliacao.id}}" name="fb-{{avaliacao.id}}" value="" checked />
-											<label for="cm_star-1-{{avaliacao.id}}">
-												<i class="fa"></i>
-											</label>
-											<input type="radio" id="cm_star-1-{{avaliacao.id}}" name="fb-{{avaliacao.id}}" value="1" />
-											<label for="cm_star-2-{{avaliacao.id}}">
-												<i class="fa"></i>
-											</label>
-											<input type="radio" id="cm_star-2-{{avaliacao.id}}" name="fb-{{avaliacao.id}}" value="2" />
-											<label for="cm_star-3-{{avaliacao.id}}">
-												<i class="fa"></i>
-											</label>
-											<input type="radio" id="cm_star-3-{{avaliacao.id}}" name="fb-{{avaliacao.id}}" value="3" />
-											<label for="cm_star-4-{{avaliacao.id}}">
-												<i class="fa"></i>
-											</label>
-											<input type="radio" id="cm_star-4-{{avaliacao.id}}" name="fb-{{avaliacao.id}}" value="4" />
-											<label for="cm_star-5-{{avaliacao.id}}">
-												<i class="fa"></i>
-											</label>
-											<input type="radio" id="cm_star-5-{{avaliacao.id}}" name="fb-{{avaliacao.id}}" value="5" />
-										</div>
+
+										<span id="teste-{{avaliacao.id}}" uib-rating class="ui-rating size-h3" ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)"
+										    on-leave="overStar = null" state-on="'fa fa-star'" state-off="'fa fa-star-o'"> </span>
 									</div>
 								</div>
-							<br>
+								<br>
 							</div>
 							<br>
 							<div class="text-right">
@@ -142,5 +124,4 @@
 			</div>
 		</div>
 	</div>
-</div>
 </div>
