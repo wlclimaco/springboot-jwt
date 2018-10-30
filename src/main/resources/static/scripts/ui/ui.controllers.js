@@ -403,8 +403,9 @@
 											$uibModalInstance.dismiss("cancel");
 											$rootScope.authToken = authToken;
 											localStorageService.set('authToken', authToken);
-											
-										SysMgmtData.processPostPageData("https://quadra-test.herokuapp.com/user/findUserByEmail", ""+$scope.username , function(res){
+											 var surl = "https://quadra-test.herokuapp.com/";
+											//  var sUrl = "http://localhost:8080/";	
+										SysMgmtData.processPostPageData(sUrl + "user/findUserByEmail", ""+$scope.username , function(res){
 											debugger
 											var currentUser = res;
 												$rootScope.user = currentUser;
@@ -637,13 +638,12 @@
 										lat : -19.7483300,
 										lng : -47.9319400
 									},
-									mapTypeId : new  google.maps.MapTypeId.ROADMAP,
+									mapTypeId : google.maps.MapTypeId.ROADMAP,
 									scrollwheel : false
 								};
 								// if (map === void 0) {
-								// map = new
-								// google.maps.Map(document.getElementById('mapamaster'),
-								// mapOptions);
+								 map = new google.maps.Map("",
+								 mapOptions);
 								// }
 
 								var i, markers;
@@ -688,7 +688,7 @@
 												markers[0],
 												'click',
 												function() {
-													
+
 													var contentString = '<div id="content">'
 															+ '<div id="siteNotice">'
 															+ '</div>'
@@ -724,7 +724,7 @@
 															markers[0]);
 												});
 
-								//	$interval($scope.GenerateMapMarkers, 10000);
+							//	$interval($scope.GenerateMapMarkers, 10000);
 							} ]).controller(
 					'LoaderController',
 					[ '$scope', 'cfpLoadingBar',

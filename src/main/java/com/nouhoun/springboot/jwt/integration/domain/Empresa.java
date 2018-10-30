@@ -12,12 +12,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "empresa")
@@ -41,6 +44,16 @@ public class Empresa{
 	@Column(name = "telefone")
 	@NotEmpty(message = "*Please provide your last name")
 	private String telefone;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name="empresa_id", referencedColumnName="empresa_id", nullable = false, insertable = false, updatable = false)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private List<Avaliacao> avaliacao;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name="empresa_id", referencedColumnName="empresa_id", nullable = false, insertable = false, updatable = false)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private List<AvaliacaoOptions> avaliacaoOptions;
 
 //	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
 //    @JoinColumn(name = "endereco_id", insertable = false, updatable = false, nullable = false)
@@ -154,8 +167,23 @@ public class Empresa{
 		super();
 	}
 
+	public List<Avaliacao> getAvaliacao() {
+		return avaliacao;
+	}
 
+	public void setAvaliacao(List<Avaliacao> avaliacao) {
+		this.avaliacao = avaliacao;
+	}
 
+	public List<AvaliacaoOptions> getAvaliacaoOptions() {
+		return avaliacaoOptions;
+	}
+
+	public void setAvaliacaoOptions(List<AvaliacaoOptions> avaliacaoOptions) {
+		this.avaliacaoOptions = avaliacaoOptions;
+	}
+	
+	
 	
 //	public Set<Horarios> getHorarioAberto() {
 //		return horarioAberto;

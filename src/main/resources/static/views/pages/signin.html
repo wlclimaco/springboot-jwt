@@ -82,13 +82,13 @@
 <div class="page" data-ng-controller="ModalDemoController">
     <script type="text/ng-template" id="myModalContent2.html">
         <div class="modal-header">
-            <h3 class="modal-title" id="modal-title">Solicitar ParticipaÃ§Ã£o!</h3>
+            <h3 class="modal-title" id="modal-title">Solicitar Participação!</h3>
         </div>
         <div class="modal-body" id="modal-body">
             <form role="form" ng-submit='login()'>
                 <fieldset>
                     <div class="modal-body" id="modal-body">
-                        Sua solicitaÃ§Ã£o foi enviada, para o adminstrador <br> do jogo assim que for Aprovado/recusado vocÃª receber <br> uma noticicaÃ§Ã£o no aplicativo
+                        Sua solicitação foi enviada, para o adminstrador <br> do jogo assim que for Aprovado/recusado você receber <br> uma noticicação no aplicativo
                     </div>
                 </fieldset>
             </form>
@@ -293,7 +293,7 @@
                         </section>
                     </uib-tab>
                     <uib-tab heading="Mapa">
-                        <div class="panel-body" >
+                        <div class="panel-body" data-ng-controller="MapDemoController">
                             <map class="ui-map" zoom="13" center="[-19.7539784,-47.9349623]" map-type-id="TERRAIN" zoom="13" scrollwheel="false">
 							</map>
                         </div>
