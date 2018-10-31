@@ -1,83 +1,79 @@
 <style>
     .sdsdsdsd .list-group-item {
-        padding: 0px 1px!Important;
+        padding: 0px 1px !Important;
     }
-    
+
     .sdsdsdsd .list-group {
-        margin-bottom: 0px!Important;
+        margin-bottom: 0px !Important;
     }
-    
-.my-modal-popup{
+    .my-modal-popup {
 
-    @media (min-width: 1400px){
+        @media (min-width: 1400px) {
 
-        .modal-lg {
-            width: 1308px;
+            .modal-lg {
+                width: 1308px;
+            }
         }
+
     }
 
-}
+    /* Hiding the checkbox, but allowing it to be focused */
 
-/* Hiding the checkbox, but allowing it to be focused */
-.badgebox
-{
-    opacity: 0;
-}
+    .badgebox {
+        opacity: 0;
+    }
 
-.badgebox + .badge
-{
-    /* Move the check mark away when unchecked */
-    text-indent: -999999px;
-    /* Makes the badge's width stay the same checked and unchecked */
-	width: 27px;
-}
+    .badgebox+.badge {
+        /* Move the check mark away when unchecked */
+        text-indent: -999999px;
+        /* Makes the badge's width stay the same checked and unchecked */
+        width: 27px;
+    }
 
-.badgebox:focus + .badge
-{
-    /* Set something to make the badge looks focused */
-    /* This really depends on the application, in my case it was: */
-    
-    /* Adding a light border */
-    box-shadow: inset 0px 0px 5px;
-    /* Taking the difference out of the padding */
-}
+    .badgebox:focus+.badge {
+        /* Set something to make the badge looks focused */
+        /* This really depends on the application, in my case it was: */
+        /* Adding a light border */
+        box-shadow: inset 0px 0px 5px;
+        /* Taking the difference out of the padding */
+    }
 
-.badgebox:checked + .badge
-{
-    /* Move the check mark back when checked */
-	text-indent: 0;
-}
+    .badgebox:checked+.badge {
+        /* Move the check mark back when checked */
+        text-indent: 0;
+    }
 </style>
+
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <nav class="navbar navbar-inverse top-header clearfix" style="background: #0FA74B;">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a style="color: #000000;" class="navbar-brand" href="#">Eu-Jogador</a>
-    </div>
-    <div class="form-container" data-ng-controller="LoginController">
-                <form class="navbar-form navbar-right" role="search">
-                     <div class="form-group" style="background:red;color:00000;">
-                            <input type="text" id="username" ng-model="username" data-focus="true" class="form-control text-center" placeholder="email">
-                        </div>
-                    <div class="form-group">
-                        <input type="password" id="password" ng-model="password" class="form-control text-center" placeholder="Senha">
-                    </div>
-                    <div class="form-group">
-                         <input type="submit" value="Entrar" class="btn btn-primary btn-round btn-block text-center" ng-click="login()" />
-                     </div>
-<div class="form-group">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a style="color: #000000;" class="navbar-brand" href="#">Eu-Jogador</a>
+        </div>
+        <div class="form-container" data-ng-controller="LoginController">
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group" style="background:red;color:00000;">
+                    <input type="text" id="username" ng-model="username" data-focus="true" class="form-control text-center" placeholder="email">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" ng-model="password" class="form-control text-center" placeholder="Senha">
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Entrar" class="btn btn-primary btn-round btn-block text-center" ng-click="login()" />
+                </div>
+                <div class="form-group">
                     <a href="#/pages/forgot-password">Esqueceu A SENHA?</a>
                     <a href="#/cadastro">Novo Usuario?</a>
                 </div>
-                </form>
-                </div>
-  </div>
-  
+            </form>
+        </div>
+    </div>
+
 </nav>
 <div class="page" data-ng-controller="ModalDemoController">
     <script type="text/ng-template" id="myModalContent2.html">
@@ -88,7 +84,9 @@
             <form role="form" ng-submit='login()'>
                 <fieldset>
                     <div class="modal-body" id="modal-body">
-                        Sua solicita��o foi enviada, para o adminstrador <br> do jogo assim que for Aprovado/recusado voc� receber <br> uma noticica��o no aplicativo
+                        Sua solicita��o foi enviada, para o adminstrador
+                        <br> do jogo assim que for Aprovado/recusado voc� receber
+                        <br> uma noticica��o no aplicativo
                     </div>
                 </fieldset>
             </form>
@@ -98,55 +96,63 @@
             <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
         </div>
     </script>
-    
+
     <script type="text/ng-template" class="my-modal-popup" id="myModalContent3.html" style="width: 10px; max-width: 20px; min-width: 5px; ">
         <div class="modal-header">
-            <div class="col-md-11"><h3 class="modal-title" id="modal-title">{{items.jogo.nome}}</h3></div><div class="col-md-1"> <span class="pull-right"><button type="button" ng-click="cancel()">&times;</button></span></div>
+            <div class="col-md-11">
+                <h3 class="modal-title" id="modal-title">{{items.jogo.nome}}</h3>
+            </div>
+            <div class="col-md-1">
+                <span class="pull-right">
+                    <button type="button" ng-click="cancel()">&times;</button>
+                </span>
+            </div>
         </div>
-        <div class="modal-body" id="modal-body" >
-           <section class="panel panel-box" ng-init="oEmpresa = items.jogo" >
-                                
-                                <div class="col-md-12">
-                                    <div id="buscarQuadra-container3s" class="creator-container" style="margin-top: 1%; margin-left: 1%;">
-                                        <div class="ui-tab-container">
-                                            <uib-tabset class="ui-tab">
-                                                <uib-tab heading="Sobre">
-													<div class="col-md-12 sdsdsdsd" style="padding: 0px 1px!Important;margin-bottom: 0px!Important;">
-                                    <div class="panel panel-profile">
-                                        <ul class="list-group">
-                                            <li class="list-group-item">
-                                                <p class="pull-left">Responsavel : {{oEmpresa.nomeResponsavel}}</p>
-                                                <p class="pull-right">Email : {{oEmpresa.email}}</p>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <p class="pull-left">Endereço : {{oEmpresa.endereco.logradouro}}, {{oEmpresa.endereco.numero}}, {{Empresa.endereco.bairro}}
-                                                </p>
-                                                <p class="pull-right">Telefone : {{oEmpresa.telefone}}</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                                    <section data-ng-include=" 'views/include-sobre.html' "></section>
-                                                </uib-tab>
-                                                <uib-tab heading="Avaliações">
-                                                    <section data-ng-include=" 'views/include-avaliacao.html' ">
-                                                    </section>
-                                                </uib-tab>
-                                                <uib-tab heading="Horario">
-                                                    <section data-ng-include=" 'views/include-horarios-tab.html' "></section>
-                                                </uib-tab>
-                                                <uib-tab heading="Fotos">
-                                                    <section data-ng-include=" 'views/include-fotos.html' "></section>
-                                                </uib-tab>
-                                            </uib-tabset>
-                                            <!-- end Pofile panel -->
+        <div class="modal-body" id="modal-body">
+            <section class="panel panel-box" ng-init="oEmpresa = items.jogo">
+
+                <div class="col-md-12">
+                    <div id="buscarQuadra-container3s" class="creator-container" style="margin-top: 1%; margin-left: 1%;">
+                        <div class="ui-tab-container">
+                            <uib-tabset class="ui-tab">
+                                <uib-tab heading="Sobre">
+                                    <div class="col-md-12 sdsdsdsd" style="padding: 0px 1px!Important;margin-bottom: 0px!Important;">
+                                        <div class="panel panel-profile">
+                                            <ul class="list-group">
+                                                <li class="list-group-item">
+                                                    <p class="pull-left">Responsavel : {{oEmpresa.nomeResponsavel}}</p>
+                                                    <p class="pull-right">Email : {{oEmpresa.email}}</p>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <p class="pull-left">Endereço : {{oEmpresa.endereco.logradouro}}, {{oEmpresa.endereco.numero}},
+                                                        {{Empresa.endereco.bairro}}
+                                                    </p>
+                                                    <p class="pull-right">Telefone : {{oEmpresa.telefone}}</p>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
-                        </section>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
-        </div>
+                                    <section data-ng-include=" 'views/include-sobre.html' "></section>
+                                </uib-tab>
+                                <uib-tab heading="Avaliações">
+                                    <section data-ng-include=" 'views/include-avaliacao.html' ">
+                                    </section>
+                                </uib-tab>
+                                <uib-tab heading="Horario">
+                                    <section data-ng-include=" 'views/include-horarios-tab.html' "></section>
+                                </uib-tab>
+                                <uib-tab heading="Fotos">
+                                    <section data-ng-include=" 'views/include-fotos.html' "></section>
+                                </uib-tab>
+                            </uib-tabset>
+                            <!-- end Pofile panel -->
+                        </div>
+                    </div>
+            </section>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+            </div>
     </script>
     <script type="text/ng-template" id="myModalContent4.html">
         <div class="modal-header">
@@ -157,34 +163,41 @@
                 <fieldset>
                     <div class="modal-body" id="modal-body">
                         <div class="signin-body">
-        <div class="container col-md-12">
+                            <div class="container col-md-12">
 
-            <div class="form-container" >
-                <form class="form-horizontal">
+                                <div class="form-container">
+                                    <form class="form-horizontal">
 
-                    <img class="img-responsive center-block" src="https://www.freelogoservices.com/api/main/ph/zjHl2lgef9cYrQL0JFa7kzbw2vuDpBZNkBjO0Tp9OXdE9g5shnN1i...Bv9ettdV9dsBUGw0pY" />
-                    <fieldset>
-                        <div class="form-group">
-                            <input type="text" id="username" ng-model="username" data-focus="true" class="form-control input-lg input-round text-center" placeholder="e-address@qat.com">
+                                        <img class="img-responsive center-block" src="https://www.freelogoservices.com/api/main/ph/zjHl2lgef9cYrQL0JFa7kzbw2vuDpBZNkBjO0Tp9OXdE9g5shnN1i...Bv9ettdV9dsBUGw0pY"
+                                        />
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <input type="text" id="username" ng-model="username" data-focus="true" class="form-control input-lg input-round text-center"
+                                                    placeholder="e-address@qat.com">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" id="password" ng-model="password" class="form-control input-lg input-round text-center" placeholder="Password">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="submit" value="Log In" class="btn btn-primary btn-lg btn-round btn-block text-center" ng-click="loginssss()"
+                                                />
+                                            </div>
+                                            <div class="alert alert-danger" ng-show="error">{{error}}</div>
+                                        </fieldset>
+                                    </form>
+
+                                    <section>
+                                        <p class="text-center">
+                                            <a href="#/pages/forgot-password">Esqueceu A SENHA?</a>
+                                        </p>
+                                        <p class="text-center text-muted text-small">
+                                            <a href="#/cadastro">Novo Usuario?</a>
+                                        </p>
+                                    </section>
+
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input type="password" id="password" ng-model="password" class="form-control input-lg input-round text-center" placeholder="Password">
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Log In" class="btn btn-primary btn-lg btn-round btn-block text-center" ng-click="loginssss()" />
-                        </div>
-                        <div class="alert alert-danger" ng-show="error">{{error}}</div>
-                    </fieldset>
-                </form>
-
-                <section>
-                    <p class="text-center"><a href="#/pages/forgot-password">Esqueceu A SENHA?</a></p>
-                    <p class="text-center text-muted text-small"><a href="#/cadastro">Novo Usuario?</a></p>
-                </section>
-
-            </div>
-        </div>
-    </div>
                     </div>
                 </fieldset>
             </form>
@@ -193,7 +206,7 @@
             <button class="btn btn-warning" type="button" ng-click="cancel()">Fechar</button>
         </div>
     </script>
-    
+
     <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
             <h3 class="modal-title" id="modal-title">Confirmar Agenda</h3>
@@ -205,17 +218,32 @@
                         <form name="form" role="form">
                             <div ng-disabled="isSubmitted">
                                 <div class="form-group">
-                                    <label class="item item-input"><input ng-model="items.jogo.maximoConfirmados" type="number" placeholder="Numero Maximo Jogodores" name="email" id="email" class="form-control" ng-model="lc.user.email" > </label>
+                                    <label class="item item-input">
+                                        <input ng-model="items.jogo.maximoConfirmados" type="number" placeholder="Numero Maximo Jogodores"
+                                            name="email" id="email" class="form-control" ng-model="lc.user.email"> </label>
 
                                 </div>
                                 <div class="form-group">
                                     <dl class="dl-horizontal">
                                         <dt>Tempo Agenda</dt>
                                         <dd>
-                                            <label class="ui-radio"><input ng-model="items.jogo.confirmacao" name="radio1" type="radio" value="FIXO" checked><span>Fixo</span></label>
-                                            <label class="ui-radio"><input ng-model="items.jogo.confirmacao" name="radio1" type="radio" value="SOHOJE" ><span>So Dessa Vez</span></label>
-                                            <label class="ui-radio"><input ng-model="items.jogo.confirmacao" name="radio1" type="radio" value="MENSAL"><span>Mensal</span></label>
-                                            <label class="ui-radio"><input ng-model="items.jogo.confirmacao" name="radio1" type="radio" value="ANUAL"><span>Anual</span></label>
+                                            <label class="ui-radio">
+                                                <input ng-model="items.jogo.confirmacao" name="radio1" type="radio" value="FIXO"
+                                                    checked>
+                                                <span>Fixo</span>
+                                            </label>
+                                            <label class="ui-radio">
+                                                <input ng-model="items.jogo.confirmacao" name="radio1" type="radio" value="SOHOJE">
+                                                <span>So Dessa Vez</span>
+                                            </label>
+                                            <label class="ui-radio">
+                                                <input ng-model="items.jogo.confirmacao" name="radio1" type="radio" value="MENSAL">
+                                                <span>Mensal</span>
+                                            </label>
+                                            <label class="ui-radio">
+                                                <input ng-model="items.jogo.confirmacao" name="radio1" type="radio" value="ANUAL">
+                                                <span>Anual</span>
+                                            </label>
                                         </dd>
 
                                     </dl>
@@ -250,7 +278,8 @@
                                                 <p class="pull-right">Email : {{oEmpresa.email}}</p>
                                             </li>
                                             <li class="list-group-item">
-                                                <p class="pull-left">Endereço : {{oEmpresa.endereco.logradouro}}, {{oEmpresa.endereco.numero}}, {{Empresa.endereco.bairro}}
+                                                <p class="pull-left">Endereço : {{oEmpresa.endereco.logradouro}}, {{oEmpresa.endereco.numero}},
+                                                    {{Empresa.endereco.bairro}}
                                                 </p>
                                                 <p class="pull-right">Telefone : {{oEmpresa.telefone}}</p>
                                             </li>
@@ -277,11 +306,9 @@
                                                         <div class="panel-heading"></div>
                                                         <div class="panel-body">
                                                             <map class="ui-map" zoom="13" center="[-19.7539784,-47.9349623]" map-type-id="TERRAIN" scrollwheel="false">
-															<marker
-																position="[{{oEmpresa.endereco.lat}},{{oEmpresa.endereco.longi}}]"
-																title="{{oEmpresa.nome}}" animation="Animation.DROP"></marker>
-															<traffic-layer></traffic-layer>
-														</map>
+                                                                <marker position="[{{oEmpresa.endereco.lat}},{{oEmpresa.endereco.longi}}]" title="{{oEmpresa.nome}}" animation="Animation.DROP"></marker>
+                                                                <traffic-layer></traffic-layer>
+                                                            </map>
                                                         </div>
                                                     </section>
                                                 </uib-tab>
@@ -295,7 +322,7 @@
                     <uib-tab heading="Mapa">
                         <div class="panel-body" data-ng-controller="MapDemoController">
                             <map class="ui-map" zoom="13" center="[-19.7539784,-47.9349623]" map-type-id="TERRAIN" zoom="13" scrollwheel="false">
-							</map>
+                            </map>
                         </div>
                     </uib-tab>
                     <uib-tab heading="Todos Horarios">
@@ -312,4 +339,3 @@
 
             <div data-ui-footer></div>
         </div>
-        
