@@ -16,6 +16,9 @@ public class AvaliacaoOptions{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "avaliacao_options_id")
 	private Integer id;
+	
+	@Column(name = "chat_itens_id")
+	private Integer chat_itens_id;
 		
 	@Column(name = "empresa_id") 
     private Integer empresa_id;
@@ -47,6 +50,14 @@ public class AvaliacaoOptions{
 
 	public void setOpcao(String opcao) {
 		this.opcao = opcao;
+	}
+
+	public Integer getChat_itens_id() {
+		return chat_itens_id;
+	}
+
+	public void setChat_itens_id(Integer chat_itens_id) {
+		this.chat_itens_id = chat_itens_id;
 	}
 	
 }

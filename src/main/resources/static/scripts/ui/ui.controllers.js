@@ -166,8 +166,8 @@
 								$scope.tipoEscolha = "";
 								$scope.change = function(jogadores) {
 
-									//$scope.qntJogador = 0;
-									//$scope.Aleatorio = "";
+									// $scope.qntJogador = 0;
+									// $scope.Aleatorio = "";
 									var list1 = $filter('orderBy')(jogadores,
 											'goleiro');
 									var list2 = [];
@@ -281,9 +281,10 @@
 								}
 								var oUser = JSON.parse(localStorage
 										.getItem('wdAppLS.currentUser'));
-								AuthService.findJogoByUserAndStatus(oUser,
-										fnCallback2);
-
+								if (oUser) {
+									AuthService.findJogoByUserAndStatus(oUser,
+											fnCallback2);
+								}
 								$scope.gravarGols = function(jogoData) {
 									alert('!!!')
 								}
@@ -321,29 +322,29 @@
 
 								$scope.openSolicitacao = function(size,
 										parentSelector, jogo, status) {
-									
+
 									var abUl = $location.absUrl();
 
 									var modalInstance;
 									if (abUl === "http://localhost:8080/#/pages/signin") {
 										modalInstance = $uibModal
-										.open({
-											animation : $scope.animationsEnabled,
-											ariaLabelledBy : 'modal-title',
-											ariaDescribedBy : 'modal-body',
-											templateUrl : 'myModalContent4.html',
-											controller : 'ModalInstanceController',
-											size : 'lg',
-											resolve : {
-												items : function() {
+												.open({
+													animation : $scope.animationsEnabled,
+													ariaLabelledBy : 'modal-title',
+													ariaDescribedBy : 'modal-body',
+													templateUrl : 'myModalContent4.html',
+													controller : 'ModalInstanceController',
+													size : 'lg',
+													resolve : {
+														items : function() {
 
-													return {
-														"jogo" : jogo,
-														"status" : status
-													};
-												}
-											}
-										});
+															return {
+																"jogo" : jogo,
+																"status" : status
+															};
+														}
+													}
+												});
 									} else {
 										modalInstance = $uibModal
 												.open({
@@ -383,72 +384,102 @@
 							'$scope',
 							'$uibModalInstance',
 							'items',
-							'jogoFactory','$rootScope', '$location', 'localStorageService','WDAuthentication','SysMgmtData',
+							'jogoFactory',
+							'$rootScope',
+							'$location',
+							'localStorageService',
+							'WDAuthentication',
+							'SysMgmtData',
 							function($scope, $uibModalInstance, items,
-									jogoFactory,$rootScope, $location, localStorageService, WDAuthentication,SysMgmtData) {
+									jogoFactory, $rootScope, $location,
+									localStorageService, WDAuthentication,
+									SysMgmtData) {
 								$scope.items = items;
 								$scope.selected = {
 									item : $scope.items[0]
 								};
-								
-								$scope.loginssss  = function() {
-									//$scope.username, password: $scope.password
-									let body = JSON.stringify(
-									        { "username": $scope.username, "password": $scope.password }
-									    )
-									WDAuthentication.processLogin(WebDaptiveAppConfig.authenticationURL, body, function(authenticationResult) {
-										debugger
-										var authToken = authenticationResult.token;
-										if (authToken !== undefined){	
-											$uibModalInstance.dismiss("cancel");
-											$rootScope.authToken = authToken;
-											localStorageService.set('authToken', authToken);
-											 var surl = "https://quadra-test.herokuapp.com/";
-											//  var sUrl = "http://localhost:8080/";	
-										SysMgmtData.processPostPageData(sUrl + "user/findUserByEmail", ""+$scope.username , function(res){
-											debugger
-											var currentUser = res;
-												$rootScope.user = currentUser;
-												$rootScope.main.name = $scope.username;
-												localStorageService.set('currentUser', $rootScope.user);
-												var tempRole = "";
-												var bAdmin = false;
-												var prop = {};
-												for (var x = 0; x < currentUser.authorities.length; x++) {
-													prop = currentUser.authorities[x]
-													tempRole += prop.name + "";
-													if(prop.name === 'ROLE_USER')
-														bAdmin = true;
-												}							
-												$rootScope.displayRoles = tempRole;
-												localStorageService.set('displayRoles', $rootScope.displayRoles);						
-											
-																
-											if ($rootScope.callingPath !== undefined){	
-												if ($rootScope.callingPath === '/pages/signin' || $rootScope.callingPath ===  '/cadastro'){
-													if(bAdmin)
-													{
-														$rootScope.callingPath = "/dashboard2";
-													}
-													else
-													{
-														$rootScope.callingPath = "/meusJogos";
-													}
-												}
-												$location.path($rootScope.callingPath);
-											}
-											else{
-												$location.path( "/buscaQuadra" );
-											}	
-										});
-										}
-										else{
-												$location.path( "/pages/signin" );
-										}		
-									});
+
+								$scope.loginssss = function() {
+									// $scope.username, password:
+									// $scope.password
+									let body = JSON.stringify({
+										"username" : $scope.username,
+										"password" : $scope.password
+									})
+									WDAuthentication
+											.processLogin(
+													WebDaptiveAppConfig.authenticationURL,
+													body,
+													function(
+															authenticationResult) {
+														debugger
+														var authToken = authenticationResult.token;
+														if (authToken !== undefined) {
+															$uibModalInstance
+																	.dismiss("cancel");
+															$rootScope.authToken = authToken;
+															localStorageService
+																	.set(
+																			'authToken',
+																			authToken);
+															var surl = "https://quadra-test.herokuapp.com/";
+															// var sUrl =
+															// "http://localhost:8080/";
+															SysMgmtData
+																	.processPostPageData(
+																			sUrl
+																					+ "user/findUserByEmail",
+																			""
+																					+ $scope.username,
+																			function(
+																					res) {
+																				debugger
+																				var currentUser = res;
+																				$rootScope.user = currentUser;
+																				$rootScope.main.name = $scope.username;
+																				localStorageService
+																						.set(
+																								'currentUser',
+																								$rootScope.user);
+																				var tempRole = "";
+																				var bAdmin = false;
+																				var prop = {};
+																				for (var x = 0; x < currentUser.authorities.length; x++) {
+																					prop = currentUser.authorities[x]
+																					tempRole += prop.name
+																							+ "";
+																					if (prop.name === 'ROLE_USER')
+																						bAdmin = true;
+																				}
+																				$rootScope.displayRoles = tempRole;
+																				localStorageService
+																						.set(
+																								'displayRoles',
+																								$rootScope.displayRoles);
+
+																				if ($rootScope.callingPath !== undefined) {
+																					if ($rootScope.callingPath === '/pages/signin'
+																							|| $rootScope.callingPath === '/cadastro') {
+																						if (bAdmin) {
+																							$rootScope.callingPath = "/dashboard2";
+																						} else {
+																							$rootScope.callingPath = "/meusJogos";
+																						}
+																					}
+																					$location
+																							.path($rootScope.callingPath);
+																				} else {
+																					$location
+																							.path("/buscaQuadra");
+																				}
+																			});
+														} else {
+															$location
+																	.path("/pages/signin");
+														}
+													});
 								};
-								
-								
+
 								$scope.ok = function(oJogo, sStatus) {
 
 									jogoFactory.update(oJogo, sStatus);
@@ -457,7 +488,7 @@
 								};
 								$scope.cancel = function() {
 									$uibModalInstance
-									.close($scope.selected.item);
+											.close($scope.selected.item);
 									$uibModalInstance.dismiss("cancel");
 								};
 
@@ -540,7 +571,7 @@
 							'$http',
 							'$interval',
 							function($scope, $http, $interval) {
-								
+
 								var createMacromed = function(oEmpresa) {
 									var vazio = " -- "
 
@@ -642,8 +673,7 @@
 									scrollwheel : false
 								};
 								// if (map === void 0) {
-								 map = new google.maps.Map("",
-								 mapOptions);
+								map = new google.maps.Map("", mapOptions);
 								// }
 
 								var i, markers;
@@ -710,7 +740,8 @@
 															+ '</div>'
 															+ '</div>';
 
-													// close window if not undefined
+													// close window if not
+													// undefined
 													if (infoWindow !== void 0) {
 														infoWindow.close();
 													}
@@ -724,7 +755,7 @@
 															markers[0]);
 												});
 
-							//	$interval($scope.GenerateMapMarkers, 10000);
+								// $interval($scope.GenerateMapMarkers, 10000);
 							} ]).controller(
 					'LoaderController',
 					[ '$scope', 'cfpLoadingBar',

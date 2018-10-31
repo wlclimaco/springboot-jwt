@@ -43,20 +43,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nouhoun.springboot.jwt.api.APIResponse;
+import com.nouhoun.springboot.jwt.integration.domain.Avaliacao;
 import com.nouhoun.springboot.jwt.integration.domain.Category;
 import com.nouhoun.springboot.jwt.integration.domain.Empresa;
 import com.nouhoun.springboot.jwt.integration.domain.EmpresaDTO;
 import com.nouhoun.springboot.jwt.integration.domain.Horarios;
 import com.nouhoun.springboot.jwt.integration.domain.Job;
 import com.nouhoun.springboot.jwt.integration.domain.Jogo;
+import com.nouhoun.springboot.jwt.integration.domain.Notificacoes;
 import com.nouhoun.springboot.jwt.integration.domain.Jogo.Dias;
 import com.nouhoun.springboot.jwt.integration.domain.Jogo.Status;
 import com.nouhoun.springboot.jwt.integration.domain.Quadra;
 import com.nouhoun.springboot.jwt.integration.domain.UserDTO;
+import com.nouhoun.springboot.jwt.integration.service.AvaliacaoService;
 import com.nouhoun.springboot.jwt.integration.service.EmpresaService;
 import com.nouhoun.springboot.jwt.integration.service.JobService;
 import com.nouhoun.springboot.jwt.integration.service.JogoService;
@@ -72,6 +76,9 @@ public class EmpresaController {
 	
     @Autowired
     private JobService jobService;
+    
+    @Autowired
+    private AvaliacaoService avaliacaoService;
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/empresa/insert", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
@@ -142,6 +149,89 @@ public class EmpresaController {
 
 		return APIResponse.toOkResponse(authResp);
 	}
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value = "/avaliacao/insert", method = RequestMethod.POST)
+	public @ResponseBody APIResponse insertAvaliacao(@RequestBody String users, BindingResult bindingResult) {
+		String error = "";
+		HashMap<String, Object> authResp = new HashMap<String, Object>();
+		ObjectMapper mapper = new ObjectMapper();
+		Avaliacao avaliacao = new Avaliacao();
+		try {
+			avaliacao = mapper.readValue(users, Avaliacao.class);
+		} catch (JsonParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (JsonMappingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		try {
+			avaliacaoService.saveAvaliacao(avaliacao);
+		} catch (Exception e) {
+			error = e.getMessage();
+		}
+		
+		Object token = auth.getCredentials();
+		authResp.put("token", token);
+		authResp.put("user", avaliacao);
+		authResp.put("Error", error);
+		return APIResponse.toOkResponse(authResp);
+
+	}
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value = "/avaliacao/delete", method = RequestMethod.POST)
+	public @ResponseBody APIResponse deleteAvaliacao(@Valid Avaliacao avaliacao, BindingResult bindingResult) {
+
+		HashMap<String, Object> authResp = new HashMap<String, Object>();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		avaliacaoService.deleteAvaliacao(avaliacao);
+		Object token = auth.getCredentials();
+		authResp.put("token", token);
+		authResp.put("user", avaliacao);
+		authResp.put("Error", null);
+		return APIResponse.toOkResponse(authResp);
+
+	}
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value = "/avaliacao/edit", method = RequestMethod.POST)
+	public @ResponseBody APIResponse editAvaliacao(@RequestBody String users, BindingResult bindingResult) {
+		String error = "";
+		HashMap<String, Object> authResp = new HashMap<String, Object>();
+		ObjectMapper mapper = new ObjectMapper();
+		Avaliacao avaliacao = new Avaliacao();
+		try {
+			avaliacao = mapper.readValue(users, Avaliacao.class);
+		} catch (JsonParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (JsonMappingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		try {
+			avaliacaoService.updateAvaliacao(avaliacao);
+		} catch (Exception e) {
+			error = e.getMessage();
+		}
+		
+		Object token = auth.getCredentials();
+		authResp.put("token", token);
+		authResp.put("user", avaliacao);
+		authResp.put("Error", error);
+		return APIResponse.toOkResponse(authResp);
+
+	}
 
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/empresa/delete", method = RequestMethod.POST)
@@ -154,7 +244,6 @@ public class EmpresaController {
 		HashMap<String, Object> authResp = new HashMap<String, Object>();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-		//createAuthResponse(user, authResp);
 
 		return APIResponse.toOkResponse(authResp);
 	}

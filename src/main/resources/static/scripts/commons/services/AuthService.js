@@ -54,6 +54,21 @@
 
                 SysMgmtData.processPostPageData(url, user, fnCallback);
             },
+            saveAvaliacao: function(user, fnCallback) {
+                var url = sUrlServer + '/avaliacao/insert';
+
+                SysMgmtData.processPostPageData(url, user, fnCallback);
+            },
+            editAvaliacao: function(user, fnCallback) {
+                var url = sUrlServer + '/avaliacao/edit';
+
+                SysMgmtData.processPostPageData(url, user, fnCallback);
+            },
+            deleteAvaliacao: function(user, fnCallback) {
+                var url = sUrlServer + '/avaliacao/delete';
+
+                SysMgmtData.processPostPageData(url, user, fnCallback);
+            },
             
             fetchChatByUserId: function(user, fnCallback) {
                 var url = sUrlServer + '/chat/findChatByUser';

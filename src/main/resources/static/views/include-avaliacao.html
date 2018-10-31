@@ -1,7 +1,7 @@
 <div class="panel-body">
 	<div class="rate-review-box review-box col-md-12">
 		<div class="overall-box col-md-4 pull-left" style="margin-bottom:3%;">
-			<span>5.0</span>
+			<span>10.0</span>
 			<div class="rating_stars ">
 				<i class="icon-star fa fa-star icon_on"></i>
 				<i class="icon-star fa fa-star icon_on"></i>
@@ -90,23 +90,24 @@
 			<div class="well well-sm">
 				<div class="row" id="post-review-box">
 					<div class="col-md-12" data-ng-controller="RatingDemoController">
-						<form accept-charset="UTF-8" action="" method="post">
+						<form >
 							<input id="ratings-hidden" name="rating" type="hidden">
 							<!-- <div class="row" > -->
-							<input class="form-control animated" type="email" id="ratings" name="ratings" placeholder="email">
+							<input class="form-control animated" ng-model="create.email" type="email" id="ratings" name="ratings" placeholder="email">
 							<!-- </div> -->
 							<br>
-							<textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="mensagem" rows="5"></textarea>
+							<textarea class="form-control animated" ng-model="create.menssagem" cols="50" id="new-review" name="comment" placeholder="mensagem" rows="5"></textarea>
 							<br>
 							<div class="row" ng-repeat="avaliacao in oEmpresa.avaliacaoOptions">
 								<div class="col-md-12">
 									<div class="pull-left">
-										<label>{{avaliacao.opcao}} :</label>
+										<label >{{avaliacao.opcao}} :</label>
+										<input ng-init="oAvaliacao[$index].opcaoId = avaliacao.id" id="ratings-hidden-{{$index}}" name="rating" type="hidden" >
 									</div>
 									<div class="pull-right">
 
-										<span id="teste-{{avaliacao.id}}" uib-rating class="ui-rating size-h3" ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)"
-										    on-leave="overStar = null" state-on="'fa fa-star'" state-off="'fa fa-star-o'"> </span>
+										<span id="teste-{{avaliacao.id}}" uib-rating class="ui-rating size-h3" ng-model="oAvaliacao[$index].nota" max="max" read-only="isReadonly" on-hover="hoveringOver(value)"
+										    on-leave="overStar = null" state-on="'fa fa-star'"  state-off="'fa fa-star-o'"> </span>
 									</div>
 								</div>
 								<br>
@@ -116,7 +117,7 @@
 								<a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="margin-right: 10px;">
 									<span class="glyphicon glyphicon-remove"></span>Cancel
 								</a>
-								<button class="btn btn-success btn-lg" type="submit">Save</button>
+								<button class="btn btn-success btn-lg"  type="button" ng-click="addRowToGrid(create)">Save</button>
 							</div>
 						</form>
 					</div>

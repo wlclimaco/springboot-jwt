@@ -60,7 +60,7 @@
   ]).controller('RatingDemoController', [
     '$scope', function($scope) {
       $scope.rate = 7;
-      $scope.max = 10;
+      $scope.max = 5;
       $scope.isReadonly = false;
       $scope.hoveringOver = function(value) {
         $scope.overStar = value;

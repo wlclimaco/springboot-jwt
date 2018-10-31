@@ -33,7 +33,7 @@ public class Avaliacao{
   
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name="avaliacao_id", referencedColumnName="avaliacao_id", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name="avaliacao_id", referencedColumnName="avaliacao_id", nullable = false, insertable = true, updatable = true)
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<AvaliacaoItens> avaliacaoItens;
 	

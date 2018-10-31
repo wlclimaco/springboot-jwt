@@ -30,6 +30,14 @@
            //  $scope.quadras = 
          
         });
+    $scope.oAvaliacao = [{}];
+    $scope.addRowToGrid = function(oAvaliacao) {
+      console.log(oAvaliacao);
+      console.log($scope.oAvaliacao);
+      var oRequest = {empresaId:82,email:oAvaliacao.email,mensagen:oAvaliacao.menssagem, avaliacaoItens :  $scope.oAvaliacao,updatedAt:new Date()};
+      AuthService.saveAvaliacao(oRequest,function(oResp){console.log(oResp)});
+      debugger
+    }
 
     $scope.detalhesQuadra = function(jogo)
     {
