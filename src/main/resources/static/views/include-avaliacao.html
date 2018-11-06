@@ -14,14 +14,16 @@
 		<div style="width:50px;"></div>
 		<div class="rating col-md-8 pull-right">
 			<div class="rating_bars" style="order: 1; font-size: 11px; line-height: normal; width: 100% !Important; margin-top: -10px; content: ''; display: table;">
-				<div class="rating_bar" title="93% das avaliações possui 5 estrelas">
-					<div class="rating_header">5 estrelas</div>
-					<div class="rating_count">(28)</div>
-					<div class="rating_progress progress progress-danger" style="height: 10px !Important; margin-top: -10px !Important;">
-						<div class="bar progress-bar" style="width: 93%"></div>
+				<div ng-repeat="avaliacaos in avaliacaoList">
+					<div class="rating_bar" title="{{((avaliacaos.divisor*5) / avaliacaos.nota) * 10}}% das avaliações gostaram do {{avaliacaos.nome}}">
+						<div class="rating_header">{{avaliacaos.nome}}</div>
+						<div><label class="rating_count" style="z-index: 999!Important;color: black!Important;margin-bottom:12px">{{((avaliacaos.divisor*5) / avaliacaos.nota) * 10}}%</label></div>
+						<div class="rating_progress progress progress-danger" style="height: 10px !Important; margin-top: -10px !Important;">
+							<div class="bar progress-bar" style="width: {{((avaliacaos.divisor*5) / avaliacaos.nota) * 10}}%"></div>
+						</div>
 					</div>
 				</div>
-				<div class="rating_bar" title="6% das avaliações possui 4 estrelas">
+				<!-- <div class="rating_bar" title="6% das avaliações possui 4 estrelas">
 					<div class="rating_header">4 estrelas</div>
 					<div class="rating_count">(2)</div>
 					<div class="rating_progress progress progress-danger" style="height: 10px !Important; margin-top: -10px !Important;">
@@ -48,7 +50,7 @@
 					<div class="rating_progress progress progress-danger" style="height: 10px !Important; margin-top: -10px !Important;">
 						<div class="bar progress-bar" style="width: 0%"></div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

@@ -29,8 +29,8 @@
   $scope.openSolicitacao = function (size, parentSelector,jogo,status) {
 	  
 		var abUl = $location.absUrl(); 
-		  var surl = "https://quadra-test.herokuapp.com/#/pages/signin";
-	//	  var surl = "http://localhost:8080/#/pages/signin";
+		//  var surl = "https://quadra-test.herokuapp.com/#/pages/signin";
+		  var surl = "http://localhost:8080/#/pages/signin";
 		  if(abUl === surl){
 			  $scope.remover = false;
 			  $scope.desmarcar = false;

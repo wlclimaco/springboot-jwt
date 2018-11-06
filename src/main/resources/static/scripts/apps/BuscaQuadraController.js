@@ -6,8 +6,10 @@
 	  var vm = this;
 	  
 	  var abUl = $location.absUrl(); 
-	  
-	  if(abUl === "https://quadra-test.herokuapp.com/#/pages/signin"){
+   //   var surl = "https://quadra-test.herokuapp.com/#/pages/signin";
+      var surl = "http://localhost:8080/#/pages/signin";
+    
+	  if(abUl === surl){
 		  $scope.remover = false;
 		  $scope.desmarcar = false;
 		  $scope.marcar = false;
@@ -23,6 +25,8 @@
             $scope.empresaList = response;
             console.log($scope.empresaList);
             $scope.loading = false;
+            
+            $scope.calcAvaliacao(response[0].avaliacao, response[0].avaliacaoOptions);
            // if (resp && resp.code==200) {
           //      AuthService.createJWTToken(resp.result.user, resp.result.token);
            //     AuthService.setCredentials();
@@ -30,6 +34,49 @@
            //  $scope.quadras = 
          
         });
+
+    $scope.calcAvaliacao = function(listAvaliacao,listOpcao) {
+      debugger
+        $scope.avaliacaoList = []; 
+        if(listAvaliacao){
+          for (let y = 0; y < listAvaliacao.length; y++) {
+            var avaliacaoItens = listAvaliacao[y].avaliacaoItens
+            for (let index = 0; index < avaliacaoItens.length; index++) {
+                for (let i = 0; i < listOpcao.length; i++) {
+                    if(avaliacaoItens[index].opcaoId == listOpcao[i].id){
+                      calcTotalNota($scope.avaliacaoList, avaliacaoItens[index].nota, avaliacaoItens[index].opcaoId, listOpcao[i].opcao )
+                    }
+                }
+            }
+          }
+        }
+        debugger
+    }
+
+    calcTotalNota = function(listAvaliacao, nota, id, opcao){
+        var bInsert = true;
+        for (let index = 0; index < listAvaliacao.length; index++) {
+          if(listAvaliacao[index].id == id){
+            listAvaliacao[index].nota = (listAvaliacao[index].nota + nota);
+            listAvaliacao[index].divisor = (listAvaliacao[index].divisor + 1);
+            bInsert = false;
+          } 
+        }   
+          if(bInsert){
+            $scope.avaliacaoList.push({id: id,nota: nota, nome: opcao, divisor: 1});
+        }
+    }
+
+    $scope.getAvaliacaoName = function(idAvaliacao, listAvaliacao) {
+        var avaliacaoName = "";
+        for (let index = 0; index < listAvaliacao.length; index++) {
+            const element = listAvaliacao[index];
+            if(listAvaliacao[index].opcaoId === idAvaliacao){
+              avaliacaoName = listAvaliacao[index].opcao;
+            }
+        }
+        return avaliacaoName;  
+    }
     $scope.oAvaliacao = [{}];
     $scope.addRowToGrid = function(oAvaliacao) {
       console.log(oAvaliacao);

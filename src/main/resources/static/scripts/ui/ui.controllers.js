@@ -422,9 +422,8 @@
 																	.set(
 																			'authToken',
 																			authToken);
-															var surl = "https://quadra-test.herokuapp.com/";
-															// var sUrl =
-															// "http://localhost:8080/";
+															//var surl = "https://quadra-test.herokuapp.com/";
+															var sUrl = "http://localhost:8080/";
 															SysMgmtData
 																	.processPostPageData(
 																			sUrl
